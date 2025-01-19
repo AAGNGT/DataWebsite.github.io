@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訪客專區</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="visitor-theme">
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <h1>強人bb - 訪客專區</h1>
+            <button onclick="logout()" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                登出
+            </button>
+        </div>
+    </div>
+
+    <div class="success-container visitor-theme">
+        <div class="success-content">
+            <div class="welcome-section">
+                <i class="fas fa-user"></i>
+                <h2>訪客專區</h2>
+                <p class="welcome-text">歡迎參觀！</p>
+                <p class="intro-text">在這裡，您可以瀏覽我們的學習資源、參與討論，以及了解更多關於我們的服務。</p>
+            </div>
+
+            <div class="dashboard-layout">
+                <!-- 左側統計資訊 -->
+                <div class="stats-sidebar">
+                    <div class="quick-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <span class="stat-number">5000+</span>
+                            <span class="stat-label">活躍用戶</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-book-open"></i>
+                            <span class="stat-number">200+</span>
+                            <span class="stat-label">學習資源</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-comments"></i>
+                            <span class="stat-number">1000+</span>
+                            <span class="stat-label">討論主題</span>
+                        </div>
+                    </div>
+
+                    <div class="announcement-section">
+                        <h3><i class="fas fa-bullhorn"></i> 最新公告</h3>
+                        <div class="announcement-content">
+                            <div class="announcement-item">
+                                <span class="date">2024/03/21</span>
+                                <p>新增多項學習資源，歡迎查看！</p>
+                            </div>
+                            <div class="announcement-item">
+                                <span class="date">2024/03/20</span>
+                                <p>系統維護通知：本週日凌晨 2-4 點進行系統更新</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側功能卡片 -->
+                <div class="feature-cards">
+                    <div class="feature-card horizontal" onclick="openFeature('learn')">
+                        <div class="card-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>學習資源</h3>
+                            <p>瀏覽學習材料</p>
+                            <div class="feature-details">
+                                <ul>
+                                    <li><i class="fas fa-check"></i> 免費教學影片</li>
+                                    <li><i class="fas fa-check"></i> 實用教材下載</li>
+                                    <li><i class="fas fa-check"></i> 學習進度追蹤</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card horizontal" onclick="openFeature('forum')">
+                        <div class="card-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>留言板</h3>
+                            <p>查看公開討論</p>
+                            <div class="feature-details">
+                                <ul>
+                                    <li><i class="fas fa-check"></i> 即時討論區</li>
+                                    <li><i class="fas fa-check"></i> 經驗分享</li>
+                                    <li><i class="fas fa-check"></i> 問題解答</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card horizontal" onclick="openFeature('help')">
+                        <div class="card-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>幫助中心</h3>
+                            <p>常見問題解答</p>
+                            <div class="feature-details">
+                                <ul>
+                                    <li><i class="fas fa-check"></i> 使用指南</li>
+                                    <li><i class="fas fa-check"></i> 常見問題</li>
+                                    <li><i class="fas fa-check"></i> 操作教學</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card horizontal" onclick="openFeature('contact')">
+                        <div class="card-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>聯繫我們</h3>
+                            <p>意見反饋</p>
+                            <div class="feature-details">
+                                <ul>
+                                    <li><i class="fas fa-check"></i> 客服支援</li>
+                                    <li><i class="fas fa-check"></i> 建議回饋</li>
+                                    <li><i class="fas fa-check"></i> 聯絡方式</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 防止返回上一頁
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+
+        // 功能卡片點擊處理
+        function openFeature(feature) {
+            // 這裡可以添加各個功能的具體實現
+            alert('開啟功能：' + feature);
+        }
+
+        // 登出功能
+        function logout() {
+            localStorage.removeItem('userType');
+            window.location.href = 'index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 檢查用戶類型
+            const userType = localStorage.getItem('userType');
+            if (userType !== 'visitor') {
+                window.location.href = 'index.html';  // 如果不是訪客則返回登入頁
+            }
+        });
+    </script>
+</body>
+</html> 

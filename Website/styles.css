@@ -10,24 +10,20 @@ body {
     );
     position: relative;
     overflow-x: hidden;
+    display: flex;  /* 添加 flex 佈局 */
+    justify-content: center;  /* 水平置中 */
+    align-items: center;  /* 垂直置中 */
 }
 
-/* 移除所有動態效果 */
-body::before,
-body::after {
-    display: none;
-}
-
+/* 容器樣式 */
 .container {
     width: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.hidden {
-    display: none;
+    padding: 2rem;  /* 添加內邊距 */
+    box-sizing: border-box;  /* 確保內邊距不會增加容器大小 */
 }
 
 /* 容器主題樣式 */
@@ -55,20 +51,370 @@ body::after {
 
 /* 登入框主體樣式更新 */
 .login-box {
-    width: 90%;
-    max-width: 1000px;
-    padding: 2rem;
+    width: 85%;
+    max-width: 900px;
+    padding: 1.8rem;
     display: grid;
-    grid-template-columns: 1fr 1px 1.5fr;
-    gap: 3rem;
+    grid-template-columns: 0.8fr 1px 1fr;
+    gap: 2rem;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(44, 82, 130, 0.08),
+                0 2px 8px rgba(44, 82, 130, 0.05);
+    margin: auto;  /* 自動邊距確保置中 */
+    position: relative;  /* 添加相對定位 */
+}
+
+/* 左側資訊區域調整 */
+.login-header {
+    height: 550px;
+    overflow-y: auto;
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 分隔線 */
+.login-divider {
+    width: 1px;
+    height: 550px;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--primary-light),
+        transparent
+    );
+}
+
+/* 右側登入區域基礎樣式 */
+.login-form-section {
+    height: 550px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 1rem 0 1rem 2rem;  /* 增加左側內邊距 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;  /* 改為左對齊 */
+    gap: 2.5rem;
+}
+
+/* 登入表單包裝容器 */
+.login-form-wrapper {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 0 0 1rem;  /* 只保留左側內邊距 */
+}
+
+/* 帳戶選擇器樣式 */
+.account-selector {
+    width: 100%;
+    max-width: 320px;  /* 增加最大寬度 */
+    display: flex;
+    gap: 1.5rem;  /* 增加按鈕間距 */
+    justify-content: flex-start;
+}
+
+/* 帳戶選項樣式 */
+.account-option {
+    width: 150px;  /* 增加按鈕寬度 */
+    padding: 1.4rem 1.2rem;  /* 增加內邊距 */
+    background: white;
+    border: 2px solid var(--neutral-300);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 帳戶選項內容樣式 */
+.option-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.option-content i {
+    font-size: 1.5rem;  /* 增加圖標大小 */
+    transition: all 0.3s ease;
+}
+
+.option-content span {
+    font-size: 1.1rem;  /* 增加文字大小 */
+    font-weight: 500;
+}
+
+/* 密碼區域容器樣式 */
+.password-section {
+    width: 100%;
+    max-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    margin: 0 auto;
+}
+
+/* 密碼輸入框容器樣式 */
+.input-group {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* 密碼輸入框基礎樣式 */
+.input-group input[type="password"] {
+    width: 100%;
+    height: 56px;
+    padding: 0 60px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--neutral-300);
+    border-radius: 15px;
+    font-size: 1.3rem;
+    color: var(--primary-dark);
+    letter-spacing: 4px;  /* 調整文字間距從 8px 改為 4px */
+    transition: all 0.3s ease;
+}
+
+/* 密碼圖標樣式 */
+.input-group i {
+    position: absolute;
+    left: 22px;
+    color: var(--primary-main);
+    font-size: 1.3rem;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+/* 密碼輸入框懸浮效果 */
+.input-group:hover input[type="password"] {
+    border-color: var(--primary-light);
     box-shadow: 
-        0 8px 32px rgba(44, 82, 130, 0.08),
-        0 2px 8px rgba(44, 82, 130, 0.05);
+        inset 0 2px 4px rgba(0, 0, 0, 0.02),
+        0 4px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+/* 密碼輸入框焦點效果 */
+.input-group input[type="password"]:focus {
+    border-color: var(--primary-main);
+    background: white;
+    box-shadow: 
+        0 0 0 3px rgba(74, 144, 226, 0.1),
+        0 8px 25px rgba(74, 144, 226, 0.1);
+    outline: none;
+    transform: translateY(-2px);
+}
+
+/* 密碼輸入框懸浮時圖標效果 */
+.input-group:hover i {
+    color: var(--primary-main);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* 密碼輸入框佔位符樣式 */
+.input-group input[type="password"]::placeholder {
+    letter-spacing: normal;  /* 讓提示文字保持正常間距 */
+    font-family: 'Microsoft JhengHei', sans-serif;
+    font-size: 1rem;
+    color: #94A3B8;
+    opacity: 0.8;
+}
+
+/* 密碼輸入框禁用狀態 */
+.input-group input[type="password"]:disabled {
+    background: rgba(247, 250, 252, 0.95);
+    border: 1px solid #E2E8F0;
+    color: #94A3B8;
+    cursor: not-allowed;
+    letter-spacing: 0;
+    box-shadow: none;
+    transform: none;
+}
+
+/* 開發者主題樣式 */
+.developer-theme .input-group input[type="password"]:focus {
+    border-color: var(--developer-primary);
+    box-shadow: 
+        0 0 0 3px rgba(46, 125, 50, 0.15),
+        0 8px 25px rgba(46, 125, 50, 0.12);
+}
+
+.developer-theme .input-group i {
+    color: var(--developer-primary);
+}
+
+/* 訪客主題樣式 */
+.visitor-theme .input-group input[type="password"]:focus {
+    border-color: var(--visitor-primary);
+    box-shadow: 
+        0 0 0 3px rgba(30, 61, 89, 0.15),
+        0 8px 25px rgba(30, 61, 89, 0.12);
+}
+
+.visitor-theme .input-group i {
+    color: var(--visitor-primary);
+}
+
+/* 登入按鈕調整 */
+.login-btn {
+    width: 100%;
+    max-width: 280px;  /* 與輸入框同寬 */
+    height: 42px;
+    margin-right: auto;  /* 自動右邊距，實現左對齊 */
+    font-family: 'Microsoft JhengHei', sans-serif;
+    font-size: 1.1rem;  /* 調整按鈕文字大小 */
+    font-weight: 500;   /* 調整文字粗細 */
+    letter-spacing: 2px;  /* 增加字間距 */
+}
+
+.login-btn i {
+    font-size: 1.1rem;  /* 調整圖標大小 */
+    margin-right: 4px;  /* 增加圖標和文字的間距 */
+}
+
+/* 頁腳區域調整 */
+.login-footer {
+    width: 100%;
+    max-width: 280px;  /* 與輸入框同寬 */
+    margin-left: 2rem;  /* 統一左邊距 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* 響應式調整 */
+@media (max-width: 992px) {
+    .container {
+        padding: 1rem;  /* 減少內邊距 */
+    }
+    
+    .login-box {
+        width: 90%;
+        max-width: 500px;
+    }
+
+    .login-header {
+        height: auto;
+        max-height: none;
+        padding: 1rem;
+    }
+
+    .login-divider {
+        display: none;
+    }
+
+    .login-form-section {
+        padding: 2rem 1rem;
+        height: auto;
+        align-items: center;
+    }
+
+    .login-form-wrapper {
+        padding: 0;
+    }
+
+    .account-selector,
+    .password-section,
+    .input-group,
+    .login-btn,
+    .login-footer {
+        max-width: 280px;
+        margin-left: 0;
+    }
+
+    .system-info,
+    .login-tips,
+    .support-info {
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .password-section,
+    .input-group,
+    .login-btn,
+    .login-footer {
+        padding-left: 1rem;  /* 縮小左側內邊距 */
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0.5rem;  /* 進一步減少內邊距 */
+    }
+    
+    .login-box {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .account-selector {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .account-option {
+        width: 100%;
+        max-width: 320px;  /* 配合父容器寬度 */
+        padding: 1.4rem;
+    }
+
+    .input-group,
+    .login-btn,
+    .login-footer {
+        max-width: 280px;
+    }
+
+    .overlay-hint {
+        width: 90%;
+        min-width: auto;
+        top: -70px;
+    }
+
+    .hint-content {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+
+    .modal-content {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .changelog-sidebar {
+        width: 100%;
+    }
+
+    .login-form-section {
+        padding: 1.5rem;
+    }
+
+    .password-section,
+    .input-group,
+    .login-btn,
+    .login-footer {
+        padding-left: 0;  /* 移除左側內邊距 */
+        align-items: center;  /* 在小螢幕上置中 */
+        margin: 0 auto;  /* 在小螢幕上置中 */
+    }
 }
 
 /* 移除登入框的光暈效果 */
@@ -100,11 +446,41 @@ body::after {
     }
 }
 
-/* 登入框左側區域 */
-.login-header {
-    text-align: left;
-    padding-right: 2rem;
-    width: 100%;  /* 確保內容填滿左側空間 */
+/* 自定義捲動條樣式 */
+.login-header::-webkit-scrollbar {
+    width: 6px;
+}
+
+.login-header::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+}
+
+.login-header::-webkit-scrollbar-thumb {
+    background: rgba(74, 144, 226, 0.3);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.login-header::-webkit-scrollbar-thumb:hover {
+    background: rgba(74, 144, 226, 0.5);
+}
+
+/* 主題相關捲動條樣式 */
+.developer-theme .login-header::-webkit-scrollbar-thumb {
+    background: rgba(46, 125, 50, 0.3);
+}
+
+.developer-theme .login-header::-webkit-scrollbar-thumb:hover {
+    background: rgba(46, 125, 50, 0.5);
+}
+
+.visitor-theme .login-header::-webkit-scrollbar-thumb {
+    background: rgba(30, 61, 89, 0.3);
+}
+
+.visitor-theme .login-header::-webkit-scrollbar-thumb:hover {
+    background: rgba(30, 61, 89, 0.5);
 }
 
 .login-logo {
@@ -141,71 +517,6 @@ body::after {
     color: #546E7A;
     font-size: 1.1rem;
     line-height: 1.5;
-}
-
-/* 分隔線 */
-.login-divider {
-    width: 1px;
-    height: 280px;
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        var(--primary-light),
-        transparent
-    );
-    margin: 0 1.5rem;
-}
-
-/* 分隔線主題樣式 */
-.developer-theme .login-divider {
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        var(--developer-light),
-        transparent
-    );
-}
-
-.visitor-theme .login-divider {
-    background: linear-gradient(
-        to bottom,
-        transparent,
-        var(--visitor-light),
-        transparent
-    );
-}
-
-/* 右側登入區域調整 */
-.login-form-section {
-    width: 100%;
-    max-width: 500px;  /* 限制最大寬度 */
-    margin: 0 auto;    /* 居中對齊 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-}
-
-/* 帳戶選擇器容器 */
-.account-selector {
-    width: 100%;
-    display: flex;
-    gap: 1.8rem;  /* 減少按鈕之間的間距 */
-    justify-content: center;
-    margin-bottom: 1.5rem;
-}
-
-/* 帳戶選項基礎樣式 */
-.account-option {
-    width: 160px;     /* 縮小按鈕寬度 */
-    padding: 1.5rem;  /* 減少內邊距 */
-    background: white;
-    border: 2px solid var(--neutral-300);
-    border-radius: 12px;  /* 稍微調整圓角 */
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    position: relative;
-    overflow: hidden;
 }
 
 /* 選項內容樣式 */
@@ -320,108 +631,6 @@ body::after {
     left: 100%;
 }
 
-/* 密碼區域調整 */
-.password-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-}
-
-/* 密碼輸入框容器 */
-.input-group {
-    position: relative;
-    width: 100%;
-    max-width: 450px;
-    margin: 2rem 0;  /* 增加上下間距 */
-}
-
-/* 密碼輸入框樣式 */
-.input-group input {
-    width: 100%;
-    height: 35px;
-    padding: 0 50px;
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid var(--neutral-300);
-    border-radius: 12px;
-    font-size: 1.2rem;
-    color: var(--primary-dark);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-align: center;
-    letter-spacing: 2px;
-}
-
-/* 密碼輸入框焦點效果 */
-.input-group input:focus {
-    border-color: var(--primary-main);
-    box-shadow: 
-        0 0 0 4px rgba(44, 82, 130, 0.1),
-        0 4px 12px rgba(44, 82, 130, 0.1);
-    outline: none;
-    background: white;
-}
-
-/* 密碼圖標樣式 */
-.input-group i {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--primary-main);
-    font-size: 1.3rem;
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-
-/* 輸入框懸浮效果 */
-.input-group:hover input {
-    border-color: var(--primary-light);
-    box-shadow: 0 2px 8px rgba(44, 82, 130, 0.1);
-}
-
-/* 輸入框懸浮時圖標效果 */
-.input-group:hover i {
-    color: var(--primary-light);
-    transform: translateY(-50%) scale(1.1);
-}
-
-/* 密碼輸入框佔位符樣式 */
-.input-group input::placeholder {
-    color: #A0AEC0;
-    letter-spacing: 0;
-    font-size: 1.1rem;
-}
-
-/* 密碼輸入框自動填充樣式 */
-.input-group input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px white inset;
-    -webkit-text-fill-color: var(--primary-dark);
-}
-
-/* 密碼輸入框禁用狀態 */
-.input-group input:disabled {
-    width: 100%;
-    height: 45px;  /* 增加高度 */
-    background-color: rgba(247, 250, 252, 0.95);
-    border: 1px solid #E2E8F0;
-    color: #A0AEC0;
-    cursor: not-allowed;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    text-align: center;
-}
-
-/* 密碼輸入框錯誤狀態 */
-.input-group.error input {
-    border-color: #FF4444;
-    box-shadow: 0 0 0 4px rgba(255, 68, 68, 0.1);
-}
-
-.input-group.error i {
-    color: #FF4444;
-}
-
 /* 登入按鈕樣式 */
 .login-btn {
     width: 450px;
@@ -526,13 +735,7 @@ body::after {
 
 /* 頁腳區域調整 */
 .login-footer {
-    width: 100%;
-    max-width: 450px;
-    margin: 0 auto;
-    padding-top: 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    max-width: 320px;  /* 配合其他元素寬度 */
 }
 
 /* 安全加密連線樣式 */
@@ -730,18 +933,27 @@ body::after {
 /* 響應式調整 */
 @media (max-width: 992px) {
     .login-box {
+        width: 90%;
+        max-width: 500px;
         grid-template-columns: 1fr;
-        gap: 2rem;
-        max-width: 600px;
+        padding: 1.5rem;
+    }
+
+    .login-header,
+    .login-divider,
+    .login-form-section {
+        height: auto;
+        max-height: none;
     }
 
     .login-divider {
         display: none;
     }
 
-    .login-header {
-        text-align: center;
-        padding-right: 0;
+    .system-info,
+    .login-tips,
+    .support-info {
+        max-width: 400px;
     }
 
     .login-logo {
@@ -761,40 +973,39 @@ body::after {
 @media (max-width: 768px) {
     .account-selector {
         flex-direction: column;
-        gap: 1rem;
-        width: 100%;
-        max-width: 280px;
+        align-items: center;
     }
 
     .account-option {
-        width: 100%;
-        padding: 1rem;
+        width: 200px;
     }
 
-    .input-group {
-        max-width: 280px;
-    }
-
-    .login-btn {
-        width: 280px;
-    }
-
+    .input-group,
+    .login-btn,
     .login-footer {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .security-info,
-    .changelog-btn {
-        width: 100%;
-        justify-content: center;
+        max-width: 280px;
     }
 }
 
 @media (max-width: 576px) {
     .login-box {
-        padding: 1.5rem;
-        margin: 1rem;
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .account-selector {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .account-option {
+        width: 200px;
+    }
+
+    .input-group,
+    .login-btn,
+    .login-footer {
+        max-width: 280px;
     }
 
     .overlay-hint {
@@ -819,6 +1030,10 @@ body::after {
 
     .changelog-sidebar {
         width: 100%;
+    }
+
+    .login-form-section {
+        padding: 1.5rem;
     }
 }
 
@@ -1016,11 +1231,20 @@ body::after {
     top: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
-    color: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     z-index: 100;
-    animation: slideDown 0.5s ease-out;
+    background-color: #2c3e50 !important; /* 強制使用深藍色背景 */
+    color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 開發者主題 */
+.developer-theme .top-bar {
+    background-color: #2c3e50 !important; /* 確保開發者主題也使用深藍色 */
+}
+
+/* 訪客主題 */
+.visitor-theme .top-bar {
+    background-color: #2c3e50 !important; /* 確保訪客主題也使用深藍色 */
 }
 
 .top-bar-content {
@@ -2158,4 +2382,798 @@ body::after {
     50% {
         transform: translateX(-50%) translateY(-3px);  /* 減少浮動距離 */
     }
-} 
+}
+
+/* 登入品牌區域 */
+.login-brand {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-top: 1rem;  /* 添加頂部間距 */
+}
+
+.brand-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.version-tag {
+    background: var(--primary-light);
+    color: white;
+    padding: 0.2rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    align-self: flex-start;
+}
+
+/* 系統資訊區域 */
+.system-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.info-item:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateX(5px);
+}
+
+.info-item i {
+    font-size: 1.2rem;
+    color: var(--primary-main);
+    background: rgba(74, 144, 226, 0.1);
+    padding: 0.8rem;
+    border-radius: 12px;
+}
+
+.info-content {
+    flex: 1;
+}
+
+.info-content h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.info-content p {
+    margin: 0.2rem 0 0;
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+/* 登入提示區域 */
+.login-tips {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.tip-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.tip-header i {
+    color: #FFB100;
+    font-size: 1.2rem;
+}
+
+.tip-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.tips-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tips-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5rem 0;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.tips-list li i {
+    color: #4CAF50;
+    font-size: 0.9rem;
+}
+
+/* 支援資訊區域 */
+.support-info {
+    margin-top: 2rem;  /* 增加底部間距 */
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.support-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5rem 0;
+}
+
+.support-item i {
+    color: var(--primary-main);
+    font-size: 1rem;
+}
+
+.support-item span {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* 主題相關樣式 */
+.developer-theme .version-tag {
+    background: var(--developer-primary);
+}
+
+.visitor-theme .version-tag {
+    background: var(--visitor-primary);
+}
+
+/* 響應式調整 */
+@media (max-width: 992px) {
+    .login-brand {
+        justify-content: center;
+    }
+
+    .system-info,
+    .login-tips,
+    .support-info {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* 開發者功能區域樣式 */
+.developer-features {
+    width: 100%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+/* ===== 側邊導航欄樣式 ===== */
+.side-nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 280px;
+    height: 100vh;
+    background: #1a2234;
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    transform: translateX(5px);
+}
+
+.nav-link i {
+    width: 20px;
+    text-align: center;
+}
+
+.nav-footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1rem;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.user-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.user-role {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+}
+
+/* ===== 主要內容區域樣式 ===== */
+.main-content {
+    margin-left: 280px;
+    padding: 2rem;
+    background: #f4f6f8;
+    min-height: 100vh;
+}
+
+/* ===== 頂部狀態欄樣式 ===== */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.search-bar {
+    position: relative;
+}
+
+.search-bar input {
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border: 1px solid #eee;
+    border-radius: 20px;
+    width: 200px;
+    transition: all 0.3s ease;
+}
+
+.search-bar i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.notification-bell {
+    position: relative;
+    cursor: pointer;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4757;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* ===== 統計卡片樣式 ===== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.stat-trend {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.stat-trend.up {
+    color: #2ecc71;
+}
+
+.stat-trend.down {
+    color: #e74c3c;
+}
+
+/* ===== 內容網格樣式 ===== */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2rem;
+}
+
+.features-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.view-controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.view-btn {
+    padding: 0.5rem;
+    border: none;
+    background: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.view-btn.active,
+.view-btn:hover {
+    background: #f4f6f8;
+    color: var(--primary-dark);
+}
+
+/* ===== 響應式設計 ===== */
+@media (max-width: 1200px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .side-nav {
+        transform: translateX(-100%);
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 新增動畫關鍵幀 */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes progressRing {
+    from { stroke-dashoffset: 360; }
+    to { stroke-dashoffset: var(--progress-offset); }
+}
+
+/* 統計卡片動畫 */
+.stat-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInLeft 0.6s ease forwards;
+    animation-delay: var(--delay, 0s);
+}
+
+.stat-card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 進度環動畫 */
+.progress-ring-circle {
+    fill: none;
+    stroke: var(--primary-main);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 360;
+    stroke-dashoffset: var(--progress-offset);
+    transform: rotate(-90deg);
+    transform-origin: center;
+    animation: progressRing 1.5s ease forwards;
+    animation-delay: calc(var(--delay) + 0.3s);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: #E2E8F0;
+    stroke-width: 8;
+}
+
+/* 圖標動畫 */
+.stat-icon i.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.stat-trend i.bounce {
+    animation: bounce 2s ease-in-out infinite;
+}
+
+/* 側邊導航動畫 */
+.nav-link {
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: white;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after {
+    transform: translateX(0);
+}
+
+/* 搜索欄動畫 */
+.search-bar input:focus {
+    width: 250px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* 通知鈴鐺動畫 */
+@keyframes ring {
+    0% { transform: rotate(0); }
+    10% { transform: rotate(30deg); }
+    20% { transform: rotate(-28deg); }
+    30% { transform: rotate(25deg); }
+    40% { transform: rotate(-22deg); }
+    50% { transform: rotate(18deg); }
+    60% { transform: rotate(-15deg); }
+    70% { transform: rotate(12deg); }
+    80% { transform: rotate(-8deg); }
+    90% { transform: rotate(5deg); }
+    100% { transform: rotate(0); }
+}
+
+.notification-bell:hover i {
+    animation: ring 1s ease;
+}
+
+/* 功能卡片動畫 */
+.feature-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.feature-card:hover::before {
+    left: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* ===== 管理面板樣式 ===== */
+.admin-panel {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-nav {
+    width: 280px;
+    background-color: #1a2234;
+    color: white;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.nav-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.menu-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.menu-title {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    padding: 0.5rem 1rem;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    transform: translateX(5px);
+}
+
+.menu-item i {
+    width: 20px;
+    text-align: center;
+}
+
+/* ===== 用戶資料區域 ===== */
+.nav-footer {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1rem;
+}
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+}
+
+.admin-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.admin-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.admin-role {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+}
+
+/* ===== 登出按鈕 ===== */
+.logout-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, #ff4757, #ff6b81);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.logout-button i {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.3);
+    background: linear-gradient(135deg, #ff6b81, #ff4757);
+}
+
+.logout-button:hover i {
+    transform: rotate(180deg);
+}
+
+.logout-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.logout-button:hover::before {
+    left: 100%;
+}
+
+.logout-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 10px rgba(255, 71, 87, 0.2);
+}
+
+/* 在小螢幕上的樣式 */
+@media (max-width: 768px) {
+    .logout-button {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+}

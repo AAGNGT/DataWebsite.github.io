@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理人員控制台</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body class="admin-panel">
+    <!-- 左側導航欄 -->
+    <nav class="admin-nav">
+        <div class="nav-header">
+            <img src="logo.png" alt="Logo" class="nav-logo">
+            <h1>管理控制台</h1>
+        </div>
+
+        <div class="nav-menu">
+            <div class="menu-section">
+                <span class="menu-title">主要功能</span>
+                <a href="#dashboard" class="menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    控制台
+                </a>
+                <a href="#users" class="menu-item">
+                    <i class="fas fa-users-cog"></i>
+                    用戶管理
+                </a>
+                <a href="#security" class="menu-item">
+                    <i class="fas fa-shield-alt"></i>
+                    安全設置
+                </a>
+            </div>
+
+            <div class="menu-section">
+                <span class="menu-title">系統管理</span>
+                <a href="#settings" class="menu-item">
+                    <i class="fas fa-cogs"></i>
+                    系統設置
+                </a>
+                <a href="#logs" class="menu-item">
+                    <i class="fas fa-history"></i>
+                    系統日誌
+                </a>
+                <a href="#backup" class="menu-item">
+                    <i class="fas fa-database"></i>
+                    數據備份
+                </a>
+            </div>
+        </div>
+
+        <div class="nav-footer">
+            <div class="admin-profile">
+                <img src="admin-avatar.png" alt="Admin" class="admin-avatar">
+                <div class="admin-info">
+                    <span class="admin-name">管理員</span>
+                    <span class="admin-role">系統管理員</span>
+                </div>
+            </div>
+            <button onclick="logout()" class="logout-button">
+                <i class="fas fa-power-off"></i>
+                登出系統
+            </button>
+        </div>
+    </nav>
+
+    <!-- 主要內容區域 -->
+    <main class="admin-main">
+        <!-- 頂部工具欄 -->
+        <header class="main-header">
+            <div class="header-left">
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="breadcrumb">
+                    <span>控制台</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>系統概覽</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="搜尋...">
+                </div>
+                <div class="header-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">5</span>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-envelope"></i>
+                        <span class="badge">3</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- 儀表板內容 -->
+        <div class="dashboard-content">
+            <!-- 系統狀態卡片 -->
+            <div class="status-cards">
+                <div class="status-card">
+                    <div class="card-icon success">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>系統狀態</h3>
+                        <div class="status-value">
+                            <span class="value">正常運行</span>
+                            <span class="time">運行時間: 99.9%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-card">
+                    <div class="card-icon warning">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>安全狀態</h3>
+                        <div class="status-value">
+                            <span class="value">需要注意</span>
+                            <span class="time">2個安全提醒</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-card">
+                    <div class="card-icon info">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-info">
+                        <h3>在線用戶</h3>
+                        <div class="status-value">
+                            <span class="value">1,234</span>
+                            <span class="time">較昨日 +5.2%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 系統監控圖表 -->
+            <div class="monitor-section">
+                <div class="chart-container">
+                    <h3>系統資源監控</h3>
+                    <div class="chart-area">
+                        <!-- 這裡放置圖表 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 最近活動列表 -->
+            <div class="activity-section">
+                <h3>系統活動日誌</h3>
+                <div class="activity-list">
+                    <!-- 活動項目 -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 登出功能
+        function logout() {
+            localStorage.removeItem('userType');
+            window.location.href = 'index.html';
+        }
+
+        // 防止返回上一頁
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
+</body>
+</html> 
