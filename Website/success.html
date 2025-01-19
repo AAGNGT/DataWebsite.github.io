@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入成功</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- 頂部導航欄 -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <h1>強人bb</h1>
+            <button onclick="logout()" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                登出
+            </button>
+        </div>
+    </div>
+
+    <!-- 主要內容區域 -->
+    <div class="success-container">
+        <div class="success-content">
+            <!-- 歡迎訊息 -->
+            <div class="welcome-section">
+                <i class="fas fa-check-circle"></i>
+                <h2>登入成功</h2>
+                <p class="welcome-text">歡迎回來！</p>
+            </div>
+
+            <!-- 功能卡片區域 -->
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <i class="fas fa-book"></i>
+                    <h3>學習資源</h3>
+                    <p>豐富的學習材料</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>社群互動</h3>
+                    <p>與其他用戶交流</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>學習進度</h3>
+                    <p>追蹤您的學習歷程</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-trophy"></i>
+                    <h3>成就系統</h3>
+                    <p>獲得學習成就</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 登出功能
+        function logout() {
+            window.location.href = 'index.html';
+        }
+
+        // 防止返回上一頁
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    </script>
+</body>
+</html> 

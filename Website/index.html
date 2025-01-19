@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>密碼保護網站</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div id="topBar" class="top-bar hidden">
+        <div class="top-bar-content">
+            <h1>強人bb</h1>
+            <button onclick="logout()" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                登出
+            </button>
+        </div>
+    </div>
+
+    <div id="loginSection" class="container">
+        <div class="login-box">
+            <div class="login-header">
+                <img src="https://picsum.photos/100/100" alt="Logo" class="login-logo">
+                <h2>歡迎回來</h2>
+                <p class="login-subtitle">請選擇帳戶類型並輸入密碼<br>安全加密保護您的帳戶</p>
+            </div>
+            <div class="login-divider"></div>
+            <div class="login-form-section">
+                <div class="account-selector">
+                    <div class="account-option" onclick="selectAccountType('developer')">
+                        <div class="option-content">
+                            <i class="fas fa-laptop-code"></i>
+                            <span>開發人員</span>
+                        </div>
+                        <div class="check-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="account-option" onclick="selectAccountType('guest')">
+                        <div class="option-content">
+                            <i class="fas fa-user-graduate"></i>
+                            <span>訪客</span>
+                        </div>
+                        <div class="check-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="password-section">
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="passwordInput" placeholder="請輸入密碼">
+                    </div>
+                    <button onclick="checkPassword()" class="login-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        登入
+                    </button>
+                </div>
+                <div class="login-footer">
+                    <div class="security-info">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>安全加密連線</span>
+                    </div>
+                    <button class="changelog-btn" onclick="toggleChangelog()">
+                        <i class="fas fa-history"></i>
+                        更新日誌
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="changelog-sidebar hidden" id="changelogSidebar">
+            <div class="changelog-header">
+                <h2><i class="fas fa-history"></i> 更新日誌</h2>
+                <button class="close-changelog" onclick="toggleChangelog()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="changelog-content">
+                <div class="changelog-item">
+                    <div class="version">v2.0.0</div>
+                    <div class="date">2024-03-20</div>
+                    <ul>
+                        <li><i class="fas fa-star"></i> 全新界面設計</li>
+                        <li><i class="fas fa-palette"></i> 優化使用者體驗</li>
+                        <li><i class="fas fa-shield-alt"></i> 提升安全性</li>
+                    </ul>
+                </div>
+                <div class="changelog-item">
+                    <div class="version">v1.5.0</div>
+                    <div class="date">2024-03-15</div>
+                    <ul>
+                        <li><i class="fas fa-plus"></i> 新增功能模組</li>
+                        <li><i class="fas fa-bug"></i> 修復已知問題</li>
+                    </ul>
+                </div>
+                <div class="changelog-item">
+                    <div class="version">v1.0.0</div>
+                    <div class="date">2024-03-10</div>
+                    <ul>
+                        <li><i class="fas fa-rocket"></i> 首次發布</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="errorModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-icon">❌</div>
+            <h2>密碼錯誤</h2>
+            <p>請重新輸入正確的密碼</p>
+            <button onclick="closeErrorModal()">確定</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedAccountType = null;
+
+        function selectAccountType(type) {
+            selectedAccountType = type;
+            // 移除所有選中狀態
+            document.querySelectorAll('.account-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            // 添加選中狀態
+            event.currentTarget.classList.add('selected');
+            // 更新密碼輸入框提示
+            const placeholder = type === 'developer' ? '請輸入開發人員密碼' : '請輸入訪客密碼';
+            document.getElementById('passwordInput').placeholder = placeholder;
+        }
+
+        function checkPassword() {
+            if (!selectedAccountType) {
+                showErrorModal('請先選擇帳戶類型');
+                return;
+            }
+
+            const password = selectedAccountType === 'developer' ? 'A1368MONqq231' : 'guest1234';
+            const input = document.getElementById('passwordInput').value;
+
+            if (input === password) {
+                // 登入成功後直接跳轉到 success.html
+                window.location.href = 'success.html';
+            } else {
+                showErrorModal('密碼錯誤');
+            }
+        }
+
+        function toggleChangelog() {
+            const changelog = document.getElementById('changelogSidebar');
+            changelog.classList.toggle('hidden');
+            
+            // 添加動畫效果
+            if (!changelog.classList.contains('hidden')) {
+                changelog.style.transform = 'translateX(0)';
+            } else {
+                changelog.style.transform = 'translateX(100%)';
+            }
+        }
+
+        function showErrorModal(message) {
+            const modal = document.getElementById('errorModal');
+            modal.querySelector('p').textContent = message;
+            modal.classList.remove('hidden');
+        }
+
+        function closeErrorModal() {
+            document.getElementById('errorModal').classList.add('hidden');
+            document.getElementById('passwordInput').value = '';
+        }
+
+        function logout() {
+            document.getElementById('topBar').classList.add('hidden');
+            document.getElementById('loginSection').classList.remove('hidden');
+            document.getElementById('passwordInput').value = '';
+            selectedAccountType = null;
+            document.querySelectorAll('.account-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+        }
+    </script>
+</body>
+</html> 
