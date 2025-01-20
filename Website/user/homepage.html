@@ -53,13 +53,13 @@
 
         <!-- 功能區塊 -->
         <div class="features-section">
-            <a href="../login.html" class="feature-card">
+            <a href="#" class="feature-card" onclick="transitionToVerify(event)">
                 <div class="card-header">
                     <div class="card-icon">
                         <i class="fas fa-terminal"></i>
                     </div>
                 </div>
-                <h3>指令庫</h3>
+                <h3>指令庫 [已啟用]</h3>
                 <p>快速查找和使用常用指令</p>
                 <ul class="feature-list">
                     <li>教學圖片</li>
@@ -169,6 +169,42 @@
 
         function redirectToLogin() {
             window.location.href = '../login.html';
+        }
+
+        // 添加轉場效果
+        function transitionToVerify(event) {
+            event.preventDefault();
+            const card = event.currentTarget;
+            
+            // 創建轉場遮罩
+            const overlay = document.createElement('div');
+            overlay.className = 'transition-overlay';
+            document.body.appendChild(overlay);
+            
+            // 獲取卡片位置
+            const rect = card.getBoundingClientRect();
+            
+            // 設置遮罩初始位置
+            overlay.style.cssText = `
+                position: fixed;
+                inset: 0;
+                background: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(0px);
+                z-index: 1000;
+                transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+                opacity: 0;
+            `;
+            
+            // 觸發動畫
+            requestAnimationFrame(() => {
+                overlay.style.backdropFilter = 'blur(20px)';
+                overlay.style.opacity = '1';
+                
+                // 動畫結束後跳轉
+                setTimeout(() => {
+                    window.location.href = 'verify.html';
+                }, 800);
+            });
         }
     </script>
 </body>
