@@ -3,169 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>訪客專區</title>
-    <link rel="stylesheet" href="open1.css">
-    <link rel="stylesheet" href="open2.css">
-    <link rel="stylesheet" href="open3.css">
-    <link rel="stylesheet" href="open4.css">
+    <title>訪客專區 - 強人BB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="visitor-style.css">
 </head>
-<body class="visitor-theme">
-    <div class="top-bar">
-        <div class="top-bar-content">
-            <h1>強人bb - 訪客專區</h1>
-            <button onclick="logout()" class="logout-btn">
-                <i class="fas fa-sign-out-alt"></i>
-                登出
-            </button>
+<body>
+    <!-- 頂部導航 -->
+    <nav class="visitor-nav">
+        <div class="nav-brand">
+            <i class="fas fa-baby"></i>
+            <span>強人BB</span>
+        </div>
+        <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>登出系統</span>
+        </button>
+    </nav>
+
+    <!-- 主要內容區 -->
+    <div class="visitor-container">
+        <!-- 歡迎區塊 -->
+        <div class="welcome-banner">
+            <div class="welcome-content">
+                <h1>歡迎來到訪客專區</h1>
+                <p>探索我們為您準備的精彩內容</p>
+                <div class="community-btn-wrapper">
+                    <button class="community-btn">
+                        <div class="btn-content">
+                            <i class="fas fa-users"></i>
+                            <span>加入社群</span>
+                        </div>
+                        <div class="btn-decoration">
+                            <div class="circle-pulse"></div>
+                            <div class="sparkles">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="decoration-circles">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
+
+        <!-- 功能區塊 -->
+        <div class="features-section">
+            <div class="feature-card">
+                <div class="card-icon">
+                    <i class="fas fa-book-reader"></i>
+                </div>
+                <h3>學習資源</h3>
+                <p>豐富的教育內容和學習材料</p>
+                <ul class="feature-list">
+                    <li>教學影片</li>
+                    <li>互動練習</li>
+                    <li>學習指南</li>
+                </ul>
+                <div class="card-decoration"></div>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <h3>社群討論</h3>
+                <p>與其他家長交流育兒經驗</p>
+                <ul class="feature-list">
+                    <li>育兒討論</li>
+                    <li>經驗分享</li>
+                    <li>專家建議</li>
+                </ul>
+                <div class="card-decoration"></div>
+            </div>
+
+            <div class="feature-card">
+                <div class="card-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>活動資訊</h3>
+                <p>最新活動和課程安排</p>
+                <ul class="feature-list">
+                    <li>親子活動</li>
+                    <li>課程預約</li>
+                    <li>活動報名</li>
+                </ul>
+                <div class="card-decoration"></div>
+            </div>
+        </div>
+
+        <!-- 最新消息區 -->
+        <div class="news-section">
+            <h2>最新消息</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-date">2024/03/25</div>
+                    <h4>新課程上線</h4>
+                    <p>全新互動式學習課程現已開放報名！</p>
+                </div>
+                <div class="news-card">
+                    <div class="news-date">2024/03/23</div>
+                    <h4>系統更新</h4>
+                    <p>介面優化完成，帶來更好的使用體驗。</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="success-container visitor-theme">
-        <div class="success-content">
-            <div class="welcome-section">
-                <i class="fas fa-user"></i>
-                <h2>訪客專區</h2>
-                <p class="welcome-text">歡迎參觀！</p>
-                <p class="intro-text">在這裡，您可以瀏覽我們的學習資源、參與討論，以及了解更多關於我們的服務。</p>
-            </div>
-
-            <div class="dashboard-layout">
-                <!-- 左側統計資訊 -->
-                <div class="stats-sidebar">
-                    <div class="quick-stats">
-                        <div class="stat-item">
-                            <i class="fas fa-users"></i>
-                            <span class="stat-number">5000+</span>
-                            <span class="stat-label">活躍用戶</span>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-book-open"></i>
-                            <span class="stat-number">200+</span>
-                            <span class="stat-label">學習資源</span>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-comments"></i>
-                            <span class="stat-number">1000+</span>
-                            <span class="stat-label">討論主題</span>
-                        </div>
-                    </div>
-
-                    <div class="announcement-section">
-                        <h3><i class="fas fa-bullhorn"></i> 最新公告</h3>
-                        <div class="announcement-content">
-                            <div class="announcement-item">
-                                <span class="date">2024/03/21</span>
-                                <p>新增多項學習資源，歡迎查看！</p>
-                            </div>
-                            <div class="announcement-item">
-                                <span class="date">2024/03/20</span>
-                                <p>系統維護通知：本週日凌晨 2-4 點進行系統更新</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 右側功能卡片 -->
-                <div class="feature-cards">
-                    <div class="feature-card horizontal" onclick="openFeature('learn')">
-                        <div class="card-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>學習資源</h3>
-                            <p>瀏覽學習材料</p>
-                            <div class="feature-details">
-                                <ul>
-                                    <li><i class="fas fa-check"></i> 免費教學影片</li>
-                                    <li><i class="fas fa-check"></i> 實用教材下載</li>
-                                    <li><i class="fas fa-check"></i> 學習進度追蹤</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="feature-card horizontal" onclick="openFeature('forum')">
-                        <div class="card-icon">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>留言板</h3>
-                            <p>查看公開討論</p>
-                            <div class="feature-details">
-                                <ul>
-                                    <li><i class="fas fa-check"></i> 即時討論區</li>
-                                    <li><i class="fas fa-check"></i> 經驗分享</li>
-                                    <li><i class="fas fa-check"></i> 問題解答</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="feature-card horizontal" onclick="openFeature('help')">
-                        <div class="card-icon">
-                            <i class="fas fa-info-circle"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>幫助中心</h3>
-                            <p>常見問題解答</p>
-                            <div class="feature-details">
-                                <ul>
-                                    <li><i class="fas fa-check"></i> 使用指南</li>
-                                    <li><i class="fas fa-check"></i> 常見問題</li>
-                                    <li><i class="fas fa-check"></i> 操作教學</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="feature-card horizontal" onclick="openFeature('contact')">
-                        <div class="card-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="card-content">
-                            <h3>聯繫我們</h3>
-                            <p>意見反饋</p>
-                            <div class="feature-details">
-                                <ul>
-                                    <li><i class="fas fa-check"></i> 客服支援</li>
-                                    <li><i class="fas fa-check"></i> 建議回饋</li>
-                                    <li><i class="fas fa-check"></i> 聯絡方式</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- 登入提示 -->
+    <div class="login-alert" id="loginAlert">
+        <div class="alert-content">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>需要登入</h3>
+            <p>請先登入後再訪問此頁面</p>
+            <button onclick="redirectToLogin()">前往登入</button>
         </div>
     </div>
 
     <script>
-        // 防止返回上一頁
-        history.pushState(null, null, document.URL);
-        window.addEventListener('popstate', function () {
-            history.pushState(null, null, document.URL);
+        document.addEventListener('DOMContentLoaded', function() {
+            const userType = localStorage.getItem('userType');
+            if (!userType || userType !== 'visitor') {
+                document.getElementById('loginAlert').classList.add('show');
+                document.querySelector('.visitor-container').style.display = 'none';
+            }
         });
 
-        // 功能卡片點擊處理
-        function openFeature(feature) {
-            // 這裡可以添加各個功能的具體實現
-            alert('開啟功能：' + feature);
-        }
-
-        // 登出功能
         function logout() {
             localStorage.removeItem('userType');
             window.location.href = 'index.html';
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // 檢查用戶類型
-            const userType = localStorage.getItem('userType');
-            if (userType !== 'visitor') {
-                window.location.href = 'index.html';  // 如果不是訪客則返回登入頁
-            }
-        });
+        function redirectToLogin() {
+            window.location.href = 'index.html';
+        }
     </script>
 </body>
 </html> 

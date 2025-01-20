@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>數據分析 - 管理系統</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="admin-spacing.css">
+    <link rel="stylesheet" href="analytics-style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 側邊導航 -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fas fa-cube"></i>
+                <span>管理系統</span>
+            </div>
+            
+            <nav class="nav-links">
+                <a href="developer.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>總覽</span>
+                </a>
+                <a href="analytics.html" class="nav-link active">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>數據分析</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-users"></i>
+                    <span>用戶管理</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    <span>系統設置</span>
+                </a>
+            </nav>
+
+            <div class="user-profile">
+                <div class="user-info">
+                    <h4>系統管理員</h4>
+                    <button class="system-logout-btn" onclick="systemLogout()">
+                        <div class="btn-content">
+                            <i class="fas fa-power-off"></i>
+                            <span>系統登出</span>
+                        </div>
+                        <div class="btn-indicator">
+                            <div class="indicator-dot"></div>
+                            <span class="status-text">已連接</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 主要內容區 -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1>數據分析</h1>
+                    <span class="breadcrumb">首頁 / 數據分析</span>
+                </div>
+                <div class="top-actions">
+                    <div class="user-account">
+                        <div class="account-info">
+                            <span class="username">管理員</span>
+                            <span class="role">系統管理者</span>
+                        </div>
+                        <div class="account-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- 數據分析內容 -->
+            <div class="analytics-content">
+                <!-- 數據概覽卡片 -->
+                <div class="analytics-cards">
+                    <div class="analytics-card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>總用戶數</h3>
+                            <div class="number">12,345</div>
+                            <div class="trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>15.3%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <div class="card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>活躍度</h3>
+                            <div class="number">89.7%</div>
+                            <div class="trend positive">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>5.2%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <div class="card-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="card-info">
+                            <h3>平均使用時間</h3>
+                            <div class="number">25.4分鐘</div>
+                            <div class="trend negative">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>2.1%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 圖表區域 -->
+                <div class="charts-container">
+                    <div class="chart-box">
+                        <div class="chart-header">
+                            <h3>用戶增長趨勢</h3>
+                            <div class="chart-actions">
+                                <button class="chart-btn active">日</button>
+                                <button class="chart-btn">週</button>
+                                <button class="chart-btn">月</button>
+                            </div>
+                        </div>
+                        <div class="chart-area">
+                            <!-- 這裡可以接入實際的圖表庫 -->
+                            <div class="placeholder-chart"></div>
+                        </div>
+                    </div>
+
+                    <div class="chart-box">
+                        <div class="chart-header">
+                            <h3>使用者分布</h3>
+                            <div class="chart-actions">
+                                <button class="chart-btn active">地區</button>
+                                <button class="chart-btn">年齡</button>
+                            </div>
+                        </div>
+                        <div class="chart-area">
+                            <div class="placeholder-chart circular"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 詳細數據表格 -->
+                <div class="data-table-container">
+                    <div class="table-header">
+                        <h3>詳細數據</h3>
+                        <div class="table-actions">
+                            <button class="export-btn">
+                                <i class="fas fa-download"></i>
+                                導出數據
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>日期</th>
+                                    <th>新增用戶</th>
+                                    <th>活躍用戶</th>
+                                    <th>轉換率</th>
+                                    <th>留存率</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2024-03-25</td>
+                                    <td>234</td>
+                                    <td>1,890</td>
+                                    <td>23.5%</td>
+                                    <td>85.2%</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-03-24</td>
+                                    <td>198</td>
+                                    <td>1,756</td>
+                                    <td>21.8%</td>
+                                    <td>83.7%</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-03-23</td>
+                                    <td>245</td>
+                                    <td>1,934</td>
+                                    <td>24.2%</td>
+                                    <td>86.1%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 登出功能
+        function systemLogout() {
+            // 設置一個標記，表示需要執行登出動畫
+            sessionStorage.setItem('needLogout', 'true');
+            // 跳轉到 developer.html
+            window.location.href = 'developer.html';
+        }
+
+        // 檢查登入狀態
+        document.addEventListener('DOMContentLoaded', function() {
+            const userType = localStorage.getItem('userType');
+            if (!userType || userType !== 'developer') {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html> 

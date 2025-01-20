@@ -1,4 +1,3 @@
-
 .search-bar input {
     padding: 0.5rem 1rem 0.5rem 2.5rem;
     border: 1px solid #eee;
@@ -466,5 +465,137 @@
     .logout-button {
         padding: 0.8rem;
         font-size: 0.9rem;
+    }
+}
+
+/* 安全資訊彈出視窗樣式 */
+.security-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.security-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.security-modal-content {
+    background: var(--surface-color);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+.security-modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.security-modal-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--text-primary);
+}
+
+.security-modal-header i {
+    color: var(--primary-color);
+}
+
+.close-security-modal {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.close-security-modal:hover {
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+.security-info-content {
+    padding: 1.5rem;
+}
+
+.security-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    margin-bottom: 1rem;
+}
+
+.security-item i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    padding: 0.5rem;
+    background: rgba(67, 97, 238, 0.1);
+    border-radius: 8px;
+}
+
+.info-details h3 {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+}
+
+.info-details p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.verified-tag {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    background: var(--success-color);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.security-footer {
+    padding: 1rem 1.5rem;
+    background: rgba(255,255,255,0.05);
+    border-top: 1px solid var(--border-color);
+    border-radius: 0 0 15px 15px;
+}
+
+.security-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--success-color);
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
     }
 }
