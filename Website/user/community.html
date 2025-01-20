@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社群中心 - 強人BB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="community-style.css">
+</head>
+<body>
+    <!-- 頂部導航 -->
+    <nav class="community-nav">
+        <div class="nav-brand">
+            <i class="fas fa-users"></i>
+            <span>社群中心</span>
+        </div>
+        <div class="nav-actions">
+            <button class="back-btn" onclick="window.location.href='homepage.html'">
+                <i class="fas fa-arrow-left"></i>
+                <span>返回首頁</span>
+            </button>
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>登出系統</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="community-container">
+        <div class="page-header">
+            <div class="header-content">
+                <h1><i class="fas fa-newspaper"></i> 社群文章</h1>
+                <p>分享您的育兒經驗和心得</p>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <span>活躍用戶：152</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-file-alt"></i>
+                        <span>文章總數：<span id="articleCount">0</span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="header-decoration">
+                <div class="decoration-circle"></div>
+                <div class="decoration-line"></div>
+                <div class="decoration-dots"></div>
+            </div>
+        </div>
+
+        <!-- 左側文章列表 -->
+        <div class="articles-container">
+            <div class="articles-header">
+                <div class="header-actions">
+                    <button class="create-article-btn" onclick="showCreateArticleModal()">
+                        <i class="fas fa-plus"></i>
+                        <span>創建文章</span>
+                    </button>
+                </div>
+            </div>
+            <div class="articles-list" id="articlesList">
+                <!-- 文章將由 JavaScript 動態生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 創建文章的彈出視窗 -->
+    <div id="createArticleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>創建新文章</h2>
+                <button class="close-btn" onclick="closeCreateArticleModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>文章標題</label>
+                    <input type="text" id="articleTitle" placeholder="請輸入標題...">
+                </div>
+                <div class="form-group">
+                    <label>文章內容</label>
+                    <textarea id="articleContent" rows="6" placeholder="請輸入文章內容..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cancel-btn" onclick="closeCreateArticleModal()">取消</button>
+                <button class="submit-btn" onclick="createArticle()">發布文章</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userType = localStorage.getItem('userType');
+            if (!userType || userType !== 'visitor') {
+                window.location.href = '../login.html';
+                return;
+            }
+
+            // 初始化文章列表
+            loadArticles();
+        });
+
+        function logout() {
+            localStorage.removeItem('userType');
+            window.location.href = '../login.html';
+        }
+
+        // 加載文章
+        function loadArticles() {
+            const articlesList = document.getElementById('articlesList');
+            const articles = JSON.parse(localStorage.getItem('articles')) || [];
+            
+            // 更新文章數量
+            document.getElementById('articleCount').textContent = articles.length;
+            
+            // 如果沒有文章，顯示提示信息
+            if (articles.length === 0) {
+                articlesList.innerHTML = `
+                    <div class="no-articles">
+                        <i class="fas fa-file-alt"></i>
+                        <p>目前還沒有文章，來分享第一篇吧！</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            articlesList.innerHTML = articles.map((article, index) => `
+                <div class="article-item ${index === 0 ? 'active' : ''}" onclick="selectArticle(${index})">
+                    <div class="article-header">
+                        <span class="article-date">${article.date}</span>
+                        <div class="article-actions">
+                            <button class="action-btn" onclick="event.stopPropagation(); deleteArticle(${index})">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <h3>${article.title}</h3>
+                    <p>${article.content.substring(0, 100)}...</p>
+                    <div class="article-footer">
+                        <button class="read-more-btn" onclick="event.stopPropagation(); window.location.href='article-detail.html?id=${index}'">
+                            <span>閱讀更多</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 創建文章
+        function createArticle() {
+            const title = document.getElementById('articleTitle').value;
+            const content = document.getElementById('articleContent').value;
+            
+            if (!title || !content) {
+                alert('請填寫完整的文章信息');
+                return;
+            }
+            
+            const articles = JSON.parse(localStorage.getItem('articles')) || [];
+            const newArticle = {
+                title,
+                content,
+                date: new Date().toLocaleDateString('zh-TW', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }),
+            };
+            
+            articles.unshift(newArticle);
+            localStorage.setItem('articles', JSON.stringify(articles));
+            
+            loadArticles();
+            closeCreateArticleModal();
+            clearForm();
+        }
+
+        // 顯示創建文章視窗
+        function showCreateArticleModal() {
+            document.getElementById('createArticleModal').classList.add('show');
+        }
+
+        // 關閉創建文章視窗
+        function closeCreateArticleModal() {
+            document.getElementById('createArticleModal').classList.remove('show');
+            clearForm();
+        }
+
+        // 清空表單
+        function clearForm() {
+            document.getElementById('articleTitle').value = '';
+            document.getElementById('articleContent').value = '';
+        }
+
+        // 選擇文章
+        function selectArticle(index) {
+            const articles = document.querySelectorAll('.article-item');
+            articles.forEach(article => article.classList.remove('active'));
+            articles[index].classList.add('active');
+        }
+
+        // 刪除文章
+        function deleteArticle(index) {
+            if (!confirm('確定要刪除這篇文章嗎？')) return;
+            
+            const articles = JSON.parse(localStorage.getItem('articles')) || [];
+            articles.splice(index, 1);
+            localStorage.setItem('articles', JSON.stringify(articles));
+            loadArticles();
+        }
+    </script>
+</body>
+</html> 

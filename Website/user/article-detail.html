@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章詳情 - 強人BB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="article-detail-style.css">
+</head>
+<body>
+    <!-- 載入動畫 -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- 頂部導航 -->
+    <nav class="article-nav">
+        <div class="nav-brand">
+            <i class="fas fa-newspaper"></i>
+            <span>文章詳情</span>
+        </div>
+        <div class="nav-actions">
+            <button class="back-btn" onclick="window.location.href='community.html'">
+                <i class="fas fa-arrow-left"></i>
+                <span>返回列表</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="article-container">
+        <article class="article-content" id="articleDetail">
+            <!-- 文章內容將由 JavaScript 動態生成 -->
+        </article>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 模擬載入延遲
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+            }, 1000);
+
+            const articleId = new URLSearchParams(window.location.search).get('id');
+            if (!articleId) {
+                window.location.href = 'community.html';
+                return;
+            }
+
+            const articles = JSON.parse(localStorage.getItem('articles')) || [];
+            const article = articles[articleId];
+            
+            if (!article) {
+                window.location.href = 'community.html';
+                return;
+            }
+
+            document.title = `${article.title} - 強人BB`;
+            
+            const articleDetail = document.getElementById('articleDetail');
+            articleDetail.innerHTML = `
+                <div class="article-header">
+                    <div class="article-meta">
+                        <span class="article-date">
+                            <i class="far fa-calendar-alt"></i>
+                            ${article.date}
+                        </span>
+                    </div>
+                    <h1>${article.title}</h1>
+                </div>
+                <div class="article-body">
+                    ${formatContent(article.content)}
+                </div>
+            `;
+        });
+
+        // 格式化文章內容，將換行符轉換為段落
+        function formatContent(content) {
+            return content.split('\n')
+                .filter(paragraph => paragraph.trim())
+                .map(paragraph => `<p>${paragraph}</p>`)
+                .join('');
+        }
+    </script>
+</body>
+</html> 

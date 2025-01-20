@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訪客專區 - 強人BB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="visitor-style.css">
+</head>
+<body>
+    <!-- 頂部導航 -->
+    <nav class="visitor-nav">
+        <div class="nav-brand">
+            <i class="fas fa-baby"></i>
+            <span>強人BB - 訪客專區</span>
+        </div>
+        <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>登出系統</span>
+        </button>
+    </nav>
+
+    <!-- 主要內容區 -->
+    <div class="visitor-container">
+        <!-- 歡迎區塊 -->
+        <div class="welcome-banner">
+            <div class="welcome-content">
+                <h1>歡迎來到訪客專區</h1>
+                <p>探索我們為您準備的精彩內容</p>
+                <div class="community-btn-wrapper">
+                    <button class="community-btn" onclick="window.location.href='community.html'">
+                        <div class="btn-content">
+                            <i class="fas fa-users"></i>
+                            <span>加入社群</span>
+                        </div>
+                        <div class="btn-decoration">
+                            <div class="circle-pulse"></div>
+                            <div class="sparkles">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="decoration-circles">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
+
+        <!-- 功能區塊 -->
+        <div class="features-section">
+            <a href="../login.html" class="feature-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-terminal"></i>
+                    </div>
+                </div>
+                <h3>指令庫</h3>
+                <p>快速查找和使用常用指令</p>
+                <ul class="feature-list">
+                    <li>教學圖片</li>
+                    <li>複製指令</li>
+                    <li>學習指南</li>
+                </ul>
+                <div class="card-decoration"></div>
+            </a>
+
+            <a href="#" class="feature-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                </div>
+                <h3>社群討論</h3>
+                <p>與其他家長交流育兒經驗</p>
+                <ul class="feature-list">
+                    <li>育兒討論</li>
+                    <li>經驗分享</li>
+                    <li>專家建議</li>
+                </ul>
+                <div class="card-decoration"></div>
+            </a>
+
+            <a href="#" class="feature-card">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                </div>
+                <h3>活動資訊</h3>
+                <p>最新活動和課程安排</p>
+                <ul class="feature-list">
+                    <li>親子活動</li>
+                    <li>課程預約</li>
+                    <li>活動報名</li>
+                </ul>
+                <div class="card-decoration"></div>
+            </a>
+        </div>
+
+        <!-- 最新消息區 -->
+        <div class="news-section">
+            <h2>最新消息</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-date">2024/03/25</div>
+                    <h4>新課程上線</h4>
+                    <p>全新互動式學習課程現已開放報名！</p>
+                </div>
+                <div class="news-card">
+                    <div class="news-date">2024/03/23</div>
+                    <h4>系統更新</h4>
+                    <p>介面優化完成，帶來更好的使用體驗。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登入提示 -->
+    <div class="login-alert" id="loginAlert">
+        <div class="alert-content">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>需要登入</h3>
+            <p>請先登入後再訪問此頁面</p>
+            <button onclick="redirectToLogin()">前往登入</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userType = localStorage.getItem('userType');
+            if (!userType || userType !== 'visitor') {
+                document.getElementById('loginAlert').classList.add('show');
+                document.querySelector('.visitor-container').style.display = 'none';
+            }
+            
+            // 追蹤滑鼠位置來創建背景光效
+            document.addEventListener('mousemove', function(e) {
+                const container = document.querySelector('.success-container');
+                const x = (e.clientX / window.innerWidth) * 100;
+                const y = (e.clientY / window.innerHeight) * 100;
+                container.style.setProperty('--mouse-x', `${x}%`);
+                container.style.setProperty('--mouse-y', `${y}%`);
+            });
+
+            // 追蹤滑鼠位置來創建光影效果
+            const cards = document.querySelectorAll('.feature-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', function(e) {
+                    const rect = card.getBoundingClientRect();
+                    const x = ((e.clientX - rect.left) / rect.width) * 100;
+                    const y = ((e.clientY - rect.top) / rect.height) * 100;
+                    
+                    card.style.setProperty('--mouse-x', `${x}%`);
+                    card.style.setProperty('--mouse-y', `${y}%`);
+                });
+            });
+        });
+
+        function logout() {
+            localStorage.removeItem('userType');
+            window.location.href = '../login.html';
+        }
+
+        function redirectToLogin() {
+            window.location.href = '../login.html';
+        }
+    </script>
+</body>
+</html> 
