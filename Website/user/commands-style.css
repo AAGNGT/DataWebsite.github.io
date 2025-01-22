@@ -1,0 +1,346 @@
+:root {
+    --primary: #7E57C2;
+    --secondary: #9575CD;
+    --accent: #5E35B1;
+    --background: #EDE7F6;
+    --surface: #D1C4E9;
+    --text: #311B92;
+    --success: #66BB6A;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #EDE7F6, #D1C4E9, #B39DDB);
+    color: var(--text);
+    overflow: hidden;
+    transition: background 0.5s ease;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2rem;
+    height: calc(100vh - 4rem);
+}
+
+/* 左側選單樣式 */
+.command-menu {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow-y: auto;
+    animation: slideIn 0.5s ease-out;
+}
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(149, 117, 205, 0.2);
+}
+
+.menu-header i {
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.menu-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--text);
+}
+
+.command-button {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.command-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+}
+
+.command-button.active {
+    background: var(--accent);
+    color: white;
+}
+
+/* 右側內容樣式 */
+.command-content {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow-y: auto;
+    animation: fadeIn 0.5s ease-out;
+    transition: all 0.3s ease;
+}
+
+.content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(149, 117, 205, 0.2);
+}
+
+.content-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text);
+}
+
+.command-box {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.command-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--accent);
+}
+
+.command-code {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: monospace;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.copy-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.copy-button.copied {
+    background: var(--success);
+    color: white;
+}
+
+.command-description {
+    font-size: 0.9rem;
+    color: rgba(49, 27, 146, 0.8);
+    line-height: 1.6;
+}
+
+/* 動畫效果 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 滾動條樣式 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(94, 53, 177, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(94, 53, 177, 0.5);
+}
+
+/* 添加進階模式的主題色 */
+.advanced-theme {
+    --primary: #64B5F6;
+    --secondary: #90CAF9;
+    --accent: #2196F3;
+    --background: #E3F2FD;
+    --surface: #BBDEFB;
+    --text: #1565C0;
+    --success: #4CAF50;
+}
+
+/* 進階模式的背景和過渡效果 */
+body {
+    transition: background 0.5s ease;
+}
+
+/* 進階模式啟動時的樣式 */
+.advanced-theme body {
+    background: linear-gradient(135deg, #E3F2FD, #BBDEFB, #90CAF9);
+}
+
+.advanced-theme .command-menu {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(33, 150, 243, 0.2);
+}
+
+.advanced-theme .command-content {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(33, 150, 243, 0.2);
+}
+
+.advanced-theme .command-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+}
+
+.advanced-theme .command-button:hover {
+    background: rgba(33, 150, 243, 0.2);
+}
+
+.advanced-theme .command-button.active {
+    background: var(--accent);
+    color: white;
+}
+
+.advanced-theme .command-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(33, 150, 243, 0.2);
+}
+
+.advanced-theme .command-code {
+    background: rgba(25, 118, 210, 0.1);
+}
+
+.advanced-theme .copy-button {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.advanced-theme .copy-button:hover {
+    background: rgba(33, 150, 243, 0.3);
+}
+
+/* 進階模式的滾動條樣式 */
+.advanced-theme ::-webkit-scrollbar-thumb {
+    background: rgba(33, 150, 243, 0.3);
+}
+
+.advanced-theme ::-webkit-scrollbar-thumb:hover {
+    background: rgba(33, 150, 243, 0.5);
+}
+
+/* 添加網絡模式的主題色 */
+.network-theme {
+    --primary: #81C784;
+    --secondary: #A5D6A7;
+    --accent: #4CAF50;
+    --background: #E8F5E9;
+    --surface: #C8E6C9;
+    --text: #2E7D32;
+    --success: #43A047;
+}
+
+/* 網絡模式的背景和過渡效果 */
+.network-theme body {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9, #A5D6A7);
+}
+
+.network-theme .command-menu {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(76, 175, 80, 0.2);
+}
+
+.network-theme .command-content {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(76, 175, 80, 0.2);
+}
+
+.network-theme .command-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+}
+
+.network-theme .command-button:hover {
+    background: rgba(76, 175, 80, 0.2);
+}
+
+.network-theme .command-button.active {
+    background: var(--accent);
+    color: white;
+}
+
+.network-theme .command-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(76, 175, 80, 0.2);
+}
+
+.network-theme .command-code {
+    background: rgba(46, 125, 50, 0.1);
+}
+
+.network-theme .copy-button {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.network-theme .copy-button:hover {
+    background: rgba(76, 175, 80, 0.3);
+}
+
+/* 網絡模式的滾動條樣式 */
+.network-theme ::-webkit-scrollbar-thumb {
+    background: rgba(76, 175, 80, 0.3);
+}
+
+.network-theme ::-webkit-scrollbar-thumb:hover {
+    background: rgba(76, 175, 80, 0.5);
+} 

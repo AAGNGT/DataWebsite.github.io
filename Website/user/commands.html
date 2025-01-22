@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系統指令庫</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="hdmi.css">
+</head>
+<body>
+    <div class="container">
+        <div class="command-menu">
+            <div class="menu-header">
+                <i class="fas fa-terminal"></i>
+                <h2>系統指令類型</h2>
+            </div>
+            <button class="command-button active" onclick="showCommands('basic')">
+                <i class="fas fa-laptop"></i>
+                基本系統指令
+            </button>
+            <button class="command-button" onclick="showCommands('advanced')">
+                <i class="fas fa-cogs"></i>
+                進階系統設定
+            </button>
+            <button class="command-button" onclick="showCommands('network')">
+                <i class="fas fa-network-wired"></i>
+                網路相關指令
+            </button>
+            <button class="command-button" onclick="showCommands('security')">
+                <i class="fas fa-shield-alt"></i>
+                安全性設定
+            </button>
+        </div>
+
+        <div class="command-content" id="commandContent">
+            <!-- 內容會通過 JavaScript 動態更新 -->
+        </div>
+    </div>
+
+    <script>
+        const commandData = {
+            basic: {
+                title: '基本系統指令',
+                commands: [
+                    {
+                        title: '提取 Wi-fi 密碼數據',
+                        code: 'netsh wlan show profile name="test_w" key=clear',
+                        description: '不需要有管理員權限。'
+                    },
+                    {
+                        title: '終極隱藏效能模式',
+                        code: 'powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61',
+                        description: '調整電源管理設定將電腦的硬體性能推向極限。通過關閉不必要的背景服務。'
+                    },
+                    {
+                        title: 'WhatsApp 快捷開啟',
+                        code: "explorer.exe shell:appsFolder\\5319275A.WhatsAppDesktop_cv1g1gvanyjgm!App",
+                        description: 'Microsoft Store 安裝的 WhatsApp 快捷開啟。'
+                    }
+                ]
+            },
+            network: {
+                title: '網路相關指令',
+                commands: [
+                    {
+                        title: '清除 DNS 快取',
+                        code: 'ipconfig/flushdns',
+                        description: '清除 DNS 解讀器快取。'
+                    },
+                    {
+                        title: '顯示 DNS 紀錄',
+                        code: 'ipconfig/displaydns',
+                        description: '解析 DNS 解讀器紀錄。'
+                    }
+                ]
+            },
+            advanced: {
+                title: '進階系統設定',
+                commands: [
+                    {
+                        title: '系統檔案完整性檢查',
+                        code: 'sfc /scannow',
+                        description: '掃描系統檔案並修復損壞的檔案。需要管理員權限。'
+                    },
+                    {
+                        title: '磁碟檢查',
+                        code: 'chkdsk /f /r',
+                        description: '檢查並修復磁碟錯誤。/f 修復錯誤，/r 恢復可讀取資訊。'
+                    }
+                ]
+            },
+            security: {
+                title: '安全性設定',
+                commands: [
+                    {
+                        title: '防火牆狀態',
+                        code: 'netsh advfirewall show allprofiles',
+                        description: '顯示所有防火牆配置檔案的當前狀態。'
+                    },
+                    {
+                        title: '系統更新歷史',
+                        code: 'wmic qfe list brief',
+                        description: '顯示已安裝的系統更新清單。'
+                    }
+                ]
+            }
+        };
+
+        function showCommands(type) {
+            // 更新按鈕狀態
+            document.querySelectorAll('.command-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            // 移除所有主題類別
+            document.documentElement.classList.remove('advanced-theme', 'network-theme');
+
+            // 根據類型切換主題
+            switch(type) {
+                case 'advanced':
+                    document.documentElement.classList.add('advanced-theme');
+                    break;
+                case 'network':
+                    document.documentElement.classList.add('network-theme');
+                    break;
+            }
+
+            // 獲取指令數據
+            const data = commandData[type];
+            if (!data) return;
+
+            // 添加過渡效果
+            const content = document.getElementById('commandContent');
+            content.style.opacity = '0';
+            
+            setTimeout(() => {
+                // 更新內容
+                content.innerHTML = `
+                    <div class="content-header">
+                        <h2>${data.title}</h2>
+                    </div>
+                    ${data.commands.map(cmd => `
+                        <div class="command-box">
+                            <h3 class="command-title">${cmd.title}</h3>
+                            <div class="command-code">
+                                ${cmd.code}
+                                <button class="copy-button" onclick="copyCommand(this)">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <p class="command-description">${cmd.description}</p>
+                        </div>
+                    `).join('')}
+                `;
+                content.style.opacity = '1';
+            }, 300);
+        }
+
+        function copyCommand(button) {
+            const codeElement = button.parentElement;
+            const code = codeElement.textContent.trim();
+            
+            navigator.clipboard.writeText(code).then(() => {
+                button.classList.add('copied');
+                button.innerHTML = '<i class="fas fa-check"></i>';
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = '<i class="fas fa-copy"></i>';
+                }, 2000);
+            });
+        }
+
+        // 確保頁面載入時初始化主題
+        document.addEventListener('DOMContentLoaded', () => {
+            // 初始化顯示基本指令
+            showCommands('basic');
+        });
+    </script>
+</body>
+</html> 

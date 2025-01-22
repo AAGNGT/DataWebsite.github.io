@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDMI 多人遊戲</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="game.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- 遊戲大廳 -->
+        <div id="gameLobby" class="section">
+            <h1>HDMI 多人遊戲</h1>
+            <div class="lobby-buttons">
+                <button id="createGameBtn" class="primary-btn">
+                    <i class="fas fa-plus"></i> 創建新遊戲
+                </button>
+                <div class="join-game">
+                    <input type="text" id="gameCodeInput" placeholder="輸入遊戲代碼">
+                    <button id="joinGameBtn" class="secondary-btn">
+                        <i class="fas fa-sign-in-alt"></i> 加入遊戲
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 遊戲房間 -->
+        <div id="gameRoom" class="section hidden">
+            <div class="room-header">
+                <h2>房間：<span id="roomCode"></span></h2>
+                <div class="share-link">
+                    <input type="text" id="shareLink" readonly>
+                    <button id="copyLinkBtn">
+                        <i class="fas fa-copy"></i> 複製連結
+                    </button>
+                </div>
+            </div>
+
+            <div class="game-area">
+                <!-- 玩家列表 -->
+                <div class="players-list">
+                    <h3>玩家列表</h3>
+                    <ul id="playersList"></ul>
+                    <div class="ready-button">
+                        <button id="readyBtn" class="primary-btn">
+                            <i class="fas fa-check"></i> 準備
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 遊戲內容 -->
+                <div class="game-content">
+                    <div id="gameStage" class="game-stage">
+                        <div id="level1" class="game-level hidden">
+                            <h3>第一關：記憶配對</h3>
+                            <div class="memory-cards"></div>
+                        </div>
+                        <div id="level2" class="game-level hidden">
+                            <h3>第二關：數字排序</h3>
+                            <div class="number-sort"></div>
+                        </div>
+                        <div id="level3" class="game-level hidden">
+                            <h3>第三關：解密遊戲</h3>
+                            <div class="puzzle-game"></div>
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <span class="timer">時間：<span id="timeLeft">0</span></span>
+                        <span class="score">分數：<span id="currentScore">0</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let socket;
+        let currentRoom = null;
+        let isReady = false;
+        let currentLevel = 0;
+
+        // 連接 Socket.IO
+        function connectSocket() {
+            if (!socket) {
+                const protocol = window.location.protocol;
+                const host = window.location.hostname;
+                const port = window.location.port || (protocol === 'https:' ? '443' : '3000');
+                
+                socket = io({
+                    path: '/socket.io',
+                    transports: ['polling', 'websocket'],
+                    reconnectionAttempts: 5,
+                    reconnectionDelay: 1000,
+                    forceNew: true,
+                    timeout: 10000,
+                    url: `${protocol}//${host}:${port}`
+                });
+
+                setupSocketListeners();
+            }
+        }
+
+        // 設置 Socket 監聽器
+        function setupSocketListeners() {
+            socket.on('connect', () => {
+                console.log('已連接到服務器');
+            });
+
+            socket.on('player-joined', (data) => {
+                updatePlayersList(data.players);
+            });
+
+            socket.on('game-start', (data) => {
+                startGame(data);
+            });
+
+            socket.on('level-complete', (data) => {
+                handleLevelComplete(data);
+            });
+
+            socket.on('game-over', (data) => {
+                showGameResults(data);
+            });
+        }
+
+        // 創建遊戲
+        document.getElementById('createGameBtn').addEventListener('click', () => {
+            connectSocket();
+            socket.emit('create-game', {}, (response) => {
+                if (response.success) {
+                    showGameRoom(response.roomId);
+                }
+            });
+        });
+
+        // 加入遊戲
+        document.getElementById('joinGameBtn').addEventListener('click', () => {
+            const gameCode = document.getElementById('gameCodeInput').value.trim();
+            if (!gameCode) {
+                alert('請輸入遊戲代碼');
+                return;
+            }
+
+            connectSocket();
+            socket.emit('join-game', { roomId: gameCode }, (response) => {
+                if (response.success) {
+                    showGameRoom(gameCode);
+                } else {
+                    alert('無法加入遊戲，請檢查代碼是否正確');
+                }
+            });
+        });
+
+        // 準備按鈕
+        document.getElementById('readyBtn').addEventListener('click', () => {
+            isReady = !isReady;
+            const btn = document.getElementById('readyBtn');
+            btn.innerHTML = isReady ? 
+                '<i class="fas fa-times"></i> 取消準備' : 
+                '<i class="fas fa-check"></i> 準備';
+            btn.classList.toggle('ready');
+
+            socket.emit('player-ready', {
+                roomId: currentRoom,
+                ready: isReady
+            });
+        });
+
+        // 顯示遊戲房間
+        function showGameRoom(roomId) {
+            currentRoom = roomId;
+            document.getElementById('gameLobby').classList.add('hidden');
+            document.getElementById('gameRoom').classList.remove('hidden');
+            document.getElementById('roomCode').textContent = roomId;
+            document.getElementById('shareLink').value = `${window.location.origin}/game.html?room=${roomId}`;
+        }
+
+        // 更新玩家列表
+        function updatePlayersList(players) {
+            const list = document.getElementById('playersList');
+            list.innerHTML = players.map(player => `
+                <li class="player-item ${player.ready ? 'ready' : ''}">
+                    <i class="fas fa-user"></i>
+                    <span>${player.name}</span>
+                    ${player.ready ? '<i class="fas fa-check"></i>' : ''}
+                </li>
+            `).join('');
+        }
+
+        // 複製分享連結
+        document.getElementById('copyLinkBtn').addEventListener('click', () => {
+            const linkInput = document.getElementById('shareLink');
+            linkInput.select();
+            document.execCommand('copy');
+            
+            const btn = document.getElementById('copyLinkBtn');
+            btn.innerHTML = '<i class="fas fa-check"></i> 已複製';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-copy"></i> 複製連結';
+            }, 2000);
+        });
+
+        // 檢查 URL 參數
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const roomId = urlParams.get('room');
+            
+            if (roomId) {
+                document.getElementById('gameCodeInput').value = roomId;
+                document.getElementById('joinGameBtn').click();
+            }
+        });
+    </script>
+</body>
+</html> 
