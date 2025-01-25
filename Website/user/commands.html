@@ -92,6 +92,11 @@
             security: {
                 title: '安全性設定',
                 commands: [
+                {
+                        title: '觀看影片平台權限',
+                        code: 'https://7ynkmb-my.sharepoint.com/:f:/g/personal/chenman_7ynkmb_onmicrosoft_com/Elt8oVHlLkpJlTgWa6OZvlEBrfjyeYVO2w5Vi-Q0TiY68w',
+                        description: '取得連結強人bb NAS伺服器'
+                    },
                     {
                         title: '防火牆狀態',
                         code: 'netsh advfirewall show allprofiles',
@@ -114,7 +119,7 @@
             event.currentTarget.classList.add('active');
 
             // 移除所有主題類別
-            document.documentElement.classList.remove('advanced-theme', 'network-theme');
+            document.documentElement.classList.remove('advanced-theme', 'network-theme', 'security-theme');
 
             // 根據類型切換主題
             switch(type) {
@@ -123,6 +128,9 @@
                     break;
                 case 'network':
                     document.documentElement.classList.add('network-theme');
+                    break;
+                case 'security':
+                    document.documentElement.classList.add('security-theme');
                     break;
             }
 

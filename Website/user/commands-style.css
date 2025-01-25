@@ -343,4 +343,70 @@ body {
 
 .network-theme ::-webkit-scrollbar-thumb:hover {
     background: rgba(76, 175, 80, 0.5);
+}
+
+/* 添加安全性主題的主題色 */
+.security-theme {
+    --primary: #FFD700;    /* 金黃色 */
+    --secondary: #FFE57F;  /* 淺金黃色 */
+    --accent: #FFC107;     /* 深金黃色 */
+    --background: #FFF8E1; /* 淺黃色背景 */
+    --surface: #FFECB3;    /* 稍深淺黃色 */
+    --text: #F57F17;       /* 深橙黃色文字 */
+    --success: #66BB6A;    /* 保持原有的成功色 */
+}
+
+/* 安全性主題的背景和過渡效果 */
+.security-theme body {
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3, #FFE57F);
+}
+
+.security-theme .command-menu {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 193, 7, 0.2);
+}
+
+.security-theme .command-content {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 193, 7, 0.2);
+}
+
+.security-theme .command-button {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+}
+
+.security-theme .command-button:hover {
+    background: rgba(255, 193, 7, 0.2);
+}
+
+.security-theme .command-button.active {
+    background: var(--accent);
+    color: white;
+}
+
+.security-theme .command-box {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 193, 7, 0.2);
+}
+
+.security-theme .command-code {
+    background: rgba(245, 127, 23, 0.1);
+}
+
+.security-theme .copy-button {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.security-theme .copy-button:hover {
+    background: rgba(255, 193, 7, 0.3);
+}
+
+/* 安全性主題的滾動條樣式 */
+.security-theme ::-webkit-scrollbar-thumb {
+    background: rgba(255, 193, 7, 0.3);
+}
+
+.security-theme ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 193, 7, 0.5);
 } 
