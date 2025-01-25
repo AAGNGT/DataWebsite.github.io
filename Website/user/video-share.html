@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影片分享平台 - 強人BB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --accent: #10B981;
+            --bg: #1E1B4B;
+            --text: #E0E7FF;
+            --text-secondary: #A5B4FC;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--bg), #2D3748);
+            color: var(--text);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 頂部導航 */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-light);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* 分類選單 */
+        .category-menu {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding: 0.5rem 0;
+        }
+
+        .category-btn {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--primary-light);
+            border-radius: 20px;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .category-btn.active {
+            background: var(--primary-light);
+        }
+
+        /* 影片網格 */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 比例 */
+            background: #000;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .video-info {
+            padding: 1rem;
+        }
+
+        .video-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* 上傳按鈕 */
+        .upload-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-light);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            background: var(--primary);
+        }
+
+        /* 搜索欄 */
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            flex: 1;
+            max-width: 500px;
+            margin: 0 2rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--primary-light);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+        }
+
+        .search-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-light);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* 修改按鈕樣式 */
+        .back-btn {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .back-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* 優化影片卡片樣式 */
+        .video-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent 60%,
+                rgba(0, 0, 0, 0.5)
+            );
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-card:hover .video-thumbnail::after {
+            opacity: 1;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 導航欄 -->
+        <nav class="nav-bar">
+            <div class="nav-brand">
+                <i class="fas fa-video"></i> 影片分享平台
+            </div>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="搜索影片...">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            <div class="nav-controls">
+                <button class="back-btn" onclick="window.location.href='homepage.html'">
+                    <i class="fas fa-arrow-left"></i>
+                    返回列表
+                </button>
+            </div>
+        </nav>
+
+        <!-- 分類選單 -->
+        <div class="category-menu">
+            <button class="category-btn active">全部</button>
+            <button class="category-btn">教學影片</button>
+            <button class="category-btn">經驗分享</button>
+            <button class="category-btn">直播回放</button>
+            <button class="category-btn">育兒技巧</button>
+            <button class="category-btn">專家建議</button>
+        </div>
+
+        <!-- 影片網格 -->
+        <div class="video-grid">
+            <!-- STAND BY ME 多啦A夢 -->
+            <div class="video-card" onclick="playVideo('ab146d13-f7c2-466d-8904-f3f7d1ca48bc', 'Stand By Me：多啦A夢')">
+                <div class="video-thumbnail">
+                    <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2021/04/07/EKyzlC.png?v1" alt="影片縮圖">
+                    <span class="video-duration">1:33:57</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">STAND BY ME: 多啦A夢</h3>
+                    <div class="video-meta">
+                        <span>藤子·F·不二雄</span>
+                        <span>2014 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STAND BY ME 多啦A夢 2 -->
+            <div class="video-card" onclick="playVideo('ab146d13-f7c1-466d-8904-f3f7d1ca48bc', 'Stand By Me：多啦A夢 2')">
+                <div class="video-thumbnail">
+                    <img src="https://chinesedora.com/news/wp-content/uploads/2020/12/STAND-BY-ME-%E5%93%86%E5%95%A6A%E5%A4%A22-%E6%AD%A3%E5%BC%8F%E6%B5%B7%E5%A0%B1_2%E6%9C%8810%E6%97%A5.jpg" alt="影片縮圖">
+                    <span class="video-duration">1:30:13</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">STAND BY ME: 多啦A夢 2</h3>
+                    <div class="video-meta">
+                        <span>藤子·F·不二雄</span>
+                        <span>2020 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('DBFDBD-f7c1-466d-8904-f3f7d1ca48bc', '你的名字')">
+                <div class="video-thumbnail">
+                    <img src="https://cdn.hk01.com/di/media/images/283773/org/6da32b263e534c5943f748d194adff95.png/H24CXCYv6qFWVjYxlnsXxaVYK-45Qjvh51lmwedZZsE?v=w800" alt="影片縮圖">
+                    <span class="video-duration">1:46:35</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">你的名字</h3>
+                    <div class="video-meta">
+                        <span>新海誠</span>
+                        <span>2016 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('DBFDBD-123D-466d-8904-f3f7d1ca48bc', '天氣之子')">
+                <div class="video-thumbnail">
+                    <img src="https://cdn.hk01.com/di/media/images/3137038/org/31eca1f4d6d7241fc824e93e6223346e.jpg/C3TRBgRqkkqYwmAWlFuS7xJk5IiDNBhVRS-O6UUvjuk?v=w1920" alt="影片縮圖">
+                    <span class="video-duration">1:52:09</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">天氣之子</h3>
+                    <div class="video-meta">
+                        <span>新海誠</span>
+                        <span>2019 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="playVideo('DBFDBD-123D-123F-8904-f3f7d1ca48bc', '鈴芽之旅')">
+                <div class="video-thumbnail">
+                    <img src="https://cdn.hk01.com/di/media/images/dw/20230228/707220027236945920027381.jpeg/O9WEP4B2dZgwajEdsjYMFr_Xjo34GvFDRyrt4Ucq7eE?v=w1920r16_9" alt="影片縮圖">
+                    <span class="video-duration">2:01:28</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">鈴芽之旅</h3>
+                    <div class="video-meta">
+                        <span>新海誠</span>
+                        <span>2022 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 哆啦A夢：大雄的宇宙小戰爭 -->
+            <div class="video-card" onclick="playVideo('bc247e24-h8d3-577e-9015-g4f8e2db59cd', '哆啦A夢：大雄的宇宙小戰爭')">
+                <div class="video-thumbnail">
+                    <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2024/03/26/YKLmn8.jpg" alt="影片縮圖">
+                    <span class="video-duration">1:40:22</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">哆啦A夢：大雄的宇宙小戰爭</h3>
+                    <div class="video-meta">
+                        <span>觀看次數：856</span>
+                        <span>2024 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 哆啦A夢：大雄的月球探測記 -->
+            <div class="video-card" onclick="playVideo('cd358f35-i9e4-688f-a126-h5g9f3ec6ae1', '哆啦A夢：大雄的月球探測記')">
+                <div class="video-thumbnail">
+                    <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2024/03/26/zPQw4R.jpg" alt="影片縮圖">
+                    <span class="video-duration">1:35:45</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">哆啦A夢：大雄的月球探測記</h3>
+                    <div class="video-meta">
+                        <span>觀看次數：723</span>
+                        <span>2019 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 哆啦A夢：大雄的新恐龍 -->
+            <div class="video-card" onclick="playVideo('de469g46-j0f5-7990-b237-i6h0g4fd7bf2', '哆啦A夢：大雄的新恐龍')">
+                <div class="video-thumbnail">
+                    <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2024/03/26/vNxT9M.jpg" alt="影片縮圖">
+                    <span class="video-duration">1:50:15</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">哆啦A夢：大雄的新恐龍</h3>
+                    <div class="video-meta">
+                        <span>觀看次數：945</span>
+                        <span>2020 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 哆啦A夢：大雄的宇宙英雄記 -->
+            <div class="video-card" onclick="playVideo('ef570h57-k1g6-8a01-c348-j7i1h5ge8cg3', '哆啦A夢：大雄的宇宙英雄記')">
+                <div class="video-thumbnail">
+                    <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2024/03/26/bKcV5H.jpg" alt="影片縮圖">
+                    <span class="video-duration">1:48:33</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">哆啦A夢：大雄的宇宙英雄記</h3>
+                    <div class="video-meta">
+                        <span>觀看次數：678</span>
+                        <span>2015 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 哆啦A夢：大雄的金銀島 -->
+            <div class="video-card" onclick="playVideo('fg681i68-l2h7-9b12-d459-k8j2i6hf9dh4', '哆啦A夢：大雄的金銀島')">
+                <div class="video-thumbnail">
+                    <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2024/03/26/qWsX7J.jpg" alt="影片縮圖">
+                    <span class="video-duration">1:49:27</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">哆啦A夢：大雄的金銀島</h3>
+                    <div class="video-meta">
+                        <span>觀看次數：892</span>
+                        <span>2018 年</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 分類按鈕切換
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // 這裡可以添加過濾影片的邏輯
+            });
+        });
+
+        // 可以添加更多功能：
+        // 1. 影片上傳功能
+        // 2. 搜索功能
+        // 3. 影片播放功能
+        // 4. 分頁加載
+
+        function playVideo(videoId, title) {
+            // 將影片信息存儲到 localStorage
+            localStorage.setItem('currentVideo', JSON.stringify({
+                id: videoId,
+                title: title
+            }));
+            // 跳轉到播放頁面
+            window.location.href = 'video-player.html';
+        }
+    </script>
+</body>
+</html> 

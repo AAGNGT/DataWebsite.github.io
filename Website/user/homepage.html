@@ -6,6 +6,329 @@
     <title>訪客專區 - 強人BB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="visitor-style.css">
+    <style>
+        /* 主容器樣式 */
+        .visitor-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 功能區塊樣式 */
+        .features-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin: 3rem auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        /* 移除原有的紫色橫線，改用漸變背景 */
+        .features-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 59, 59, 0.05),
+                transparent,
+                rgba(255, 59, 59, 0.05)
+            );
+            pointer-events: none;
+            border-radius: 30px;
+        }
+
+        /* 上方卡片樣式 */
+        .top-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            grid-column: 1 / -1;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 更新顏色變量 */
+        :root {
+            --video-primary: #FF3B3B;
+            --video-secondary: #FF6B6B;
+            --video-accent: #FF4B4B;
+            --video-gradient: linear-gradient(135deg, #FF3B3B, #FF8787);
+        }
+
+        /* 底部大卡片樣式 */
+        .bottom-card {
+            grid-column: 1 / -1;
+            height: 340px;
+            display: grid;
+            grid-template-columns: 1fr 450px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .bottom-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 59, 59, 0.1),
+                rgba(255, 135, 135, 0.05));
+            pointer-events: none;
+        }
+
+        .bottom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 59, 59, 0.15);
+            border-color: rgba(255, 59, 59, 0.3);
+        }
+
+        /* 卡片基礎樣式 */
+        .feature-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            height: 250px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 內容區域樣式 */
+        .video-content {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 標題區域 */
+        .video-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .video-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--video-gradient);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 59, 59, 0.25);
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .bottom-card:hover .video-icon {
+            transform: rotate(0deg);
+        }
+
+        .video-text {
+            flex-grow: 1;
+        }
+
+        .video-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            background: var(--video-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .video-desc {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            opacity: 0.9;
+        }
+
+        /* 功能標籤 */
+        .video-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: auto;
+        }
+
+        .feature-tag {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 59, 59, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .feature-tag:hover {
+            background: rgba(255, 59, 59, 0.1);
+            transform: translateY(-3px);
+            border-color: rgba(255, 59, 59, 0.3);
+        }
+
+        .feature-tag i {
+            font-size: 1.3rem;
+            color: var(--video-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-tag:hover i {
+            transform: scale(1.1);
+        }
+
+        .feature-tag span {
+            font-size: 0.95rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* 預覽區域 */
+        .video-preview {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+            transition: transform 0.6s ease;
+        }
+
+        .bottom-card:hover .video-preview img {
+            transform: scale(1);
+        }
+
+        .preview-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to right,
+                rgba(255, 59, 59, 0.8),
+                rgba(255, 59, 59, 0.4),
+                transparent
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-button {
+            width: 85px;
+            height: 85px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: white;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .play-button::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: pulseRed 2s infinite;
+        }
+
+        @keyframes pulseRed {
+            0% { transform: scale(1); opacity: 1; border-color: rgba(255, 59, 59, 0.5); }
+            100% { transform: scale(1.5); opacity: 0; border-color: rgba(255, 59, 59, 0); }
+        }
+
+        .bottom-card:hover .play-button {
+            transform: scale(1.1);
+            background: rgba(255, 59, 59, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* 卡片內容樣式 */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-list {
+            margin-top: auto;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .feature-list li {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            .features-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .top-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .bottom-card {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .video-content {
+                padding: 25px;
+            }
+
+            .video-preview {
+                height: 250px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- 頂部導航 -->
@@ -53,52 +376,79 @@
 
         <!-- 功能區塊 -->
         <div class="features-section">
-            <a href="#" class="feature-card" onclick="transitionToVerify(event)">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-terminal"></i>
+            <div class="top-cards">
+                <!-- 指令庫 -->
+                <a href="#" class="feature-card" onclick="transitionToVerify(event)">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-terminal"></i>
+                        </div>
+                        <h3>指令庫 <span class="status">已啟用</span></h3>
                     </div>
-                </div>
-                <h3>指令庫 [已啟用]</h3>
-                <p>快速查找和使用常用指令</p>
-                <ul class="feature-list">
-                    <li>教學圖片</li>
-                    <li>複製指令</li>
-                    <li>學習指南</li>
-                </ul>
-                <div class="card-decoration"></div>
-            </a>
+                    <p>快速查找和使用常用指令</p>
+                    <ul class="feature-list">
+                        <li>教學圖片</li>
+                        <li>複製指令</li>
+                        <li>學習指南</li>
+                    </ul>
+                </a>
 
-            <a href="#" class="feature-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-comments"></i>
+                <!-- 社群討論 -->
+                <a href="#" class="feature-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>社群討論</h3>
                     </div>
-                </div>
-                <h3>社群討論</h3>
-                <p>與其他家長交流育兒經驗</p>
-                <ul class="feature-list">
-                    <li>育兒討論</li>
-                    <li>經驗分享</li>
-                    <li>專家建議</li>
-                </ul>
-                <div class="card-decoration"></div>
-            </a>
+                    <p>與其他家長交流育兒經驗</p>
+                    <ul class="feature-list">
+                        <li>育兒討論</li>
+                        <li>經驗分享</li>
+                        <li>專家建議</li>
+                    </ul>
+                </a>
+            </div>
 
-            <a href="#" class="feature-card">
-                <div class="card-header">
-                    <div class="card-icon">
-                        <i class="fas fa-calendar-alt"></i>
+            <!-- 影片分享 -->
+            <a href="video-share.html" class="bottom-card">
+                <div class="video-content">
+                    <div class="video-header">
+                        <div class="video-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="video-text">
+                            <h3 class="video-title">影片分享平台 已啟用</h3>
+                            <p class="video-desc">利用強人BB的NAS 再加上Microsoft 內崁，打造專屬影音空間</p>
+                        </div>
+                    </div>
+                    <div class="video-features">
+                        <div class="feature-tag">
+                            <i class="fas fa-server"></i>
+                            <span>NAS 存儲</span>
+                        </div>
+                        <div class="feature-tag">
+                            <i class="fab fa-microsoft"></i>
+                            <span>微軟支持</span>
+                        </div>
+                        <div class="feature-tag">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>hkanime.com 贊助</span>
+                        </div>
+                        <div class="feature-tag">
+                            <i class="fas fa-sync"></i>
+                            <span> 強人bb 不斷更新</span>
+                        </div>
                     </div>
                 </div>
-                <h3>活動資訊</h3>
-                <p>最新活動和課程安排</p>
-                <ul class="feature-list">
-                    <li>親子活動</li>
-                    <li>課程預約</li>
-                    <li>活動報名</li>
-                </ul>
-                <div class="card-decoration"></div>
+                <div class="video-preview">
+                    <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2021/04/07/EKyzlC.png?v1" alt="影片預覽">
+                    <div class="preview-overlay">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                </div>
             </a>
         </div>
 

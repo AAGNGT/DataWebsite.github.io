@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影片播放 - 強人BB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --bg: #1E1B4B;
+            --text: #E0E7FF;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 8px;
+            color: var(--text);
+            cursor: pointer;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="video-share.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            返回列表
+        </a>
+        
+        <div class="video-container">
+            <iframe id="videoPlayer" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="video-info">
+            <h1 id="videoTitle" class="video-title"></h1>
+        </div>
+    </div>
+
+    <script>
+        // 影片數據映射
+        const videoMap = {
+            'ab146d13-f7c2-466d-8904-f3f7d1ca48bc': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=ab146d13-f7c2-466d-8904-f3f7d1ca48bc&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
+                title: 'Stand By Me：多啦A夢'
+            },
+            'ab146d13-f7c1-466d-8904-f3f7d1ca48bc': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=d2f8e69a-0c85-4e83-aa5a-a46fe01d58bb&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
+                title: 'Stand By Me：多啦A夢 2'
+            },
+            'DBFDBD-f7c1-466d-8904-f3f7d1ca48bc': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=ff5fd156-2a7b-44c7-ade1-897f0a0dfa1f&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
+                title: '你的名字'
+            },
+            'DBFDBD-123D-466d-8904-f3f7d1ca48bc': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=b5cc7bd0-c60e-4061-9509-8fe35056494d&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
+                title: '天氣之子'
+            },
+            'DBFDBD-123D-123F-8904-f3f7d1ca48bc': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=3a3d8293-1f3a-4453-a584-ebdd57b17b90&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
+                title: '鈴芽之旅'
+            },
+            'bc247e24-h8d3-577e-9015-g4f8e2db59cd': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=bc247e24-h8d3-577e-9015-g4f8e2db59cd&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
+                title: '哆啦A夢：大雄的宇宙小戰爭'
+            },
+            // 可以繼續添加更多影片...
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 從 localStorage 獲取當前影片信息
+            const videoData = JSON.parse(localStorage.getItem('currentVideo'));
+            
+            if (videoData && videoMap[videoData.id]) {
+                const video = videoMap[videoData.id];
+                
+                // 設置影片標題
+                document.getElementById('videoTitle').textContent = video.title;
+                document.title = `${video.title} - 影片播放`;
+                
+                // 設置影片播放器
+                const player = document.getElementById('videoPlayer');
+                player.src = video.url;
+                
+                // 清除存儲的影片信息
+                localStorage.removeItem('currentVideo');
+            } else {
+                // 如果沒有影片信息，返回列表頁
+                window.location.href = 'video-share.html';
+            }
+        });
+    </script>
+</body>
+</html> 
