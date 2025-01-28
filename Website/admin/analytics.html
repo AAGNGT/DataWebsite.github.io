@@ -70,6 +70,9 @@
                             <i class="fas fa-user-circle"></i>
                         </div>
                     </div>
+                    <button class="nav-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </header>
 
@@ -152,51 +155,44 @@
                 </div>
 
                 <!-- 詳細數據表格 -->
-                <div class="data-table-container">
-                    <div class="table-header">
+                <div class="data-section">
+                    <div class="data-header">
                         <h3>詳細數據</h3>
-                        <div class="table-actions">
-                            <button class="export-btn">
-                                <i class="fas fa-download"></i>
-                                導出數據
-                            </button>
-                        </div>
+                        <button class="action-btn">
+                            <i class="fas fa-download"></i> 導出數據
+                        </button>
                     </div>
-                    <div class="table-wrapper">
+                    
+                    <div class="table-container">
                         <table class="data-table">
                             <thead>
                                 <tr>
-                                    <th>日期</th>
-                                    <th>新增用戶</th>
-                                    <th>活躍用戶</th>
-                                    <th>轉換率</th>
-                                    <th>留存率</th>
+                                    <th>ID</th>
+                                    <th>用戶名稱</th>
+                                    <th>登入時間</th>
+                                    <th>操作類型</th>
+                                    <th>IP 位址</th>
+                                    <th>狀態</th>
+                                    <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>2024-03-25</td>
-                                    <td>234</td>
-                                    <td>1,890</td>
-                                    <td>23.5%</td>
-                                    <td>85.2%</td>
+                                    <td>#1001</td>
+                                    <td>user_admin</td>
+                                    <td>2024-01-20 10:30:15</td>
+                                    <td>系統登入</td>
+                                    <td>192.168.1.100</td>
+                                    <td><span class="status-badge status-success">成功</span></td>
+                                    <td><button class="action-btn">查看</button></td>
                                 </tr>
-                                <tr>
-                                    <td>2024-03-24</td>
-                                    <td>198</td>
-                                    <td>1,756</td>
-                                    <td>21.8%</td>
-                                    <td>83.7%</td>
-                                </tr>
-                                <tr>
-                                    <td>2024-03-23</td>
-                                    <td>245</td>
-                                    <td>1,934</td>
-                                    <td>24.2%</td>
-                                    <td>86.1%</td>
-                                </tr>
+                                <!-- 添加更多數據行 -->
                             </tbody>
                         </table>
+                    </div>
+                    
+                    <div class="scroll-hint">
+                        <i class="fas fa-arrows-alt-h"></i> 左右滑動查看更多
                     </div>
                 </div>
             </div>
@@ -219,6 +215,54 @@
             if (!userType || userType !== 'developer') {
                 window.location.href = '../login.html';
             }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 不需要動態創建按鈕，因為已經在 HTML 中
+            const navToggle = document.querySelector('.nav-toggle');
+            
+            // 創建遮罩層
+            const overlay = document.createElement('div');
+            overlay.className = 'sidebar-overlay';
+            document.body.appendChild(overlay);
+
+            // 切換側邊欄
+            navToggle.addEventListener('click', function() {
+                const sidebar = document.querySelector('.sidebar');
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                this.classList.toggle('active');
+                
+                // 切換圖標
+                const icon = this.querySelector('i');
+                if (sidebar.classList.contains('active')) {
+                    icon.className = 'fas fa-times';
+                } else {
+                    icon.className = 'fas fa-bars';
+                }
+            });
+
+            // 點擊遮罩層關閉側邊欄
+            overlay.addEventListener('click', function() {
+                const sidebar = document.querySelector('.sidebar');
+                const navToggle = document.querySelector('.nav-toggle');
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                navToggle.classList.remove('active');
+                navToggle.querySelector('i').className = 'fas fa-bars';
+            });
+
+            // ESC 鍵關閉側邊欄
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const sidebar = document.querySelector('.sidebar');
+                    const navToggle = document.querySelector('.nav-toggle');
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    navToggle.classList.remove('active');
+                    navToggle.querySelector('i').className = 'fas fa-bars';
+                }
+            });
         });
     </script>
 </body>

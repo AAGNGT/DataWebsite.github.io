@@ -22,12 +22,12 @@ body {
 .container {
     width: 100%;
     max-width: 1400px;
-    margin: 2rem auto;
-    padding: 0 2rem;
+    margin: 1rem auto;
+    padding: 0 clamp(1rem, 3vw, 2rem);
     display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 2rem;
-    height: calc(100vh - 4rem);
+    grid-template-columns: minmax(250px, 300px) 1fr;
+    gap: clamp(1rem, 3vw, 2rem);
+    height: calc(100vh - 2rem);
 }
 
 /* 左側選單樣式 */
@@ -35,7 +35,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 15px;
-    padding: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
     border: 1px solid rgba(255, 255, 255, 0.2);
     overflow-y: auto;
     animation: slideIn 0.5s ease-out;
@@ -51,19 +51,19 @@ body {
 }
 
 .menu-header i {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
     color: var(--accent);
 }
 
 .menu-header h2 {
     margin: 0;
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 3.5vw, 1.3rem);
     color: var(--text);
 }
 
 .command-button {
     width: 100%;
-    padding: 1rem;
+    padding: clamp(0.8rem, 2.5vw, 1rem);
     margin: 0.5rem 0;
     border: none;
     border-radius: 10px;
@@ -75,6 +75,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 
 .command-button:hover {
@@ -92,7 +93,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 15px;
-    padding: 2rem;
+    padding: clamp(1rem, 3vw, 2rem);
     border: 1px solid rgba(255, 255, 255, 0.2);
     overflow-y: auto;
     animation: fadeIn 0.5s ease-out;
@@ -110,39 +111,41 @@ body {
 
 .content-header h2 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
     color: var(--text);
 }
 
 .command-box {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
-    padding: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
     margin-bottom: 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
 }
 
 .command-title {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 3vw, 1.2rem);
     margin-bottom: 1rem;
     color: var(--accent);
 }
 
 .command-code {
     background: rgba(0, 0, 0, 0.1);
-    padding: 1rem;
+    padding: clamp(0.8rem, 2.5vw, 1rem);
     border-radius: 8px;
     font-family: monospace;
     position: relative;
     margin-bottom: 1rem;
+    font-size: clamp(0.8rem, 2.5vw, 1rem);
+    overflow-x: auto;
 }
 
 .copy-button {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    padding: 0.5rem;
+    padding: clamp(0.3rem, 1.5vw, 0.5rem);
     border: none;
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.1);
@@ -161,7 +164,7 @@ body {
 }
 
 .command-description {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
     color: rgba(49, 27, 146, 0.8);
     line-height: 1.6;
 }
@@ -409,4 +412,181 @@ body {
 
 .security-theme ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 193, 7, 0.5);
-} 
+}
+
+.command-group {
+    display: flex;
+    justify-content: center;
+    padding: clamp(10px, 3vw, 20px);
+    position: fixed;
+    bottom: clamp(15px, 4vw, 30px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.home-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: clamp(10px, 3vw, 15px) clamp(20px, 4vw, 30px);
+    background: linear-gradient(135deg, #4F46E5, #3730A3);
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.home-btn:hover {
+    background: linear-gradient(135deg, #3730A3, #312E81);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
+}
+
+.home-btn i {
+    font-size: 1.3rem;
+    color: #ffffff;
+}
+
+.home-btn span {
+    letter-spacing: 0.5px;
+}
+
+/* 動畫效果 */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+.home-btn:hover i {
+    animation: float 1s ease-in-out infinite;
+}
+
+/* 響應式設計 */
+/* 大型平板 */
+@media screen and (max-width: 1024px) {
+    .home-btn {
+        padding: 14px 28px;
+        font-size: 1rem;
+    }
+    
+    .home-btn i {
+        font-size: 1.2rem;
+    }
+}
+
+/* 平板 */
+@media screen and (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        height: auto;
+        margin: 1rem auto 5rem auto; /* 為底部按鈕留出空間 */
+    }
+
+    .command-menu {
+        max-height: 200px;
+    }
+
+    .home-btn {
+        padding: 12px 25px;
+        gap: 10px;
+    }
+}
+
+/* 大型手機 */
+@media screen and (max-width: 576px) {
+    .command-group {
+        bottom: 20px;
+        width: 90%;
+    }
+    
+    .home-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .home-btn i {
+        font-size: 1.1rem;
+    }
+}
+
+/* 小型手機 */
+@media screen and (max-width: 375px) {
+    .command-group {
+        bottom: 15px;
+        padding: 10px;
+    }
+    
+    .home-btn {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
+    
+    .home-btn i {
+        font-size: 1rem;
+    }
+}
+
+/* 處理橫屏模式 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .command-group {
+        bottom: 10px;
+    }
+    
+    .home-btn {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* 深色模式支援 */
+@media (prefers-color-scheme: dark) {
+    .home-btn {
+        background: linear-gradient(135deg, #5046E5, #4730A3);
+    }
+    
+    .home-btn:hover {
+        background: linear-gradient(135deg, #4730A3, #412E81);
+    }
+}
+
+/* 減少動畫 */
+@media (prefers-reduced-motion: reduce) {
+    .home-btn {
+        transition: none;
+    }
+    
+    .home-btn:hover {
+        transform: none;
+    }
+    
+    .home-btn:hover i {
+        animation: none;
+    }
+}
+
+/* 優化滾動條在小螢幕上的顯示 */
+@media screen and (max-width: 480px) {
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .command-code {
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+}
+
+/* 處理超長指令在小螢幕上的顯示 */
+.command-code {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}

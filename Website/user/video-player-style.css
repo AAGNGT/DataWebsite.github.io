@@ -1,0 +1,358 @@
+:root {
+    --primary: #4F46E5;
+    --bg: #1E1B4B;
+    --text: #E0E7FF;
+    --accent: #FF0000;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text);
+    cursor: pointer;
+    margin-bottom: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+    transform: translateX(-5px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.15);
+}
+
+.back-btn i {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.back-btn:hover i {
+    transform: translateX(-3px);
+}
+
+.video-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+    font-weight: 600;
+}
+
+.video-meta-container {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.video-meta-primary {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.meta-item i {
+    font-size: 1.5rem;
+    color: #FFD700;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    padding: 15px;
+    border-radius: 12px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.meta-item:hover i {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.15);
+}
+
+.meta-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.meta-label {
+    font-size: 0.85rem;
+    color: rgba(224, 231, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.meta-value {
+    font-size: 1.1rem;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.video-description-container {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.description-title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+    color: var(--text);
+}
+
+.description-title i {
+    font-size: 1.3rem;
+    color: #FFD700;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    padding: 12px;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.video-description {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(224, 231, 255, 0.9);
+    margin: 0;
+    padding: 0;
+    white-space: pre-line;
+}
+
+.recommendations {
+    margin-top: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.2rem;
+}
+
+.section-header h3 i {
+    font-size: 1.3rem;
+    color: #FFD700;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    padding: 12px;
+    border-radius: 10px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scroll-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.scroll-btn {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.scroll-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.15);
+}
+
+.recommendations-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.recommendations-scroll {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px 0;
+    scrollbar-width: none;
+}
+
+.recommendations-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.recommendation-card {
+    flex: 0 0 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.rec-thumbnail {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+}
+
+.rec-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rec-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rec-overlay i {
+    font-size: 1.5rem;
+    color: #FF0000;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.recommendation-card:hover .rec-overlay i {
+    transform: scale(1.1);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.rec-duration {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
+
+.rec-info {
+    padding: 15px;
+}
+
+.rec-info h4 {
+    margin: 0 0 10px 0;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+.rec-meta {
+    font-size: 0.9em;
+    color: rgba(224, 231, 255, 0.7);
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .video-meta-primary {
+        gap: 1.5rem;
+    }
+
+    .meta-item {
+        flex: 1 1 auto;
+    }
+
+    .video-title {
+        font-size: 1.5rem;
+    }
+
+    .meta-value {
+        font-size: 1rem;
+    }
+
+    .video-description {
+        font-size: 1rem;
+    }
+} 

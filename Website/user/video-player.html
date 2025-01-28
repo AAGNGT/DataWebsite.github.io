@@ -5,63 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>影片播放 - 強人BB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <style>
-        :root {
-            --primary: #4F46E5;
-            --bg: #1E1B4B;
-            --text: #E0E7FF;
-        }
-
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%;
-            background: #000;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 8px;
-            color: var(--text);
-            cursor: pointer;
-            margin-bottom: 20px;
-            text-decoration: none;
-        }
-
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/user/video-player-style.css">
 </head>
 <body>
     <div class="container">
@@ -87,34 +34,181 @@
         // 影片數據映射
         const videoMap = {
             'ab146d13-f7c2-466d-8904-f3f7d1ca48bc': {
-                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=ab146d13-f7c2-466d-8904-f3f7d1ca48bc&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
-                title: 'Stand By Me：多啦A夢'
-            },
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=ab146d13-f7c2-466d-8904-f3f7d1ca48bc',
+                title: 'Stand By Me：多啦A夢',
+                description: '《STAND BY ME 哆啦A夢》是一部紀念《哆啦A夢》作者藤子·F·不二雄誕辰80週年的系列首部3D電影，於2014年8月8日在日本上映，內容結合了原著漫畫：<br>《從未來之國千里迢迢而来》、《蛋中的靜香》、《靜香！再見！》、《雪山上的浪漫史》、《大雄的結婚前夜》、《再見哆啦A夢》和《哆啦A夢回來了》<br>等篇目的經典劇情',
+                author: '藤子·F·不二雄',
+                year: '2014',
+                duration: '95分鐘',
+                recommendations: [
+                    {
+                        title: 'Stand By Me：多啦A夢 2 預告片',
+                        url: 'https://www.youtube.com/watch?v=5lXXPGP1Sv4',
+                        thumbnail: 'https://img.youtube.com/vi/5lXXPGP1Sv4/mqdefault.jpg',
+                        duration: '13:13' 
+                    }
+                ]
+            },        
             'ab146d13-f7c1-466d-8904-f3f7d1ca48bc': {
-                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=d2f8e69a-0c85-4e83-aa5a-a46fe01d58bb&embed=%7B%22hvm%22%3Atrue%2C%22ust%22%3Atrue%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
-                title: 'Stand By Me：多啦A夢 2'
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=d2f8e69a-0c85-4e83-aa5a-a46fe01d58bb',
+                title: 'Stand By Me：多啦A夢 2',
+                description: '大雄為了見證奶奶的婚禮，決定回到過去...',
+                author: '藤子·F·不二雄',
+                year: '2020',
+                duration: '96分鐘',
+                recommendations: [
+                    {
+                        title: 'Stand By Me：多啦A夢 2 電影預告',
+                        url: 'https://www.youtube.com/watch?v=d8k_VWBqxZw',
+                        thumbnail: 'https://img.youtube.com/vi/d8k_VWBqxZw/mqdefault.jpg',
+                        duration: '1:30'
+                    }
+                ]
             },
             'DBFDBD-f7c1-466d-8904-f3f7d1ca48bc': {
-                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=ff5fd156-2a7b-44c7-ade1-897f0a0dfa1f&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
-                title: '你的名字'
-            },
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=ff5fd156-2a7b-44c7-ade1-897f0a0dfa1f',
+                title: '你的名字',
+                description: '《你的名字》講述在東京生活的男高中生立花瀧與住在深山小鎮的女高中生宮水三葉，兩人在夢中不斷互換身份。他們從未謀面，卻通過交換日記漸漸了解對方的生活。當瀧得知三葉所在小鎮即將遭遇一場災難時，決心跨越時空拯救她...',
+                author: '新海誠',
+                year: '2016',
+                duration: '107分鐘',
+                recommendations: [
+                    {
+                        title: '你的名字 電影預告',
+                        url: 'https://www.youtube.com/watch?v=YAXTn0E-Zgo',
+                        thumbnail: 'https://img.youtube.com/vi/YAXTn0E-Zgo/mqdefault.jpg',
+                        duration: '1:48'
+                    },
+                    {
+                        title: '你的名字 主題曲 前前前世',
+                        url: 'https://www.youtube.com/watch?v=PDSkFeMVNFs',
+                        thumbnail: 'https://img.youtube.com/vi/PDSkFeMVNFs/mqdefault.jpg',
+                        duration: '5:39'
+                    }
+                ]
+            },        
             'DBFDBD-123D-466d-8904-f3f7d1ca48bc': {
-                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=b5cc7bd0-c60e-4061-9509-8fe35056494d&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
-                title: '天氣之子'
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=b5cc7bd0-c60e-4061-9509-8fe35056494d',
+                title: '天氣之子',
+                description: '在天空不斷下著雨的東京，高中生森嶋帆高離家出走，來到繁華的東京。在陰雨連綿的都市中，他邂逅了擁有操控天氣能力的少女天野陽菜。「就算失去晴天也沒關係，我只想讓你活下去。」兩人的相遇，改變了世界的天氣...',
+                author: '新海誠',
+                year: '2019',
+                duration: '112分鐘',
+                recommendations: [
+                    {
+                        title: '天氣之子 電影預告',
+                        url: 'https://www.youtube.com/watch?v=rzKcrJ77wBY',
+                        thumbnail: 'https://img.youtube.com/vi/rzKcrJ77wBY/mqdefault.jpg',
+                        duration: '1:31'
+                    },
+                    {
+                        title: '天氣之子 主題曲 - 風たちの声',
+                        url: 'https://www.youtube.com/watch?v=q_R1LH8UKd4',
+                        thumbnail: 'https://img.youtube.com/vi/q_R1LH8UKd4/mqdefault.jpg',
+                        duration: '4:47'
+                    },
+                    {
+                        title: '天氣之子 主題曲 - 祝祭',
+                        url: 'https://www.youtube.com/watch?v=PD-bG9zo6iY',
+                        thumbnail: 'https://img.youtube.com/vi/PD-bG9zo6iY/mqdefault.jpg',
+                        duration: '5:02'
+                    },
+                    {
+                        title: '天氣之子 主題曲 - Is There Still Anything That Love Can Do?',
+                        url: 'https://www.youtube.com/watch?v=iQs-f88RBws',
+                        thumbnail: 'https://img.youtube.com/vi/iQs-f88RBws/mqdefault.jpg',
+                        duration: '4:56'
+                    },
+                    {
+                        title: '天氣之子 插曲 - Grand Escape',
+                        url: 'https://www.youtube.com/watch?v=j4fIz2ozjO0',
+                        thumbnail: 'https://img.youtube.com/vi/j4fIz2ozjO0/mqdefault.jpg',
+                        duration: '6:03'
+                    },
+                    {
+                        title: '天氣之子 配樂 - 大丈夫',
+                        url: 'https://www.youtube.com/watch?v=tEL6EQE66FA',
+                        thumbnail: 'https://img.youtube.com/vi/tEL6EQE66FA/mqdefault.jpg',
+                        duration: '3:52'
+                    },
+                    {
+                        title: '天氣之子 後話',
+                        url: 'https://www.youtube.com/watch?v=P2WPznUSS-0',
+                        thumbnail: 'https://img.youtube.com/vi/P2WPznUSS-0/mqdefault.jpg',
+                        duration: '4:25'
+                    }
+                ]
             },
             'DBFDBD-123D-123F-8904-f3f7d1ca48bc': {
-                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=3a3d8293-1f3a-4453-a584-ebdd57b17b90&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
-                title: '鈴芽之旅'
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=3a3d8293-1f3a-4453-a584-ebdd57b17b90',
+                title: '鈴芽之旅',
+                description: '17歲的少女鈴芽在九州的寧靜小鎮過著平靜的生活。一天，她遇見了一位正在尋找神秘門扉的青年。鈴芽跟隨他的腳步，發現了一扇古老的門，打開後卻釋放出了被封印的災厄。為了拯救日本各地，鈴芽必須踏上關閉所有門扉的冒險之旅...',
+                author: '新海誠',
+                year: '2022',
+                duration: '122分鐘',
+                recommendations: [
+                    {
+                        title: '鈴芽之旅 電影預告',
+                        url: 'https://www.youtube.com/watch?v=WZKTXPucXYs',
+                        thumbnail: 'https://img.youtube.com/vi/WZKTXPucXYs/mqdefault.jpg',
+                        duration: '2:25'
+                    },
+                    {
+                        title: '鈴芽之旅 主題曲 Suzume',
+                        url: 'https://www.youtube.com/watch?v=9hr3GzHZ3S0',
+                        thumbnail: 'https://img.youtube.com/vi/9hr3GzHZ3S0/mqdefault.jpg',
+                        duration: '4:56'
+                    }
+                ]
             },
             'bc247e24-h8d3-577e-9015-g4f8e2db59cd': {
-                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=bc247e24-h8d3-577e-9015-g4f8e2db59cd&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=OneUpFileViewer&referrerScenario=EmbedDialog.Create',
-                title: '哆啦A夢：大雄的宇宙小戰爭'
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=84c845f0-540b-40f6-8cf8-58b13fa5638c',
+                title: '哆啦A夢：大雄的宇宙小戰爭',
+                description: '大雄在公園裡發現了一個神秘的小生物皮皮，並把它帶回家中。沒想到皮皮竟然是來自宇宙的外星人！當皮皮的星球遭到侵略者攻擊時，大雄和哆啦A夢決定幫助皮皮拯救他的家園。然而，等待他們的將是一場驚心動魄的宇宙冒險...',
+                author: '藤子·F·不二雄',
+                year: '2021',
+                duration: '108分鐘',
+                recommendations: [
+                    {
+                        title: '哆啦A夢：大雄的宇宙小戰爭 預告片',
+                        url: 'https://www.youtube.com/watch?v=wBVJ6J7sMPE',
+                        thumbnail: 'https://img.youtube.com/vi/wBVJ6J7sMPE/mqdefault.jpg',
+                        duration: '1:37'
+                    },
+                    {
+                        title: '哆啦A夢：大雄的宇宙小戰爭 主題曲',
+                        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                        thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg',
+                        duration: '3:45'
+                    }
+                ]
+            },
+            'ABCD-h8d3-577e-9015-g4f8e2db59cd': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=4f2e5988-04ce-4341-9d8a-7e02a4033b29',
+                title: '龍貓',
+                description: '本片是對日本鄉村生活的迷人及節奏緩慢的描繪。故事背景設定於1958年，一位大學教授「草壁達郎」和他的兩個女兒「皋月、梅」搬進一個森林附近的一所舊房子而教授的妻子「草壁靖子」因染上了結核病，在附近的一所醫院養病中。搬來新家的皋月和梅，都在家中及附近發現各種奇妙的東西，如家裡藏著像是小黑球模樣的「灰塵精靈」。而梅某一天也在外頭發現可以隱形的「小龍貓」、為了追趕它而被引領到樹洞裡發現森林的守護者「大龍貓」並且在一個下雨的晚上，當皋月和梅在公車站牌邊等爸爸時，她們都遇到用樹葉擋雨、先前梅在樹洞裡看到的大龍貓，不久「貓巴士」來到，大龍貓給予皋月一包種子後登上貓巴士離去。之後有一天皋月從醫院得知媽媽的病情變得不好的情況下趕緊打電話聯絡她的父親，而梅想把一個成熟的玉米帶給媽媽時不慎迷路，當眾人都遍尋不著後，皋月跑去找大龍貓幫忙。之後大龍貓召喚貓巴士，皋月在貓巴士的幫助下找到迷路的梅，兩人乘著貓巴士穿過鄉間到醫院探望她們的媽媽，最後草壁達郎在醫院中得知她們的媽媽病情好轉不久就可以出院。',
+                author: '宮崎駿',
+                year: '1988',
+                duration: '86分鐘',
+                recommendations: [
+                    {
+                        title: '宮崎駿鋼琴音樂合集',
+                        url: 'https://www.youtube.com/watch?v=oYQut39Uyww',
+                        thumbnail: 'https://img.youtube.com/vi/oYQut39Uyww/mqdefault.jpg',
+                        duration: '1:37'
+                    },
+                    {
+                        title: '哆啦A夢：大雄的宇宙小戰爭 主題曲',
+                        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                        thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg',
+                        duration: '3:45'
+                    }
+                ]
             },
             // 可以繼續添加更多影片...
         };
 
         document.addEventListener('DOMContentLoaded', function() {
-            // 從 localStorage 獲取當前影片信息
             const videoData = JSON.parse(localStorage.getItem('currentVideo'));
             
             if (videoData && videoMap[videoData.id]) {
@@ -123,18 +217,111 @@
                 // 設置影片標題
                 document.getElementById('videoTitle').textContent = video.title;
                 document.title = `${video.title} - 影片播放`;
-                
+
                 // 設置影片播放器
                 const player = document.getElementById('videoPlayer');
                 player.src = video.url;
-                
+
+                // 更新影片資訊區域
+                const videoInfo = document.querySelector('.video-info');
+                videoInfo.innerHTML = `
+                    <h1 class="video-title">${video.title}</h1>
+                    
+                    <div class="video-meta-container">
+                        <div class="video-meta-primary">
+                            <div class="meta-item">
+                                <i class="fas fa-user-circle"></i>
+                                <div class="meta-content">
+                                    <span class="meta-label">導演</span>
+                                    <span class="meta-value">${video.author}</span>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div class="meta-content">
+                                    <span class="meta-label">上映日期</span>
+                                    <span class="meta-value">${video.year}</span>
+                                </div>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <div class="meta-content">
+                                    <span class="meta-label">片長</span>
+                                    <span class="meta-value">${video.duration}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-description-container">
+                        <h3 class="description-title">
+                            <i class="fas fa-info-circle"></i>
+                            劇情簡介
+                        </h3>
+                        <p class="video-description">${video.description}</p>
+                    </div>
+                    
+                    <div class="recommendations">
+                        <div class="section-header">
+                            <h3><i class="fas fa-film"></i> 相關影片推薦</h3>
+                            <div class="scroll-buttons">
+                                <button class="scroll-btn scroll-left" onclick="scrollRecommendations('left')">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <button class="scroll-btn scroll-right" onclick="scrollRecommendations('right')">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="recommendations-container">
+                            <div class="recommendations-scroll">
+                                ${video.recommendations.map(rec => `
+                                    <a href="${rec.url}" target="_blank" class="recommendation-card">
+                                        <div class="rec-thumbnail">
+                                            <img src="${rec.thumbnail}" alt="${rec.title}" loading="lazy">
+                                            <div class="rec-overlay">
+                                                <i class="fab fa-youtube"></i>
+                                                <span class="rec-duration">${rec.duration}</span>
+                                            </div>
+                                        </div>
+                                        <div class="rec-info">
+                                            <h4>${rec.title}</h4>
+                                            <div class="rec-meta">
+                                                <span>開啟分頁觀看</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
                 // 清除存儲的影片信息
                 localStorage.removeItem('currentVideo');
             } else {
-                // 如果沒有影片信息，返回列表頁
-                window.location.href = 'video-share.html';
+                // 修改跳轉方式，添加狀態參數
+                window.location.href = 'video-share.html?status=unavailable';
             }
         });
+
+        // 滾動推薦影片
+        function scrollRecommendations(direction) {
+            const container = document.querySelector('.recommendations-scroll');
+            const scrollAmount = 300; // 每次滾動的距離
+            
+            if (direction === 'left') {
+                container.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            } else {
+                container.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        }
     </script>
 </body>
 </html> 

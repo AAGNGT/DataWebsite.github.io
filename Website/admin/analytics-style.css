@@ -2,23 +2,24 @@
 .analytics-content {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: clamp(1rem, 3vw, 2rem);
+    padding: clamp(1rem, 3vw, 2rem);
 }
 
 /* 數據卡片樣式 */
 .analytics-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: clamp(1rem, 3vw, 1.5rem);
 }
 
 .analytics-card {
     background: var(--surface-color);
     border-radius: 15px;
-    padding: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: clamp(1rem, 3vw, 1.5rem);
     transition: all 0.3s ease;
 }
 
@@ -28,8 +29,8 @@
 }
 
 .card-icon {
-    width: 60px;
-    height: 60px;
+    width: clamp(45px, 8vw, 60px);
+    height: clamp(45px, 8vw, 60px);
     background: rgba(67, 97, 238, 0.1);
     border-radius: 12px;
     display: flex;
@@ -38,18 +39,18 @@
 }
 
 .card-icon i {
-    font-size: 1.8rem;
+    font-size: clamp(1.3rem, 4vw, 1.8rem);
     color: var(--primary-color);
 }
 
 .card-info h3 {
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
     color: var(--text-secondary);
     margin-bottom: 0.5rem;
 }
 
 .card-info .number {
-    font-size: 1.8rem;
+    font-size: clamp(1.4rem, 4vw, 1.8rem);
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
@@ -72,14 +73,14 @@
 /* 圖表容器樣式 */
 .charts-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    gap: clamp(1rem, 3vw, 1.5rem);
 }
 
 .chart-box {
     background: var(--surface-color);
     border-radius: 15px;
-    padding: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
 }
 
 .chart-header {
@@ -89,19 +90,24 @@
     margin-bottom: 1.5rem;
 }
 
+.chart-header h3 {
+    font-size: clamp(1rem, 3vw, 1.2rem);
+}
+
 .chart-actions {
     display: flex;
     gap: 0.5rem;
 }
 
 .chart-btn {
-    padding: 0.4rem 1rem;
+    padding: clamp(0.3rem, 2vw, 0.5rem) clamp(0.8rem, 2.5vw, 1rem);
     border: 1px solid var(--border-color);
     border-radius: 20px;
     background: transparent;
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
 }
 
 .chart-btn.active {
@@ -120,69 +126,155 @@
     height: 100%;
     background: rgba(255,255,255,0.05);
     border-radius: 10px;
+    min-height: clamp(200px, 50vw, 300px);
 }
 
 .placeholder-chart.circular {
     border-radius: 50%;
-    width: 250px;
-    height: 250px;
+    width: clamp(200px, 50vw, 250px);
+    height: clamp(200px, 50vw, 250px);
     margin: 0 auto;
 }
 
-/* 數據表格樣式 */
-.data-table-container {
+/* 數據表格區域 */
+.data-section {
     background: var(--surface-color);
     border-radius: 15px;
-    padding: 1.5rem;
+    margin-top: 1rem;
+    width: 100%;
 }
 
-.table-header {
+/* 表格標題區 */
+.data-header {
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.export-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.data-header h3 {
+    font-size: 1.2rem;
+    color: var(--text-primary);
 }
 
-.export-btn:hover {
-    background: var(--secondary-color);
-}
-
-.table-wrapper {
+/* 表格容器 */
+.table-container {
+    width: 100%;
     overflow-x: auto;
+    padding: 1rem;
 }
 
+/* 數據表格 */
 .data-table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.9rem;
 }
 
-.data-table th,
-.data-table td {
+/* 表格頭部 */
+.data-table thead th {
+    background: rgba(0, 0, 0, 0.2);
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
 }
 
-.data-table th {
+/* 表格內容 */
+.data-table tbody td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     color: var(--text-secondary);
-    font-weight: 500;
+    white-space: nowrap;
 }
 
+/* 表格行懸停效果 */
 .data-table tbody tr:hover {
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* 狀態標籤 */
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    display: inline-block;
+}
+
+.status-success {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.status-pending {
+    background: rgba(241, 196, 15, 0.2);
+    color: #f1c40f;
+}
+
+/* 操作按鈕 */
+.action-btn {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+    background: var(--secondary-color);
+}
+
+/* 響應式調整 */
+@media screen and (max-width: 768px) {
+    .data-section {
+        border-radius: 0;
+        margin: 1rem -1rem;
+        width: calc(100% + 2rem);
+    }
+
+    .table-container {
+        padding: 0.5rem;
+    }
+
+    .data-table thead th,
+    .data-table tbody td {
+        padding: 0.8rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* 滾動條樣式 */
+.table-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+/* 滾動提示 */
+.scroll-hint {
+    text-align: center;
+    padding: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    display: none;
+}
+
+@media screen and (max-width: 1024px) {
+    .scroll-hint {
+        display: block;
+    }
 }
 
 /* 主要內容區域樣式 */
@@ -310,4 +402,904 @@
 .breadcrumb {
     font-size: 0.9rem;
     color: var(--text-secondary);
-} 
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .analytics-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+
+    .table-container {
+        margin: 0 -1rem;
+        padding: 0 1rem;
+        width: calc(100% + 2rem);
+    }
+
+    .user-account {
+        padding: clamp(0.3rem, 2vw, 0.5rem);
+    }
+
+    .account-info .username {
+        font-size: clamp(0.8rem, 2.5vw, 1rem);
+    }
+
+    .account-info .role {
+        font-size: clamp(0.7rem, 2vw, 0.8rem);
+    }
+
+    .account-avatar {
+        width: clamp(32px, 8vw, 40px);
+        height: clamp(32px, 8vw, 40px);
+    }
+
+    .account-avatar i {
+        font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+    }
+}
+
+/* 平板橫向優化 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .analytics-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 優化滾動體驗 */
+.analytics-content {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 確保表格在小螢幕上可以水平滾動 */
+.table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 基礎響應式設置 */
+.app-container {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    min-height: 100vh;
+}
+
+/* 手機版側邊欄調整 */
+@media (max-width: 768px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        z-index: 1000;
+        transition: left 0.3s ease;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    /* 添加漢堡選單按鈕 */
+    .menu-toggle {
+        display: block;
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1001;
+        background: var(--surface-color);
+        border: none;
+        padding: 0.5rem;
+        border-radius: 5px;
+        color: var(--text-primary);
+        cursor: pointer;
+    }
+
+    /* 主要內容區域調整 */
+    .main-content {
+        margin-left: 0;
+        padding-top: 60px; /* 為頂部導航預留空間 */
+    }
+}
+
+/* 數據分析內容區域調整 */
+.analytics-content {
+    padding: clamp(0.5rem, 2vw, 1rem);
+    gap: clamp(0.5rem, 2vw, 1rem);
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+}
+
+/* 數據卡片調整 */
+.analytics-cards {
+    grid-template-columns: 1fr;
+    gap: clamp(0.5rem, 2vw, 1rem);
+}
+
+.analytics-card {
+    padding: clamp(0.8rem, 2vw, 1.2rem);
+    min-height: auto;
+}
+
+/* 圖表容器調整 */
+.charts-container {
+    grid-template-columns: 1fr;
+    gap: clamp(0.5rem, 2vw, 1rem);
+}
+
+.chart-box {
+    padding: clamp(0.8rem, 2vw, 1.2rem);
+}
+
+/* 表格容器調整 */
+.data-table-container {
+    padding: clamp(0.8rem, 2vw, 1.2rem);
+    overflow-x: auto;
+}
+
+.data-table {
+    min-width: 600px; /* 確保表格內容完整顯示 */
+}
+
+/* 頂部欄調整 */
+.top-bar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 0.8rem;
+    background: var(--deep-blue);
+    z-index: 999;
+}
+
+.page-title h1 {
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
+}
+
+.breadcrumb {
+    font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+}
+
+/* 用戶帳戶資訊調整 */
+.user-account {
+    padding: clamp(0.3rem, 1.5vw, 0.5rem);
+}
+
+/* 優化滾動體驗 */
+.analytics-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* 添加遮罩層 */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* 新增 JavaScript 控制側邊欄 */
+@media (max-width: 768px) {
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .analytics-content {
+        padding-bottom: 4rem; /* 為底部預留空間 */
+    }
+
+    /* 改善表格在手機上的顯示 */
+    .table-container {
+        margin: 0 -0.8rem;
+        padding: 0 0.8rem;
+    }
+
+    .data-table thead th,
+    .data-table tbody td {
+        padding: 0.6rem;
+        font-size: 0.85rem;
+    }
+}
+
+/* 平板適配 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .analytics-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 基礎容器設置 */
+.app-container {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    min-height: 100vh;
+}
+
+/* 主要內容區域 */
+.main-content {
+    height: 100vh;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+/* 數據分析內容 */
+.analytics-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* 數據卡片網格 */
+.analytics-cards {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.analytics-card {
+    background: var(--surface-color);
+    border-radius: 15px;
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* 圖表容器 */
+.charts-container {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.chart-box {
+    background: var(--surface-color);
+    border-radius: 15px;
+    padding: 1.2rem;
+}
+
+/* 數據表格容器 */
+.data-table-container {
+    background: var(--surface-color);
+    border-radius: 15px;
+    padding: 1.2rem;
+    overflow-x: auto;
+}
+
+.data-table {
+    width: 100%;
+    min-width: 600px;
+}
+
+/* 響應式調整 */
+@media (max-width: 1024px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        width: 250px;
+        height: 100%;
+        z-index: 1000;
+        transition: 0.3s;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding-top: 60px;
+    }
+
+    .analytics-cards {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 0.8rem;
+    }
+
+    .analytics-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+
+    .analytics-card {
+        padding: 1rem;
+    }
+
+    .chart-box {
+        padding: 1rem;
+    }
+
+    .data-table-container {
+        padding: 1rem;
+    }
+
+    .table-container {
+        margin: 0 -0.5rem;
+    }
+}
+
+/* 漢堡選單按鈕 */
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001;
+    background: var(--surface-color);
+    border: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    color: var(--text-primary);
+    cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* 遮罩層 */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* 頂部欄固定 */
+.top-bar {
+    position: sticky;
+    top: 0;
+    background: var(--deep-blue);
+    z-index: 10;
+    padding: 1rem;
+}
+
+/* 優化滾動條 */
+.analytics-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.analytics-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.analytics-content::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+/* 字體大小響應式 */
+.card-info h3 {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.card-info .number {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+}
+
+.chart-header h3 {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.data-table th,
+.data-table td {
+    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+    padding: 0.8rem;
+}
+
+/* 側邊欄基礎樣式 */
+.sidebar {
+    background: var(--darker-blue);
+    height: 100vh;
+    transition: all 0.3s ease;
+}
+
+/* 手機版側邊欄控制按鈕 */
+.sidebar-toggle {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    transform: scale(1.05);
+    background: var(--secondary-color);
+}
+
+.sidebar-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.sidebar-toggle.active i {
+    transform: rotate(180deg);
+}
+
+/* 響應式調整 */
+@media (max-width: 1024px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        width: 80%;
+        max-width: 300px;
+        z-index: 1001;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar.active {
+        right: 0;
+    }
+
+    .sidebar-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-content {
+        margin-right: 0;
+    }
+}
+
+/* 遮罩層 */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* 動畫效果 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* 基礎設置 */
+:root {
+    --mobile-header-height: 60px;
+    --mobile-sidebar-width: 80%;
+    --sidebar-width: 80%;
+    --max-sidebar-width: 300px;
+    --nav-button-size: 56px;
+}
+
+/* 手機版導航按鈕 */
+.mobile-nav-toggle {
+    display: none;  /* 默認隱藏 */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1002;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+/* 手機版側邊欄樣式 */
+@media screen and (max-width: 768px) {
+    .app-container {
+        grid-template-columns: 1fr;  /* 單列布局 */
+    }
+
+    .mobile-nav-toggle {
+        display: flex;  /* 在手機版顯示按鈕 */
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        right: -100%;  /* 初始隱藏在右側 */
+        width: var(--mobile-sidebar-width);
+        height: 100vh;
+        z-index: 1001;
+        transition: right 0.3s ease;
+        background: var(--darker-blue);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .sidebar.active {
+        right: 0;  /* 顯示側邊欄 */
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    /* 遮罩層 */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+
+    /* 調整內容區域 */
+    .analytics-content {
+        padding: 1rem;
+        padding-bottom: 80px; /* 為底部按鈕留出空間 */
+    }
+
+    /* 優化卡片布局 */
+    .analytics-cards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /* 優化圖表布局 */
+    .charts-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /* 調整表格容器 */
+    .data-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* 按鈕動畫效果 */
+.mobile-nav-toggle:active {
+    transform: scale(0.95);
+}
+
+.mobile-nav-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.mobile-nav-toggle.active i {
+    transform: rotate(180deg);
+}
+
+/* 側邊欄基礎樣式 */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: var(--sidebar-width);
+    max-width: var(--max-sidebar-width);
+    height: 100vh;
+    background: var(--darker-blue);
+    z-index: 1001;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+/* 導航切換按鈕 - 所有尺寸都顯示 */
+.nav-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: var(--nav-button-size);
+    height: var(--nav-button-size);
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1002;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle:hover {
+    transform: scale(1.05);
+    background: var(--secondary-color);
+}
+
+.nav-toggle:active {
+    transform: scale(0.95);
+}
+
+.nav-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.nav-toggle.active i {
+    transform: rotate(180deg);
+}
+
+/* 遮罩層 */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* 主要內容區域 */
+.main-content {
+    width: 100%;
+    margin-left: 0;
+    padding-bottom: calc(var(--nav-button-size) + 40px);
+}
+
+/* 內容布局 */
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+/* 數據卡片網格 */
+.analytics-cards {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* 圖表容器 */
+.charts-container {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* 響應式調整 */
+@media (min-width: 1200px) {
+    .analytics-cards {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .charts-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .analytics-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+
+    .data-table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* 動畫效果 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/* 頂部用戶資訊區域調整 */
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-account {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+/* 導航切換按鈕 - 放在頂部 */
+.nav-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-toggle:hover {
+    background: var(--secondary-color);
+}
+
+.nav-toggle:active {
+    transform: scale(0.95);
+}
+
+.nav-toggle i {
+    transition: transform 0.3s ease;
+}
+
+.nav-toggle.active i {
+    transform: rotate(180deg);
+}
+
+/* 側邊欄基礎樣式 */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: var(--sidebar-width);
+    max-width: var(--max-sidebar-width);
+    height: 100vh;
+    background: var(--darker-blue);
+    z-index: 1001;
+    transition: right 0.3s ease;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+/* 遮罩層 */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
+/* 保持其他現有樣式 */
+// ... existing code ... 

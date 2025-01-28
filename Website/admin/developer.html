@@ -6,6 +6,42 @@
     <title>系統管理平台</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="admin-spacing.css">
+    <link rel="stylesheet" href="analytics-style.css">
+    <style>
+        /* 添加必要的側邊欄樣式 */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 250px;
+            height: 100vh;
+            background: var(--darker-blue);
+            z-index: 1001;
+            transition: left 0.3s ease;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -54,21 +90,27 @@
 
         <!-- 主要內容區 -->
         <main class="main-content">
-            <header class="top-bar">
+            <!-- 頂部欄 -->
+            <div class="top-bar">
                 <div class="page-title">
                     <h1>系統總覽</h1>
-                    <span class="breadcrumb">首頁 / 總覽</span>
+                    <span class="breadcrumb">首頁 / 系統總覽</span>
                 </div>
                 <div class="top-actions">
-                    <button class="notification-btn">
-                        <i class="fas fa-bell"></i>
-                        <span class="badge">3</span>
-                    </button>
-                    <button class="theme-toggle">
-                        <i class="fas fa-moon"></i>
+                    <div class="user-account">
+                        <div class="account-info">
+                            <span class="username">管理員</span>
+                            <span class="role">系統管理者</span>
+                        </div>
+                        <div class="account-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                    </div>
+                    <button class="nav-toggle">
+                        <i class="fas fa-bars"></i>
                     </button>
                 </div>
-            </header>
+            </div>
 
             <div class="content-grid">
                 <!-- 快速統計卡片 -->
@@ -254,11 +296,6 @@
             history.pushState(null, null, document.URL);
         });
 
-        // 主題切換
-        document.querySelector('.theme-toggle').addEventListener('click', function() {
-            document.body.classList.toggle('dark-theme');
-        });
-
         // 修改登出功能
         function systemLogout() {
             const modal = document.getElementById('logoutModal');
@@ -277,6 +314,58 @@
                 window.location.href = '../login.html';
             }, 3000);
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const sidebar = document.querySelector('.sidebar');
+            const navToggle = document.querySelector('.nav-toggle');
+            
+            // 確保遮罩層存在
+            let overlay = document.querySelector('.sidebar-overlay');
+            if (!overlay) {
+                overlay = document.createElement('div');
+                overlay.className = 'sidebar-overlay';
+                document.body.appendChild(overlay);
+            }
+
+            // 切換側邊欄
+            function toggleSidebar() {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                navToggle.classList.toggle('active');
+                
+                if (sidebar.classList.contains('active')) {
+                    navToggle.querySelector('i').className = 'fas fa-times';
+                } else {
+                    navToggle.querySelector('i').className = 'fas fa-bars';
+                }
+            }
+
+            // 關閉側邊欄
+            function closeSidebar() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                navToggle.classList.remove('active');
+                navToggle.querySelector('i').className = 'fas fa-bars';
+            }
+
+            // 按鈕點擊事件
+            navToggle.addEventListener('click', toggleSidebar);
+
+            // 遮罩層點擊事件
+            overlay.addEventListener('click', closeSidebar);
+
+            // ESC 鍵關閉
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeSidebar();
+                }
+            });
+
+            // 確保按鈕可見且正常工作
+            console.log('Nav toggle button:', navToggle);
+            console.log('Sidebar:', sidebar);
+            console.log('Overlay:', overlay);
+        });
     </script>
 </body>
 </html> 
