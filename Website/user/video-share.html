@@ -85,6 +85,10 @@
             border-radius: 15px;
             overflow: hidden;
             transition: transform 0.3s ease;
+            /* 添加初始動畫狀態 */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
         }
 
         .video-card:hover {
@@ -247,6 +251,31 @@
             font-size: 0.8rem;
             z-index: 1;
         }
+
+        /* 添加新的動畫關鍵幀 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 添加動畫延遲類 */
+        .video-card:nth-child(1) { animation-delay: 0.1s; }
+        .video-card:nth-child(2) { animation-delay: 0.2s; }
+        .video-card:nth-child(3) { animation-delay: 0.3s; }
+        .video-card:nth-child(4) { animation-delay: 0.4s; }
+        .video-card:nth-child(5) { animation-delay: 0.5s; }
+        .video-card:nth-child(6) { animation-delay: 0.6s; }
+        .video-card:nth-child(7) { animation-delay: 0.7s; }
+        .video-card:nth-child(8) { animation-delay: 0.8s; }
+        .video-card:nth-child(9) { animation-delay: 0.9s; }
+        .video-card:nth-child(10) { animation-delay: 1.0s; }
+        .video-card:nth-child(n+11) { animation-delay: 1.1s; }
     </style>
 </head>
 <body>
@@ -501,6 +530,51 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 再見螢火蟲 -->
+            <div class="video-card" onclick="playVideo('7d82ac2b-d577-4ef4-90cf-936cffac9c38', '再見螢火蟲')">
+                <div class="video-thumbnail">
+                    <img src="https://image-cdn.hypb.st/https%3A%2F%2Fpopbee.com%2Fimage%2F2018%2F04%2Fgrave-of-the-fireflies-poster-teaser.jpg?q=75&w=800&cbr=1&fit=max" alt="影片縮圖">
+                    <span class="video-duration">1:28:21</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">再見螢火蟲</h3>
+                    <div class="video-meta">
+                        <span>宮崎駿</span>
+                        <span>1988 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 貓之報恩 -->
+            <div class="video-card" onclick="playVideo('YZAB-n4j9-1d34-f671-m0k4l8jh1fj6', '貓之報恩')">
+                <div class="video-thumbnail">
+                    <img src="https://im.marieclaire.com.tw/m800c533h100b0/assets/mc/202405/6642B6947C9071715648148.jpeg" alt="影片縮圖">
+                    <span class="video-duration">1:15:24</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">貓之報恩</h3>
+                    <div class="video-meta">
+                        <span>宮崎駿</span>
+                        <span>2002 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 借物少女艾莉緹 -->
+            <div class="video-card" onclick="playVideo('CDEF-p5k0-2e45-g782-n1l5m9ki2gk7', '借物少女艾莉緹')">
+                <div class="video-thumbnail">
+                    <img src="https://images.now-tv.com/shares/vod_images/vi_vodproduct_desc_t/202011/en_us/original_horizontal2/202011181217403_1440_810" alt="影片縮圖">
+                    <span class="video-duration">1:34:15</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">借物少女艾莉緹</h3>
+                    <div class="video-meta">
+                        <span>宮崎駿</span>
+                        <span>2010 年</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -517,19 +591,36 @@
                 
                 const category = btn.textContent.trim();
                 
-                // 過濾影片
+                // 重置所有卡片的動畫
                 videoCards.forEach(card => {
+                    // 先移除動畫
+                    card.style.animation = 'none';
+                    card.offsetHeight; // 觸發重排
+                    
                     const author = card.querySelector('.video-meta span').textContent;
                     if (category === '全部') {
                         card.style.display = 'block';
-                    } else if (category === '多啦A夢' && author === '藤子·F·不二雄') {
+                        // 重新添加動畫
+                        card.style.animation = '';
+                    } else if (
+                        (category === '多啦A夢' && author === '藤子·F·不二雄') ||
+                        (category === '新海誠' && author === '新海誠') ||
+                        (category === '宮崎駿' && author === '宮崎駿')
+                    ) {
                         card.style.display = 'block';
-                    } else if (category === '新海誠' && author === '新海誠') {
-                        card.style.display = 'block';
-                    } else if (category === '宮崎駿' && author === '宮崎駿') {
-                        card.style.display = 'block';
+                        // 重新添加動畫
+                        card.style.animation = '';
                     } else {
                         card.style.display = 'none';
+                    }
+                });
+
+                // 重新計算可見卡片的動畫延遲
+                let delay = 0;
+                videoCards.forEach(card => {
+                    if (card.style.display !== 'none') {
+                        card.style.animationDelay = `${delay}s`;
+                        delay += 0.1;
                     }
                 });
             });

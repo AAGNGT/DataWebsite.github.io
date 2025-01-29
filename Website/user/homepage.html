@@ -328,6 +328,121 @@
                 height: 250px;
             }
         }
+
+        .login-alert {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .login-alert.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .alert-content {
+            background: rgba(31, 31, 35, 0.95);
+            border: 1px solid rgba(255, 59, 59, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            position: relative;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 25px 50px -12px rgba(255, 59, 59, 0.25);
+        }
+
+        .login-alert.show .alert-content {
+            transform: translateY(0);
+        }
+
+        .alert-content::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(45deg, rgba(255, 59, 59, 0.5), rgba(255, 135, 135, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .alert-content i {
+            font-size: 3.5rem;
+            color: #FF3B3B;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: pulseIcon 2s infinite;
+        }
+
+        @keyframes pulseIcon {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .alert-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #FF3B3B, #FF8787);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .alert-content p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .alert-content button {
+            background: linear-gradient(135deg, #FF3B3B, #FF8787);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alert-content button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%) skewX(-15deg);
+            transition: transform 0.5s ease;
+        }
+
+        .alert-content button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px rgba(255, 59, 59, 0.5);
+        }
+
+        .alert-content button:hover::before {
+            transform: translateX(100%) skewX(-15deg);
+        }
     </style>
 </head>
 <body>
@@ -475,8 +590,10 @@
         <div class="alert-content">
             <i class="fas fa-exclamation-circle"></i>
             <h3>需要登入</h3>
-            <p>請先登入後再訪問此頁面</p>
-            <button onclick="redirectToLogin()">前往登入</button>
+            <p>沒有訪客權限 請登入系統後再訪問此頁面</p>
+            <button onclick="redirectToLogin()">
+                前往登入
+            </button>
         </div>
     </div>
 

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完整更新日誌 - 強人bb</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #818CF8;
+            --text: #E0E7FF;
+            --background: #1E1B4B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--background), #2D2A6B);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-title i {
+            color: var(--primary-light);
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .changelog-list {
+            padding: 30px;
+        }
+
+        .changelog-item {
+            position: relative;
+            padding-left: 30px;
+            padding-bottom: 30px;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .changelog-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .changelog-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            border: 2px solid var(--background);
+        }
+
+        .version-header {
+            margin-left: 15px;
+            margin-bottom: 10px;
+        }
+
+        .version {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .version i {
+            transition: transform 0.3s ease;
+        }
+
+        .version.collapsed i {
+            transform: rotate(-90deg);
+        }
+
+        .version-tag {
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(79, 70, 229, 0.2);
+            color: var(--text);
+        }
+
+        .date {
+            font-size: 0.85rem;
+            color: rgba(224, 231, 255, 0.6);
+            margin-top: 4px;
+        }
+
+        .changes {
+            margin-left: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .changes.collapsed {
+            padding: 0;
+            height: 0;
+            opacity: 0;
+        }
+
+        .change-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+        }
+
+        .change-item:first-child {
+            padding-top: 0;
+        }
+
+        .change-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .change-item i {
+            color: var(--primary-light);
+            width: 20px;
+            text-align: center;
+        }
+
+        .feature-tag {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: auto;
+        }
+
+        .new { 
+            background: rgba(16, 185, 129, 0.2);
+            color: #34D399;
+        }
+
+        .fix { 
+            background: rgba(239, 68, 68, 0.2);
+            color: #F87171;
+        }
+
+        .improvement { 
+            background: rgba(245, 158, 11, 0.2);
+            color: #FBBF24;
+        }
+
+        .development { 
+            background: rgba(147, 51, 234, 0.2);
+            color: #A78BFA;
+        }
+
+        .changelog-item:first-child {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(147, 51, 234, 0.1));
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.15);
+        }
+
+        .changelog-item:first-child .version-header {
+            margin-left: 0;
+        }
+
+        .changelog-item:first-child .changes {
+            margin-left: 0;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .changelog-item:first-child .version {
+            font-size: 1.4rem;
+            color: #4F46E5;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .changelog-item:first-child .version-tag {
+            background: linear-gradient(135deg, #4F46E5, #A78BFA);
+            color: white;
+            padding: 4px 12px;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+            margin-left: 10px;
+        }
+
+        .changelog-item:first-child .date {
+            color: rgba(224, 231, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .changelog-item:first-child .change-item {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .changelog-item:first-child .change-item:hover {
+            transform: translateX(5px);
+        }
+
+        .changelog-item:first-child .change-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .changelog-item:first-child .change-item i {
+            font-size: 1.1rem;
+            color: #4F46E5;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 15px 20px;
+            }
+
+            .changelog-list {
+                padding: 20px;
+            }
+
+            .header-title {
+                font-size: 1.2rem;
+            }
+
+            .back-btn {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* 添加歷史版本分隔標題樣式 */
+        .history-title {
+            margin: 30px 0 20px;
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(224, 231, 255, 0.6);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .history-title::before,
+        .history-title::after {
+            content: '';
+            height: 1px;
+            flex: 1;
+            background: linear-gradient(to right, rgba(224, 231, 255, 0.1), rgba(224, 231, 255, 0.2));
+        }
+
+        .history-title i {
+            color: rgba(224, 231, 255, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .changelog-item:nth-child(1) { animation-delay: 0.1s; }
+        .changelog-item:nth-child(2) { animation-delay: 0.2s; }
+        .changelog-item:nth-child(3) { animation-delay: 0.3s; }
+        .changelog-item:nth-child(4) { animation-delay: 0.4s; }
+        .changelog-item:nth-child(5) { animation-delay: 0.5s; }
+        .changelog-item:nth-child(n+6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="header-title">
+                <i class="fas fa-history"></i>
+                完整更新日誌
+            </h1>
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+                返回登入
+            </button>
+        </div>
+
+        <div class="changelog-list">
+            <!-- 內容將由 JavaScript 動態生成 -->
+        </div>
+    </div>
+
+    <script src="js/changelog-data.js"></script>
+    <script>
+        function goBack() {
+            const returnUrl = localStorage.getItem('returnUrl') || 'login.html';
+            window.location.href = returnUrl;
+        }
+
+        function toggleChangelog(element) {
+            const changes = element.closest('.version-header').nextElementSibling;
+            const versionTitle = element;
+            
+            changes.classList.toggle('collapsed');
+            versionTitle.classList.toggle('collapsed');
+        }
+
+        // 初始化時折疊所有更新日誌，除了最新版本
+        document.addEventListener('DOMContentLoaded', function() {
+            renderChangelog();
+            
+            const allVersions = document.querySelectorAll('.changelog-item');
+            allVersions.forEach((item, index) => {
+                if (index !== 0) {
+                    const changes = item.querySelector('.changes');
+                    const version = item.querySelector('.version');
+                    changes.classList.add('collapsed');
+                    version.classList.add('collapsed');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
