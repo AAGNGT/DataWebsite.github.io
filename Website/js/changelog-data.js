@@ -5,7 +5,7 @@
 
 const changelogData = {
     currentVersion: "2.0.3.2",
-    lastUpdated: "2025-01-29 21:57",
+    lastUpdated: "2025-01-31 05:01",
     versions: [
         {
             version: "2.0.3.2",
