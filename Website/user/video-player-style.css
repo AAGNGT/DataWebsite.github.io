@@ -334,7 +334,67 @@ body {
     color: rgba(224, 231, 255, 0.7);
 }
 
-/* 響應式設計 */
+/* 新增的標題行和展開按鈕樣式 */
+.title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.title-expand-btn {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 16px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.title-expand-btn:hover {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.15);
+}
+
+.title-expand-btn i {
+    transition: transform 0.3s ease;
+}
+
+.title-expand-btn.active i {
+    transform: rotate(180deg);
+}
+
+.title-details-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+    margin: 0 0 15px;
+    backdrop-filter: blur(10px);
+}
+
+.title-details-card.expanded {
+    max-height: 500px;
+    opacity: 1;
+    margin: 0 0 15px;
+}
+
+.details-content {
+    padding: 20px;
+}
+
+/* 更新響應式設計部分 */
 @media (max-width: 768px) {
     .video-meta-primary {
         gap: 1.5rem;
@@ -354,5 +414,23 @@ body {
 
     .video-description {
         font-size: 1rem;
+    }
+
+    .title-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .title-expand-btn {
+        align-self: flex-end;
+        margin-top: -40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-expand-btn {
+        margin-top: 0;
+        align-self: flex-start;
     }
 } 

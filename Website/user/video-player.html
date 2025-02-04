@@ -26,8 +26,76 @@
         </div>
 
         <div class="video-info">
-            <h1 id="videoTitle" class="video-title"></h1>
+            <div class="title-row">
+                <h1 class="video-title">
+                    <span id="videoTitle"></span>
+                </h1>
+                <!-- <button class="title-expand-btn" onclick="toggleTitleDetails(this)">
+                    查看更多 <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+
+            <div class="title-details-card">
+                <div class="details-content">
+                    <div class="movie-description">
+                        <p id="description"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-meta-container">
+                <div class="video-meta-primary">
+                    <div class="meta-item">
+                        <i class="fas fa-user-circle"></i>
+                        <div class="meta-content">
+                            <span class="meta-label">導演</span>
+                            <span id="director" class="value"></span>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div class="meta-content">
+                            <span class="meta-label">年份</span>
+                            <span id="year" class="value"></span>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="meta-content">
+                            <span class="meta-label">片長</span>
+                            <span id="duration" class="value"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <div class="video-description-container">
+            <h3 class="description-title">
+                <i class="fas fa-info-circle"></i>
+                劇情簡介
+            </h3>
+            <p class="video-description"></p>
+        </div>
+        
+        <div class="recommendations">
+            <div class="section-header">
+                <h3><i class="fas fa-film"></i> 相關影片推薦</h3>
+                <div class="scroll-buttons">
+                    <button class="scroll-btn scroll-left" onclick="scrollRecommendations('left')">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="scroll-btn scroll-right" onclick="scrollRecommendations('right')">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="recommendations-container">
+                <div class="recommendations-scroll">
+                    <!-- Recommendations will be dynamically populated here -->
+                </div>
+            </div>
+        </div> -->
     </div>
 
     <script>
@@ -311,7 +379,7 @@
                 description: '離巢之詩 :<br><br>滿月潮漲的午夜，13歲魔女琪琪違背母親叮囑，執意帶著黑貓吉吉飛向最遠的城邦。「魔女的血越稀薄，風就越冷。」掃帚顛簸如學步的鹿，她卻在雲層間笑得發顫——直到降落在克里克港的垃圾堆，裙擺沾滿魚腥與油漬，才明白成人世界的初吻，往往是現實的一記耳光。<br><br>折翼之港 :<br><br>麵包店閣樓的蝸居歲月，琪琪以快遞掙取銅板與尊嚴。她為獨居老婦遞交初戀情書，卻親眼見證收信人早已化為墓碑；暗戀的男孩蜻蜓邀她參觀飛行俱樂部，卻在眾人面前摔碎她貼滿膠帶的掃帚。某夜，吉吉突然吐出人類語言：「妳的魔法在枯萎，因為妳假裝看不見自己的影子。」<br><br>燼中生花 :<br><br>魔力盡失的暴雨夜，畫家烏爾絲拉將酗酒的琪琪撿回森林小屋。火爐旁，她撕毀所有草稿：「你看，完美是多無趣的暴君。」破曉時分，颶風捲走飛艇，蜻蜓懸吊於斷裂的纜繩。琪琪抓起水桶刷躍出窗台，逆風嘶喊：「飛不起來又怎樣？至少我能墜落到你身旁！」<br><br>陰翳禮讚 :<br><br>三年後，琪琪的掃帚仍會打滑，卻學會用蘇娜送的收音機導航。吉吉與白貓莉莉私奔了，留給她一窩會喵嗚的絨球。離城前夜，烏爾絲拉展示新作：夜空中的少女騎著歪斜掃帚，身後拖曳的微光不是星尾，而是無數委託人寄出的「謝謝」。晨光中，琪琪將母親的魔女斗篷壓入箱底，換上蘇娜縫的牛仔吊帶褲。她仍是魔女，但從此允許自己活得有點像個人類。',
                 author: '宮崎駿',
                 year: '1989',
-                duration: '124分鐘',
+                duration: '103分鐘',
                 recommendations: [
                     {
                         title: '☁️遺片☁️魔女宅急便',
@@ -377,6 +445,140 @@
                     }
                 ]
             },
+            'WXYZ-r5s9-1e34-g782-n6p5o8mn2ik7': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=942fbd64-8dec-4e29-853a-1ae598c2c5f1',
+                title: '紅豬',
+                description: '《紅豬》講述了一個被詛咒變成豬的前意大利空軍王牌飛行員波魯克（紅豬）的故事。故事背景設定在1920年代的亞得里亞海，紅豬以賞金獵人的身份與空中海盜對抗。<br><br>他與美麗的酒店老闆吉娜有著深厚的感情，同時也結識了年輕的女飛行員菲歐。在與空中海盜團「媽媽艾雅隊」的對抗中，紅豬展現出高超的飛行技術和獨特的處世哲學。<br><br>影片探討了英雄主義、愛情與自我認同等主題，通過紅豬這個特殊的角色，反思人性與生存的意義。',
+                author: '宮崎駿',
+                year: '1992',
+                duration: '93分鐘',
+                recommendations: [
+                    {
+                        title: '紅豬 主題曲',
+                        url: 'https://www.youtube.com/watch?v=QsowHW0t7CA',
+                        thumbnail: 'https://img.youtube.com/vi/QsowHW0t7CA/mqdefault.jpg',
+                        duration: '4:23'
+                    },
+                    {
+                        title: '紅豬 電影解析',
+                        url: 'https://www.youtube.com/watch?v=w6zhAh_JC8g',
+                        thumbnail: 'https://img.youtube.com/vi/w6zhAh_JC8g/mqdefault.jpg',
+                        duration: '12:45'
+                    }
+                ]
+            },
+            'VWXY-s6t0-2f45-h893-o7q6p9no3jl8': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=37556292-79aa-44c1-8596-8aba5e29e7a2',
+                title: '側耳傾聽',
+                description: '《側耳傾聽》講述了高中女生月島雫與神秘男孩天澤聰的青春戀愛故事。雫喜歡閱讀，經常在圖書館借書。她發現所有她借的書都曾被一個叫天澤聰的男生借過。<br><br>通過圖書卡片的簽名，雫開始對這個素未謀面的男生產生好奇。後來，她遇見了聰，發現他是一個製作小提琴的學徒，夢想成為一名優秀的小提琴製作師。在追尋夢想的過程中，兩人互相鼓勵、支持，最終都找到了屬於自己的人生方向。<br><br>影片細膩地描繪了青春期少男少女的成長、夢想與初戀，展現了追求理想過程中的迷惘與堅持。',
+                author: '宮崎駿',
+                year: '1995',
+                duration: '110分鐘',
+                recommendations: [
+                    {
+                        title: '側耳傾聽 主題曲',
+                        url: 'https://www.youtube.com/watch?v=0pVkiod6V0U',
+                        thumbnail: 'https://img.youtube.com/vi/0pVkiod6V0U/mqdefault.jpg',
+                        duration: '4:15'
+                    },
+                    {
+                        title: '側耳傾聽 電影解析',
+                        url: 'https://www.youtube.com/watch?v=k3qDl_mQYLQ',
+                        thumbnail: 'https://img.youtube.com/vi/k3qDl_mQYLQ/mqdefault.jpg',
+                        duration: '11:32'
+                    }
+                ]
+            },
+            'UVWX-t7u1-3g56-i904-p8r7q0op4km91': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=uvwx-t7u1-3g56-i904-p8r7q0op4km9',
+                title: '幽靈公主',
+                description: '《幽靈公主》設定在日本室町時代，講述了少年阿席達卡為解除詛咒，前往西方尋找答案的故事。在旅程中，他遇見了被狼神養大的少女小桑，捲入了人類與森林之神的衝突之中。<br><br>人類為了發展工業文明，不斷砍伐森林，引起了森林之神的憤怒。小桑站在森林一方，與養母狼神莫娜一起保護森林。阿席達卡試圖在人類與自然之間尋求平衡，但隨著衝突加劇，他必須做出艱難的選擇。<br><br>影片探討了人類文明與自然環境的矛盾，以及和平共處的可能性。通過壯麗的場景和深刻的主題，展現了宮崎駿對環境保護的關注。',
+                author: '宮崎駿',
+                year: '1997',
+                duration: '134分鐘',
+                recommendations: [
+                    {
+                        title: '幽靈公主 主題曲',
+                        url: 'https://www.youtube.com/watch?v=8XOV2L-eM38',
+                        thumbnail: 'https://img.youtube.com/vi/8XOV2L-eM38/mqdefault.jpg',
+                        duration: '5:33'
+                    },
+                    {
+                        title: '幽靈公主 電影解析',
+                        url: 'https://www.youtube.com/watch?v=RqSx_DqgMLY',
+                        thumbnail: 'https://img.youtube.com/vi/RqSx_DqgMLY/mqdefault.jpg',
+                        duration: '15:21'
+                    }
+                ]
+            },
+            'STUV-u8v2-4h67-j015-q9s8r1pq5ln0': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=29b507e1-b3c4-4b7f-9151-f7fb18117ec0',
+                title: '霍爾的移動城堡',
+                description: '《霍爾的移動城堡》講述了18歲的少女蘇菲被荒野女巫詛咒變成90歲老婦後，在魔法師霍爾的移動城堡中展開的奇幻冒險。<br><br>蘇菲在城堡中遇見了被詛咒的火焰惡魔卡西法、霍爾的學徒馬可、以及稻草人王子。她以管家身份照顧城堡居民，同時也逐漸了解到霍爾的秘密——他為了獲得強大魔力，與惡魔訂下契約，導致逐漸失去人性。<br><br>在戰爭的陰影下，蘇菲必須找到方法解除霍爾的詛咒，同時也要面對自己內心的成長。她最終明白，真正的美麗來自於內心的勇氣與愛。通過對霍爾的愛與付出，她不僅幫助霍爾找回人性，自己也重獲青春。<br><br>影片探討了戰爭與和平、愛與犧牲、年齡與美麗等深刻主題，展現了宮崎駿對人性的思考與對和平的嚮往。移動城堡本身則象徵著人們在動盪時代中尋找歸屬的願望。',
+                author: '宮崎駿',
+                year: '2004',
+                duration: '119分鐘',
+                recommendations: [
+                    {
+                        title: '霍爾的移動城堡 主題曲 - 人生的旋轉木馬',
+                        url: 'https://www.youtube.com/watch?v=UwxatzcYf9Q',
+                        thumbnail: 'https://img.youtube.com/vi/UwxatzcYf9Q/mqdefault.jpg',
+                        duration: '3:31'
+                    },
+                    {
+                        title: '霍爾的移動城堡 配樂 - The Merry-Go-Round of Life',
+                        url: 'https://www.youtube.com/watch?v=J6qIzKxmW8Y',
+                        thumbnail: 'https://img.youtube.com/vi/J6qIzKxmW8Y/mqdefault.jpg',
+                        duration: '3:25'
+                    },
+                    {
+                        title: '🏰遺片🏰霍爾的移動城堡',
+                        url: 'https://www.youtube.com/watch?v=0j_6zwmqLvE',
+                        thumbnail: 'https://img.youtube.com/vi/0j_6zwmqLvE/mqdefault.jpg',
+                        duration: '13:42'
+                    },
+                    {
+                        title: '霍爾的移動城堡 電影解析',
+                        url: 'https://www.youtube.com/watch?v=n8c4PJn4Mtw',
+                        thumbnail: 'https://img.youtube.com/vi/n8c4PJn4Mtw/mqdefault.jpg',
+                        duration: '11:56'
+                    }
+                ]
+            },
+            'PQRS-v9w3-5i78-k126-r0t9s2qr6mp1': {
+                url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=776bd318-1f50-40cf-9de5-db0929c74b6f',
+                title: '風之谷',
+                description: '《風之谷》描繪了一個後啟示錄時代的世界，人類文明在「火之七日」的災難後幾近毀滅，僅存的人類生活在被有毒孢子森林「腐海」包圍的幾個小國中。<br><br>故事主角娜烏西卡是風之谷的公主，她具有與蟲獸溝通的特殊能力。她發現腐海其實是淨化人類污染的自然系統，而巨蟲歐姆則是這個生態系統的守護者。然而，托魯梅基亞帝國試圖復活古代的生物兵器「巨神兵」，意圖以武力征服世界並消滅腐海。<br><br>娜烏西卡在戰爭與環境危機中，努力阻止人類的傲慢行為導致更大的災難。她以非暴力的方式化解衝突，展現了對生命的尊重與對和平的追求。最終，她的犧牲與智慧拯救了人類與自然的共存可能。<br><br>影片探討了人與自然的關係、戰爭與和平的議題，以及環境保護的重要性。通過娜烏西卡的視角，宮崎駿傳達了他對生態平衡與和平共處的理想。',
+                author: '宮崎駿',
+                year: '1984',
+                duration: '117分鐘',
+                recommendations: [
+                    {
+                        title: '風之谷 主題曲 - 娜烏西卡安魂曲',
+                        url: 'https://www.youtube.com/watch?v=B51bLBdUt3w',
+                        thumbnail: 'https://img.youtube.com/vi/B51bLBdUt3w/mqdefault.jpg',
+                        duration: '4:12'
+                    },
+                    {
+                        title: '風之谷 配樂精選',
+                        url: 'https://www.youtube.com/watch?v=CxwJrzEdw1U',
+                        thumbnail: 'https://img.youtube.com/vi/CxwJrzEdw1U/mqdefault.jpg',
+                        duration: '7:35'
+                    },
+                    {
+                        title: '🌿遺片🌿風之谷',
+                        url: 'https://www.youtube.com/watch?v=6zhggk_Tg1Y',
+                        thumbnail: 'https://img.youtube.com/vi/6zhggk_Tg1Y/mqdefault.jpg',
+                        duration: '14:23'
+                    },
+                    {
+                        title: '風之谷 深度解析',
+                        url: 'https://www.youtube.com/watch?v=B-OlpI7hN7I',
+                        thumbnail: 'https://img.youtube.com/vi/B-OlpI7hN7I/mqdefault.jpg',
+                        duration: '12:48'
+                    }
+                ]
+            }
         };
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -396,8 +598,21 @@
                 // 更新影片資訊區域
                 const videoInfo = document.querySelector('.video-info');
                 videoInfo.innerHTML = `
-                    <h1 class="video-title">${video.title}</h1>
-                    
+                    <div class="title-row">
+                        <h1 class="video-title">${video.title}</h1>
+                        <button class="title-expand-btn" onclick="toggleTitleDetails(this)">
+                            查看更多 <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+
+                    <div class="title-details-card">
+                        <div class="details-content">
+                            <div class="movie-description">
+                                <p>${video.description}</p>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="video-meta-container">
                         <div class="video-meta-primary">
                             <div class="meta-item">
@@ -493,6 +708,25 @@
                 });
             }
         }
+
+        function toggleTitleDetails(btn) {
+            btn.classList.toggle('active');
+            const card = document.querySelector('.title-details-card');
+            card.classList.toggle('expanded');
+        }
+
+        // 當頁面載入時，從 videoMap 中獲取並顯示電影詳情
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoData = JSON.parse(localStorage.getItem('currentVideo'));
+            
+            if (videoData && videoMap[videoData.id]) {
+                const video = videoMap[videoData.id];
+                document.getElementById('director').textContent = video.author;
+                document.getElementById('year').textContent = video.year;
+                document.getElementById('duration').textContent = video.duration;
+                document.getElementById('description').innerHTML = video.description;
+            }
+        });
     </script>
 </body>
 </html> 

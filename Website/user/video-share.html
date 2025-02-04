@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>影片分享平台 - 強人BB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="video-player-style.css">
+    <link rel="stylesheet" href="user\video-share-styles.css">
     <style>
         :root {
             --primary: #4F46E5;
@@ -42,6 +42,10 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-light);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .nav-controls {
@@ -283,7 +287,8 @@
         <!-- 導航欄 -->
         <nav class="nav-bar">
             <div class="nav-brand">
-                <i class="fas fa-video"></i> 影片分享平台
+                <i class="fas fa-video"></i>
+                <span>影片分享平台</span>
             </div>
             <div class="search-bar">
                 <input type="text" class="search-input" placeholder="搜索影片...">
@@ -294,7 +299,7 @@
             <div class="nav-controls">
                 <button class="back-btn" onclick="window.location.href='homepage.html'">
                     <i class="fas fa-arrow-left"></i>
-                    返回列表
+                    <span>返回列表</span>
                 </button>
             </div>
         </nav>
@@ -502,10 +507,10 @@
             </div>
 
             <!-- 霍爾的移動城堡 -->
-            <div class="video-card" onclick="playVideo('', '霍爾的移動城堡')">
+            <div class="video-card" onclick="playVideo('STUV-u8v2-4h67-j015-q9s8r1pq5ln0', '霍爾的移動城堡')">
                 <div class="video-thumbnail">
-                    <img src="https://cdn.hk01.com/di/media/images/1556285/org/e8e6e6e6e6e6e6e6e6e6e6e6e6e6e6e6.jpg/rpA_2OqgGDqRKs_7Ek9FYKjwEd5_HI_c_3Fy6ZQNB4" alt="影片縮圖">
-                    <span class="video-duration">1:59:12</span>
+                    <img src="https://cdn.hk01.com/di/media/images/dw/20201019/394834556513816576845193.jpeg/tG4R3oQip2-BIwVHfQfx5f-0M2kIHrmqsavUgrGr1II?v=w1920" alt="影片縮圖">
+                    <span class="video-duration">1:59:09</span>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">霍爾的移動城堡</h3>
@@ -517,10 +522,10 @@
             </div>
 
             <!-- 風之谷 -->
-            <div class="video-card" onclick="playVideo('QRST-l2h7-9b12-d459-k8j2i6hf9dh4', '風之谷')">
+            <div class="video-card" onclick="playVideo('PQRS-v9w3-5i78-k126-r0t9s2qr6mp1', '風之谷')">
                 <div class="video-thumbnail">
-                    <img src="https://cdn.hk01.com/di/media/images/1556286/org/f9f7f7f7f7f7f7f7f7f7f7f7f7f7f7f7.jpg/rpA_2OqgGDqRKs_7Ek9FYKjwEd5_HI_c_3Fy6ZQNB4" alt="影片縮圖">
-                    <span class="video-duration">1:57:04</span>
+                    <img src="https://cdn.hk01.com/di/media/images/dw/20201221/417656576796528640735928.jpeg/3wEnYoSJ8_oR-cBbMEgTPDrTg--JIALJORrkGDka5Bg?v=w1920" alt="影片縮圖">
+                    <span class="video-duration">1:57:02</span>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">風之谷</h3>
@@ -602,6 +607,51 @@
                     <div class="video-meta">
                         <span>宮崎駿</span>
                         <span>1994 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 紅豬 -->
+            <div class="video-card" onclick="playVideo('WXYZ-r5s9-1e34-g782-n6p5o8mn2ik7', '紅豬')">
+                <div class="video-thumbnail">
+                    <img src="https://raw.githubusercontent.com/AAGNGT/RobloxGUI/42323b40c2bed2fe8fa83c94a97e9da209da332f/Picture%20library/145.jpg" alt="影片縮圖">
+                    <span class="video-duration">1:33:19</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">紅豬 - 飛天紅豬俠</h3>
+                    <div class="video-meta">
+                        <span>宮崎駿</span>
+                        <span>1992 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 側耳傾聽 -->
+            <div class="video-card" onclick="playVideo('VWXY-s6t0-2f45-h893-o7q6p9no3jl8', '側耳傾聽')">
+                <div class="video-thumbnail">
+                    <img src="https://meet.eslite.com/Content/Images/Article/WhisperoftheHeart-m_20210623013457.jpg" alt="影片縮圖">
+                    <span class="video-duration">1:50:50</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">心之谷 - 側耳傾聽</h3>
+                    <div class="video-meta">
+                        <span>宮崎駿</span>
+                        <span>1995 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 幽靈公主 -->
+            <div class="video-card" onclick="playVideo('UVWX-t7u1-3g56-i904-p8r7q0op4km9', '幽靈公主')">
+                <div class="video-thumbnail">
+                    <!-- <img src="https://images-tw.girlstyle.com/wp-content/uploads/2020/10/mononoke043.jpg?auto=format&w=1053" alt="影片縮圖"> -->
+                    <span class="video-duration">2:14:00</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">幽靈公主</h3>
+                    <div class="video-meta">
+                        <span>宮崎駿</span>
+                        <span>1997 年</span>
                     </div>
                 </div>
             </div>
