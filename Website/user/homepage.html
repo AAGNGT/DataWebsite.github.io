@@ -5,454 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>訪客專區 - 強人BB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="visitor-style.css">
-    <style>
-        /* 主容器樣式 */
-        .visitor-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* 功能區塊樣式 */
-        .features-section {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            margin: 3rem auto;
-            padding: 0 20px;
-            position: relative;
-        }
-
-        /* 移除原有的紫色橫線，改用漸變背景 */
-        .features-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                135deg,
-                rgba(255, 59, 59, 0.05),
-                transparent,
-                rgba(255, 59, 59, 0.05)
-            );
-            pointer-events: none;
-            border-radius: 30px;
-        }
-
-        /* 上方卡片樣式 */
-        .top-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            grid-column: 1 / -1;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* 更新顏色變量 */
-        :root {
-            --video-primary: #FF3B3B;
-            --video-secondary: #FF6B6B;
-            --video-accent: #FF4B4B;
-            --video-gradient: linear-gradient(135deg, #FF3B3B, #FF8787);
-        }
-
-        /* 底部大卡片樣式 */
-        .bottom-card {
-            grid-column: 1 / -1;
-            height: 340px;
-            display: grid;
-            grid-template-columns: 1fr 450px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .bottom-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, 
-                rgba(255, 59, 59, 0.1),
-                rgba(255, 135, 135, 0.05));
-            pointer-events: none;
-        }
-
-        .bottom-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 59, 59, 0.15);
-            border-color: rgba(255, 59, 59, 0.3);
-        }
-
-        /* 卡片基礎樣式 */
-        .feature-card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            height: 250px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        /* 內容區域樣式 */
-        .video-content {
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* 標題區域 */
-        .video-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .video-icon {
-            width: 64px;
-            height: 64px;
-            background: var(--video-gradient);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: white;
-            box-shadow: 0 8px 25px rgba(255, 59, 59, 0.25);
-            transform: rotate(-5deg);
-            transition: transform 0.3s ease;
-        }
-
-        .bottom-card:hover .video-icon {
-            transform: rotate(0deg);
-        }
-
-        .video-text {
-            flex-grow: 1;
-        }
-
-        .video-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            background: var(--video-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .video-desc {
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: var(--text-secondary);
-            opacity: 0.9;
-        }
-
-        /* 功能標籤 */
-        .video-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: auto;
-        }
-
-        .feature-tag {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 59, 59, 0.15);
-            transition: all 0.3s ease;
-        }
-
-        .feature-tag:hover {
-            background: rgba(255, 59, 59, 0.1);
-            transform: translateY(-3px);
-            border-color: rgba(255, 59, 59, 0.3);
-        }
-
-        .feature-tag i {
-            font-size: 1.3rem;
-            color: var(--video-secondary);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-tag:hover i {
-            transform: scale(1.1);
-        }
-
-        .feature-tag span {
-            font-size: 0.95rem;
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        /* 預覽區域 */
-        .video-preview {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .video-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: scale(1.05);
-            transition: transform 0.6s ease;
-        }
-
-        .bottom-card:hover .video-preview img {
-            transform: scale(1);
-        }
-
-        .preview-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to right,
-                rgba(255, 59, 59, 0.8),
-                rgba(255, 59, 59, 0.4),
-                transparent
-            );
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .play-button {
-            width: 85px;
-            height: 85px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.2rem;
-            color: white;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(5px);
-        }
-
-        .play-button::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            animation: pulseRed 2s infinite;
-        }
-
-        @keyframes pulseRed {
-            0% { transform: scale(1); opacity: 1; border-color: rgba(255, 59, 59, 0.5); }
-            100% { transform: scale(1.5); opacity: 0; border-color: rgba(255, 59, 59, 0); }
-        }
-
-        .bottom-card:hover .play-button {
-            transform: scale(1.1);
-            background: rgba(255, 59, 59, 0.3);
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-
-        /* 卡片內容樣式 */
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .feature-list {
-            margin-top: auto;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .feature-list li {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 992px) {
-            .features-section {
-                grid-template-columns: 1fr;
-            }
-            
-            .top-cards {
-                grid-template-columns: 1fr;
-            }
-
-            .bottom-card {
-                grid-template-columns: 1fr;
-                height: auto;
-            }
-
-            .video-content {
-                padding: 25px;
-            }
-
-            .video-preview {
-                height: 250px;
-            }
-        }
-
-        .login-alert {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .login-alert.show {
-            display: flex;
-            opacity: 1;
-        }
-
-        .alert-content {
-            background: rgba(31, 31, 35, 0.95);
-            border: 1px solid rgba(255, 59, 59, 0.2);
-            border-radius: 24px;
-            padding: 40px;
-            width: 90%;
-            max-width: 420px;
-            text-align: center;
-            position: relative;
-            transform: translateY(20px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 25px 50px -12px rgba(255, 59, 59, 0.25);
-        }
-
-        .login-alert.show .alert-content {
-            transform: translateY(0);
-        }
-
-        .alert-content::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: 24px;
-            padding: 1px;
-            background: linear-gradient(45deg, rgba(255, 59, 59, 0.5), rgba(255, 135, 135, 0.5));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-        }
-
-        .alert-content i {
-            font-size: 3.5rem;
-            color: #FF3B3B;
-            margin-bottom: 20px;
-            display: inline-block;
-            animation: pulseIcon 2s infinite;
-        }
-
-        @keyframes pulseIcon {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .alert-content h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #FF3B3B, #FF8787);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 600;
-        }
-
-        .alert-content p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .alert-content button {
-            background: linear-gradient(135deg, #FF3B3B, #FF8787);
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .alert-content button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
-            transform: translateX(-100%) skewX(-15deg);
-            transition: transform 0.5s ease;
-        }
-
-        .alert-content button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px -10px rgba(255, 59, 59, 0.5);
-        }
-
-        .alert-content button:hover::before {
-            transform: translateX(100%) skewX(-15deg);
-        }
-    </style>
+    <link rel="stylesheet" href="homepage-style.css">
 </head>
 <body>
+    <!-- 添加背景裝飾 -->
+    <div class="background-decoration"></div>
+
     <!-- 頂部導航 -->
     <nav class="visitor-nav">
         <div class="nav-brand">
-            <i class="fas fa-baby"></i>
+            <i class="fas fa-user-shield"></i>
             <span>強人BB - 訪客專區</span>
         </div>
-        <button class="logout-btn" onclick="logout()">
+        <button id="logoutButton" class="logout-btn">
             <i class="fas fa-sign-out-alt"></i>
             <span>登出系統</span>
         </button>
@@ -460,26 +25,29 @@
 
     <!-- 主要內容區 -->
     <div class="visitor-container">
-        <!-- 歡迎區塊 -->
+        <!-- 歡迎橫幅 -->
         <div class="welcome-banner">
             <div class="welcome-content">
                 <h1>歡迎來到訪客專區</h1>
                 <p>探索我們為您準備的精彩內容</p>
                 <div class="community-btn-wrapper">
                     <button class="community-btn" onclick="window.location.href='community.html'">
-                        <div class="btn-content">
-                            <i class="fas fa-users"></i>
-                            <span>加入社群</span>
-                        </div>
-                        <div class="btn-decoration">
-                            <div class="circle-pulse"></div>
-                            <div class="sparkles">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
+                        <i class="fas fa-users"></i>
+                        <span>加入社群討論</span>
+                        <i class="fas fa-arrow-right"></i>
                     </button>
+                </div>
+                <div class="welcome-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-film"></i>
+                        <span class="stat-value">23</span>
+                        <span class="stat-label">影片資源</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-users"></i>
+                        <span class="stat-value">2000+</span>
+                        <span class="stat-label">活躍用戶</span>
+                    </div>
                 </div>
             </div>
             <div class="decoration-circles">
@@ -491,80 +59,159 @@
 
         <!-- 功能區塊 -->
         <div class="features-section">
-            <div class="top-cards">
-                <!-- 指令庫 -->
-                <a href="#" class="feature-card" onclick="transitionToVerify(event)">
+            <!-- 影片分享卡片 -->
+            <div class="video-share-card" onclick="window.location.href='video-share.html'">
+                <div class="card-content">
+                    <!-- 左上標題區域 -->
                     <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-terminal"></i>
-                        </div>
-                        <h3>指令庫 <span class="status">已啟用</span></h3>
+                        <h2 class="card-title">
+                            <i class="fas fa-play-circle"></i>
+                            影片分享中心
+                        </h2>
+                        <p class="card-subtitle">利用強人BB的NAS 再加上Microsoft 內崁，打造專屬影音空間</p>
                     </div>
-                    <p>快速查找和使用常用指令</p>
-                    <ul class="feature-list">
-                        <li>教學圖片</li>
-                        <li>複製指令</li>
-                        <li>學習指南</li>
-                    </ul>
-                </a>
 
-                <!-- 社群討論 -->
-                <a href="#" class="feature-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-comments"></i>
+                    <!-- 右上輪播區域 -->
+                    <div class="card-image-wrapper">
+                        <div class="image-slider">
+                            <div class="slider-track">
+                                <div class="slide">
+                                    <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2021/04/07/EKyzlC.png?v1" alt="影片預覽 1">
+                                </div>
+                                <div class="slide">
+                                    <img src="https://cdn.hk01.com/di/media/images/dw/20201221/417667075189772288958721.jpeg/RDHgbmPRTFliKnLcGQLSXzJ6wLaJn-_LihX2uIoV9rg?v=w1920" alt="影片預覽 2">
+                                </div>
+                                <div class="slide">
+                                    <img src="https://cdn.hk01.com/di/media/images/3137038/org/31eca1f4d6d7241fc824e93e6223346e.jpg/C3TRBgRqkkqYwmAWlFuS7xJk5IiDNBhVRS-O6UUvjuk?v=w1920" alt="影片預覽 3">
+                                </div>
+                                <div class="slide">
+                                    <img src="https://images-tw.girlstyle.com/wp-content/uploads/2020/10/mononoke043.jpg?auto=format&w=1053" alt="影片預覽 4">
+                                </div>
+                            </div>
+                            <div class="slider-nav">
+                                <div class="slider-dot active"></div>
+                                <div class="slider-dot"></div>
+                                <div class="slider-dot"></div>
+                                <div class="slider-dot"></div>
+                            </div>
                         </div>
-                        <h3>社群討論</h3>
                     </div>
-                    <p>與其他家長交流育兒經驗</p>
-                    <ul class="feature-list">
-                        <li>育兒討論</li>
-                        <li>經驗分享</li>
-                        <li>專家建議</li>
-                    </ul>
-                </a>
+
+                    <!-- 下方特點列表 -->
+                    <div class="feature-list">
+                        <span class="enter-text">進入中心</span>
+                        <div class="feature-item">
+                            <i class="fas fa-server"></i>
+                            <div class="feature-info">
+                                <h4>NAS 存儲</h4>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div class="feature-info">
+                                <h4>微軟支持</h4>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <div class="feature-info">
+                                <h4>hkanime.com 贊助</h4>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-sync"></i>
+                            <div class="feature-info">
+                                <h4> 強人bb 不斷更新</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- 影片分享 -->
-            <a href="video-share.html" class="bottom-card">
-                <div class="video-content">
-                    <div class="video-header">
-                        <div class="video-icon">
-                            <i class="fas fa-play"></i>
-                        </div>
-                        <div class="video-text">
-                            <h3 class="video-title">影片分享平台 已啟用</h3>
-                            <p class="video-desc">利用強人BB的NAS 再加上Microsoft 內崁，打造專屬影音空間</p>
+            <!-- 新增排行榜卡片 -->
+            <div class="ranking-card">
+                <div class="ranking-header">
+                    <i class="fas fa-crown"></i>
+                    <h3>熱門影片排行</h3>
+                </div>
+                <div class="ranking-list">
+                    <div class="ranking-item">
+                        <div class="ranking-number">1</div>
+                        <div class="ranking-info">
+                            <div class="ranking-title">天空之城</div>
+                            <div class="ranking-meta">
+                                <span><i class="fas fa-eye"></i>2.3k</span>
+                                <span><i class="fas fa-star"></i>4.9</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="video-features">
-                        <div class="feature-tag">
-                            <i class="fas fa-server"></i>
-                            <span>NAS 存儲</span>
+                    <div class="ranking-item">
+                        <div class="ranking-number">2</div>
+                        <div class="ranking-info">
+                            <div class="ranking-title">魔女宅急便</div>
+                            <div class="ranking-meta">
+                                <span><i class="fas fa-eye"></i>2.1k</span>
+                                <span><i class="fas fa-star"></i>4.8</span>
+                            </div>
                         </div>
-                        <div class="feature-tag">
-                            <i class="fab fa-microsoft"></i>
-                            <span>微軟支持</span>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="ranking-number">3</div>
+                        <div class="ranking-info">
+                            <div class="ranking-title">千與千尋</div>
+                            <div class="ranking-meta">
+                                <span><i class="fas fa-eye"></i>1.9k</span>
+                                <span><i class="fas fa-star"></i>4.8</span>
+                            </div>
                         </div>
-                        <div class="feature-tag">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>hkanime.com 贊助</span>
-                        </div>
-                        <div class="feature-tag">
-                            <i class="fas fa-sync"></i>
-                            <span> 強人bb 不斷更新</span>
+                    </div>
+                    <div class="ranking-item">
+                        <div class="ranking-number">4</div>
+                        <div class="ranking-info">
+                            <div class="ranking-title">哈爾的移動城堡</div>
+                            <div class="ranking-meta">
+                                <span><i class="fas fa-eye"></i>1.7k</span>
+                                <span><i class="fas fa-star"></i>4.7</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="video-preview">
-                    <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2021/04/07/EKyzlC.png?v1" alt="影片預覽">
-                    <div class="preview-overlay">
-                        <div class="play-button">
-                            <i class="fas fa-play"></i>
+            </div>
+        </div>
+
+        <!-- 精選文章 -->
+        <div class="articles-section">
+            <h2>精選文章</h2>
+            <div class="articles-grid">
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2021/04/07/EKyzlC.png?v1" alt="文章配圖">
+                        <div class="article-category">影視推薦</div>
+                    </div>
+                    <div class="article-content">
+                        <h3>宮崎駿動畫的藝術特色</h3>
+                        <p>探討宮崎駿動畫中獨特的視覺風格和故事主題...</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-clock"></i> 2025/02/10</span>
+                            <span><i class="far fa-eye"></i> 1.2K 閱讀</span>
                         </div>
                     </div>
                 </div>
-            </a>
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2021/04/07/EKyzlC.png?v1" alt="文章配圖">
+                        <div class="article-category">技術分享</div>
+                    </div>
+                    <div class="article-content">
+                        <h3>NAS 存儲技術解析</h3>
+                        <p>深入了解 NAS 存儲系統的工作原理和優勢...</p>
+                        <div class="article-meta">
+                            <span><i class="far fa-clock"></i> 2025/02/08</span>
+                            <span><i class="far fa-eye"></i> 856 閱讀</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 最新消息區 -->
@@ -573,111 +220,348 @@
             <div class="news-grid">
                 <div class="news-card">
                     <div class="news-date">2025/02/04</div>
-                    <h4>  成功利用網盤 [ 中國驗證碼 ] 取得資源</h4>
-                    <p> 終於完成編碼 哈爾的移動城堡 <br> 心之谷 - 側耳傾聽 / 風之谷 / 紅豬</p>
+                    <h4>新增宮崎駿系列作品</h4>
+                    <p>哈爾的移動城堡、心之谷、風之谷等多部作品已上線</p>
                 </div>
                 <div class="news-card">
                     <div class="news-date">2025/01/28</div>
-                    <h4>成功在互聯網取得更多資源</h4>
-                    <p>借物少女艾莉緹 百變狸貓 <br> 魔女宅急便 天空之城 貓之報恩 千與千尋</p>
-                </div>
-                <div class="news-card">
-                    <div class="news-date">2025/01/28</div>
-                    <h4>添加 宮崎駿系列</h4>
-                    <p>再見螢火蟲</p>
+                    <h4>系統更新通知</h4>
+                    <p>新增自動轉碼功能，支援更多影片格式</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 登入提示 -->
-    <div class="login-alert" id="loginAlert">
-        <div class="alert-content">
-            <i class="fas fa-exclamation-circle"></i>
-            <h3>需要登入</h3>
-            <p>沒有訪客權限 請登入系統後再訪問此頁面</p>
-            <button onclick="redirectToLogin()">
-                前往登入
-            </button>
+    <!-- 登出確認視窗 -->
+    <div id="logoutModal" class="logout-confirm">
+        <div class="confirm-content">
+            <i class="fas fa-sign-out-alt"></i>
+            <h3>確認登出</h3>
+            <p>您確定要登出系統嗎？</p>
+            <div class="confirm-buttons">
+                <button id="cancelLogout" class="confirm-btn cancel">取消</button>
+                <button id="confirmLogout" class="confirm-btn confirm">確認登出</button>
+            </div>
         </div>
     </div>
 
+    <!-- 返回頂部按鈕 -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const userType = localStorage.getItem('userType');
-            if (!userType || userType !== 'visitor') {
-                document.getElementById('loginAlert').classList.add('show');
-                document.querySelector('.visitor-container').style.display = 'none';
+    // 檢查用戶是否已登入
+    document.addEventListener('DOMContentLoaded', function() {
+        const userType = localStorage.getItem('userType');
+        if (!userType) {
+            showLoginAlert();
+        }
+    });
+
+    function showLoginAlert() {
+        // 創建提示視窗
+        const alertDiv = document.createElement('div');
+        alertDiv.style.cssText = `
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+        `;
+
+        const alertContent = document.createElement('div');
+        alertContent.style.cssText = `
+            background: linear-gradient(135deg, #2b3a55, #1a2436);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+        `;
+
+        alertContent.innerHTML = `
+            <div style="margin-bottom: 1.5rem;">
+                <i class="fas fa-user-lock" style="font-size: 3rem; color: #64B5F6;"></i>
+            </div>
+            <h3 style="color: white; font-size: 1.5rem; margin-bottom: 1rem;">需要登入</h3>
+            <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem; line-height: 1.5;">
+                請先登入系統後再訪問此頁面
+            </p>
+            <button id="goToLogin" style="
+                background: #2196F3;
+                color: white;
+                border: none;
+                padding: 0.8rem 2rem;
+                border-radius: 8px;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                margin: 0 auto;
+            ">
+                <span>前往登入</span>
+                <i class="fas fa-sign-in-alt"></i>
+            </button>
+        `;
+
+        alertDiv.appendChild(alertContent);
+        document.body.appendChild(alertDiv);
+
+        // 添加動畫樣式
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            #goToLogin:hover {
+                background: #1976D2;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+            }
+        `;
+        document.head.appendChild(style);
+
+        // 點擊按鈕跳轉到登入頁面
+        document.getElementById('goToLogin').addEventListener('click', function() {
+            window.location.href = '../login.html';
+        });
+
+        // 防止訪問頁面內容
+        document.body.style.overflow = 'hidden';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const nav = document.querySelector('.visitor-nav');
+        let lastScroll = 0;
+        
+        function updateNavStyle() {
+            const currentScroll = window.scrollY;
+            
+            if (currentScroll > 100) {  // 滾動超過 100px 時
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
             }
             
-            // 追蹤滑鼠位置來創建背景光效
-            document.addEventListener('mousemove', function(e) {
-                const container = document.querySelector('.success-container');
-                const x = (e.clientX / window.innerWidth) * 100;
-                const y = (e.clientY / window.innerHeight) * 100;
-                container.style.setProperty('--mouse-x', `${x}%`);
-                container.style.setProperty('--mouse-y', `${y}%`);
-            });
+            lastScroll = currentScroll;
+        }
 
-            // 追蹤滑鼠位置來創建光影效果
-            const cards = document.querySelectorAll('.feature-card');
+        window.addEventListener('scroll', updateNavStyle);
+        updateNavStyle();  // 初始檢查
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // 為登出按鈕添加事件監聽
+        document.getElementById('logoutButton').addEventListener('click', handleLogout);
+    });
+
+        // 處理登出點擊
+    function handleLogout() {
+        console.log('Opening logout modal');
+        document.getElementById('logoutModal').classList.add('show');
+    }
+
+        // 取消登出
+    console.log('Canceling logout');
+    function closeLogoutConfirm() {
+        document.getElementById('logoutModal').classList.remove('show');
+    }
+
+        // 確認登出
+    function confirmLogout() {
+        console.log('Confirming logout');
+        localStorage.removeItem('userType');
+        window.location.href = '../login.html';
+    }
+
+        // 重定向到登入頁面
+    function redirectToLogin() {
+        window.location.href = '../login.html';
+    }
+
+        // 轉場效果
+    function transitionToVerify(event) {
+        event.preventDefault();
+        const card = event.currentTarget;
             
-            cards.forEach(card => {
-                card.addEventListener('mousemove', function(e) {
-                    const rect = card.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                    
-                    card.style.setProperty('--mouse-x', `${x}%`);
-                    card.style.setProperty('--mouse-y', `${y}%`);
-                });
+        // 創建轉場遮罩
+        const overlay = document.createElement('div');
+        overlay.className = 'transition-overlay';
+        document.body.appendChild(overlay);
+        
+        // 獲取卡片位置
+        const rect = card.getBoundingClientRect();
+        
+        // 設置遮罩初始位置
+        overlay.style.cssText = `
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(0px);
+            z-index: 1000;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        `;
+            
+            // 觸發動畫
+         requestAnimationFrame(() => {
+            overlay.style.backdropFilter = 'blur(20px)';
+            overlay.style.opacity = '1';
+                
+            // 動畫結束後跳轉
+            setTimeout(() => {
+                window.location.href = 'verify.html';
+            }, 800);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const logoutButton = document.getElementById('logoutButton');
+        const logoutModal = document.getElementById('logoutModal');
+        const cancelLogout = document.getElementById('cancelLogout');
+        const confirmLogout = document.getElementById('confirmLogout');
+
+        // 顯示登出確認視窗
+        logoutButton.addEventListener('click', () => {
+            logoutModal.classList.add('show');
+        });
+
+        // 取消登出
+        cancelLogout.addEventListener('click', () => {
+            // 添加加載動畫
+            cancelLogout.classList.add('loading');
+            setTimeout(() => {
+                cancelLogout.classList.remove('loading');
+                logoutModal.classList.remove('show');
+            }, 800);
+        });
+
+        // 確認登出
+        confirmLogout.addEventListener('click', () => {
+            // 添加加載動畫
+            confirmLogout.classList.add('loading');
+            setTimeout(() => {
+                localStorage.removeItem('userType');
+                window.location.href = '../login.html';
+            }, 800);
+        });
+
+        // 點擊背景關閉視窗
+        logoutModal.addEventListener('click', (e) => {
+            if (e.target === logoutModal) {
+                logoutModal.classList.remove('show');
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const backToTop = document.getElementById('backToTop');
+        
+        // 監聽滾動事件
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        
+        // 點擊返回頂部
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+        let isAnimating = false;
+        let autoplayTimer = null;
+
+        // 初始化第一張幻燈片
+        slides[0].classList.add('active');
+        dots[0].classList.add('active');
+
+        // 切換到指定幻燈片
+        function goToSlide(index) {
+            if (isAnimating || index === currentSlide) return;
+            isAnimating = true;
+
+            // 移除當前幻燈片的活動狀態
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+
+            // 更新當前幻燈片索引
+            currentSlide = index;
+
+            // 激活新的幻燈片
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+
+            // 動畫結束後重置狀態
+            setTimeout(() => {
+                isAnimating = false;
+            }, 300); // 與 CSS transition 時間相匹配
+        }
+
+        // 下一張幻燈片
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % slides.length);
+        }
+
+        // 為每個導航點添加點擊事件
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+                resetAutoplay();
             });
         });
 
-        function logout() {
-            localStorage.removeItem('userType');
-            window.location.href = '../login.html';
+        // 重置自動播放計時器
+        function resetAutoplay() {
+            if (autoplayTimer) {
+                clearInterval(autoplayTimer);
+            }
+            autoplayTimer = setInterval(nextSlide, 5000);
         }
 
-        function redirectToLogin() {
-            window.location.href = '../login.html';
-        }
+        // 滑鼠懸停時暫停自動播放
+        const slider = document.querySelector('.image-slider');
+        slider.addEventListener('mouseenter', () => {
+            if (autoplayTimer) {
+                clearInterval(autoplayTimer);
+            }
+        });
 
-        // 添加轉場效果
-        function transitionToVerify(event) {
-            event.preventDefault();
-            const card = event.currentTarget;
-            
-            // 創建轉場遮罩
-            const overlay = document.createElement('div');
-            overlay.className = 'transition-overlay';
-            document.body.appendChild(overlay);
-            
-            // 獲取卡片位置
-            const rect = card.getBoundingClientRect();
-            
-            // 設置遮罩初始位置
-            overlay.style.cssText = `
-                position: fixed;
-                inset: 0;
-                background: rgba(255, 255, 255, 0.1);
-                backdrop-filter: blur(0px);
-                z-index: 1000;
-                transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-                opacity: 0;
-            `;
-            
-            // 觸發動畫
-            requestAnimationFrame(() => {
-                overlay.style.backdropFilter = 'blur(20px)';
-                overlay.style.opacity = '1';
-                
-                // 動畫結束後跳轉
-                setTimeout(() => {
-                    window.location.href = 'verify.html';
-                }, 800);
-            });
-        }
+        // 滑鼠離開時恢復自動播放
+        slider.addEventListener('mouseleave', () => {
+            resetAutoplay();
+        });
+
+        // 開始自動播放
+        resetAutoplay();
+    });
     </script>
 </body>
 </html> 

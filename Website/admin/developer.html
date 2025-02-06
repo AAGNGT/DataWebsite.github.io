@@ -18,6 +18,7 @@
             background: var(--darker-blue);
             z-index: 1001;
             transition: left 0.3s ease;
+            overflow: hidden;
         }
 
         .sidebar.active {
@@ -40,6 +41,13 @@
         .sidebar-overlay.active {
             display: block;
             opacity: 1;
+        }
+
+        /* 固定用戶資料區域 */
+        .user-profile {
+            position: absolute; /* 修改為絕對定位 */
+            bottom: 0; /* 固定在底部 */
+            width: 100%; /* 寬度100% */
         }
     </style>
 </head>

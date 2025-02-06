@@ -244,6 +244,7 @@
             border-radius: 12px;
             transition: all 0.3s ease;
             text-decoration: none;
+            color: #ffffff;  /* 確保所有文字為白色 */
         }
 
         .feature-item:hover {
@@ -262,8 +263,8 @@
         }
 
         .feature-icon i {
+            color: #ffffff;
             font-size: 1.5rem;
-            color: #fff;
         }
 
         .feature-info {
@@ -271,16 +272,16 @@
         }
 
         .feature-info h3 {
+            color: #ffffff;  /* 確保標題為白色 */
             margin: 0 0 0.3rem 0;
             font-size: 1.1rem;
-            color: #fff;
             font-weight: 600;
         }
 
         .feature-info p {
+            color: rgba(255, 255, 255, 0.9);  /* 確保描述文字為白色但稍微透明 */
             margin: 0;
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.9);
             line-height: 1.4;
         }
 
@@ -323,7 +324,7 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* 社群中心按鈕風格 - 使用新的漸層配色 */
+        /* 社群中心按鈕風格 */
         .feature-item.community {
             background: linear-gradient(135deg, #7C3AED, #A78BFA);  /* 紫色漸層 */
             box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
@@ -336,6 +337,34 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
+        /* 側邊欄動畫 */
+        .changelog-sidebar.show .feature-item:nth-child(1) {
+            animation: slideInFeature 0.5s ease 0.1s forwards;
+        }
+
+        .changelog-sidebar.show .feature-item:nth-child(2) {
+            animation: slideInFeature 0.5s ease 0.2s forwards;
+        }
+
+        .changelog-sidebar.show .feature-item:nth-child(3) {
+            animation: slideInFeature 0.5s ease 0.3s forwards;
+        }
+
+        .changelog-sidebar.show .feature-item:nth-child(4) {
+            animation: slideInFeature 0.5s ease 0.4s forwards;
+        }
+
+        @keyframes slideInFeature {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         /* 修改側邊欄標題樣式 */
         .changelog-header h2 i {
             margin-right: 0.5rem;
@@ -344,6 +373,218 @@
         /* 保持原有的查看更多按鈕樣式不變 */
         .view-more-btn {
             margin-top: auto;
+        }
+
+        /* 添加頁面載入動畫 */
+        #loginSection {
+            opacity: 0;
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .login-box {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+        }
+
+        .login-brand {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeInUp 0.6s ease 0.4s forwards;
+        }
+
+        .system-info .info-item {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .system-info .info-item:nth-child(1) {
+            animation: slideInRight 0.5s ease 0.6s forwards;
+        }
+
+        .system-info .info-item:nth-child(2) {
+            animation: slideInRight 0.5s ease 0.7s forwards;
+        }
+
+        .system-info .info-item:nth-child(3) {
+            animation: slideInRight 0.5s ease 0.8s forwards;
+        }
+
+        .login-tips {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeInUp 0.6s ease 0.9s forwards;
+        }
+
+        .support-info {
+            opacity: 0;
+            animation: fadeIn 0.6s ease 1s forwards;
+        }
+
+        .account-option {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .developer-option {
+            animation: slideInRight 0.5s ease 1.1s forwards;
+        }
+
+        .visitor-option {
+            animation: slideInRight 0.5s ease 1.2s forwards;
+        }
+
+        .password-section {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeInUp 0.6s ease 1.3s forwards;
+        }
+
+        .login-footer {
+            opacity: 0;
+            animation: fadeIn 0.6s ease 1.4s forwards;
+        }
+
+        /* 動畫關鍵幀定義 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* 側邊欄樣式優化 - 白色主題 */
+        .changelog-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;  /* 初始位置在屏幕右側外 */
+            width: 400px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 1rem;
+            box-shadow: -4px 0 25px rgba(0, 0, 0, 0.1);
+            border-left: 1px solid rgba(0, 0, 0, 0.05);
+            opacity: 0;
+        }
+
+        /* 側邊欄顯示狀態 */
+        .changelog-sidebar.show {
+            right: 0;
+            opacity: 1;
+            animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* 側邊欄隱藏狀態 */
+        .changelog-sidebar.hidden {
+            animation: slideOut 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* 進入動畫 */
+        @keyframes slideIn {
+            0% {
+                right: -400px;
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                right: 0;
+                opacity: 1;
+            }
+        }
+
+        /* 退出動畫 */
+        @keyframes slideOut {
+            0% {
+                right: 0;
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                right: -400px;
+                opacity: 0;
+            }
+        }
+
+        /* 功能按鈕的進入動畫 */
+        .changelog-sidebar.show .feature-item {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .changelog-sidebar.show .feature-item:nth-child(1) {
+            animation: featureSlideIn 0.4s ease 0.2s forwards;
+        }
+
+        .changelog-sidebar.show .feature-item:nth-child(2) {
+            animation: featureSlideIn 0.4s ease 0.3s forwards;
+        }
+
+        .changelog-sidebar.show .feature-item:nth-child(3) {
+            animation: featureSlideIn 0.4s ease 0.4s forwards;
+        }
+
+        .changelog-sidebar.show .feature-item:nth-child(4) {
+            animation: featureSlideIn 0.4s ease 0.5s forwards;
+        }
+
+        @keyframes featureSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* 確保功能按鈕文字顏色正確 */
+        .feature-item .feature-info h3,
+        .feature-item .feature-info p,
+        .feature-item .feature-icon i {
+            color: #ffffff;  /* 保持按鈕內的文字為白色 */
         }
     </style>
 </head>
@@ -669,15 +910,38 @@
 
         function toggleChangelog() {
             const changelog = document.getElementById('changelogSidebar');
-            changelog.classList.toggle('hidden');
             
-            // 添加動畫效果
-            if (!changelog.classList.contains('hidden')) {
-                changelog.style.transform = 'translateX(0)';
+            if (changelog.classList.contains('hidden')) {
+                // 顯示側邊欄
+                changelog.classList.remove('hidden');
+                changelog.classList.add('show');
+                
+                // 防止背景滾動
+                document.body.style.overflow = 'hidden';
             } else {
-                changelog.style.transform = 'translateX(100%)';
+                // 隱藏側邊欄
+                changelog.classList.remove('show');
+                changelog.classList.add('hidden');
+                
+                // 延遲恢復背景滾動，等待動畫完成
+                setTimeout(() => {
+                    document.body.style.overflow = '';
+                }, 500);
             }
         }
+
+        // 添加動畫結束事件監聽
+        document.getElementById('changelogSidebar').addEventListener('animationend', function(e) {
+            if (e.animationName === 'slideOut') {
+                this.style.display = 'none';
+            }
+        });
+
+        // 在打開側邊欄時確保顯示
+        document.querySelector('.changelog-btn').addEventListener('click', function() {
+            const sidebar = document.getElementById('changelogSidebar');
+            sidebar.style.display = 'block';
+        });
 
         function showErrorModal(message) {
             const modal = document.getElementById('errorModal');
@@ -738,9 +1002,7 @@
         }
 
         function viewMoreChangelog() {
-            // 儲存當前頁面 URL
             localStorage.setItem('returnUrl', window.location.href);
-            // 跳轉到完整更新日誌頁面
             window.location.href = 'changelog.html';
         }
     </script>

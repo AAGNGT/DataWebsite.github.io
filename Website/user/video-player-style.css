@@ -433,4 +433,187 @@ body {
         margin-top: 0;
         align-self: flex-start;
     }
+}
+
+/* 響應式設計優化 */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .back-btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .video-container {
+        margin: 1rem 0;
+    }
+
+    .video-title {
+        font-size: 1.3rem;
+        line-height: 1.4;
+    }
+
+    .title-row {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .title-expand-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    .video-meta-container {
+        margin: 1rem 0;
+    }
+
+    .video-meta-primary {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .meta-item {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+
+    .meta-item i {
+        font-size: 1rem;
+    }
+
+    .video-description-container {
+        margin: 1rem 0;
+    }
+
+    .description-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .video-description {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .recommendations {
+        margin-top: 1.5rem;
+    }
+
+    .section-header {
+        margin-bottom: 1rem;
+    }
+
+    .section-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .scroll-btn {
+        width: 2rem;
+        height: 2rem;
+        font-size: 0.9rem;
+    }
+
+    .recommendations-container {
+        margin: 0 -1rem;
+        padding: 0 1rem;
+    }
+
+    .recommendations-scroll {
+        gap: 1rem;
+    }
+
+    .recommendation-card {
+        min-width: 200px;
+        max-width: 200px;
+    }
+
+    .rec-info h4 {
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .rec-meta {
+        font-size: 0.8rem;
+    }
+
+    .rec-duration {
+        font-size: 0.8rem;
+        padding: 0.2rem 0.4rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 0.8rem;
+    }
+
+    .video-title {
+        font-size: 1.2rem;
+    }
+
+    .recommendation-card {
+        min-width: 160px;
+        max-width: 160px;
+    }
+
+    .meta-item {
+        padding: 0.5rem 0.8rem;
+    }
+
+    .video-description {
+        font-size: 0.85rem;
+    }
+
+    .rec-info h4 {
+        font-size: 0.85rem;
+    }
+}
+
+/* 優化滾動體驗 */
+.recommendations-scroll {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.recommendations-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* 優化觸控體驗 */
+@media (hover: none) {
+    .scroll-btn {
+        opacity: 0.8;
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .title-expand-btn:active,
+    .scroll-btn:active {
+        transform: scale(0.95);
+    }
+}
+
+/* 優化載入效果 */
+.video-container {
+    transition: opacity 0.3s ease;
+}
+
+.video-container.loading {
+    opacity: 0.6;
+}
+
+/* 優化文字可讀性 */
+@media (max-width: 768px) {
+    .video-description {
+        text-align: justify;
+        hyphens: auto;
+    }
+
+    .meta-content {
+        flex: 1;
+    }
 } 
