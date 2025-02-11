@@ -30,14 +30,29 @@
             </div>
         </nav>
 
-        <!-- 分類選單 -->
-        <div class="category-menu">
-            <button class="category-btn active">全部</button>
-            <button class="category-btn">多啦A夢</button>
-            <button class="category-btn">新海誠</button>
-            <button class="category-btn">宮崎駿</button>
+        <!-- 在 video-grid 上方添加類別選擇器和分頁導航 -->
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">
+                <i class="fas fa-th-large"></i>
+                全部影片
+            </button>
+            <button class="category-btn" data-category="622">
+                <i class="fas fa-wind"></i>
+                宮崎駿系列
+            </button>
+            <button class="category-btn" data-category="623">
+                <i class="fas fa-bell"></i>
+                哆啦A夢系列
+            </button>
+            <button class="category-btn" data-category="624">
+                <i class="fas fa-cloud"></i>
+                新海誠系列
+            </button>
+            <button class="category-btn" data-category="625">
+                <i class="fas fa-film"></i>
+                其他動畫
+            </button>
         </div>
-
         <!-- 影片網格 -->
         <div class="video-grid">
             <!-- STAND BY ME 多啦A夢 -->
@@ -123,6 +138,20 @@
                     <div class="video-meta">
                         <span>藤子·F·不二雄</span>
                         <span>2024 年</span>
+                    </div>
+                </div>
+            </div>
+             <!-- 哆啦A夢：大雄的宇宙開拓史 -->
+             <div class="video-card" onclick="playVideo('gh792j79-m3h8-0c23-e560-l9k3j7hi8nm5', '哆啦A夢：大雄的宇宙開拓史')">
+                <div class="video-thumbnail">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZp138KtLE7JlAweKx187-4wp2CtMTO6WcHw&s" alt="影片縮圖">
+                    <span class="video-duration">1:38:58</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">哆啦A夢：大雄的宇宙開拓史</h3>
+                    <div class="video-meta">
+                        <span>藤子·F·不二雄</span>
+                        <span>2009 年</span>
                     </div>
                 </div>
             </div>
@@ -381,6 +410,71 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 哆啦A夢：新大雄的恐龍 -->
+            <div class="video-card" onclick="playVideo('hi792j79-n3h8-0c23-e560-l9k3j7hi8nm5', '哆啦A夢：大雄的恐龍')">
+                <div class="video-thumbnail">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuNG-xSR9k7dnwgCiBWy_LXVmpIaGbzDiTZw&s" alt="影片縮圖">
+                    <span class="video-duration">1:46:47</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">哆啦A夢：大雄的恐龍</h3>
+                    <div class="video-meta">
+                        <span>藤子·F·不二雄</span>
+                        <span>2006 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 在 video-grid 中添加新的影片卡片 -->
+            <div class="video-card" onclick="playVideo('doraemon-museum-2024', '哆啦A夢：大雄的秘密道具博物館')">
+                <div class="video-thumbnail">
+                    <img src="https://chinesedora.com/database/wp-content/uploads/2013/03/cut-1.jpg" alt="影片縮圖">
+                    <span class="video-duration">1:39:29</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">哆啦A夢：大雄的秘密道具博物館</h3>
+                    <div class="video-meta">
+                        <span>藤子·F·不二雄</span>
+                        <span>2013 年</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分頁導航 -->
+        <div class="pagination-container">
+            <div class="pagination-wrapper">
+                <button class="page-btn prev-btn" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    上一頁
+                </button>
+                <div class="page-numbers">
+                    <button class="page-number active">1</button>
+                    <button class="page-number">2</button>
+                    <button class="page-number">3</button>
+                    <span class="page-dots">...</span>
+                    <button class="page-number">8</button>
+                </div>
+                <button class="page-btn next-btn">
+                    下一頁
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="page-info">
+                <span>共 0 部影片</span>
+                <span class="separator">|</span>
+                <span>每頁 24 部</span>
+                <span class="separator">|</span>
+                <span>第 1/1 頁</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 在 body 標籤內添加加載動畫元素 -->
+    <div class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-circle-notch"></i>
         </div>
     </div>
 
@@ -435,17 +529,17 @@
             });
         });
 
-        // 頁面載入時恢復上次選擇的類別
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedCategory = localStorage.getItem('selectedCategory') || '全部';
+        // // 頁面載入時恢復上次選擇的類別
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const savedCategory = localStorage.getItem('selectedCategory') || '全部';
             
-            // 找到對應的類別按鈕並觸發點擊
-            categoryBtns.forEach(btn => {
-                if (btn.textContent.trim() === savedCategory) {
-                    btn.click();
-                }
-            });
-        });
+        //     // 找到對應的類別按鈕並觸發點擊
+        //     categoryBtns.forEach(btn => {
+        //         if (btn.textContent.trim() === savedCategory) {
+        //             btn.click();
+        //         }
+        //     });
+        // });
 
         // 添加檢查URL參數並顯示提示的功能
         document.addEventListener('DOMContentLoaded', function() {
@@ -531,6 +625,195 @@
             // 跳轉到播放頁面
             window.location.href = 'video-player.html';
         }
+
+        // 修改分頁和類別篩選功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoCards = document.querySelectorAll('.video-card');
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            const itemsPerPage = 24;
+            let currentPage = 1;
+            let currentCategory = 'all';
+            let filteredCards = [];
+
+            // 根據影片標題和作者判斷類別
+            videoCards.forEach(card => {
+                // 根據影片標題和作者判斷類別
+                const title = card.querySelector('.video-title').textContent;
+                const author = card.querySelector('.video-meta span:first-child').textContent;
+                let category;
+                
+                // 宮崎駿系列 (622)
+                if (author.includes('宮崎駿') || 
+                    title.includes('龍貓') || 
+                    title.includes('天空之城') || 
+                    title.includes('魔女宅急便') || 
+                    title.includes('風之谷') ||
+                    title.includes('霍爾的移動城堡')) {
+                    category = '622';
+                }
+                // 哆啦A夢系列 (623)
+                else if (author.includes('藤子·F·不二雄') || 
+                         title.includes('哆啦A夢') || 
+                         title.includes('多啦A夢')) {
+                    category = '623';
+                }
+                // 新海誠系列 (624)
+                else if (author.includes('新海誠') || 
+                         title.includes('你的名字') || 
+                         title.includes('天氣之子') ||
+                         title.includes('言葉之庭')) {
+                    category = '624';
+                }
+                // 其他動畫 (625) - 這個類別應該會越來越少，因為大部分都歸類到對應作者了
+                else {
+                    category = '625';
+                }
+                
+                card.setAttribute('data-category', category);
+            });
+
+            // 顯示當前頁面的影片
+            function showCurrentPage(showLoading = true) {
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const currentCards = filteredCards.slice(startIndex, endIndex);
+                
+                // 只在需要時顯示加載動畫
+                const loadingOverlay = document.querySelector('.loading-overlay');
+                if (showLoading) {
+                    loadingOverlay.classList.add('show');
+                }
+
+                // 先重置所有卡片
+                videoCards.forEach(card => {
+                    card.style.display = 'none';
+                    card.classList.remove('animate');
+                });
+
+                // 延遲顯示新卡片
+                setTimeout(() => {
+                    // 顯示當前頁面的卡片
+                    currentCards.forEach(card => {
+                        card.style.display = '';
+                    });
+
+                    // 添加動畫類
+                    requestAnimationFrame(() => {
+                        currentCards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('animate');
+                            }, index * 50);
+                        });
+                    });
+
+                    // 只在顯示加載動畫時才需要隱藏它
+                    if (showLoading) {
+                        setTimeout(() => {
+                            loadingOverlay.classList.remove('show');
+                        }, 800);
+                    }
+                }, showLoading ? 200 : 0); // 如果不顯示加載動畫，則不需要延遲
+            }
+
+            // 篩選並顯示影片
+            function filterAndShowVideos(category) {
+                // 移除加載動畫，直接顯示內容
+                currentCategory = category;
+                
+                // 篩選影片
+                if (category === 'all') {
+                    filteredCards = Array.from(videoCards);
+                } else {
+                    filteredCards = Array.from(videoCards).filter(card => 
+                        card.getAttribute('data-category') === category
+                    );
+                }
+
+                // 重置頁碼並更新UI
+                currentPage = 1;
+                updatePaginationUI();
+                showCurrentPage(false); // 傳入 false 表示不顯示加載動畫
+            }
+
+            // 更新分頁UI
+            function updatePaginationUI() {
+                const totalPages = Math.ceil(filteredCards.length / itemsPerPage);
+                const pageNumbers = document.querySelector('.page-numbers');
+                const prevBtn = document.querySelector('.prev-btn');
+                const nextBtn = document.querySelector('.next-btn');
+                const pageInfo = document.querySelector('.page-info');
+
+                // 更新按鈕狀態
+                prevBtn.disabled = currentPage === 1;
+                nextBtn.disabled = currentPage === totalPages;
+
+                // 更新頁碼
+                pageNumbers.innerHTML = '';
+                for (let i = 1; i <= totalPages; i++) {
+                    if (i === 1 || i === totalPages || 
+                        (i >= currentPage - 1 && i <= currentPage + 1)) {
+                        const button = document.createElement('button');
+                        button.className = `page-number ${i === currentPage ? 'active' : ''}`;
+                        button.textContent = i;
+                        button.onclick = () => handlePageChange(i);
+                        pageNumbers.appendChild(button);
+                    } else if ((i === currentPage - 2 && currentPage > 3) || 
+                              (i === currentPage + 2 && currentPage < totalPages - 2)) {
+                        const dots = document.createElement('span');
+                        dots.className = 'page-dots';
+                        dots.textContent = '...';
+                        pageNumbers.appendChild(dots);
+                    }
+                }
+
+                // 更新頁面信息
+                pageInfo.innerHTML = `
+                    <span>共 ${filteredCards.length} 部影片</span>
+                    <span class="separator">|</span>
+                    <span>每頁 ${itemsPerPage} 部</span>
+                    <span class="separator">|</span>
+                    <span>第 ${currentPage}/${totalPages} 頁</span>
+                `;
+            }
+
+            // 修改分頁按鈕點擊處理
+            function handlePageChange(newPage) {
+                if (currentPage !== newPage) {
+                    currentPage = newPage;
+                    showCurrentPage(true); // 分頁切換時顯示加載動畫
+                    updatePaginationUI();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+
+            // 綁定類別按鈕點擊事件
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (btn.getAttribute('data-category') !== currentCategory) {
+                        categoryBtns.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        filterAndShowVideos(btn.getAttribute('data-category'));
+                    }
+                });
+            });
+
+            // 修改上一頁/下一頁按鈕事件
+            document.querySelector('.prev-btn').onclick = () => {
+                if (currentPage > 1) {
+                    handlePageChange(currentPage - 1);
+                }
+            };
+
+            document.querySelector('.next-btn').onclick = () => {
+                const totalPages = Math.ceil(filteredCards.length / itemsPerPage);
+                if (currentPage < totalPages) {
+                    handlePageChange(currentPage + 1);
+                }
+            };
+
+            // 初始化顯示
+            filterAndShowVideos('all'); // 初始化不顯示加載動畫
+        });
     </script>
 </body>
 </html> 

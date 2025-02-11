@@ -112,21 +112,35 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     overflow: hidden;
-    transition: all 0.3s ease;
     cursor: pointer;
     opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease forwards;
+    transform: translateY(30px);
+    filter: blur(10px);
     position: relative;
     border: 2px solid transparent;
+    transition: transform 0.3s ease, 
+                background-color 0.3s ease, 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease;
 }
 
-/* 將所有 active/selected 效果改為 hover */
+.video-card.animate {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition: opacity 0.6s ease,
+                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                filter 0.6s ease;
+}
+
+/* 滑鼠懸停效果 */
 .video-card:hover {
-    transform: scale(1.02);
+    transform: translateY(-6px);
     background: rgba(79, 70, 229, 0.2);
-    border: 2px solid var(--primary-light);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary-light);
+    box-shadow: 
+        0 12px 24px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(129, 140, 248, 0.2);
 }
 
 .video-card::before {
@@ -177,7 +191,12 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all 0.4s ease-out;
+    transition: transform 0.4s ease;
+}
+
+.video-card:hover .video-thumbnail img {
+    transform: scale(1.06);
+    filter: brightness(1.1);
 }
 
 .video-thumbnail::after {
@@ -209,13 +228,25 @@ body {
     z-index: 1;
 }
 
+/* 卡片信息區域效果 */
 .video-info {
     padding: 1rem;
+    transition: background-color 0.3s ease;
 }
 
+.video-card:hover .video-info {
+    background: rgba(79, 70, 229, 0.15);
+}
+
+/* 標題效果 */
 .video-title {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.video-card:hover .video-title {
+    color: var(--primary-light);
 }
 
 .video-meta {
@@ -248,30 +279,11 @@ body {
     font-size: 1.1rem;
 }
 
-/* 動畫 */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* 動畫延遲 */
-.video-card:nth-child(1) { animation-delay: 0.1s; }
-.video-card:nth-child(2) { animation-delay: 0.2s; }
-.video-card:nth-child(3) { animation-delay: 0.3s; }
-.video-card:nth-child(4) { animation-delay: 0.4s; }
-.video-card:nth-child(5) { animation-delay: 0.5s; }
-.video-card:nth-child(6) { animation-delay: 0.6s; }
-.video-card:nth-child(7) { animation-delay: 0.7s; }
-.video-card:nth-child(8) { animation-delay: 0.8s; }
-.video-card:nth-child(9) { animation-delay: 0.9s; }
-.video-card:nth-child(10) { animation-delay: 1.0s; }
-.video-card:nth-child(n+11) { animation-delay: 1.1s; }
+/* 動畫延遲（每行4個卡片） */
+.video-card.animate:nth-child(4n+1) { transition-delay: 0.1s; }
+.video-card.animate:nth-child(4n+2) { transition-delay: 0.2s; }
+.video-card.animate:nth-child(4n+3) { transition-delay: 0.3s; }
+.video-card.animate:nth-child(4n+4) { transition-delay: 0.4s; }
 
 /* 響應式設計 */
 @media (max-width: 768px) {
@@ -351,4 +363,212 @@ body {
 /* 隱藏 Webkit 瀏覽器的滾動條 */
 .category-menu::-webkit-scrollbar {
     display: none;
+}
+
+/* 分頁容器樣式 */
+.pagination-container {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* 頁碼按鈕樣式 */
+.page-numbers {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.page-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.page-number.active {
+    background: #2196F3;
+    color: white;
+    border-color: #2196F3;
+}
+
+.page-number:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* 上一頁/下一頁按鈕 */
+.page-btn {
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 分頁信息 */
+.page-info {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.separator {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.page-dots {
+    color: rgba(255, 255, 255, 0.5);
+    padding: 0 0.3rem;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .pagination-container {
+        padding: 1rem;
+    }
+
+    .page-numbers {
+        gap: 0.3rem;
+    }
+
+    .page-number {
+        width: 35px;
+        height: 35px;
+        font-size: 0.8rem;
+    }
+
+    .page-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .page-info {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-numbers button:not(.active):not(:first-child):not(:last-child) {
+        display: none;
+    }
+
+    .page-info .separator,
+    .page-info span:not(:last-child) {
+        display: none;
+    }
+}
+
+/* 類別選擇器樣式 */
+.category-filter {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.category-btn i {
+    font-size: 1.1rem;
+}
+
+.category-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.category-btn.active {
+    background: #2196F3;
+    color: white;
+    border-color: #2196F3;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .category-filter {
+        justify-content: center;
+    }
+    
+    .category-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 加載動畫樣式 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.loading-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-spinner {
+    color: #2196F3;
+    font-size: 2.5rem;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 } 

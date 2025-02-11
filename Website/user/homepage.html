@@ -40,13 +40,13 @@
                 <div class="welcome-stats">
                     <div class="stat-item">
                         <i class="fas fa-film"></i>
-                        <span class="stat-value">23</span>
+                        <span class="stat-value">25</span>
                         <span class="stat-label">影片資源</span>
                     </div>
                     <div class="stat-item">
                         <i class="fas fa-users"></i>
-                        <span class="stat-value">2000+</span>
-                        <span class="stat-label">活躍用戶</span>
+                        <span class="stat-value">20+</span>
+                        <span class="stat-label">學習資料</span>
                     </div>
                 </div>
             </div>
@@ -173,6 +173,69 @@
                                 <span><i class="fas fa-eye"></i>1.7k</span>
                                 <span><i class="fas fa-star"></i>4.7</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 指令系統專區 -->
+        <div class="commands-section">
+            <div class="commands-showcase">
+                <button class="enter-verify-btn" onclick="transitionToVerify(event)">
+                    <span>進入指令系統</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+
+                <div class="commands-header">
+                    <div class="commands-title">
+                        <i class="fas fa-terminal"></i>
+                        <h2>強大指令系統</h2>
+                        <span class="beta-tag">BETA</span>
+                    </div>
+                    <p class="commands-subtitle">探索更多強大功能，打造專屬影音體驗</p>
+                </div>
+
+                <div class="commands-container">
+                    <div class="command-row featured">
+                        <div class="command-info">
+                            <div class="command-name">
+                                <i class="fas fa-star"></i>
+                                <span>/play</span>
+                            </div>
+                            <div class="command-description">智能播放控制</div>
+                        </div>
+                        <div class="command-usage">
+                            <code>/play [影片ID] -quality high</code>
+                            <span class="usage-count">使用次數：2.5k</span>
+                        </div>
+                    </div>
+
+                    <div class="command-row">
+                        <div class="command-info">
+                            <div class="command-name">
+                                <i class="fas fa-search"></i>
+                                <span>/search</span>
+                            </div>
+                            <div class="command-description">快速搜尋影片</div>
+                        </div>
+                        <div class="command-usage">
+                            <code>/search "關鍵字" -type anime</code>
+                            <span class="usage-count">使用次數：1.8k</span>
+                        </div>
+                    </div>
+
+                    <div class="command-row">
+                        <div class="command-info">
+                            <div class="command-name">
+                                <i class="fas fa-list"></i>
+                                <span>/playlist</span>
+                            </div>
+                            <div class="command-description">播放列表管理</div>
+                        </div>
+                        <div class="command-usage">
+                            <code>/playlist create "我的收藏"</code>
+                            <span class="usage-count">使用次數：1.2k</span>
                         </div>
                     </div>
                 </div>
@@ -399,36 +462,20 @@
         // 轉場效果
     function transitionToVerify(event) {
         event.preventDefault();
-        const card = event.currentTarget;
-            
+        
         // 創建轉場遮罩
         const overlay = document.createElement('div');
         overlay.className = 'transition-overlay';
         document.body.appendChild(overlay);
         
-        // 獲取卡片位置
-        const rect = card.getBoundingClientRect();
-        
-        // 設置遮罩初始位置
-        overlay.style.cssText = `
-            position: fixed;
-            inset: 0;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(0px);
-            z-index: 1000;
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0;
-        `;
+        // 觸發動畫
+        requestAnimationFrame(() => {
+            overlay.classList.add('active');
             
-            // 觸發動畫
-         requestAnimationFrame(() => {
-            overlay.style.backdropFilter = 'blur(20px)';
-            overlay.style.opacity = '1';
-                
             // 動畫結束後跳轉
             setTimeout(() => {
                 window.location.href = 'verify.html';
-            }, 800);
+            }, 500);
         });
     }
 
@@ -546,18 +593,18 @@
             autoplayTimer = setInterval(nextSlide, 5000);
         }
 
-        // 滑鼠懸停時暫停自動播放
-        const slider = document.querySelector('.image-slider');
-        slider.addEventListener('mouseenter', () => {
-            if (autoplayTimer) {
-                clearInterval(autoplayTimer);
-            }
-        });
+        // // 滑鼠懸停時暫停自動播放
+        // const slider = document.querySelector('.image-slider');
+        // slider.addEventListener('mouseenter', () => {
+        //     if (autoplayTimer) {
+        //         clearInterval(autoplayTimer);
+        //     }
+        // });
 
-        // 滑鼠離開時恢復自動播放
-        slider.addEventListener('mouseleave', () => {
-            resetAutoplay();
-        });
+        // // 滑鼠離開時恢復自動播放
+        // slider.addEventListener('mouseleave', () => {
+        //     resetAutoplay();
+        // });
 
         // 開始自動播放
         resetAutoplay();

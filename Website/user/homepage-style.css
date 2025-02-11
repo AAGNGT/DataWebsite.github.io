@@ -787,6 +787,7 @@ body::after {
     display: flex;
     justify-content: center;
     gap: 3rem;
+    
     margin-top: 1.5rem;
     position: relative;
     z-index: 1;
@@ -1894,4 +1895,518 @@ body::after {
     .feature-info h4 {
         font-size: 0.85rem;
     }
+}
+
+/* 保持原有樣式，添加響應式設計 */
+@media (max-width: 768px) {
+    /* 容器調整 */
+    .success-container {
+        padding: 1rem;
+    }
+
+    /* 導航欄調整 */
+    .visitor-nav {
+        padding: 0.8rem 1rem;
+        gap: 1rem;
+    }
+
+    .nav-brand {
+        font-size: 1rem;
+    }
+
+    /* 歡迎橫幅調整 */
+    .welcome-banner {
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+
+    .welcome-content {
+        width: 100%;
+    }
+
+    .welcome-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .welcome-stats {
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 1rem;
+    }
+
+    /* 功能卡片調整 */
+    .video-share-card {
+        padding: 1.2rem;
+        width: 100%;
+    }
+
+    .card-content {
+        display: grid;
+        grid-template-areas: 
+            "title"
+            "slider"
+            "features";
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
+    /* 輪播區域調整 */
+    .card-image-wrapper {
+        grid-area: slider;
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .image-slider {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 8px;
+    }
+
+    .slider-nav {
+        bottom: 0.5rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    /* 特點列表調整 */
+    .feature-list {
+        grid-area: features;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        padding: 1rem 0 0 0;
+        position: relative;
+    }
+
+    .feature-list::after {
+        top: 0;
+        opacity: 0.5;
+    }
+
+    .feature-item {
+        padding: 0.8rem;
+        justify-content: flex-start;
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .feature-info h4 {
+        font-size: 0.85rem;
+        white-space: normal;
+    }
+
+    .feature-item i {
+        font-size: 1rem;
+        min-width: 20px;
+    }
+
+    /* 排行榜卡片調整 */
+    .ranking-card {
+        margin-top: 1rem;
+        padding: 1.2rem;
+    }
+
+    .ranking-list {
+        gap: 0.8rem;
+    }
+
+    .ranking-item {
+        padding: 0.8rem;
+    }
+
+    /* 社群按鈕調整 */
+    .community-btn {
+        width: 100%;
+        max-width: none;
+        padding: 0.8rem 1.5rem;
+    }
+
+    /* 登出模態框調整 */
+    .modal-content {
+        width: 90%;
+        max-width: 400px;
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* 更小螢幕的優化 */
+@media (max-width: 480px) {
+    /* 導航欄進一步調整 */
+    .nav-brand span {
+        font-size: 0.9rem;
+    }
+
+    /* 歡迎內容調整 */
+    .welcome-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .welcome-content p {
+        font-size: 0.9rem;
+    }
+
+    /* 特點列表保持兩列 */
+    .feature-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+
+    .feature-item {
+        padding: 0.6rem;
+    }
+
+    /* 排行榜項目調整 */
+    .ranking-item {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .ranking-meta {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+}
+
+/* 確保橫向模式也能正常顯示 */
+@media (max-height: 600px) and (orientation: landscape) {
+    .welcome-banner {
+        margin: 0.5rem 0;
+    }
+
+    .card-content {
+        gap: 1rem;
+    }
+
+    .feature-list {
+        padding-top: 0.8rem;
+    }
+
+    .slider-nav {
+        bottom: 0.4rem;
+    }
+}
+
+/* 指令系統專區 */
+.commands-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 背景裝飾 */
+.commands-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        radial-gradient(circle at 0% 0%, rgba(33, 150, 243, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(25, 118, 210, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* 指令展示區塊 */
+.commands-showcase {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #1a237e, #0d47a1);
+    border-radius: 24px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 100px rgba(33, 150, 243, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 標題區域 */
+.commands-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.commands-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.commands-title h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff, #90caf9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.commands-title i {
+    font-size: 2.2rem;
+    color: #64B5F6;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.beta-tag {
+    background: rgba(33, 150, 243, 0.2);
+    border: 1px solid rgba(33, 150, 243, 0.3);
+    color: #90CAF9;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+}
+
+.commands-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 1rem auto 0;
+    line-height: 1.6;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* 指令列表容器 */
+.commands-container {
+    display: grid;
+    gap: 1.5rem;
+}
+
+/* 指令行樣式 */
+.command-row {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.command-row:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.command-row.featured {
+    background: rgba(33, 150, 243, 0.15);
+    border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+/* 指令資訊樣式 */
+.command-name {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.command-name i {
+    color: #64B5F6;
+    font-size: 1.2rem;
+}
+
+.command-name span {
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 600;
+    font-family: 'Fira Code', monospace;
+}
+
+.command-description {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+}
+
+/* 使用方式樣式 */
+.command-usage {
+    text-align: right;
+}
+
+.command-usage code {
+    display: inline-block;
+    font-family: 'Fira Code', monospace;
+    color: #90CAF9;
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.usage-count {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* 響應式調整 */
+@media (max-width: 1024px) {
+    .commands-showcase {
+        padding: 2.5rem;
+        margin: 0 1rem;
+    }
+
+    .commands-title h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .commands-section {
+        padding: 3rem 1rem;
+    }
+
+    .commands-showcase {
+        padding: 2rem;
+    }
+
+    .command-row {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .command-usage {
+        text-align: center;
+        width: 100%;
+    }
+
+    .command-name {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .commands-section {
+        padding: 2rem 1rem;
+    }
+
+    .commands-showcase {
+        padding: 1.5rem;
+    }
+
+    .commands-title h2 {
+        font-size: 1.8rem;
+    }
+
+    .commands-subtitle {
+        font-size: 1rem;
+    }
+
+    .command-usage code {
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+    }
+}
+
+/* 進入系統按鈕 */
+.enter-verify-btn {
+    position: absolute;
+    top: -22px; /* 向上移動使按鈕突出 */
+    right: 2rem;
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    border: none;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0 0 12px 12px; /* 下方圓角 */
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+/* 按鈕內容 */
+.enter-verify-btn span {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.enter-verify-btn i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+/* 按鈕發光效果 */
+.enter-verify-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    border-radius: 0 0 12px 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* 懸停效果 */
+.enter-verify-btn:hover {
+    transform: translateY(3px);
+    background: linear-gradient(135deg, #1E88E5, #1565C0);
+}
+
+.enter-verify-btn:hover::before {
+    opacity: 1;
+}
+
+.enter-verify-btn:hover i {
+    transform: translateX(3px);
+}
+
+/* 點擊效果 */
+.enter-verify-btn:active {
+    transform: translateY(1px);
+}
+
+/* 響應式調整 */
+@media (max-width: 1024px) {
+    .enter-verify-btn {
+        right: 1.5rem;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .enter-verify-btn {
+        right: 1rem;
+        padding: 0.6rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .enter-verify-btn {
+        right: 0.8rem;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.9rem;
+        gap: 0.6rem;
+    }
+}
+
+/* 轉場動畫 */
+.transition-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.95), rgba(25, 118, 210, 0.95));
+    backdrop-filter: blur(20px);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-overlay.active {
+    opacity: 1;
+    visibility: visible;
 }

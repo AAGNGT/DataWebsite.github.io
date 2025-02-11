@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訪客專區 - 強人BB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="visitor-hub.css">
+</head>
+<style>
+    :root {
+    /* 主題色彩 */
+    --primary: #2D3250;
+    --secondary: #424769;
+    --accent: #7077A1;
+    --background: #F6F6F6;
+    --surface: #FFFFFF;
+    --text-primary: #2D3250;
+    --text-secondary: #666666;
+    --success: #4CAF50;
+    --warning: #FFC107;
+    --error: #FF5252;
+
+    /* 陰影效果 */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* 基礎設置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', 'Outfit', sans-serif;
+    background-color: var(--background);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* 頂部狀態欄 */
+.status-bar {
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* 主導航 */
+.main-nav {
+    background: var(--surface);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link.active {
+    background: var(--primary);
+    color: white;
+}
+
+.login-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background: var(--accent);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 主要內容區 */
+.content-wrapper {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* 指令卡片 */
+.commands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.command-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.command-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.command-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.command-content code {
+    display: block;
+    background: #f8f9fa;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin: 0.75rem 0;
+    font-family: monospace;
+}
+
+/* 影片卡片 */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.video-card {
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.video-thumbnail {
+    position: relative;
+    aspect-ratio: 16/9;
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-duration {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+</style>
+<body>
+    <!-- 頂部狀態欄 -->
+    <div class="status-bar">
+        <div class="status-item">
+            <i class="fas fa-signal"></i>
+            <span>系統狀態: 正常運行中</span>
+        </div>
+        <div class="status-item">
+            <i class="fas fa-server"></i>
+            <span>伺服器負載: 65%</span>
+        </div>
+        <div class="status-item">
+            <i class="fas fa-users"></i>
+            <span>在線訪客: 238</span>
+        </div>
+    </div>
+
+    <!-- 主導航 -->
+    <nav class="main-nav">
+        <div class="nav-brand">
+            <i class="fas fa-cube"></i>
+            <span>訪客專區</span>
+        </div>
+        <div class="nav-links">
+            <a href="#commands" class="nav-link active">
+                <i class="fas fa-terminal"></i>
+                <span>指令中心</span>
+            </a>
+            <a href="#videos" class="nav-link">
+                <i class="fas fa-play-circle"></i>
+                <span>影片分享</span>
+            </a>
+            <a href="#articles" class="nav-link">
+                <i class="fas fa-book-open"></i>
+                <span>文章專區</span>
+            </a>
+        </div>
+        <button class="login-btn">
+            <i class="fas fa-sign-in-alt"></i>
+            <span>登入</span>
+        </button>
+    </nav>
+
+    <!-- 主要內容區 -->
+    <main class="content-wrapper">
+        <!-- 指令中心區塊 -->
+        <section class="commands-section" id="commands">
+            <div class="section-header">
+                <h2>熱門指令</h2>
+                <div class="command-filters">
+                    <button class="filter-btn active">全部</button>
+                    <button class="filter-btn">AI 繪圖</button>
+                    <button class="filter-btn">影片處理</button>
+                    <button class="filter-btn">文本生成</button>
+                </div>
+            </div>
+            
+            <div class="commands-grid">
+                <div class="command-card">
+                    <div class="command-header">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                        <span class="command-type">AI 繪圖</span>
+                    </div>
+                    <div class="command-content">
+                        <code>/imagine create cyberpunk city night rain</code>
+                        <p>生成賽博朋克風格的雨夜城市場景</p>
+                    </div>
+                    <div class="command-stats">
+                        <span><i class="fas fa-star"></i> 4.9</span>
+                        <span><i class="fas fa-copy"></i> 1.2k</span>
+                    </div>
+                </div>
+
+                <div class="command-card">
+                    <div class="command-header">
+                        <i class="fas fa-video"></i>
+                        <span class="command-type">影片處理</span>
+                    </div>
+                    <div class="command-content">
+                        <code>/video enhance resolution=4k</code>
+                        <p>將影片提升至4K解析度</p>
+                    </div>
+                    <div class="command-stats">
+                        <span><i class="fas fa-star"></i> 4.7</span>
+                        <span><i class="fas fa-copy"></i> 856</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 影片分享區塊 -->
+        <section class="videos-section" id="videos">
+            <div class="section-header">
+                <h2>精選影片</h2>
+                <a href="#all-videos" class="view-all">查看全部</a>
+            </div>
+            
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://picsum.photos/400/225" alt="影片縮圖">
+                        <span class="video-duration">12:34</span>
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>AI 工具使用教學</h3>
+                        <p>學習如何使用最新的 AI 工具提升工作效率</p>
+                        <div class="video-meta">
+                            <span><i class="fas fa-eye"></i> 1.5k</span>
+                            <span><i class="fas fa-heart"></i> 234</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 文章專區 -->
+        <section class="articles-section" id="articles">
+            <div class="section-header">
+                <h2>最新文章</h2>
+                <div class="article-categories">
+                    <button class="category-btn active">全部</button>
+                    <button class="category-btn">教學</button>
+                    <button class="category-btn">心得</button>
+                    <button class="category-btn">新聞</button>
+                </div>
+            </div>
+            
+            <div class="articles-grid">
+                <article class="article-card">
+                    <div class="article-image">
+                        <img src="https://picsum.photos/400/200" alt="文章圖片">
+                        <span class="article-category">教學</span>
+                    </div>
+                    <div class="article-content">
+                        <h3>如何優化 AI 生成的提示詞</h3>
+                        <p>探討提升 AI 生成內容質量的技巧和方法...</p>
+                        <div class="article-meta">
+                            <span><i class="fas fa-clock"></i> 10分鐘閱讀</span>
+                            <span><i class="fas fa-comment"></i> 23</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- 右側工具欄 -->
+    <aside class="quick-tools">
+        <button class="tool-btn">
+            <i class="fas fa-arrow-up"></i>
+            <span>返回頂部</span>
+        </button>
+        <button class="tool-btn">
+            <i class="fas fa-question-circle"></i>
+            <span>幫助中心</span>
+        </button>
+    </aside>
+</body>
+</html> 
