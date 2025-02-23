@@ -571,4 +571,37 @@ body {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-} 
+}
+
+/* 系列作品卡片特殊樣式 */
+.series-card {
+    position: relative;
+    border: 2px solid #9C27B0;
+}
+
+.series-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(156, 39, 176, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    backdrop-filter: blur(4px);
+    z-index: 2;
+}
+
+.series-card:hover {
+    border-color: #E040FB;
+    box-shadow: 
+        0 12px 24px rgba(156, 39, 176, 0.2),
+        0 0 0 1px rgba(156, 39, 176, 0.2);
+}
+
+.series-card::before {
+    background: radial-gradient(circle, rgba(156, 39, 176, 0.2) 0%, transparent 70%);
+}

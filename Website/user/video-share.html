@@ -440,6 +440,78 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 在 video-grid 中添加咕嚕咕嚕魔法陣卡片 -->
+            <div class="video-card series-card" onclick="playVideoSeries('guruguru-series', '咕嚕咕嚕魔法陣')">
+                <div class="video-thumbnail">
+                    <img src="https://static.acgsecrets.hk/img/84/842282a69b1ca0025cf03aee8b49498c/f01d50db29a801e9934ae47b72d0e82cd85f6057ec7beb6420080cdc349b13e8.png" alt="咕嚕咕嚕魔法陣">
+                    <span class="video-duration">全24集</span>
+                    <div class="series-badge">
+                        <i class="fas fa-list-ul"></i>
+                        系列作品
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">咕嚕咕嚕魔法陣</h3>
+                    <div class="video-meta">
+                        <span>衛藤ヒロユキ</span>
+                        <span>2017 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 在 video-grid 中添加新的影片卡片 -->
+            <div class="video-card" onclick="playVideo('doraemon-wonderland-2024', '哆啦A夢：新大雄的大魔境')">
+                <div class="video-thumbnail">
+                    <img src="https://img.tvb.com/mytvs/poster/1399/h_139888_v2_o.jpg" alt="影片縮圖">
+                    <span class="video-duration">1:44:42</span>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">哆啦A夢：新大雄的大魔境</h3>
+                    <div class="video-meta">
+                        <span>藤子·F·不二雄</span>
+                        <span>2014 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 在 video-grid 中添加暗殺教室第一季卡片 -->
+            <div class="video-card series-card" onclick="playVideoSeries('assassination-classroom-s1', '暗殺教室 第一季', 'anime')">
+                <div class="video-thumbnail">
+                    <img src="https://images.now-tv.com/shares/vod_images/vi_voddrama_series_desc_t/202407/zh_tw/original_horizontal_2/s202407110180825" alt="暗殺教室">
+                    <span class="video-duration">全22集</span>
+                    <div class="series-badge">
+                        <i class="fas fa-list-ul"></i>
+                        系列作品
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">暗殺教室 第一季</h3>
+                    <div class="video-meta">
+                        <span>松井優征</span>
+                        <span>2015 年</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 在 video-grid 中添加暗殺教室第二季卡片 -->
+            <div class="video-card series-card" onclick="playVideoSeries('assassination-classroom-s2', '暗殺教室 第二季', 'anime')">
+                <div class="video-thumbnail">
+                    <img src="https://megapx-assets.dcard.tw/images/261410a4-61a2-4d97-9eca-44b5336772b7/full.jpeg" alt="暗殺教室">
+                    <span class="video-duration">全25集</span>
+                    <div class="series-badge">
+                        <i class="fas fa-list-ul"></i>
+                        系列作品
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">暗殺教室 第二季</h3>
+                    <div class="video-meta">
+                        <span>松井優征</span>
+                        <span>2016 年</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 分頁導航 -->
@@ -814,6 +886,55 @@
             // 初始化顯示
             filterAndShowVideos('all'); // 初始化不顯示加載動畫
         });
+
+        // 修改 playVideoSeries 函數
+        function playVideoSeries(seriesId, title, type = 'default') {
+            localStorage.setItem('currentVideo', JSON.stringify({
+                id: seriesId,
+                title: title,
+                isSeries: true,
+                currentEpisode: 1
+            }));
+            // 根據類型決定跳轉到哪個播放頁面
+            if (type === 'anime') {
+                window.location.href = 'anime-series-player.html';
+            } else {
+                window.location.href = 'series-player.html';
+            }
+        }
+
+        // 在 videoMap 中添加咕嚕咕嚕魔法陣系列的資料
+        // const videoMap = {
+        //     // ... 其他影片數據 ...
+        //     'guruguru-series': {
+        //         episodes: [
+        //             {
+        //                 url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=guruguru-ep1',
+        //                 title: '咕嚕咕嚕魔法陣 第1集',
+        //                 description: '故事開始，尼克遇見了魔法使咕嚕咕嚕...'
+        //             },
+        //             {
+        //                 url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=guruguru-ep2',
+        //                 title: '咕嚕咕嚕魔法陣 第2集',
+        //                 description: '尼克開始學習魔法...'
+        //             },
+        //             // ... 可以繼續添加更多集數
+        //         ],
+        //         title: '咕嚕咕嚕魔法陣',
+        //         description: '《咕嚕咕嚕魔法陣》講述了13歲的少年尼克在一個偶然的機會下遇見了一位名叫咕嚕咕嚕的魔法使，並開始了他的魔法冒險之旅。這部作品充滿了歡樂、冒險和友情的元素，是一部經典的魔法冒險動畫。',
+        //         author: '衛藤ヒロユキ',
+        //         year: '1994',
+        //         totalEpisodes: 45,
+        //         recommendations: [
+        //             {
+        //                 title: '咕嚕咕嚕魔法陣 主題曲',
+        //                 url: 'https://www.youtube.com/watch?v=ICvVtA1M1c8',
+        //                 thumbnail: 'https://img.youtube.com/vi/ICvVtA1M1c8/mqdefault.jpg',
+        //                 duration: '1:30'
+        //             }
+        //         ]
+        //     }
+        // };
     </script>
 </body>
 </html> 

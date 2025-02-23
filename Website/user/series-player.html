@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系列影片播放 - 強人BB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="series-player-style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="video-share.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            返回列表
+        </a>
+        
+        <div class="video-container">
+            <iframe id="videoPlayer" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="video-info">
+            <h1 class="video-title">
+                <span id="videoTitle"></span>
+            </h1>
+        </div>
+
+        <div class="episodes-container">
+            <div class="episodes-header">
+                <h3 class="episodes-title">
+                    <i class="fas fa-list-ul"></i>
+                    選擇集數
+                </h3>
+            </div>
+            <div class="episodes-grid" id="episodesGrid">
+                <!-- 集數按鈕將由 JavaScript 動態生成 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const seriesMap = {
+            'guruguru-series': {
+                episodes: [
+                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=25e2806a-3a85-4fcb-b942-2c7ed7714739',
+                        title: '咕嚕咕嚕魔法陣 第1集',
+                        description: '故事開始，尼克遇見了魔法使咕嚕咕嚕...'
+                    },
+                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=7ff90123-5fd8-4dc3-8ac6-ebdc9941e255',
+                        title: '咕嚕咕嚕魔法陣 第2集',
+                        description: '尼克開始學習魔法...'
+                    },
+                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=11d55ab6-5b98-4a09-ba3f-47d7918730c0',
+                        title: '咕嚕咕嚕魔法陣 第3集',
+                        description: '尼克開始學習魔法...'
+                    },                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=e471ee98-834b-417a-813c-6fcb3b5468c3',
+                        title: '咕嚕咕嚕魔法陣 第4集',
+                        description: '尼克開始學習魔法...'
+                    },
+                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=a2ea7189-cb79-40c5-acd6-30ef0e151450',
+                        title: '咕嚕咕嚕魔法陣 第5集',
+                        description: '尼克開始學習魔法...'
+                    },
+                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=33e1d3c9-0b73-45bd-b4e7-8012ad71419d',
+                        title: '咕嚕咕嚕魔法陣 第6集',
+                        description: '尼克開始學習魔法...'
+                    },                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=fb3d2c0a-de5c-46c1-a454-b4c0e53c7821',
+                        title: '咕嚕咕嚕魔法陣 第7集',
+                        description: '尼克開始學習魔法...'
+                    },                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=48b7122b-cc63-4ac8-bbcd-04bf03561e9b',
+                        title: '咕嚕咕嚕魔法陣 第8集',
+                        description: '尼克開始學習魔法...'
+                    },                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=188cb7ba-661f-4453-bf62-80b1e88ae7cb',
+                        title: '咕嚕咕嚕魔法陣 第9集',
+                        description: '尼克開始學習魔法...'
+                    },                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=2dde2fb8-8c82-433b-af74-a540b8b7c4d7',
+                        title: '咕嚕咕嚕魔法陣 第10集',
+                        description: '尼克開始學習魔法...'
+                    },                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=0a4bcbf9-1a7e-4f52-bfa0-fbd2d6f80723',
+                        title: '咕嚕咕嚕魔法陣 第11集',
+                        description: '尼克開始學習魔法...'
+                    },                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=11d55ab6-5b98-4a09-ba3f-47d7918730c0',
+                        title: '咕嚕咕嚕魔法陣 第12集',
+                        description: '尼克開始學習魔法...'
+                    },                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=11d55ab6-5b98-4a09-ba3f-47d7918730c0',
+                        title: '咕嚕咕嚕魔法陣 第13集',
+                        description: '尼克開始學習魔法...'
+                    }
+
+                ],
+                title: '咕嚕咕嚕魔法陣',
+                totalEpisodes: 24
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoData = JSON.parse(localStorage.getItem('currentVideo'));
+            
+            if (videoData && videoData.isSeries) {
+                const series = seriesMap[videoData.id];
+                if (series) {
+                    // 更新標題
+                    document.getElementById('videoTitle').textContent = series.title;
+                    document.title = `${series.title} - 系列影片播放`;
+
+                    // 生成集數按鈕
+                    const episodesGrid = document.getElementById('episodesGrid');
+                    episodesGrid.innerHTML = Array.from(
+                        {length: series.totalEpisodes}, 
+                        (_, i) => `
+                            <button class="episode-btn ${i + 1 === videoData.currentEpisode ? 'active' : ''}"
+                                    onclick="changeEpisode(${i + 1})">
+                                第${i + 1}集
+                            </button>
+                        `
+                    ).join('');
+
+                    // 設置當前集數的影片
+                    const currentEpisode = series.episodes[videoData.currentEpisode - 1];
+                    if (currentEpisode) {
+                        const player = document.getElementById('videoPlayer');
+                        player.src = currentEpisode.url;
+                    }
+                }
+            } else {
+                window.location.href = 'video-share.html';
+            }
+        });
+
+        function changeEpisode(episodeNumber) {
+            const videoData = JSON.parse(localStorage.getItem('currentVideo'));
+            videoData.currentEpisode = episodeNumber;
+            localStorage.setItem('currentVideo', JSON.stringify(videoData));
+            
+            const series = seriesMap[videoData.id];
+            if (series && series.episodes[episodeNumber - 1]) {
+                const player = document.getElementById('videoPlayer');
+                player.src = series.episodes[episodeNumber - 1].url;
+                
+                // 更新按鈕狀態
+                document.querySelectorAll('.episode-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`.episode-btn:nth-child(${episodeNumber})`).classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html> 

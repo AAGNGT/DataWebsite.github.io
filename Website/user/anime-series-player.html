@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動畫系列播放 - 強人BB</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="series-player-style.css">
+</head>
+<body>
+    <div class="container">
+        <a href="video-share.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            返回列表
+        </a>
+        
+        <div class="video-container">
+            <iframe id="videoPlayer" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+
+        <div class="video-info">
+            <h1 class="video-title">
+                <span id="videoTitle"></span>
+            </h1>
+        </div>
+
+        <div class="episodes-container">
+            <div class="episodes-header">
+                <h3 class="episodes-title">
+                    <i class="fas fa-list-ul"></i>
+                    選擇集數
+                </h3>
+            </div>
+            <div class="episodes-grid" id="episodesGrid">
+                <!-- 集數按鈕將由 JavaScript 動態生成 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const animeSeriesMap = {
+            'assassination-classroom-s1': {
+                episodes: [
+                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=ac-s1-ep1',
+                        title: '暗殺教室 第1集',
+                        description: '第一季第1集'
+                    },
+                    // ... 可以繼續添加更多集數
+                ],
+                title: '暗殺教室 第一季',
+                totalEpisodes: 22
+            },
+            'assassination-classroom-s2': {
+                episodes: [
+                    {
+                        url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=ac-s2-ep1',
+                        title: '暗殺教室 第1集',
+                        description: '第二季第1集'
+                    },
+                    // ... 可以繼續添加更多集數
+                ],
+                title: '暗殺教室 第二季',
+                totalEpisodes: 25
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const videoData = JSON.parse(localStorage.getItem('currentVideo'));
+            
+            if (videoData && videoData.isSeries) {
+                const series = animeSeriesMap[videoData.id];
+                if (series) {
+                    document.getElementById('videoTitle').textContent = series.title;
+                    document.title = `${series.title} - 動畫系列播放`;
+
+                    const episodesGrid = document.getElementById('episodesGrid');
+                    episodesGrid.innerHTML = Array.from(
+                        {length: series.totalEpisodes}, 
+                        (_, i) => `
+                            <button class="episode-btn ${i + 1 === videoData.currentEpisode ? 'active' : ''}"
+                                    onclick="changeEpisode(${i + 1})">
+                                第${i + 1}集
+                            </button>
+                        `
+                    ).join('');
+
+                    const currentEpisode = series.episodes[videoData.currentEpisode - 1];
+                    if (currentEpisode) {
+                        const player = document.getElementById('videoPlayer');
+                        player.src = currentEpisode.url;
+                    }
+                }
+            } else {
+                window.location.href = 'video-share.html';
+            }
+        });
+
+        function changeEpisode(episodeNumber) {
+            const videoData = JSON.parse(localStorage.getItem('currentVideo'));
+            videoData.currentEpisode = episodeNumber;
+            localStorage.setItem('currentVideo', JSON.stringify(videoData));
+            
+            const series = animeSeriesMap[videoData.id];
+            if (series && series.episodes[episodeNumber - 1]) {
+                const player = document.getElementById('videoPlayer');
+                player.src = series.episodes[episodeNumber - 1].url;
+                
+                document.querySelectorAll('.episode-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`.episode-btn:nth-child(${episodeNumber})`).classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html> 

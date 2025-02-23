@@ -1,0 +1,129 @@
+:root {
+    --primary: #4F46E5;
+    --bg: #1E1B4B;
+    --text: #E0E7FF;
+    --accent: #9C27B0;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.15), rgba(156, 39, 176, 0.05));
+    transform: translateX(-5px);
+}
+
+.video-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+}
+
+.episodes-container {
+    padding: 1.5rem;
+    background: rgba(156, 39, 176, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.episodes-header {
+    margin-bottom: 1.5rem;
+}
+
+.episodes-title {
+    font-size: 1.2rem;
+    color: #E040FB;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0;
+}
+
+.episodes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 1rem;
+}
+
+.episode-btn {
+    padding: 0.8rem;
+    background: rgba(156, 39, 176, 0.1);
+    border: 1px solid rgba(156, 39, 176, 0.2);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.episode-btn:hover {
+    background: rgba(156, 39, 176, 0.2);
+    transform: translateY(-2px);
+}
+
+.episode-btn.active {
+    background: #9C27B0;
+    border-color: #9C27B0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .video-title {
+        font-size: 1.5rem;
+    }
+
+    .episodes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 0.8rem;
+    }
+
+    .episode-btn {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+} 
