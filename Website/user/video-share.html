@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>影片分享平台 - 強人BB</title>
+    <link rel="icon" href="../1_PNG/online-video.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="video-share-styles.css">
   
@@ -23,9 +24,9 @@
                 </button>
             </div>
             <div class="nav-controls">
-                <button class="back-btn" onclick="window.location.href='homepage.html'">
+                <button class="back-btn" onclick="handleBack()">
                     <i class="fas fa-arrow-left"></i>
-                    <span>返回列表</span>
+                    <span>返回上一頁</span>
                 </button>
             </div>
         </nav>
@@ -512,6 +513,23 @@
                     </div>
                 </div>
             </div>
+            <div class="video-card series-card" onclick="playVideoSeries('Haruka Chisuga', '殺戮的天使', 'anime')">
+                <div class="video-thumbnail">
+                    <img src="https://github.com/AAGNGT/RobloxGUI/blob/main/Picture%20library/Haruka%20Chisuga.png?raw=true" alt="殺戮的天使">
+                    <span class="video-duration">全16集</span>
+                    <div class="series-badge">
+                        <i class="fas fa-list-ul"></i>
+                        系列作品
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3 class="video-title">殺戮的天使</h3>
+                    <div class="video-meta">
+                        <span>束くだん</span>
+                        <span>2018 年</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 分頁導航 -->
@@ -618,6 +636,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('status') === 'unavailable') {
                 // 創建提示元素
+                localStorage.removeItem('currentVideo');
                 const alertDiv = document.createElement('div');
                 alertDiv.style.cssText = `
                     position: fixed;
@@ -903,38 +922,27 @@
             }
         }
 
-        // 在 videoMap 中添加咕嚕咕嚕魔法陣系列的資料
-        // const videoMap = {
-        //     // ... 其他影片數據 ...
-        //     'guruguru-series': {
-        //         episodes: [
-        //             {
-        //                 url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=guruguru-ep1',
-        //                 title: '咕嚕咕嚕魔法陣 第1集',
-        //                 description: '故事開始，尼克遇見了魔法使咕嚕咕嚕...'
-        //             },
-        //             {
-        //                 url: 'https://7ynkmb-my.sharepoint.com/personal/chenman_7ynkmb_onmicrosoft_com/_layouts/15/embed.aspx?UniqueId=guruguru-ep2',
-        //                 title: '咕嚕咕嚕魔法陣 第2集',
-        //                 description: '尼克開始學習魔法...'
-        //             },
-        //             // ... 可以繼續添加更多集數
-        //         ],
-        //         title: '咕嚕咕嚕魔法陣',
-        //         description: '《咕嚕咕嚕魔法陣》講述了13歲的少年尼克在一個偶然的機會下遇見了一位名叫咕嚕咕嚕的魔法使，並開始了他的魔法冒險之旅。這部作品充滿了歡樂、冒險和友情的元素，是一部經典的魔法冒險動畫。',
-        //         author: '衛藤ヒロユキ',
-        //         year: '1994',
-        //         totalEpisodes: 45,
-        //         recommendations: [
-        //             {
-        //                 title: '咕嚕咕嚕魔法陣 主題曲',
-        //                 url: 'https://www.youtube.com/watch?v=ICvVtA1M1c8',
-        //                 thumbnail: 'https://img.youtube.com/vi/ICvVtA1M1c8/mqdefault.jpg',
-        //                 duration: '1:30'
-        //             }
-        //         ]
-        //     }
-        // };
+        function handleBack() {
+            // 檢查用戶登入狀態
+            const googleUser = localStorage.getItem('googleUser');
+            const userType = localStorage.getItem('userType');
+            const currentPath = window.location.pathname;
+
+            // 如果當前在homepage.html，且有googleUser數據但不是訪客，則返回google-user.html
+            if (currentPath.includes('homepage.html') && googleUser && userType !== 'visitor') {
+                window.location.href = 'google-user.html';
+                return;
+            }
+
+            // 其他情況按原有邏輯處理
+            if (googleUser) {
+                window.location.href = 'google-user.html';
+            } else if (userType === 'visitor') {
+                window.location.href = 'homepage.html';
+            } else {
+                window.location.href = '../login.html';
+            }
+        }
     </script>
 </body>
 </html> 

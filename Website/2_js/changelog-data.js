@@ -4,13 +4,44 @@
 // 'development': '開發中'
 
 const changelogData = {
-    currentVersion: "2.0.3.2",
-    lastUpdated: "2025-2-12 00:33",
+    currentVersion: "3.0.0",
+    lastUpdated: "2025-3-9 22:24",
     versions: [
+        {
+            version: "3.0.0",
+            date: "2025-3-9 | 21:05pm",
+            isLatest: true,
+            changes: [
+                {
+                    icon: "fab fa-google",
+                    description: "Google API 製作使用 Google 帳戶登入",
+                    type: "new"
+                },
+                {
+                    icon: "fas fa-book-open",
+                    description: "添加 殺戮的天使 期待製作更多劇集摘要 | 優化返回功能",
+                    type: "improvement"
+                },
+                {
+                    icon: "fas fa-shield-alt",
+                    description: "為了適應新系統 優化更多登入邏輯 | 防止作弊者 3.0",
+                    type: "fix"
+                },
+                {
+                    icon: "fas fa-server",
+                    description: " 盡量使用「伺服器源」加快載入流量",
+                    type: "improvement"
+                },
+                {
+                    icon: "fas fa-tools",
+                    description: "製作更多特色功能 + ing",
+                    type: "development"
+                }
+            ]
+        },
         {
             version: "2.0.3.2",
             date: "2025-01-29 | 21:54pm",
-            isLatest: true,
             changes: [
                 {
                     icon: "fas fa-sign-in-alt",

@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google 用戶專區</title>
+    <link rel="icon" href="../1_PNG/google-symbol.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* 主題變量 */
+        :root {
+            /* 默認主題 - 深邃靛藍 */
+            --primary: #7C3AED;
+            --primary-dark: #6D28D9;
+            --secondary: #F59E0B;
+            --secondary-dark: #D97706;
+            --text: #F3F4F6;
+            --background: #1F2937;
+            --card-bg: #374151;
+        }
+
+        /* 科技藍主題 */
+        [data-theme="tech-blue"] {
+            --primary: #2563EB;
+            --primary-dark: #1D4ED8;
+            --secondary: #06B6D4;
+            --secondary-dark: #0891B2;
+            --text: #F8FAFC;
+            --background: #0F172A;
+            --card-bg: #1E293B;
+        }
+
+        /* 優雅紫主題 */
+        [data-theme="elegant-purple"] {
+            --primary: #9333EA;
+            --primary-dark: #7E22CE;
+            --secondary: #EC4899;
+            --secondary-dark: #DB2777;
+            --text: #FAF5FF;
+            --background: #2D1B69;
+            --card-bg: #4C1D95;
+        }
+
+        /* 自然綠主題 */
+        [data-theme="nature-green"] {
+            --primary: #059669;
+            --primary-dark: #047857;
+            --secondary: #84CC16;
+            --secondary-dark: #65A30D;
+            --text: #ECFDF5;
+            --background: #064E3B;
+            --card-bg: #065F46;
+        }
+
+        /* 溫暖橙主題 */
+        [data-theme="warm-orange"] {
+            --primary: #EA580C;
+            --primary-dark: #C2410C;
+            --secondary: #FBBF24;
+            --secondary-dark: #F59E0B;
+            --text: #FFF7ED;
+            --background: #7C2D12;
+            --card-bg: #9A3412;
+        }
+
+        /* 主題選擇器樣式 */
+        .theme-selector {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+
+        .theme-selector.show {
+            transform: translateX(0);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            background: var(--primary);
+            color: var(--text);
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text);
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .theme-option.active {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .theme-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* 新增卡片動畫效果 */
+        .feature-card {
+            animation: cardFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 新增統計卡片效果 */
+        .stat-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 頂部導航欄 */
+        .navbar {
+            background: var(--primary);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--secondary);
+        }
+
+        .user-info h3 {
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .user-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.8rem;
+        }
+
+        /* 功能卡片網格 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .feature-icon i {
+            font-size: 1.5rem;
+            color: var(--text);
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* 統計數據卡片 */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h4 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: var(--text);
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* 用戶活動時間軸 */
+        .timeline {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: var(--card-bg);
+            border-radius: 1rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-left: 2px solid var(--primary);
+            margin-left: 1rem;
+        }
+
+        .timeline-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: -1rem;
+        }
+
+        .timeline-icon i {
+            color: var(--text);
+            font-size: 0.8rem;
+        }
+
+        .timeline-content h4 {
+            color: var(--secondary);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-content p {
+            color: var(--text);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* 登出按鈕 */
+        .logout-btn {
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+            color: var(--text);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+        }
+
+        /* 添加新的模態框樣式 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+        }
+
+        .modal-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            background: #1a1f36;
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            box-shadow: 
+                0 0 0 1px rgba(99, 102, 241, 0.1),
+                0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show .modal-container {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .modal-icon i {
+            font-size: 2.5rem;
+            color: #6366f1;
+            animation: pulse 2s infinite;
+        }
+
+        .modal-title {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .modal-message {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .modal-button {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* 在 style 標籤內添加新樣式 */
+        .request-limit-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .request-limit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .request-limit-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text);
+        }
+
+        .request-limit-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .request-limit-stat {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .request-limit-stat h4 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .request-limit-stat p {
+            font-size: 0.9rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .reset-timer-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--text);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .reset-timer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .reset-timer-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            transition: width 1s linear;
+        }
+
+        /* 在 style 標籤中添加新樣式 */
+        .dashboard-header {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-message {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .welcome-message i {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .welcome-text h2 {
+            color: var(--text);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text p {
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            background: var(--primary);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+        }
+
+        .section-title i {
+            color: var(--secondary);
+        }
+
+        .section-title h2 {
+            color: var(--text);
+            font-size: 1.2rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-header h3 {
+            color: var(--text);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+        }
+
+        .info-item span {
+            color: var(--text);
+        }
+
+        .info-item span:last-child {
+            color: var(--secondary);
+        }
+
+        .chart-container {
+            height: 200px;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            color: var(--text);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="user-profile">
+            <img id="userAvatar" src="" alt="用戶頭像" class="user-avatar">
+            <div class="user-info">
+                <h3 id="userName">載入中...</h3>
+                <p id="userEmail">載入中...</p>
+            </div>
+        </div>
+        <button class="logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            登出
+        </button>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-header">
+            <div class="welcome-message">
+                <i class="fas fa-user-circle"></i>
+                <div class="welcome-text">
+                    <h2>歡迎回來，<span id="welcomeUserName">用戶</span></h2>
+                    <p>今天是 <span id="currentDate">2024年3月21日</span></p>
+                </div>
+            </div>
+            <div class="quick-actions">
+                <button class="action-btn" onclick="refreshData()">
+                    <i class="fas fa-sync-alt"></i>
+                    刷新數據
+                </button>
+                <button class="action-btn" onclick="openSettings()">
+                    <i class="fas fa-cog"></i>
+                    系統設置
+                </button>
+            </div>
+        </div>
+
+        <div class="section-title">
+            <i class="fas fa-chart-line"></i>
+            <h2>系統概覽</h2>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-header">
+                    <h3><i class="fas fa-server"></i> 系統資源</h3>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-item">
+                        <span>CPU 使用率</span>
+                        <span id="cpuUsage">32%</span>
+                    </div>
+                    <div class="info-item">
+                        <span>記憶體使用</span>
+                        <span id="memoryUsage">2.4GB / 8GB</span>
+                    </div>
+                    <div class="info-item">
+                        <span>存儲空間</span>
+                        <span id="storageUsage">45%</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-placeholder">資源使用趨勢圖</div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-header">
+                    <h3><i class="fas fa-shield-alt"></i> 安全狀態</h3>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-item">
+                        <span>上次掃描</span>
+                        <span id="lastScan">2小時前</span>
+                    </div>
+                    <div class="info-item">
+                        <span>威脅檢測</span>
+                        <span id="threatCount">無威脅</span>
+                    </div>
+                    <div class="info-item">
+                        <span>防火牆狀態</span>
+                        <span id="firewallStatus">已啟用</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-placeholder">安全事件統計圖</div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-header">
+                    <h3><i class="fas fa-clock"></i> 系統活動</h3>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+                <div class="info-content">
+                    <div class="info-item">
+                        <span>運行時間</span>
+                        <span id="uptime">3天 4小時</span>
+                    </div>
+                    <div class="info-item">
+                        <span>活躍用戶</span>
+                        <span id="activeUsers">24</span>
+                    </div>
+                    <div class="info-item">
+                        <span>處理請求</span>
+                        <span id="requestCount">1,234</span>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-placeholder">活動趨勢圖</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card" onclick="location.href='video-share.html'">
+                <div class="feature-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3>影片分享平台</h3>
+                <p>觀看多啦A夢、新海誠、宮崎駿電影，享受高畫質串流體驗。</p>
+            </div>
+            <div class="feature-card" onclick="location.href='verify.html'">
+                <div class="feature-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>開發指令庫</h3>
+                <p>存放開發指令，快速查找和使用常用程式碼片段。</p>
+            </div>
+            <div class="feature-card" onclick="location.href='community.html'">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>社群中心</h3>
+                <p>分享和瀏覽社群文章，與其他用戶互動交流。</p>
+            </div>
+            <div class="feature-card" onclick="location.href='../admin/developer.html'">
+                <div class="feature-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>數據管理</h3>
+                <p>管理和分析用戶數據，監控系統運行狀態。</p>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <h3 style="padding: 1rem; color: var(--secondary);">最近活動</h3>
+            <div id="activityTimeline">
+                <!-- 活動記錄將通過 JavaScript 動態添加 -->
+            </div>
+        </div>
+
+        <div class="request-limit-card">
+            <div class="request-limit-header">
+                <div class="request-limit-title">
+                    <i class="fas fa-clock"></i>
+                    <h3>請求限制管理</h3>
+                </div>
+                <button id="resetTimerBtn" class="reset-timer-btn" onclick="resetRequestTimer()" disabled>
+                    <i class="fas fa-redo-alt"></i>
+                    <span>重置計時器</span>
+                    <span id="resetCountdown"></span>
+                </button>
+            </div>
+            <div class="request-limit-info">
+                <div class="request-limit-stat">
+                    <h4 id="requestsRemaining">10</h4>
+                    <p>剩餘請求次數</p>
+                </div>
+                <div class="request-limit-stat">
+                    <h4 id="nextResetTime">--:--</h4>
+                    <p>下次重置時間</p>
+                </div>
+                <div class="request-limit-stat">
+                    <h4 id="totalRequests">0</h4>
+                    <p>總請求次數</p>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div id="progressBarFill" class="progress-bar-fill" style="width: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加模態框HTML結構 -->
+    <div id="accessDeniedModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-icon">
+                <i class="fas fa-user-lock"></i>
+            </div>
+            <h3 class="modal-title">需要重新驗證</h3>
+            <p class="modal-message">
+                您的 Google 帳戶驗證已過期或無效<br>
+                請重新登入以繼續訪問
+            </p>
+            <button class="modal-button" onclick="redirectToLogin()">
+                <i class="fas fa-sign-in-alt"></i>
+                <span>前往登入</span>
+            </button>
+        </div>
+    </div>
+
+    <button class="theme-toggle" onclick="toggleThemeSelector()">
+        <i class="fas fa-palette"></i>
+    </button>
+
+    <div class="theme-selector" id="themeSelector">
+        <button class="theme-option active" data-theme="default" onclick="setTheme('default')">
+            <div class="theme-color" style="background: #7C3AED"></div>
+            <span>深邃靛藍</span>
+        </button>
+        <button class="theme-option" data-theme="tech-blue" onclick="setTheme('tech-blue')">
+            <div class="theme-color" style="background: #2563EB"></div>
+            <span>科技藍</span>
+        </button>
+        <button class="theme-option" data-theme="elegant-purple" onclick="setTheme('elegant-purple')">
+            <div class="theme-color" style="background: #9333EA"></div>
+            <span>優雅紫</span>
+        </button>
+        <button class="theme-option" data-theme="nature-green" onclick="setTheme('nature-green')">
+            <div class="theme-color" style="background: #059669"></div>
+            <span>自然綠</span>
+        </button>
+        <button class="theme-option" data-theme="warm-orange" onclick="setTheme('warm-orange')">
+            <div class="theme-color" style="background: #EA580C"></div>
+            <span>溫暖橙</span>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const googleUser = localStorage.getItem('googleUser');
+            if (!googleUser) {
+                showAccessDeniedModal();
+            } else {
+                // 解析並顯示用戶資訊
+                const userData = JSON.parse(googleUser);
+                updateUserInterface(userData);
+            }
+        });
+
+        function showAccessDeniedModal() {
+            document.getElementById('accessDeniedModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function redirectToLogin() {
+            window.location.href = '../login.html';
+        }
+
+        function updateUserInterface(userData) {
+            // 更新用戶資訊
+            document.getElementById('userAvatar').src = userData.imageUrl;
+            document.getElementById('userName').textContent = userData.name;
+            document.getElementById('userEmail').textContent = userData.email;
+
+            // 更新統計資訊
+            document.getElementById('loginCount').textContent = localStorage.getItem('loginCount') || '1';
+            document.getElementById('lastLoginTime').textContent = new Date(userData.login_time).toLocaleTimeString();
+            document.getElementById('accountStatus').textContent = '已驗證';
+
+            // 獲取用戶IP和地理位置信息
+            if (useRequest()) {
+                fetch('https://ipapi.co/json/')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('userIP').textContent = data.ip;
+                        document.getElementById('userLocation').textContent = `${data.city}, ${data.country_name}`;
+                    })
+                    .catch(error => {
+                        document.getElementById('userIP').textContent = '無法獲取';
+                        document.getElementById('userLocation').textContent = '無法獲取';
+                    });
+            } else {
+                alert('已達到請求限制，請等待重置或手動重置計時器');
+            }
+
+            // 獲取系統信息
+            const userAgent = navigator.userAgent;
+            let systemInfo = '';
+            if (userAgent.includes('Windows')) {
+                systemInfo = 'Windows';
+            } else if (userAgent.includes('Mac')) {
+                systemInfo = 'MacOS';
+            } else if (userAgent.includes('Linux')) {
+                systemInfo = 'Linux';
+            } else if (userAgent.includes('Android')) {
+                systemInfo = 'Android';
+            } else if (userAgent.includes('iPhone') || userAgent.includes('iPad')) {
+                systemInfo = 'iOS';
+            } else {
+                systemInfo = '未知系統';
+            }
+            document.getElementById('userSystem').textContent = systemInfo;
+
+            // 更新活動時間軸，添加IP記錄
+            updateActivityTimeline(userData);
+        }
+
+        function updateActivityTimeline(userData) {
+            const timeline = document.getElementById('activityTimeline');
+            const activities = [
+                {
+                    icon: 'fa-sign-in-alt',
+                    title: '成功登入',
+                    time: new Date().toLocaleString(),
+                    description: '使用 Google 帳戶登入系統'
+                },
+                {
+                    icon: 'fa-user-check',
+                    title: '驗證完成',
+                    time: new Date(userData.login_time).toLocaleString(),
+                    description: '完成 Google 帳戶驗證'
+                },
+                {
+                    icon: 'fa-network-wired',
+                    title: 'IP 記錄',
+                    time: new Date().toLocaleString(),
+                    description: '系統記錄用戶網絡信息'
+                },
+                {
+                    icon: 'fa-sync',
+                    title: '資料同步',
+                    time: new Date(Date.now() - 1000 * 60).toLocaleString(),
+                    description: '同步用戶資料和偏好設定'
+                }
+            ];
+
+            timeline.innerHTML = activities.map(activity => `
+                <div class="timeline-item">
+                    <div class="timeline-icon">
+                        <i class="fas ${activity.icon}"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>${activity.title}</h4>
+                        <p>${activity.description}</p>
+                        <small style="color: var(--secondary);">${activity.time}</small>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function logout() {
+            localStorage.removeItem('googleUser');
+            localStorage.removeItem('userType');
+            window.location.href = '../login.html';
+        }
+
+        function toggleThemeSelector() {
+            const selector = document.getElementById('themeSelector');
+            selector.classList.toggle('show');
+        }
+
+        function setTheme(theme) {
+            // 更新文檔主題
+            document.documentElement.setAttribute('data-theme', theme);
+            
+            // 更新按鈕狀態
+            document.querySelectorAll('.theme-option').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.theme === theme);
+            });
+
+            // 保存主題選擇
+            localStorage.setItem('preferred-theme', theme);
+        }
+
+        // 在頁面加載時恢復保存的主題
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('preferred-theme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            }
+        });
+
+        // 請求限制管理系統
+        const REQUEST_LIMIT = 10;
+        const RESET_INTERVAL = 30 * 60 * 1000; // 30分鐘
+
+        let requestData = {
+            remaining: REQUEST_LIMIT,
+            lastReset: Date.now(),
+            nextReset: Date.now() + RESET_INTERVAL,
+            total: 0
+        };
+
+        // 從本地存儲加載數據
+        function loadRequestData() {
+            const saved = localStorage.getItem('requestData');
+            if (saved) {
+                requestData = JSON.parse(saved);
+                // 檢查是否需要自動重置
+                if (Date.now() >= requestData.nextReset) {
+                    resetRequestTimer(true);
+                }
+            }
+            updateRequestUI();
+        }
+
+        // 保存數據到本地存儲
+        function saveRequestData() {
+            localStorage.setItem('requestData', JSON.stringify(requestData));
+        }
+
+        // 更新UI顯示
+        function updateRequestUI() {
+            const remaining = document.getElementById('requestsRemaining');
+            const nextReset = document.getElementById('nextResetTime');
+            const total = document.getElementById('totalRequests');
+            const resetBtn = document.getElementById('resetTimerBtn');
+            const progressBar = document.getElementById('progressBarFill');
+            const resetCountdown = document.getElementById('resetCountdown');
+
+            remaining.textContent = requestData.remaining;
+            total.textContent = requestData.total;
+
+            // 更新進度條
+            const progress = (requestData.remaining / REQUEST_LIMIT) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            // 更新下次重置時間
+            const timeUntilReset = requestData.nextReset - Date.now();
+            if (timeUntilReset <= 0) {
+                resetBtn.disabled = false;
+                nextReset.textContent = "可以重置";
+                resetCountdown.textContent = "";
+            } else {
+                resetBtn.disabled = true;
+                const minutes = Math.floor(timeUntilReset / 60000);
+                const seconds = Math.floor((timeUntilReset % 60000) / 1000);
+                nextReset.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                resetCountdown.textContent = ` (${minutes}:${seconds.toString().padStart(2, '0')})`;
+            }
+        }
+
+        // 重置計時器
+        function resetRequestTimer(auto = false) {
+            requestData.remaining = REQUEST_LIMIT;
+            requestData.lastReset = Date.now();
+            requestData.nextReset = Date.now() + RESET_INTERVAL;
+            if (!auto) {
+                requestData.total += REQUEST_LIMIT; // 只在手動重置時增加總次數
+            }
+            saveRequestData();
+            updateRequestUI();
+        }
+
+        // 使用請求
+        function useRequest() {
+            if (requestData.remaining > 0) {
+                requestData.remaining--;
+                saveRequestData();
+                updateRequestUI();
+                return true;
+            }
+            return false;
+        }
+
+        // 定時更新UI
+        setInterval(updateRequestUI, 1000);
+
+        // 頁面加載時初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadRequestData();
+            updateWelcomeMessage();
+            updateSystemMetrics();
+        });
+
+        function refreshData() {
+            // 模擬數據刷新
+            const loadingToast = showToast('正在刷新數據...', 'info');
+            setTimeout(() => {
+                updateSystemMetrics();
+                hideToast(loadingToast);
+                showToast('數據已更新', 'success');
+            }, 1500);
+        }
+
+        function openSettings() {
+            // 實現設置面板邏輯
+            alert('設置面板開發中...');
+        }
+
+        function updateSystemMetrics() {
+            // 更新系統指標
+            document.getElementById('cpuUsage').textContent = Math.floor(Math.random() * 100) + '%';
+            document.getElementById('memoryUsage').textContent = 
+                Math.floor(Math.random() * 4 + 2) + 'GB / 8GB';
+            document.getElementById('storageUsage').textContent = 
+                Math.floor(Math.random() * 30 + 40) + '%';
+            
+            // 更新其他指標...
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.classList.add('show'), 100);
+            return toast;
+        }
+
+        function hideToast(toast) {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }
+
+        // 更新歡迎信息
+        function updateWelcomeMessage() {
+            const userData = JSON.parse(localStorage.getItem('googleUser') || '{}');
+            document.getElementById('welcomeUserName').textContent = userData.name || '用戶';
+            
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDate').textContent = 
+                now.toLocaleDateString('zh-TW', options);
+        }
+    </script>
+</body>
+</html> 

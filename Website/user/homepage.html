@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>訪客專區 - 強人BB</title>
+    <link rel="icon" href="../1_PNG/visitor.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="homepage-style.css">
 </head>
@@ -317,6 +318,15 @@
     // 檢查用戶是否已登入
     document.addEventListener('DOMContentLoaded', function() {
         const userType = localStorage.getItem('userType');
+        const googleUser = localStorage.getItem('googleUser');
+
+        // 如果有 Google 用戶數據且不是訪客，重定向到 google-user.html
+        if (googleUser && userType !== 'visitor') {
+            window.location.href = 'google-user.html';
+            return;
+        }
+
+        // 如果沒有用戶類型，顯示登入提示
         if (!userType) {
             showLoginAlert();
         }

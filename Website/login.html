@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>密碼保護網站</title>
-    <link rel="stylesheet" href="css/open1.css">
-    <link rel="stylesheet" href="css/open2.css">
-    <link rel="stylesheet" href="css/open3.css">
-    <link rel="stylesheet" href="css/open4.css">
+    <link rel="icon" href="/1_PNG/responsive-design.png">
+    <link rel="stylesheet" href="3_css/open1.css">
+    <link rel="stylesheet" href="3_css/open2.css">
+    <link rel="stylesheet" href="3_css/open3.css">
+    <link rel="stylesheet" href="3_css/open4.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <meta name="google-signin-client_id" content="696459352143-i7g86bhhpgaflb4pgan2hcr75hge7765.apps.googleusercontent.com">
     <style>
         /* 添加動畫相關樣式 */
         .success-animation {
@@ -492,17 +495,18 @@
         .changelog-sidebar {
             position: fixed;
             top: 0;
-            right: -400px;  /* 初始位置在屏幕右側外 */
+            right: -400px;
             width: 400px;
             height: 100vh;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            z-index: 1000;
+            z-index: 1001;  /* 確保比社群登入視窗層級高 */
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 1rem;
             box-shadow: -4px 0 25px rgba(0, 0, 0, 0.1);
             border-left: 1px solid rgba(0, 0, 0, 0.05);
             opacity: 0;
+            display: none;  /* 初始時隱藏 */
         }
 
         /* 側邊欄顯示狀態 */
@@ -585,6 +589,304 @@
         .feature-item .feature-info p,
         .feature-item .feature-icon i {
             color: #ffffff;  /* 保持按鈕內的文字為白色 */
+        }
+
+        /* 登入框移動動畫 */
+        .login-form-wrapper.slide-left {
+            animation: slideLeftOut 0.5s forwards;
+        }
+
+        @keyframes slideLeftOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+        }
+
+        /* 修改社群登入容器樣式 */
+        .social-login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;  /* 初始時隱藏 */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .social-login-box {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            width: 400px;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #googleLoginButton {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        /* 顯示狀態 */
+        .social-login-container.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .social-login-container.show .social-login-box {
+            transform: translateX(0);
+        }
+
+        /* 隱藏狀態 */
+        .social-login-container.hide .social-login-box {
+            transform: translateX(100%);
+        }
+
+        /* 修改登入框移動動畫 */
+        .login-form-wrapper {
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 從右側滑入動畫 */
+        .login-form-wrapper.slide-right {
+            animation: slideFromRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes slideFromRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* 返回按鈕樣式 */
+        .back-btn {
+            position: absolute;
+            top: 1.2rem;
+            left: 1.2rem;
+            background: transparent;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: #333;
+            transform: translateX(-3px);
+        }
+
+        .back-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* Google 登入按鈕樣式 */
+        .google-login-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            background: white;
+            color: #3c4043;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .google-login-btn:hover {
+            background-color: #f8f9fa;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .google-login-btn svg {
+            margin-right: 12px;
+        }
+
+        /* 修改資訊視窗的樣式 */
+        .info-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 1002;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            text-align: left;
+            animation: modalSlideIn 0.5s ease forwards;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* 修改動畫關鍵幀定義 */
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -45%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .modal-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+        }
+
+        .modal-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal-scroll::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+
+        .modal-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        /* 添加模態框樣式 */
+        .previous-login-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .previous-login-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2b3a55, #1a2436);
+            padding: 2rem;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            color: white;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .user-info {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .user-info p {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-button {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .continue-btn {
+            background: #2196F3;
+            color: white;
+        }
+
+        .continue-btn:hover {
+            background: #1976D2;
+            transform: translateY(-2px);
+        }
+
+        .new-login-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .new-login-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -692,10 +994,10 @@
                         </button>
                     </div>
                     <div class="login-footer">
-                        <div class="security-info">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>安全加密連線</span>
-                        </div>
+                        <button class="changelog-btn" onclick="toggleSocialLogin()">
+                            <i class="fas fa-users"></i>
+                            社群帳戶登入
+                        </button>
                         <button class="changelog-btn" onclick="toggleChangelog()">
                             <i class="fas fa-th-large"></i>
                             更多功能
@@ -758,7 +1060,55 @@
         </div>
     </div>
 
-    <script src="js/changelog-data.js"></script>
+    <!-- 修改社群登入視窗 -->
+    <div class="social-login-container" id="socialLoginContainer">
+        <div class="social-login-box">
+            <button class="back-btn" onclick="toggleSocialLoginBack()">
+                <i class="fas fa-arrow-left"></i>
+                返回
+            </button>
+            
+            <h2>社群帳戶登入 ( beta 版 )</h2>
+            <div id="googleLoginButton"></div>
+        </div>
+    </div>
+
+    <!-- 添加先前登入提示模態框 -->
+    <div class="previous-login-modal" id="previousLoginModal">
+        <div class="modal-content">
+            <h3>
+                <i class="fas fa-user-check"></i>
+                發現先前的登入記錄
+            </h3>
+            <div class="user-info">
+                <p>
+                    <i class="fas fa-user"></i>
+                    <span id="previousUserName">載入中...</span>
+                </p>
+                <p>
+                    <i class="fas fa-clock"></i>
+                    <span id="previousLoginTime">載入中...</span>
+                </p>
+                <p>
+                    <i class="fas fa-envelope"></i>
+                    <span id="previousUserEmail">載入中...</span>
+                </p>
+            </div>
+            <p>是否繼續使用此帳戶登入？</p>
+            <div class="modal-buttons">
+                <button class="modal-button continue-btn" onclick="continueWithPreviousLogin()">
+                    <i class="fas fa-sign-in-alt"></i>
+                    繼續使用
+                </button>
+                <button class="modal-button new-login-btn" onclick="startNewLogin()">
+                    <i class="fas fa-user-plus"></i>
+                    重新登入
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="2_js/changelog-data.js"></script>
     <script>
         let selectedAccountType = null;
 
@@ -800,6 +1150,21 @@
                     checkPassword();
                 }
             });
+
+            // 初始化 Google 登入
+            initGoogleSignIn();
+
+            // 檢查是否有先前的登入記錄
+            const googleUser = localStorage.getItem('googleUser');
+            if (googleUser) {
+                try {
+                    const userData = JSON.parse(googleUser);
+                    showPreviousLoginModal(userData);
+                } catch (error) {
+                    console.error('解析用戶數據時出錯:', error);
+                    localStorage.removeItem('googleUser');
+                }
+            }
         });
 
         function selectAccountType(type) {
@@ -908,13 +1273,22 @@
             showErrorModal('密碼錯誤');
         }
 
+        // 更多功能切換
         function toggleChangelog() {
             const changelog = document.getElementById('changelogSidebar');
+            const socialLoginContainer = document.getElementById('socialLoginContainer');
+            
+            // 確保社群登入視窗是隱藏的
+            socialLoginContainer.style.display = 'none';
+            socialLoginContainer.classList.remove('show');
             
             if (changelog.classList.contains('hidden')) {
                 // 顯示側邊欄
-                changelog.classList.remove('hidden');
-                changelog.classList.add('show');
+                changelog.style.display = 'block';  // 先設置顯示
+                setTimeout(() => {  // 等待一個幀後添加動畫類
+                    changelog.classList.remove('hidden');
+                    changelog.classList.add('show');
+                }, 10);
                 
                 // 防止背景滾動
                 document.body.style.overflow = 'hidden';
@@ -925,9 +1299,59 @@
                 
                 // 延遲恢復背景滾動，等待動畫完成
                 setTimeout(() => {
+                    changelog.style.display = 'none';
                     document.body.style.overflow = '';
                 }, 500);
             }
+        }
+
+        // 社群登入切換
+        function toggleSocialLogin() {
+            const loginForm = document.querySelector('.login-form-wrapper');
+            const socialLoginContainer = document.getElementById('socialLoginContainer');
+            const changelog = document.getElementById('changelogSidebar');
+            
+            changelog.style.display = 'none';
+            changelog.classList.remove('show');
+            changelog.classList.add('hidden');
+            
+            loginForm.classList.remove('slide-right');
+            loginForm.classList.add('slide-left');
+            
+            socialLoginContainer.style.display = 'flex';
+            setTimeout(() => {
+                socialLoginContainer.classList.add('show');
+                // 重新初始化 Google 登入
+                initGoogleSignIn();
+            }, 50);
+        }
+
+        // 社群登入返回功能
+        function toggleSocialLoginBack() {
+            const loginForm = document.querySelector('.login-form-wrapper');
+            const socialLoginContainer = document.getElementById('socialLoginContainer');
+            
+            // 添加隱藏動畫
+            socialLoginContainer.classList.remove('show');
+            socialLoginContainer.classList.add('hide');
+            
+            // 先將登入表單移到右側準備滑入
+            loginForm.style.transform = 'translateX(100%)';
+            loginForm.style.opacity = '0';
+            
+            // 移除向左滑出效果，添加從右側滑入效果
+            loginForm.classList.remove('slide-left');
+            
+            // 短暫延遲後添加滑入動畫
+            setTimeout(() => {
+                loginForm.classList.add('slide-right');
+            }, 50);
+            
+            // 等待過渡效果完成後隱藏社群登入視窗
+            setTimeout(() => {
+                socialLoginContainer.style.display = 'none';
+                socialLoginContainer.classList.remove('hide');
+            }, 500);
         }
 
         // 添加動畫結束事件監聽
@@ -1002,9 +1426,638 @@
         }
 
         function viewMoreChangelog() {
-            localStorage.setItem('returnUrl', window.location.href);
             window.location.href = 'changelog.html';
+        }
+
+        // 修改 Google 登入按鈕的初始化
+        function initGoogleSignIn() {
+            google.accounts.id.initialize({
+                client_id: '696459352143-i7g86bhhpgaflb4pgan2hcr75hge7765.apps.googleusercontent.com',
+                callback: handleCredentialResponse,
+                auto_select: false,
+                cancel_on_tap_outside: true,
+                prompt_parent_id: "googleLoginButton",
+                state_cookie_domain: 'localhost',
+                error_callback: handleSignInError
+            });
+
+            // 渲染 Google 登入按鈕
+            google.accounts.id.renderButton(
+                document.getElementById("googleLoginButton"),
+                {
+                    theme: "outline",
+                    size: "large",
+                    type: "standard",
+                    shape: "rectangular",
+                    text: "signin_with",
+                    logo_alignment: "left",
+                    width: 250
+                }
+            );
+        }
+
+        // 添加錯誤處理函數
+        function handleSignInError(error) {
+            showErrorNotification('登入已取消', '請重新嘗試登入 Google 帳戶');
+        }
+
+        // 添加錯誤通知函數
+        function showErrorNotification(title, message) {
+            const errorNotification = document.createElement('div');
+            errorNotification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                background: linear-gradient(135deg, #EF4444, #F87171);
+                color: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                z-index: 2000;
+                animation: slideInLeft 0.5s ease forwards;
+                max-width: 400px;
+            `;
+            
+            errorNotification.innerHTML = `
+                <div style="background: rgba(255,255,255,0.2); border-radius: 50%; padding: 10px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" fill="white"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 style="margin: 0 0 5px 0; font-size: 16px;">${title}</h3>
+                    <p style="margin: 0; font-size: 14px; opacity: 0.9;">${message}</p>
+                </div>
+            `;
+            
+            // 添加動畫樣式
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInLeft {
+                    from {
+                        transform: translateX(-100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                
+                @keyframes fadeOut {
+                    from {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translateX(-100%);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(errorNotification);
+            
+            // 3秒後淡出通知
+            setTimeout(() => {
+                errorNotification.style.animation = 'fadeOut 0.5s ease forwards';
+                setTimeout(() => {
+                    errorNotification.remove();
+                }, 500);
+            }, 3000);
+        }
+
+        // 修改處理 Google 登入回調函數
+        function handleCredentialResponse(response) {
+            if (response.credential) {
+                const responsePayload = decodeJwtResponse(response.credential);
+                
+                // 首先顯示成功通知
+                const successNotification = document.createElement('div');
+                successNotification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #10B981, #34D399);
+                    color: white;
+                    padding: 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    z-index: 2000;
+                    animation: slideInRight 0.5s ease forwards;
+                    max-width: 400px;
+                `;
+                
+                successNotification.innerHTML = `
+                    <div style="background: rgba(255,255,255,0.2); border-radius: 50%; padding: 10px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.293 5.293L9 16.586L4.707 12.293L3.293 13.707L9 19.414L21.707 6.707L20.293 5.293Z" fill="white"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 style="margin: 0 0 5px 0; font-size: 16px;">登入成功！</h3>
+                        <p style="margin: 0; font-size: 14px; opacity: 0.9;">歡迎回來，${responsePayload.name}</p>
+                    </div>
+                `;
+
+                document.body.appendChild(successNotification);
+
+                // 創建並顯示勾勾圖案和加載條容器
+                const loadingContainer = document.createElement('div');
+                loadingContainer.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 20px;
+                    z-index: 1004;
+                `;
+
+                // 勾勾圖案
+                const checkmarkIcon = document.createElement('div');
+                checkmarkIcon.style.cssText = `
+                    width: 80px;
+                    height: 80px;
+                    animation: checkmarkSlideIn 0.8s ease forwards;
+                `;
+
+                checkmarkIcon.innerHTML = `
+                    <div style="
+                        width: 100%;
+                        height: 100%;
+                        background: linear-gradient(135deg, #10B981, #34D399);
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+                        animation: checkmarkPulse 2s infinite;
+                    ">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.293 5.293L9 16.586L4.707 12.293L3.293 13.707L9 19.414L21.707 6.707L20.293 5.293Z" fill="white"/>
+                        </svg>
+                    </div>
+                `;
+
+                // 加載條和文字容器
+                const loadingBarContainer = document.createElement('div');
+                loadingBarContainer.style.cssText = `
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 10px;
+                    animation: fadeIn 0.5s ease forwards;
+                `;
+
+                // 加載條
+                const loadingBar = document.createElement('div');
+                loadingBar.style.cssText = `
+                    width: 200px;
+                    height: 4px;
+                    background: rgba(255, 255, 255, 0.2);
+                    border-radius: 2px;
+                    overflow: hidden;
+                `;
+
+                const loadingProgress = document.createElement('div');
+                loadingProgress.style.cssText = `
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(135deg, #10B981, #34D399);
+                    animation: progressBar 2.5s ease forwards;
+                    transform-origin: left;
+                `;
+
+                // 加載文字
+                const loadingText = document.createElement('div');
+                loadingText.style.cssText = `
+                    color: white;
+                    font-size: 14px;
+                    font-weight: 500;
+                    text-align: center;
+                    opacity: 0.9;
+                `;
+
+                // 組裝加載條和文字
+                loadingBar.appendChild(loadingProgress);
+                loadingBarContainer.appendChild(loadingBar);
+                loadingBarContainer.appendChild(loadingText);
+
+                // 組裝主容器
+                loadingContainer.appendChild(checkmarkIcon);
+                loadingContainer.appendChild(loadingBarContainer);
+
+                // 創建背景遮罩
+                const overlay = document.createElement('div');
+                overlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.5);
+                    backdrop-filter: blur(5px);
+                    z-index: 1001;
+                    animation: fadeIn 0.5s ease forwards;
+                `;
+
+                // 添加動畫樣式
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes progressBar {
+                        0% { transform: scaleX(0); }
+                        100% { transform: scaleX(1); }
+                    }
+
+                    @keyframes checkmarkPulse {
+                        0% { transform: scale(1); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+                        50% { transform: scale(1.05); box-shadow: 0 4px 20px rgba(16, 185, 129, 0.5); }
+                        100% { transform: scale(1); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+                    }
+
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+
+                    @keyframes checkmarkMoveUp {
+                        to {
+                            transform: translate(-50%, -120%);
+                            opacity: 0;
+                        }
+                    }
+
+                    @keyframes modalSlideIn {
+                        from {
+                            opacity: 0;
+                            transform: translate(-50%, -45%);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+
+                // 添加到頁面
+                document.body.appendChild(overlay);
+                document.body.appendChild(loadingContainer);
+
+                // 更新加載文字
+                let textIndex = 0;
+                const loadingMessages = [
+                    "正在驗證帳戶...",
+                    "正在處理資訊...",
+                    "即將完成...",
+                    "驗證成功！"
+                ];
+
+                const textInterval = setInterval(() => {
+                    if (textIndex < loadingMessages.length) {
+                        loadingText.textContent = loadingMessages[textIndex];
+                        textIndex++;
+                    } else {
+                        clearInterval(textInterval);
+                    }
+                }, 800);
+
+                // 延遲顯示資訊視窗
+                setTimeout(() => {
+                    // 平滑過渡：先將勾勾圖案移動到頂部
+                    loadingContainer.style.animation = 'checkmarkMoveUp 0.8s ease forwards';
+                    
+                    // 等待移動動畫完成後顯示資訊視窗
+                    setTimeout(() => {
+                        loadingContainer.remove();
+                        
+                        // 創建資訊視窗
+                        const infoModal = document.createElement('div');
+                        infoModal.style.cssText = `
+                            position: fixed;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            background: white;
+                            padding: 2rem;
+                            border-radius: 1rem;
+                            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                            z-index: 1002;
+                            width: 90%;
+                            max-width: 600px;
+                            max-height: 80vh;
+                            text-align: left;
+                            animation: modalSlideIn 0.5s ease forwards;
+                            display: flex;
+                            flex-direction: column;
+                            overflow: hidden;
+                        `;
+
+                        // 添加資訊視窗內容
+                        infoModal.innerHTML = `
+                            <div style="
+                                display: flex;
+                                flex-direction: column;
+                                height: 100%;
+                                max-height: calc(80vh - 4rem);
+                            ">
+                                <!-- 用戶基本資訊部分 -->
+                                <div style="
+                                    padding-bottom: 1rem;
+                                    border-bottom: 1px solid #eee;
+                                    margin-bottom: 1rem;
+                                ">
+                                    <div style="display: flex; align-items: center;">
+                                        <img src="${responsePayload.picture}" style="width: 100px; height: 100px; border-radius: 50%; margin-right: 1.5rem; border: 3px solid #10B981;">
+                                        <div>
+                                            <h2 style="margin: 0; color: #333; font-size: 1.8rem;">${responsePayload.name}</h2>
+                                            <p style="margin: 0.3rem 0 0 0; color: #666; font-size: 1.1rem;">${responsePayload.email}</p>
+                                            <div style="margin-top: 0.8rem; display: flex; gap: 0.5rem;">
+                                                <span style="
+                                                    background: ${responsePayload.email_verified ? '#10B981' : '#EF4444'};
+                                                    color: white;
+                                                    padding: 0.2rem 0.8rem;
+                                                    border-radius: 1rem;
+                                                    font-size: 0.9rem;
+                                                ">
+                                                    ${responsePayload.email_verified ? '已驗證' : '未驗證'}
+                                                </span>
+                                                <span style="
+                                                    background: #6366F1;
+                                                    color: white;
+                                                    padding: 0.2rem 0.8rem;
+                                                    border-radius: 1rem;
+                                                    font-size: 0.9rem;
+                                                ">
+                                                    Google 帳戶
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 可滾動的資訊卡片容器 -->
+                                <div class="modal-scroll" style="
+                                    flex: 1;
+                                    overflow-y: auto;
+                                    padding-right: 10px;
+                                    margin: 0 -10px 1rem 0;
+                                ">
+                                    <!-- 使用 grid 布局的資訊卡片 -->
+                                    <div style="
+                                        display: grid;
+                                        grid-template-columns: repeat(2, 1fr);
+                                        gap: 1.5rem;
+                                        padding: 0.5rem;
+                                    ">
+                                        <!-- 基本資訊卡片 -->
+                                        <div style="
+                                            background: #F3F4F6;
+                                            padding: 1.5rem;
+                                            border-radius: 0.8rem;
+                                            transition: transform 0.2s ease;
+                                            cursor: pointer;
+                                            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                                        " onmouseover="this.style.transform='translateY(-2px)'" 
+                                           onmouseout="this.style.transform='translateY(0)'">
+                                            <h4 style="margin: 0 0 0.5rem 0; color: #374151; display: flex; align-items: center; gap: 0.5rem;">
+                                                <i class="fas fa-user" style="color: #10B981;"></i>
+                                                基本資訊
+                                            </h4>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>名稱:</strong> ${responsePayload.name}</p>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>姓氏:</strong> ${responsePayload.family_name || '未提供'}</p>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>名字:</strong> ${responsePayload.given_name || '未提供'}</p>
+                                        </div>
+
+                                        <!-- 帳戶資訊卡片 -->
+                                        <div style="
+                                            background: #F3F4F6;
+                                            padding: 1.5rem;
+                                            border-radius: 0.8rem;
+                                            transition: transform 0.2s ease;
+                                            cursor: pointer;
+                                            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                                        " onmouseover="this.style.transform='translateY(-2px)'" 
+                                           onmouseout="this.style.transform='translateY(0)'">
+                                            <h4 style="margin: 0 0 0.5rem 0; color: #374151; display: flex; align-items: center; gap: 0.5rem;">
+                                                <i class="fas fa-id-card" style="color: #6366F1;"></i>
+                                                帳戶資訊
+                                            </h4>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>ID:</strong> ${responsePayload.sub}</p>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>語言:</strong> ${responsePayload.locale || '未提供'}</p>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>時區:</strong> ${Intl.DateTimeFormat().resolvedOptions().timeZone}</p>
+                                        </div>
+
+                                        <!-- 安全資訊卡片 -->
+                                        <div style="
+                                            background: #F3F4F6;
+                                            padding: 1.5rem;
+                                            border-radius: 0.8rem;
+                                            transition: transform 0.2s ease;
+                                            cursor: pointer;
+                                            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                                        " onmouseover="this.style.transform='translateY(-2px)'" 
+                                           onmouseout="this.style.transform='translateY(0)'">
+                                            <h4 style="margin: 0 0 0.5rem 0; color: #374151; display: flex; align-items: center; gap: 0.5rem;">
+                                                <i class="fas fa-shield-alt" style="color: #EF4444;"></i>
+                                                安全資訊
+                                            </h4>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>電子郵件:</strong> ${responsePayload.email}</p>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>驗證狀態:</strong> ${responsePayload.email_verified ? '已驗證' : '未驗證'}</p>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>登入時間:</strong> ${new Date().toLocaleString()}</p>
+                                        </div>
+
+                                        <!-- 其他資訊卡片 -->
+                                        <div style="
+                                            background: #F3F4F6;
+                                            padding: 1.5rem;
+                                            border-radius: 0.8rem;
+                                            transition: transform 0.2s ease;
+                                            cursor: pointer;
+                                            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+                                        " onmouseover="this.style.transform='translateY(-2px)'" 
+                                           onmouseout="this.style.transform='translateY(0)'">
+                                            <h4 style="margin: 0 0 0.5rem 0; color: #374151; display: flex; align-items: center; gap: 0.5rem;">
+                                                <i class="fas fa-info-circle" style="color: #F59E0B;"></i>
+                                                其他資訊
+                                            </h4>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>裝置:</strong> ${navigator.platform}</p>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>瀏覽器:</strong> ${navigator.userAgent.split(')')[0].split('(')[1]}</p>
+                                            <p style="margin: 0.3rem 0; color: #666;"><strong>螢幕解析度:</strong> ${window.screen.width}x${window.screen.height}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 底部按鈕 -->
+                                <div style="
+                                    padding-top: 1rem;
+                                    border-top: 1px solid #eee;
+                                    margin-top: auto;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                ">
+                                    <button onclick="switchAccount()" style="
+                                        padding: 0.8rem 1.5rem;
+                                        background: transparent;
+                                        color: #EF4444;
+                                        border: none;
+                                        border-radius: 0.5rem;
+                                        cursor: pointer;
+                                        font-weight: 500;
+                                        transition: all 0.3s ease;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0.5rem;
+                                    ">
+                                        <i class="fas fa-exchange-alt"></i>
+                                        <span>使用另一個帳戶登入</span>
+                                    </button>
+                                    <button onclick="continueToHome()" style="
+                                        padding: 0.8rem 1.5rem;
+                                        background: linear-gradient(135deg, #10B981, #34D399);
+                                        color: white;
+                                        border: none;
+                                        border-radius: 0.5rem;
+                                        cursor: pointer;
+                                        font-weight: 500;
+                                        transition: all 0.3s ease;
+                                        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0.5rem;
+                                    ">
+                                        <span>繼續前往首頁</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        document.body.appendChild(infoModal);
+                    }, 800);
+                }, 3500);
+
+                // 儲存用戶資訊
+                localStorage.setItem('googleUser', JSON.stringify({
+                    id: responsePayload.sub,
+                    name: responsePayload.name,
+                    email: responsePayload.email,
+                    imageUrl: responsePayload.picture,
+                    token: response.credential,
+                    family_name: responsePayload.family_name,
+                    given_name: responsePayload.given_name,
+                    locale: responsePayload.locale,
+                    login_time: new Date().toISOString()
+                }));
+            } else {
+                showErrorNotification('登入失敗', '無法獲取 Google 帳戶資訊，請重新嘗試');
+            }
+        }
+
+        // 解碼 JWT token
+        function decodeJwtResponse(token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
+
+        // 切換帳戶的函數
+        function switchAccount() {
+            // 清除 Google 用戶數據
+            localStorage.removeItem('googleUser');
+            
+            // 移除資訊視窗和遮罩
+            document.querySelectorAll('div[style*="z-index: 1001"], div[style*="z-index: 1002"]').forEach(el => {
+                el.remove();
+            });
+            
+            // 顯示社群登入視窗
+            const socialLoginContainer = document.getElementById('socialLoginContainer');
+            socialLoginContainer.style.display = 'flex';
+            setTimeout(() => {
+                socialLoginContainer.classList.add('show');
+                // 重新初始化 Google 登入
+                initGoogleSignIn();
+            }, 50);
+        }
+
+        // 繼續前往首頁的函數
+        function continueToHome() {
+            // 顯示成功動畫
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-animation';
+            const googleUser = JSON.parse(localStorage.getItem('googleUser'));
+            
+            successDiv.innerHTML = `
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+                <h3>登入成功</h3>
+                <p>歡迎回來，${googleUser.name}</p>
+            `;
+            
+            document.body.appendChild(successDiv);
+            
+            // 移除資訊視窗和遮罩
+            document.querySelectorAll('div[style*="z-index: 1001"], div[style*="z-index: 1002"]').forEach(el => {
+                el.remove();
+            });
+            
+            // 延遲後跳轉到 Google 用戶專屬頁面
+            setTimeout(() => {
+                window.location.href = 'user/google-user.html';
+            }, 2000);
+        }
+
+        // 顯示先前登入提示
+        function showPreviousLoginModal(userData) {
+            document.getElementById('previousUserName').textContent = userData.name || '未知用戶';
+            document.getElementById('previousUserEmail').textContent = userData.email || '未知郵箱';
+            document.getElementById('previousLoginTime').textContent = 
+                new Date(userData.login_time).toLocaleString() || '未知時間';
+            
+            document.getElementById('previousLoginModal').classList.add('show');
+        }
+
+        // 繼續使用先前的登入
+        function continueWithPreviousLogin() {
+            const googleUser = localStorage.getItem('googleUser');
+            if (googleUser) {
+                const userData = JSON.parse(googleUser);
+                // 更新登入時間
+                userData.login_time = new Date().toISOString();
+                localStorage.setItem('googleUser', JSON.stringify(userData));
+                
+                // 根據用戶類型重定向
+                const userType = localStorage.getItem('userType');
+                if (userType === 'visitor') {
+                    window.location.href = 'user/homepage.html';
+                } else {
+                    window.location.href = 'user/google-user.html';
+                }
+            }
+        }
+
+        // 開始新的登入
+        function startNewLogin() {
+            localStorage.removeItem('googleUser');
+            document.getElementById('previousLoginModal').classList.remove('show');
         }
     </script>
 </body>
-</html> 
+</html>
