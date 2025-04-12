@@ -639,22 +639,21 @@
         document.addEventListener('DOMContentLoaded', function() {
             // 獲取 URL 參數中的 status
             const urlParams = new URLSearchParams(window.location.search);
-            let status = urlParams.get('status');
-            const videoData = JSON.parse(localStorage.getItem('currentVideo'));
+            let status = urlParams.get('status'); //這個從網址接收的數據才是主流
+            const videoData = JSON.parse(localStorage.getItem('currentVideo')); //他的作用只是從定向
             
-            // 檢查是否有有效的影片數據
-            if (videoData && videoMap[videoData.id]) {
-                // 如果沒有 status 參數，則使用當前影片 ID
+            // 如果沒有 status 參數，則使用當前影片 ID
                 if (!status) {
                     status = videoData.id;
                     // 更新 URL，但不重新加載頁面
                     const newUrl = `${window.location.pathname}?status=${status}`;
                     window.history.pushState({ path: newUrl }, '', newUrl);
                 }
-                
-                // 檢查 status 是否與當前影片 ID 匹配
-                if (status === videoData.id) {
-                    const video = videoMap[videoData.id];
+            // 檢查是否有有效的影片數據
+            if (videoMap[status]) {
+                // v2 只需要根據網址發送而作出更改
+                if (status) {
+                    const video = videoMap[status];
                     // 設置影片標題
                     document.getElementById('videoTitle').textContent = video.title;
                     document.title = `${video.title} - 影片播放`;
@@ -662,13 +661,16 @@
                     // 設置影片播放器
                     const player = document.getElementById('videoPlayer');
                     player.src = video.url;
+                    
+                    localStorage.setItem('currentVideo', JSON.stringify({
+                        title: video.title,
+                        id: status
+                    }));
 
                     // 更新影片資訊區域
                     updateVideoInfo(video);
-                } else {
-                    // status 不匹配，設置為 unavailable 並重定向
-                    redirectToVideoShare('unavailable');
                 }
+
             } else {
                 // 沒有有效的影片數據，設置為 unavailable 並重定向
                 redirectToVideoShare('unavailable');

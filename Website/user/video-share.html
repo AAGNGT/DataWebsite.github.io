@@ -893,7 +893,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('status') === 'unavailable') {
                 // 創建提示元素
-                localStorage.removeItem('currentVideo');
+                // localStorage.removeItem('currentVideo');
                 const alertDiv = document.createElement('div');
                 alertDiv.style.cssText = `
                     position: fixed;
@@ -966,10 +966,10 @@
 
         function playVideo(videoId, videoTitle) {
             // 儲存當前影片信息到 localStorage
-            localStorage.setItem('currentVideo', JSON.stringify({
-                id: videoId,
-                title: videoTitle
-            }));
+            // localStorage.setItem('currentVideo', JSON.stringify({
+            //     id: videoId,
+            //     title: videoTitle
+            // }));
 
             // 直接跳轉到帶有 status 參數的播放頁面
             window.location.href = `video-player.html?status=${videoId}`;
