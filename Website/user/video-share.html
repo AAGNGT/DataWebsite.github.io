@@ -54,6 +54,16 @@
                 其他動畫
             </button>
         </div>
+
+        <!-- 搜索結果標題 -->
+        <div class="search-result-title" style="display: none;">
+            <h2>
+                <i class="fas fa-search"></i>
+                <span>搜索結果</span>
+                <small class="search-keyword"></small>
+            </h2>
+        </div>
+
         <!-- 影片網格 -->
         <div class="video-grid">
             <!-- STAND BY ME 多啦A夢 -->
@@ -568,6 +578,265 @@
         </div>
     </div>
 
+    <style>
+    /* 搜索結果容器樣式 */
+    .search-results {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.98);
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .search-results.active {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    .search-category {
+        margin-bottom: 20px;
+    }
+
+    .search-category-title {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .search-category-title i {
+        font-size: 1.2em;
+    }
+
+    .search-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .search-item {
+        background: white;
+        border-radius: 8px;
+        padding: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.3s ease forwards;
+    }
+
+    .search-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 搜索按鈕動畫 */
+    .search-btn.searching .fa-search {
+        display: none;
+    }
+
+    .search-btn.searching::after {
+        content: '×';
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* 搜索結果標題樣式 */
+    .search-result-title {
+        margin: 20px 0;
+        padding: 0 20px;
+    }
+
+    .search-result-title h2 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.5rem;
+        color: #333;
+    }
+
+    .search-result-title i {
+        color: #666;
+    }
+
+    .search-result-title .search-keyword {
+        color: #2196F3;
+        font-weight: normal;
+        margin-left: 8px;
+    }
+
+    /* 添加搜索結果動畫 */
+    .video-card {
+        transition: all 0.3s ease;
+    }
+
+    .video-card[style*="display: none"] {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    .video-card:not([style*="display: none"]) {
+        animation: fadeInScale 0.3s ease forwards;
+    }
+
+    @keyframes fadeInScale {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .search-results-container {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.85);
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-sizing: border-box;
+    }
+
+    .search-category {
+        width: 100%;
+        margin-bottom: 20px;
+        background: rgba(33, 33, 33, 0.95);
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .category-header {
+        width: 100%;
+        padding: 15px 20px;
+        background: linear-gradient(135deg, #1a237e, #0d47a1);
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-sizing: border-box;
+    }
+
+    .category-results {
+        width: 100%;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        box-sizing: border-box;
+    }
+
+    .result-item {
+        background: #1e1e1e;
+        padding: 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .result-item:hover {
+        background: #2c2c2c;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .result-item h4 {
+        color: #fff;
+        margin: 0 0 8px 0;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .result-item p {
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.4;
+    }
+
+    .result-item .meta {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 12px;
+    }
+
+    .result-item .meta i {
+        font-size: 14px;
+        color: #64B5F6;
+    }
+
+    @media (max-width: 1200px) {
+        .category-results {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 900px) {
+        .category-results {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .search-results-container {
+            padding: 15px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .category-results {
+            grid-template-columns: 1fr;
+        }
+        .search-category {
+            padding: 15px;
+        }
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 30px;
+        color: rgba(255, 255, 255, 0.7);
+        font-style: italic;
+    }
+    </style>
+
     <script>
         // 分類按鈕切換
         const categoryBtns = document.querySelectorAll('.category-btn');
@@ -618,18 +887,6 @@
                 });
             });
         });
-
-        // // 頁面載入時恢復上次選擇的類別
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     const savedCategory = localStorage.getItem('selectedCategory') || '全部';
-            
-        //     // 找到對應的類別按鈕並觸發點擊
-        //     categoryBtns.forEach(btn => {
-        //         if (btn.textContent.trim() === savedCategory) {
-        //             btn.click();
-        //         }
-        //     });
-        // });
 
         // 添加檢查URL參數並顯示提示的功能
         document.addEventListener('DOMContentLoaded', function() {
@@ -707,14 +964,15 @@
             }
         });
 
-        function playVideo(videoId, title) {
-            // 將影片信息存儲到 localStorage
+        function playVideo(videoId, videoTitle) {
+            // 儲存當前影片信息到 localStorage
             localStorage.setItem('currentVideo', JSON.stringify({
                 id: videoId,
-                title: title
+                title: videoTitle
             }));
-            // 跳轉到播放頁面
-            window.location.href = 'video-player.html';
+
+            // 直接跳轉到帶有 status 參數的播放頁面
+            window.location.href = `video-player.html?status=${videoId}`;
         }
 
         // 修改分頁和類別篩選功能
@@ -943,6 +1201,156 @@
                 window.location.href = '../login.html';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.search-input');
+            const searchBtn = document.querySelector('.search-btn');
+            const categoryFilter = document.querySelector('.category-filter');
+            const searchResultTitle = document.querySelector('.search-result-title');
+            const videoGrid = document.querySelector('.video-grid');
+            
+            // 檢查 URL 參數
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('search');
+
+            if (searchQuery) {
+                // 如果有搜索參數，隱藏類別過濾器，顯示搜索結果
+                categoryFilter.style.display = 'none';
+                searchResultTitle.style.display = 'block';
+                document.querySelector('.search-keyword').textContent = `"${searchQuery}"`;
+                searchInput.value = searchQuery;
+                performSearch(searchQuery, true);
+            }
+
+            // 搜索按鈕點擊事件
+            searchBtn.addEventListener('click', function() {
+                const query = searchInput.value.trim();
+                if (searchBtn.classList.contains('searching')) {
+                    // 清除搜索
+                    searchInput.value = '';
+                    window.location.href = window.location.pathname; // 移除 URL 參數
+                } else {
+                    // 執行搜索
+                    if (query) {
+                        window.location.href = `${window.location.pathname}?search=${encodeURIComponent(query)}`;
+                    }
+                }
+            });
+
+            // 搜索輸入事件 - 按下 Enter 鍵搜索
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const query = e.target.value.trim();
+                    if (query) {
+                        window.location.href = `${window.location.pathname}?search=${encodeURIComponent(query)}`;
+                    }
+                }
+            });
+
+            // 修改搜索功能
+            function performSearch(query, updateUI = false) {
+                const results = {
+                    titles: [],
+                    authors: [],
+                    years: []
+                };
+
+                // 獲取所有影片卡片
+                const videoCards = document.querySelectorAll('.video-card');
+                videoCards.forEach(card => {
+                    const title = card.querySelector('.video-title').textContent;
+                    const author = card.querySelector('.video-meta span:first-child').textContent;
+                    const year = card.querySelector('.video-meta span:last-child').textContent;
+                    const videoId = card.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    const thumbnail = card.querySelector('img')?.src || '';
+
+                    // 標題匹配
+                    if (title.toLowerCase().includes(query.toLowerCase())) {
+                        results.titles.push({ id: videoId, title, author, year, thumbnail });
+                    }
+                    // 作者匹配
+                    if (author.toLowerCase().includes(query.toLowerCase())) {
+                        results.authors.push({ id: videoId, title, author, year, thumbnail });
+                    }
+                    // 年份匹配
+                    if (year.includes(query)) {
+                        results.years.push({ id: videoId, title, author, year, thumbnail });
+                    }
+
+                    // 隱藏所有卡片
+                    card.style.display = 'none';
+                });
+
+                // 創建搜索結果區域
+                const searchResultsContainer = document.createElement('div');
+                searchResultsContainer.className = 'search-results-container';
+
+                // 顯示分類結果
+                const categories = [
+                    { key: 'titles', icon: 'fa-film', title: '影片標題' },
+                    { key: 'authors', icon: 'fa-user', title: '作者' },
+                    { key: 'years', icon: 'fa-calendar', title: '年份' }
+                ];
+
+                let totalResults = 0;
+                categories.forEach(({ key, icon, title }) => {
+                    if (results[key].length > 0) {
+                        totalResults += results[key].length;
+                        const categorySection = document.createElement('div');
+                        categorySection.className = 'search-category';
+                        categorySection.innerHTML = `
+                            <div class="category-header">
+                                <i class="fas ${icon}"></i>
+                                <h3>按${title}匹配 (${results[key].length})</h3>
+                            </div>
+                            <div class="category-results">
+                                ${results[key].map((item, index) => `
+                                    <div class="video-card" onclick="playVideo('${item.id}', '${item.title}')" 
+                                         style="animation-delay: ${index * 0.05}s">
+                                        <div class="video-thumbnail">
+                                            <img src="${item.thumbnail}" alt="${item.title}">
+                                        </div>
+                                        <div class="video-info">
+                                            <h3 class="video-title">${item.title}</h3>
+                                            <div class="video-meta">
+                                                <span>${item.author}</span>
+                                                <span>${item.year}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                        searchResultsContainer.appendChild(categorySection);
+                    }
+                });
+
+                // 更新 UI
+                const videoGrid = document.querySelector('.video-grid');
+                videoGrid.innerHTML = '';
+                videoGrid.appendChild(searchResultsContainer);
+
+                // 更新分頁信息
+                if (updateUI) {
+                    searchBtn.classList.add('searching');
+                    document.querySelector('.page-info').innerHTML = `
+                        <span>找到 ${totalResults} 個結果</span>
+                        <span class="separator">|</span>
+                        <span>搜索關鍵字: ${query}</span>
+                    `;
+                }
+
+                // 如果沒有結果，顯示提示
+                if (totalResults === 0) {
+                    videoGrid.innerHTML = `
+                        <div class="no-results">
+                            <i class="fas fa-search"></i>
+                            <p>未找到相關結果</p>
+                        </div>
+                    `;
+                }
+            }
+        });
     </script>
 </body>
 </html> 

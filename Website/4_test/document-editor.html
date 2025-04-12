@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在線文件編輯器 - 強人BB</title>
+    <link rel="icon" href="../1_PNG/document-icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- SharePoint REST API 客戶端 -->
+    <script src="https://alcdn.msauth.net/browser/2.30.0/js/msal-browser.min.js"></script>
+    <script src="https://unpkg.com/@pnp/sp@3.12.1/dist/sp.es5.umd.min.js"></script>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #3730A3;
+            --background: #F3F4F6;
+            --text: #1F2937;
+            --success: #10B981;
+            --error: #EF4444;
+            --warning: #F59E0B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .nav-bar {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .back-btn, .save-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .save-btn {
+            background: var(--success);
+            color: white;
+        }
+
+        .save-btn:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .editor-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .file-list {
+            background: #F8FAFC;
+            padding: 1rem;
+            border-right: 1px solid #E2E8F0;
+            height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+
+        .file-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #E2E8F0;
+        }
+
+        .new-file-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .file-item:hover {
+            background: #E2E8F0;
+        }
+
+        .file-item.active {
+            background: #E2E8F0;
+            font-weight: 500;
+        }
+
+        .editor-main {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 140px);
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #E2E8F0;
+        }
+
+        .file-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .editor-toolbar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .toolbar-btn {
+            padding: 6px 12px;
+            border: 1px solid #E2E8F0;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toolbar-btn:hover {
+            background: #F8FAFC;
+        }
+
+        .editor-content {
+            flex: 1;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            padding: 1rem;
+            resize: none;
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .status-bar {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            display: none;
+        }
+
+        .status-bar.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            display: block;
+        }
+
+        .status-bar.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .editor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .file-list {
+                height: auto;
+                max-height: 200px;
+            }
+        }
+
+        /* 添加數據庫相關樣式 */
+        .database-controls {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #F8FAFC;
+            border-radius: 8px;
+        }
+
+        .database-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .status-indicator.connected {
+            background: var(--success);
+        }
+
+        .status-indicator.disconnected {
+            background: var(--error);
+        }
+
+        .table-select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-brand">
+            <i class="fas fa-file-alt"></i>
+            <span>在線文件編輯器</span>
+        </div>
+        <div class="nav-controls">
+            <button class="save-btn" id="saveBtn">
+                <i class="fas fa-save"></i>
+                <span>保存</span>
+            </button>
+            <button class="back-btn" onclick="handleBack()">
+                <i class="fas fa-arrow-left"></i>
+                <span>返回</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="editor-grid">
+            <div class="file-list">
+                <div class="file-list-header">
+                    <h3>數據庫文件</h3>
+                    <button class="new-file-btn" id="newFileBtn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="database-controls">
+                    <div class="database-status">
+                        <div class="status-indicator" id="dbStatus"></div>
+                        <span id="dbStatusText">正在連接數據庫...</span>
+                    </div>
+                    <select class="table-select" id="tableSelect">
+                        <option value="">選擇數據表</option>
+                    </select>
+                    <button class="sync-btn" id="syncBtn">
+                        <i class="fas fa-sync"></i>
+                        <span>同步數據</span>
+                    </button>
+                </div>
+                <div id="fileListContainer"></div>
+            </div>
+            <div class="editor-main">
+                <div class="editor-header">
+                    <input type="text" id="fileTitle" class="file-title" placeholder="文件標題">
+                </div>
+                <div class="editor-toolbar">
+                    <button class="toolbar-btn" data-command="bold">
+                        <i class="fas fa-bold"></i>
+                    </button>
+                    <button class="toolbar-btn" data-command="italic">
+                        <i class="fas fa-italic"></i>
+                    </button>
+                    <button class="toolbar-btn" data-command="underline">
+                        <i class="fas fa-underline"></i>
+                    </button>
+                    <button class="toolbar-btn" data-command="strikeThrough">
+                        <i class="fas fa-strikethrough"></i>
+                    </button>
+                    <button class="toolbar-btn" data-command="justifyLeft">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                    <button class="toolbar-btn" data-command="justifyCenter">
+                        <i class="fas fa-align-center"></i>
+                    </button>
+                    <button class="toolbar-btn" data-command="justifyRight">
+                        <i class="fas fa-align-right"></i>
+                    </button>
+                </div>
+                <div class="editor-content" id="editor" contenteditable="true"></div>
+                <div class="status-bar" id="statusBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 檢查用戶登入狀態
+        document.addEventListener('DOMContentLoaded', function() {
+            const userType = localStorage.getItem('userType');
+            const googleUser = localStorage.getItem('googleUser');
+            
+            if (!userType && !googleUser) {
+                window.location.href = '../login.html';
+                return;
+            }
+
+            // 初始化編輯器
+            initializeEditor();
+        });
+
+        function handleBack() {
+            const googleUser = localStorage.getItem('googleUser');
+            const userType = localStorage.getItem('userType');
+
+            if (googleUser && userType !== 'visitor') {
+                window.location.href = 'google-user.html';
+            } else if (userType === 'visitor') {
+                window.location.href = 'homepage.html';
+            } else {
+                window.location.href = '../login.html';
+            }
+        }
+
+        // SharePoint 配置
+        const spConfig = {
+            siteUrl: "YOUR_SHAREPOINT_SITE_URL", // 替換為您的 SharePoint 站點 URL
+            databaseName: "DocumentsDB.accdb"     // Access 數據庫名稱
+        };
+
+        // MSAL 配置
+        const msalConfig = {
+            auth: {
+                clientId: "YOUR_CLIENT_ID",
+                authority: "https://login.microsoftonline.com/YOUR_TENANT_ID",
+                redirectUri: window.location.origin + "/user/document-editor.html"
+            }
+        };
+
+        const msalInstance = new msal.PublicClientApplication(msalConfig);
+
+        // 初始化 SharePoint 連接
+        async function initializeSharePoint() {
+            try {
+                const account = msalInstance.getAllAccounts()[0];
+                if (!account) {
+                    await msalInstance.loginPopup();
+                }
+
+                const tokenResponse = await msalInstance.acquireTokenSilent({
+                    scopes: ["Sites.ReadWrite.All"],
+                    account: msalInstance.getAllAccounts()[0]
+                });
+
+                // 初始化 SharePoint 客戶端
+                const sp = spfi(spConfig.siteUrl).using(SPFx(tokenResponse.accessToken));
+                
+                updateDatabaseStatus(true);
+                return sp;
+            } catch (error) {
+                console.error('SharePoint 初始化錯誤:', error);
+                updateDatabaseStatus(false);
+                return null;
+            }
+        }
+
+        // 更新數據庫狀態指示器
+        function updateDatabaseStatus(isConnected) {
+            const statusIndicator = document.getElementById('dbStatus');
+            const statusText = document.getElementById('dbStatusText');
+            
+            statusIndicator.className = `status-indicator ${isConnected ? 'connected' : 'disconnected'}`;
+            statusText.textContent = isConnected ? '數據庫已連接' : '數據庫連接失敗';
+        }
+
+        // 加載數據表
+        async function loadTables(sp) {
+            try {
+                const tables = await sp.web.lists
+                    .filter("BaseTemplate eq 100") // 自定義列表
+                    .select("Title")
+                    .get();
+
+                const tableSelect = document.getElementById('tableSelect');
+                tableSelect.innerHTML = '<option value="">選擇數據表</option>';
+                
+                tables.forEach(table => {
+                    const option = document.createElement('option');
+                    option.value = table.Title;
+                    option.textContent = table.Title;
+                    tableSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('加載數據表錯誤:', error);
+                showStatus('無法加載數據表', 'error');
+            }
+        }
+
+        // 保存文件到 SharePoint
+        async function saveToSharePoint(sp, fileData) {
+            try {
+                const selectedTable = document.getElementById('tableSelect').value;
+                if (!selectedTable) {
+                    showStatus('請選擇數據表', 'error');
+                    return;
+                }
+
+                const list = sp.web.lists.getByTitle(selectedTable);
+                
+                const itemData = {
+                    Title: fileData.title,
+                    Content: fileData.content,
+                    LastModified: new Date().toISOString()
+                };
+
+                if (fileData.id) {
+                    // 更新現有項目
+                    await list.items.getById(fileData.id).update(itemData);
+                } else {
+                    // 創建新項目
+                    const result = await list.items.add(itemData);
+                    fileData.id = result.data.Id;
+                }
+
+                showStatus('文件已保存到數據庫', 'success');
+                return fileData;
+            } catch (error) {
+                console.error('保存到 SharePoint 錯誤:', error);
+                showStatus('保存失敗，請重試', 'error');
+                return null;
+            }
+        }
+
+        // 從 SharePoint 加載文件
+        async function loadFromSharePoint(sp) {
+            try {
+                const selectedTable = document.getElementById('tableSelect').value;
+                if (!selectedTable) {
+                    return [];
+                }
+
+                const items = await sp.web.lists
+                    .getByTitle(selectedTable)
+                    .items
+                    .select("Id,Title,Content,LastModified")
+                    .get();
+
+                return items.map(item => ({
+                    id: item.Id,
+                    title: item.Title,
+                    content: item.Content,
+                    lastModified: new Date(item.LastModified).getTime()
+                }));
+            } catch (error) {
+                console.error('從 SharePoint 加載錯誤:', error);
+                showStatus('無法加載文件', 'error');
+                return [];
+            }
+        }
+
+        // 修改初始化編輯器函數
+        async function initializeEditor() {
+            const editor = document.getElementById('editor');
+            const fileTitle = document.getElementById('fileTitle');
+            const saveBtn = document.getElementById('saveBtn');
+            const syncBtn = document.getElementById('syncBtn');
+            const newFileBtn = document.getElementById('newFileBtn');
+            const fileListContainer = document.getElementById('fileListContainer');
+            const tableSelect = document.getElementById('tableSelect');
+            let currentFileId = null;
+
+            // 初始化 SharePoint 連接
+            const sp = await initializeSharePoint();
+            if (sp) {
+                await loadTables(sp);
+            }
+
+            // 表格選擇事件
+            tableSelect.addEventListener('change', async () => {
+                if (sp) {
+                    const files = await loadFromSharePoint(sp);
+                    updateFileList(files);
+                }
+            });
+
+            // 同步按鈕事件
+            syncBtn.addEventListener('click', async () => {
+                if (!sp) {
+                    showStatus('數據庫未連接', 'error');
+                    return;
+                }
+
+                if (!currentFileId) {
+                    showStatus('請先選擇或創建文件', 'error');
+                    return;
+                }
+
+                const fileData = {
+                    id: currentFileId,
+                    title: fileTitle.value || '未命名文件',
+                    content: editor.innerHTML
+                };
+
+                await saveToSharePoint(sp, fileData);
+            });
+
+            // 自動保存
+            let autoSaveTimer;
+            editor.addEventListener('input', () => {
+                clearTimeout(autoSaveTimer);
+                autoSaveTimer = setTimeout(async () => {
+                    if (currentFileId && sp) {
+                        const fileData = {
+                            id: currentFileId,
+                            title: fileTitle.value || '未命名文件',
+                            content: editor.innerHTML
+                        };
+
+                        await saveToSharePoint(sp, fileData);
+                    }
+                }, 2000);
+            });
+
+            // 加載已保存的文件
+            loadSavedFiles();
+
+            // 工具欄按鈕事件
+            document.querySelectorAll('.toolbar-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const command = button.dataset.command;
+                    document.execCommand(command, false, null);
+                });
+            });
+
+            // 新建文件
+            newFileBtn.addEventListener('click', () => {
+                currentFileId = Date.now().toString();
+                fileTitle.value = '新文件';
+                editor.innerHTML = '';
+                updateFileList();
+                showStatus('已創建新文件', 'success');
+            });
+
+            // 加載保存的文件
+            function loadSavedFiles() {
+                const savedFiles = JSON.parse(localStorage.getItem('documentFiles') || '[]');
+                updateFileList(savedFiles);
+            }
+
+            // 更新文件列表
+            function updateFileList(files) {
+                fileListContainer.innerHTML = '';
+
+                files.sort((a, b) => b.lastModified - a.lastModified).forEach(file => {
+                    const fileItem = document.createElement('div');
+                    fileItem.className = `file-item ${file.id === currentFileId ? 'active' : ''}`;
+                    fileItem.innerHTML = `
+                        <i class="fas fa-file-alt"></i>
+                        <span>${file.title}</span>
+                    `;
+
+                    fileItem.addEventListener('click', () => {
+                        currentFileId = file.id;
+                        fileTitle.value = file.title;
+                        editor.innerHTML = file.content;
+                        updateFileList();
+                    });
+
+                    fileListContainer.appendChild(fileItem);
+                });
+            }
+
+            // 顯示狀態消息
+            function showStatus(message, type) {
+                const statusBar = document.getElementById('statusBar');
+                statusBar.textContent = message;
+                statusBar.className = `status-bar ${type}`;
+                setTimeout(() => {
+                    statusBar.className = 'status-bar';
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html> 
