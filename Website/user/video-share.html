@@ -11,6 +11,15 @@
 </head>
 <body>
     <div class="container">
+        <!-- 系統調整提示按鈕 -->
+        <div class="system-notice-banner">
+            <button class="notice-btn" onclick="showSystemWarning()">
+                <i class="fas fa-info-circle"></i>
+                <span>查看系統調整通知</span>
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
         <!-- 導航欄 -->
         <nav class="nav-bar">
             <div class="nav-brand">
@@ -67,7 +76,7 @@
         <!-- 影片網格 -->
         <div class="video-grid">
             <!-- STAND BY ME 多啦A夢 -->
-            <div class="video-card" onclick="playVideo('ab146d13-f7c2-466d-8904-f3f7d1ca48bc', 'Stand By Me：多啦A夢')">
+            <div class="video-card disabled-card" onclick="return false;">
                 <div class="video-thumbnail">
                     <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2021/04/07/EKyzlC.png?v1" alt="影片縮圖">
                     <span class="video-duration">1:33:57</span>
@@ -82,7 +91,7 @@
             </div>
 
             <!-- STAND BY ME 多啦A夢 2 -->
-            <div class="video-card" onclick="playVideo('ab146d13-f7c1-466d-8904-f3f7d1ca48bc', 'Stand By Me：多啦A夢 2')">
+            <div class="video-card disabled-card" onclick="return false;">
                 <div class="video-thumbnail">
                     <img src="https://chinesedora.com/news/wp-content/uploads/2020/12/STAND-BY-ME-%E5%93%86%E5%95%A6A%E5%A4%A22-%E6%AD%A3%E5%BC%8F%E6%B5%B7%E5%A0%B1_2%E6%9C%8810%E6%97%A5.jpg" alt="影片縮圖">
                     <span class="video-duration">1:30:13</span>
@@ -96,7 +105,7 @@
                 </div>
             </div>
 
-            <div class="video-card" onclick="playVideo('DBFDBD-f7c1-466d-8904-f3f7d1ca48bc', '你的名字')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('DBFDBD-f7c1-466d-8904-f3f7d1ca48bc', '你的名字')">
                 <div class="video-thumbnail">
                     <img src="https://cdn.hk01.com/di/media/images/283773/org/6da32b263e534c5943f748d194adff95.png/H24CXCYv6qFWVjYxlnsXxaVYK-45Qjvh51lmwedZZsE?v=w800" alt="影片縮圖">
                     <span class="video-duration">1:46:35</span>
@@ -110,7 +119,7 @@
                 </div>
             </div>
 
-            <div class="video-card" onclick="playVideo('DBFDBD-123D-466d-8904-f3f7d1ca48bc', '天氣之子')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('DBFDBD-123D-466d-8904-f3f7d1ca48bc', '天氣之子')">
                 <div class="video-thumbnail">
                     <img src="https://cdn.hk01.com/di/media/images/3137038/org/31eca1f4d6d7241fc824e93e6223346e.jpg/C3TRBgRqkkqYwmAWlFuS7xJk5IiDNBhVRS-O6UUvjuk?v=w1920" alt="影片縮圖">
                     <span class="video-duration">1:52:09</span>
@@ -124,7 +133,7 @@
                 </div>
             </div>
 
-            <div class="video-card" onclick="playVideo('DBFDBD-123D-123F-8904-f3f7d1ca48bc', '鈴芽之旅')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('DBFDBD-123D-123F-8904-f3f7d1ca48bc', '鈴芽之旅')">
                 <div class="video-thumbnail">
                     <img src="https://cdn.hk01.com/di/media/images/dw/20230228/707220027236945920027381.jpeg/O9WEP4B2dZgwajEdsjYMFr_Xjo34GvFDRyrt4Ucq7eE?v=w1920r16_9" alt="影片縮圖">
                     <span class="video-duration">2:01:28</span>
@@ -139,7 +148,7 @@
             </div>
 
             <!-- 哆啦A夢：大雄的宇宙小戰爭 -->
-            <div class="video-card" onclick="playVideo('bc247e24-h8d3-577e-9015-g4f8e2db59cd', '哆啦A夢：大雄的宇宙小戰爭')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('bc247e24-h8d3-577e-9015-g4f8e2db59cd', '哆啦A夢：大雄的宇宙小戰爭')">
                 <div class="video-thumbnail">
                     <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2024/05/29/DuS2aq.png?v1" alt="影片縮圖">
                     <span class="video-duration">1:48:41</span>
@@ -153,7 +162,7 @@
                 </div>
             </div>
              <!-- 哆啦A夢：大雄的宇宙開拓史 -->
-             <div class="video-card" onclick="playVideo('gh792j79-m3h8-0c23-e560-l9k3j7hi8nm5', '哆啦A夢：大雄的宇宙開拓史')">
+             <div class="video-card disabled-card" onclick="return false; // playVideo('gh792j79-m3h8-0c23-e560-l9k3j7hi8nm5', '哆啦A夢：大雄的宇宙開拓史')">
                 <div class="video-thumbnail">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZp138KtLE7JlAweKx187-4wp2CtMTO6WcHw&s" alt="影片縮圖">
                     <span class="video-duration">1:38:58</span>
@@ -168,7 +177,7 @@
             </div>
 
             <!-- 龍貓 -->
-            <div class="video-card" onclick="playVideo('ABCD-h8d3-577e-9015-g4f8e2db59cd', '龍貓')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('ABCD-h8d3-577e-9015-g4f8e2db59cd', '龍貓')">
                 <div class="video-thumbnail">
                     <img src="https://occ-0-8407-1723.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABQSGPq9p2dCuOIL7P2LfRVk7j1idBqHmm4dFdVL2zIEZEgVLvQXseVRuxcwyxvILIWrdRNgzjiXblfivUnE_o7bN_r7Rj9PSK99m.jpg?r=254" alt="影片縮圖">
                     <span class="video-duration">1:26:25</span>
@@ -183,7 +192,7 @@
             </div>
 
             <!-- 哆啦A夢：大雄的月球探測記 -->
-            <div class="video-card" onclick="playVideo('cd358f35-i9e4-688f-a126-h5g9f3ec6ae1', '哆啦A夢：大雄的月球探測記')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('cd358f35-i9e4-688f-a126-h5g9f3ec6ae1', '哆啦A夢：大雄的月球探測記')">
                 <div class="video-thumbnail">
                     <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2024/03/26/zPQw4R.jpg" alt="影片縮圖">
                     <span class="video-duration">1:35:45</span>
@@ -198,7 +207,7 @@
             </div>
 
             <!-- 哆啦A夢：大雄的新恐龍 -->
-            <div class="video-card" onclick="playVideo('de469g46-j0f5-7990-b237-i6h0g4fd7bf2', '哆啦A夢：大雄的新恐龍')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('de469g46-j0f5-7990-b237-i6h0g4fd7bf2', '哆啦A夢：大雄的新恐龍')">
                 <div class="video-thumbnail">
                     <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2024/03/26/vNxT9M.jpg" alt="影片縮圖">
                     <span class="video-duration">1:50:15</span>
@@ -213,7 +222,7 @@
             </div>
 
             <!-- 哆啦A夢：大雄的宇宙英雄記 -->
-            <div class="video-card" onclick="playVideo('ef570h57-k1g6-8a01-c348-j7i1h5ge8cg3', '哆啦A夢：大雄的宇宙英雄記')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('ef570h57-k1g6-8a01-c348-j7i1h5ge8cg3', '哆啦A夢：大雄的宇宙英雄記')">
                 <div class="video-thumbnail">
                     <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2024/03/26/bKcV5H.jpg" alt="影片縮圖">
                     <span class="video-duration">1:48:33</span>
@@ -228,7 +237,7 @@
             </div>
 
             <!-- 哆啦A夢：大雄的金銀島 -->
-            <div class="video-card" onclick="playVideo('fg681i68-l2h7-9b12-d459-k8j2i6hf9dh4', '哆啦A夢：大雄的金銀島')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('fg681i68-l2h7-9b12-d459-k8j2i6hf9dh4', '哆啦A夢：大雄的金銀島')">
                 <div class="video-thumbnail">
                     <img src="https://ptoho-cache.hkanime.com/img/https://upload.cc/i1/2024/03/26/qWsX7J.jpg" alt="影片縮圖">
                     <span class="video-duration">1:49:27</span>
@@ -243,7 +252,7 @@
             </div>
 
             <!-- 千與千尋 -->
-            <div class="video-card" onclick="playVideo('EFGH-i9e4-688f-a126-h5g9f3ec6ae1', '千與千尋')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('EFGH-i9e4-688f-a126-h5g9f3ec6ae1', '千與千尋')">
                 <div class="video-thumbnail">
                     <img src="https://hips.hearstapps.com/hmg-prod/images/03-254672-h-1618226784.jpg" alt="影片縮圖">
                     <span class="video-duration">2:04:32</span>
@@ -258,7 +267,7 @@
             </div>
 
             <!-- 魔女宅急便 -->
-            <div class="video-card" onclick="playVideo('IJKL-j0f5-7990-b237-i6h0g4fd7bf2', '魔女宅急便')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('IJKL-j0f5-7990-b237-i6h0g4fd7bf2', '魔女宅急便')">
                 <div class="video-thumbnail">
                     <img src="https://cdn.hk01.com/di/media/images/dw/20201124/407894089766670336158320.jpeg/tOb-_uArGyHOEsYu096GzmrG2P6HWW5rJA3PMiQNzzI?v=w1920" alt="影片縮圖">
                     <span class="video-duration">1:43:02</span>
@@ -273,7 +282,7 @@
             </div>
 
             <!-- 霍爾的移動城堡 -->
-            <div class="video-card" onclick="playVideo('STUV-u8v2-4h67-j015-q9s8r1pq5ln0', '霍爾的移動城堡')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('STUV-u8v2-4h67-j015-q9s8r1pq5ln0', '霍爾的移動城堡')">
                 <div class="video-thumbnail">
                     <img src="https://cdn.hk01.com/di/media/images/dw/20201019/394834556513816576845193.jpeg/tG4R3oQip2-BIwVHfQfx5f-0M2kIHrmqsavUgrGr1II?v=w1920" alt="影片縮圖">
                     <span class="video-duration">1:59:09</span>
@@ -288,7 +297,7 @@
             </div>
 
             <!-- 風之谷 -->
-            <div class="video-card" onclick="playVideo('PQRS-v9w3-5i78-k126-r0t9s2qr6mp1', '風之谷')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('PQRS-v9w3-5i78-k126-r0t9s2qr6mp1', '風之谷')">
                 <div class="video-thumbnail">
                     <img src="https://cdn.hk01.com/di/media/images/dw/20201221/417656576796528640735928.jpeg/3wEnYoSJ8_oR-cBbMEgTPDrTg--JIALJORrkGDka5Bg?v=w1920" alt="影片縮圖">
                     <span class="video-duration">1:57:02</span>
@@ -303,7 +312,7 @@
             </div>
 
             <!-- 再見螢火蟲 -->
-            <div class="video-card" onclick="playVideo('7d82ac2b-d577-4ef4-90cf-936cffac9c38', '再見螢火蟲')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('7d82ac2b-d577-4ef4-90cf-936cffac9c38', '再見螢火蟲')">
                 <div class="video-thumbnail">
                     <img src="https://image-cdn.hypb.st/https%3A%2F%2Fpopbee.com%2Fimage%2F2018%2F04%2Fgrave-of-the-fireflies-poster-teaser.jpg?q=75&w=800&cbr=1&fit=max" alt="影片縮圖">
                     <span class="video-duration">1:28:21</span>
@@ -318,7 +327,7 @@
             </div>
 
             <!-- 貓之報恩 -->
-            <div class="video-card" onclick="playVideo('YZAB-n4j9-1d34-f671-m0k4l8jh1fj6', '貓之報恩')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('YZAB-n4j9-1d34-f671-m0k4l8jh1fj6', '貓之報恩')">
                 <div class="video-thumbnail">
                     <img src="https://im.marieclaire.com.tw/m800c533h100b0/assets/mc/202405/6642B6947C9071715648148.jpeg" alt="影片縮圖">
                     <span class="video-duration">1:15:04</span>
@@ -333,7 +342,7 @@
             </div>
 
             <!-- 借物少女艾莉緹 -->
-            <div class="video-card" onclick="playVideo('eb18b042-569d-402e-a80a-9e5e8a03b901', '借物少女艾莉緹')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('eb18b042-569d-402e-a80a-9e5e8a03b901', '借物少女艾莉緹')">
                 <div class="video-thumbnail">
                     <img src="https://images.now-tv.com/shares/vod_images/vi_vodproduct_desc_t/202011/en_us/original_horizontal2/202011181217403_1440_810" alt="影片縮圖">
                     <span class="video-duration">1:34:07</span>
@@ -348,7 +357,7 @@
             </div>
 
             <!-- 天空之城 -->
-            <div class="video-card" onclick="playVideo('MNOP-k1g6-8a01-c348-j7i1h5ge8cg3', '天空之城')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('MNOP-k1g6-8a01-c348-j7i1h5ge8cg3', '天空之城')">
                 <div class="video-thumbnail">
                     <img src="https://cdn.hk01.com/di/media/images/dw/20201221/417667075189772288958721.jpeg/RDHgbmPRTFliKnLcGQLSXzJ6wLaJn-_LihX2uIoV9rg?v=w1920" alt="影片縮圖">
                     <span class="video-duration">2:04:33</span>
@@ -363,7 +372,7 @@
             </div>
 
             <!-- 百變狸貓 -->
-            <div class="video-card" onclick="playVideo('UVWX-q3r8-0c23-e560-p9n4m7lk3hi8', '百變狸貓')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('UVWX-q3r8-0c23-e560-p9n4m7lk3hi8', '百變狸貓')">
                 <div class="video-thumbnail">
                     <img src="https://image.enjoymovie.net/vMkba3rEDL_Yr2cwtW5zWa3z2w4=/800x468/smart/core/p/bKNV3XYNXj.jpg" alt="影片縮圖">
                     <span class="video-duration">1:59:11</span>
@@ -378,7 +387,7 @@
             </div>
 
             <!-- 紅豬 -->
-            <div class="video-card" onclick="playVideo('WXYZ-r5s9-1e34-g782-n6p5o8mn2ik7', '紅豬')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('WXYZ-r5s9-1e34-g782-n6p5o8mn2ik7', '紅豬')">
                 <div class="video-thumbnail">
                     <img src="https://raw.githubusercontent.com/AAGNGT/RobloxGUI/42323b40c2bed2fe8fa83c94a97e9da209da332f/Picture%20library/145.jpg" alt="影片縮圖">
                     <span class="video-duration">1:33:19</span>
@@ -393,7 +402,7 @@
             </div>
 
             <!-- 側耳傾聽 -->
-            <div class="video-card" onclick="playVideo('VWXY-s6t0-2f45-h893-o7q6p9no3jl8', '側耳傾聽')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('VWXY-s6t0-2f45-h893-o7q6p9no3jl8', '側耳傾聽')">
                 <div class="video-thumbnail">
                     <img src="https://meet.eslite.com/Content/Images/Article/WhisperoftheHeart-m_20210623013457.jpg" alt="影片縮圖">
                     <span class="video-duration">1:50:50</span>
@@ -408,7 +417,7 @@
             </div>
 
             <!-- 幽靈公主 -->
-            <div class="video-card" onclick="playVideo('UVWX-t7u1-3g56-i904-p8r7q0op4km9', '幽靈公主')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('UVWX-t7u1-3g56-i904-p8r7q0op4km9', '幽靈公主')">
                 <div class="video-thumbnail">
                     <!-- <img src="https://images-tw.girlstyle.com/wp-content/uploads/2020/10/mononoke043.jpg?auto=format&w=1053" alt="影片縮圖"> -->
                     <span class="video-duration">2:14:00</span>
@@ -423,7 +432,7 @@
             </div>
 
             <!-- 哆啦A夢：新大雄的恐龍 -->
-            <div class="video-card" onclick="playVideo('hi792j79-n3h8-0c23-e560-l9k3j7hi8nm5', '哆啦A夢：大雄的恐龍')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('hi792j79-n3h8-0c23-e560-l9k3j7hi8nm5', '哆啦A夢：大雄的恐龍')">
                 <div class="video-thumbnail">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuNG-xSR9k7dnwgCiBWy_LXVmpIaGbzDiTZw&s" alt="影片縮圖">
                     <span class="video-duration">1:46:47</span>
@@ -438,7 +447,7 @@
             </div>
 
             <!-- 在 video-grid 中添加新的影片卡片 -->
-            <div class="video-card" onclick="playVideo('doraemon-museum-2024', '哆啦A夢：大雄的秘密道具博物館')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('doraemon-museum-2024', '哆啦A夢：大雄的秘密道具博物館')">
                 <div class="video-thumbnail">
                     <img src="https://chinesedora.com/database/wp-content/uploads/2013/03/cut-1.jpg" alt="影片縮圖">
                     <span class="video-duration">1:39:29</span>
@@ -453,7 +462,7 @@
             </div>
 
             <!-- 在 video-grid 中添加咕嚕咕嚕魔法陣卡片 -->
-            <div class="video-card series-card" onclick="playVideoSeries('guruguru-series', '咕嚕咕嚕魔法陣')">
+            <div class="video-card series-card" onclick="return false; // playVideoSeries('guruguru-series', '咕嚕咕嚕魔法陣')">
                 <div class="video-thumbnail">
                     <img src="https://static.acgsecrets.hk/img/84/842282a69b1ca0025cf03aee8b49498c/f01d50db29a801e9934ae47b72d0e82cd85f6057ec7beb6420080cdc349b13e8.png" alt="咕嚕咕嚕魔法陣">
                     <span class="video-duration">全24集</span>
@@ -472,7 +481,7 @@
             </div>
 
             <!-- 在 video-grid 中添加新的影片卡片 -->
-            <div class="video-card" onclick="playVideo('doraemon-wonderland-2024', '哆啦A夢：新大雄的大魔境')">
+            <div class="video-card disabled-card" onclick="return false; // playVideo('doraemon-wonderland-2024', '哆啦A夢：新大雄的大魔境')">
                 <div class="video-thumbnail">
                     <img src="https://img.tvb.com/mytvs/poster/1399/h_139888_v2_o.jpg" alt="影片縮圖">
                     <span class="video-duration">1:44:42</span>
@@ -487,7 +496,7 @@
             </div>
 
             <!-- 在 video-grid 中添加暗殺教室第一季卡片 -->
-            <div class="video-card series-card" onclick="playVideoSeries('assassination-classroom-s1', '暗殺教室 第一季', 'anime')">
+            <div class="video-card series-card" onclick="return false; // playVideoSeries('assassination-classroom-s1', '暗殺教室 第一季', 'anime')">
                 <div class="video-thumbnail">
                     <img src="https://images.now-tv.com/shares/vod_images/vi_voddrama_series_desc_t/202407/zh_tw/original_horizontal_2/s202407110180825" alt="暗殺教室">
                     <span class="video-duration">全22集</span>
@@ -506,7 +515,7 @@
             </div>
 
             <!-- 在 video-grid 中添加暗殺教室第二季卡片 -->
-            <div class="video-card series-card" onclick="playVideoSeries('assassination-classroom-s2', '暗殺教室 第二季', 'anime')">
+            <div class="video-card series-card" onclick="return false; // playVideoSeries('assassination-classroom-s2', '暗殺教室 第二季', 'anime')">
                 <div class="video-thumbnail">
                     <img src="https://megapx-assets.dcard.tw/images/261410a4-61a2-4d97-9eca-44b5336772b7/full.jpeg" alt="暗殺教室">
                     <span class="video-duration">全25集</span>
@@ -523,7 +532,7 @@
                     </div>
                 </div>
             </div>
-            <div class="video-card series-card" onclick="playVideoSeries('Haruka Chisuga', '殺戮的天使', 'anime')">
+            <div class="video-card series-card" onclick="return false; // playVideoSeries('Haruka Chisuga', '殺戮的天使', 'anime')">
                 <div class="video-thumbnail">
                     <img src="https://github.com/AAGNGT/RobloxGUI/blob/main/Picture%20library/Haruka%20Chisuga.png?raw=true" alt="殺戮的天使">
                     <span class="video-duration">全16集</span>
@@ -540,7 +549,7 @@
                     </div>
                 </div>
             </div>
-            <div class="video-card series-card" onclick="playVideoSeries('Guilty Crown', '罪惡王冠', 'anime')">
+            <div class="video-card series-card" onclick="return false; // playVideoSeries('Guilty Crown', '罪惡王冠', 'anime')">
                 <div class="video-thumbnail">
                     <img src="https://img-baofun.zhhainiao.com/fs/d0a03ce35b939d5ee9c6f3b3c8a422d4.jpg" alt="罪惡王冠">
                     <span class="video-duration">全16集</span>
@@ -592,6 +601,36 @@
     <div class="loading-overlay">
         <div class="loading-spinner">
             <i class="fas fa-circle-notch"></i>
+        </div>
+    </div>
+
+    <!-- 全屏警告提示模態框 -->
+    <div id="systemWarningModal" class="warning-modal">
+        <div class="warning-backdrop"></div>
+        <div class="warning-content">
+            <div class="warning-header">
+                <div class="warning-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h2>系統調整通知</h2>
+            </div>
+            <div class="warning-body">
+                <p class="warning-text">
+                    因應新系統調整，<strong>aagngt.us.kg</strong> 將不會繼續營運影片分享平台<br>
+                    由此已將數據上傳到新網站，<strong>aagngt.dqdns.org</strong> 獨立運行<br><br>
+                    管理級 人員也可以 <strong>aatest.vercel.app</strong> 偵錯調試
+                </p>
+                <div class="warning-actions">
+                    <button class="warning-btn primary-btn" onclick="goToNewSite()">
+                        <i class="fas fa-external-link-alt"></i>
+                        前往新網站
+                    </button>
+                    <button class="warning-btn secondary-btn" onclick="stayOnCurrentSite()">
+                        <i class="fas fa-home"></i>
+                        繼續留在這裡
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -852,9 +891,424 @@
         color: rgba(255, 255, 255, 0.7);
         font-style: italic;
     }
+
+    /* 警告模態框樣式 */
+    .warning-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .warning-modal.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .warning-backdrop {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(20, 20, 20, 0.6));
+        border-radius: 20px;
+        animation: backdropPulse 2s ease-in-out infinite;
+        z-index: 1;
+    }
+
+    .warning-content {
+        position: relative;
+        background: linear-gradient(145deg, #1a1a2e, #16213e);
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 500px;
+        width: 90%;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        border: 2px solid rgba(255, 193, 7, 0.3);
+        animation: modalSlideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: scale(0.8) translateY(50px);
+        transition: all 0.3s ease;
+        z-index: 2;
+    }
+
+    .warning-modal.show .warning-content {
+        transform: scale(1) translateY(0);
+    }
+
+    .warning-header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .warning-icon {
+        font-size: 4rem;
+        color: #ffc107;
+        margin-bottom: 20px;
+        animation: iconPulse 2s ease-in-out infinite;
+    }
+
+    .warning-header h2 {
+        color: #ffffff;
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .warning-body {
+        text-align: center;
+    }
+
+    .warning-text {
+        color: #e0e0e0;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .warning-text strong {
+        color: #ffc107;
+        font-weight: 600;
+    }
+
+    .warning-actions {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .warning-btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 160px;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        z-index: 10;
+        pointer-events: auto;
+    }
+
+    .warning-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .warning-btn:hover::before {
+        left: 100%;
+    }
+
+    .primary-btn {
+        background: linear-gradient(135deg, #4CAF50, #45a049);
+        color: white;
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    }
+
+    .primary-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+    }
+
+    .secondary-btn {
+        background: linear-gradient(135deg, #6c757d, #5a6268);
+        color: white;
+        box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+    }
+
+    .secondary-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(108, 117, 125, 0.4);
+    }
+
+    /* 動畫效果 */
+    @keyframes backdropPulse {
+        0%, 100% { opacity: 0.8; }
+        50% { opacity: 0.9; }
+    }
+
+    @keyframes iconPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    @keyframes modalSlideIn {
+        from {
+            opacity: 0;
+            transform: scale(0.5) translateY(-100px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    /* 響應式設計 */
+    @media (max-width: 600px) {
+        .warning-content {
+            padding: 30px 20px;
+            margin: 20px;
+        }
+        
+        .warning-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .warning-text {
+            font-size: 1rem;
+        }
+        
+        .warning-actions {
+            flex-direction: column;
+        }
+        
+        .warning-btn {
+            width: 100%;
+        }
+    }
+
+    /* 禁用卡片樣式 */
+    .disabled-card {
+        opacity: 0.4;
+        cursor: not-allowed;
+        pointer-events: none;
+        filter: grayscale(100%) brightness(0.7);
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .disabled-card:hover {
+        transform: none;
+        box-shadow: none;
+        opacity: 0.4;
+    }
+
+    .disabled-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(128, 128, 128, 0.3);
+        border-radius: 12px;
+        z-index: 5;
+        pointer-events: none;
+    }
+
+    .disabled-card::after {
+        content: '暫停服務';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.6);
+        color: #ccc;
+        padding: 6px 12px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 500;
+        z-index: 10;
+        pointer-events: none;
+        opacity: 0.8;
+    }
+
+    .disabled-card .video-thumbnail img {
+        filter: grayscale(100%) brightness(0.5);
+    }
+
+    .disabled-card .video-info {
+        color: #999;
+    }
+
+    .disabled-card .video-title {
+        color: #666;
+    }
+
+    .disabled-card .video-meta {
+        color: #888;
+    }
+
+    /* 系統調整提示按鈕樣式 */
+    .system-notice-banner {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        margin-bottom: 20px;
+        animation: slideDownBanner 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .notice-btn {
+        width: 100%;
+        background: linear-gradient(135deg, #4CAF50, #45a049);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .notice-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.6s;
+    }
+
+    .notice-btn:hover::before {
+        left: 100%;
+    }
+
+    .notice-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(76, 175, 80, 0.5);
+        background: linear-gradient(135deg, #45a049, #2e7d32);
+    }
+
+    .notice-btn:active {
+        transform: translateY(-1px);
+    }
+
+    .notice-btn i:first-child {
+        font-size: 16px;
+    }
+
+    .notice-btn i:last-child {
+        font-size: 14px;
+        transition: transform 0.3s ease;
+    }
+
+    .notice-btn:hover i:last-child {
+        transform: translateX(3px);
+    }
+
+    @keyframes slideDownBanner {
+        from {
+            opacity: 0;
+            transform: translateY(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    /* 響應式設計 */
+    @media (max-width: 768px) {
+        .notice-btn {
+            padding: 12px 20px;
+            font-size: 14px;
+        }
+        
+        .notice-btn i:first-child {
+            font-size: 16px;
+        }
+    }
     </style>
 
     <script>
+        // 警告模態框功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 用戶一進入頁面立即顯示系統調整通知
+            setTimeout(() => {
+                showSystemWarning();
+            }, 500); // 短暫延遲確保頁面載入完成
+        });
+
+        function showSystemWarning() {
+            const modal = document.getElementById('systemWarningModal');
+            modal.classList.add('show');
+            
+            // 防止背景滾動
+            document.body.style.overflow = 'hidden';
+            
+            // 添加事件監聽器作為備用方案
+            const primaryBtn = modal.querySelector('.primary-btn');
+            const secondaryBtn = modal.querySelector('.secondary-btn');
+            
+            if (primaryBtn) {
+                primaryBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('主要按鈕被點擊（事件監聽器）');
+                    window.open('https://aagngt.dpdns.org/', '_blank');
+                    hideSystemWarning();
+                });
+            }
+            
+            if (secondaryBtn) {
+                secondaryBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('次要按鈕被點擊（事件監聽器）');
+                    hideSystemWarning();
+                });
+            }
+        }
+
+        function hideSystemWarning() {
+            const modal = document.getElementById('systemWarningModal');
+            modal.classList.remove('show');
+            
+            // 恢復背景滾動
+            document.body.style.overflow = '';
+        }
+
+        // 將函數定義為全局函數
+        window.goToNewSite = function() {
+            console.log('前往新網站按鈕被點擊');
+            // 前往新網站
+            window.open('https://aagngt.dpdns.org/', '_blank');
+            hideSystemWarning();
+        };
+
+        window.stayOnCurrentSite = function() {
+            console.log('繼續留在這裡按鈕被點擊');
+            // 繼續留在當前網站
+            hideSystemWarning();
+        };
+
         // 分類按鈕切換
         const categoryBtns = document.querySelectorAll('.category-btn');
         const videoCards = document.querySelectorAll('.video-card');
@@ -1322,7 +1776,7 @@
                             </div>
                             <div class="category-results">
                                 ${results[key].map((item, index) => `
-                                    <div class="video-card" onclick="playVideo('${item.id}', '${item.title}')" 
+                                    <div class="video-card disabled-card" onclick="return false; // playVideo('${item.id}', '${item.title}')" 
                                          style="animation-delay: ${index * 0.05}s">
                                         <div class="video-thumbnail">
                                             <img src="${item.thumbnail}" alt="${item.title}">
