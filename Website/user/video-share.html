@@ -462,7 +462,7 @@
             </div>
 
             <!-- 在 video-grid 中添加咕嚕咕嚕魔法陣卡片 -->
-            <div class="video-card series-card" onclick="return false; // playVideoSeries('guruguru-series', '咕嚕咕嚕魔法陣')">
+            <div class="video-card series-card disabled-card" onclick="return false; // playVideoSeries('guruguru-series', '咕嚕咕嚕魔法陣')">
                 <div class="video-thumbnail">
                     <img src="https://static.acgsecrets.hk/img/84/842282a69b1ca0025cf03aee8b49498c/f01d50db29a801e9934ae47b72d0e82cd85f6057ec7beb6420080cdc349b13e8.png" alt="咕嚕咕嚕魔法陣">
                     <span class="video-duration">全24集</span>
@@ -496,7 +496,7 @@
             </div>
 
             <!-- 在 video-grid 中添加暗殺教室第一季卡片 -->
-            <div class="video-card series-card" onclick="return false; // playVideoSeries('assassination-classroom-s1', '暗殺教室 第一季', 'anime')">
+            <div class="video-card series-card disabled-card" onclick="return false; // playVideoSeries('assassination-classroom-s1', '暗殺教室 第一季', 'anime')">
                 <div class="video-thumbnail">
                     <img src="https://images.now-tv.com/shares/vod_images/vi_voddrama_series_desc_t/202407/zh_tw/original_horizontal_2/s202407110180825" alt="暗殺教室">
                     <span class="video-duration">全22集</span>
@@ -515,7 +515,7 @@
             </div>
 
             <!-- 在 video-grid 中添加暗殺教室第二季卡片 -->
-            <div class="video-card series-card" onclick="return false; // playVideoSeries('assassination-classroom-s2', '暗殺教室 第二季', 'anime')">
+            <div class="video-card series-card disabled-card" onclick="return false; // playVideoSeries('assassination-classroom-s2', '暗殺教室 第二季', 'anime')">
                 <div class="video-thumbnail">
                     <img src="https://megapx-assets.dcard.tw/images/261410a4-61a2-4d97-9eca-44b5336772b7/full.jpeg" alt="暗殺教室">
                     <span class="video-duration">全25集</span>
@@ -532,7 +532,7 @@
                     </div>
                 </div>
             </div>
-            <div class="video-card series-card" onclick="return false; // playVideoSeries('Haruka Chisuga', '殺戮的天使', 'anime')">
+            <div class="video-card series-card disabled-card" onclick="return false; // playVideoSeries('Haruka Chisuga', '殺戮的天使', 'anime')">
                 <div class="video-thumbnail">
                     <img src="https://github.com/AAGNGT/RobloxGUI/blob/main/Picture%20library/Haruka%20Chisuga.png?raw=true" alt="殺戮的天使">
                     <span class="video-duration">全16集</span>
@@ -549,7 +549,7 @@
                     </div>
                 </div>
             </div>
-            <div class="video-card series-card" onclick="return false; // playVideoSeries('Guilty Crown', '罪惡王冠', 'anime')">
+            <div class="video-card series-card disabled-card" onclick="return false; // playVideoSeries('Guilty Crown', '罪惡王冠', 'anime')">
                 <div class="video-thumbnail">
                     <img src="https://img-baofun.zhhainiao.com/fs/d0a03ce35b939d5ee9c6f3b3c8a422d4.jpg" alt="罪惡王冠">
                     <span class="video-duration">全16集</span>
@@ -617,7 +617,7 @@
             <div class="warning-body">
                 <p class="warning-text">
                     因應新系統調整，<strong>aagngt.us.kg</strong> 將不會繼續營運影片分享平台<br>
-                    由此已將數據上傳到新網站，<strong>aagngt.dqdns.org</strong> 獨立運行<br><br>
+                    由此已將數據上傳到新網站，<strong>aagngt.dpdns.org</strong> 獨立運行<br><br>
                     管理級 人員也可以 <strong>aatest.vercel.app</strong> 偵錯調試
                 </p>
                 <div class="warning-actions">
@@ -1273,8 +1273,20 @@
                 primaryBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     console.log('主要按鈕被點擊（事件監聽器）');
+                    // 使用相同的防重複機制
+                    if (isNavigating) {
+                        console.log('正在處理中，請勿重複點擊');
+                        return;
+                    }
+                    
+                    isNavigating = true;
                     window.open('https://aagngt.dpdns.org/', '_blank');
                     hideSystemWarning();
+                    
+                    // 2秒後重置標記
+                    setTimeout(() => {
+                        isNavigating = false;
+                    }, 2000);
                 });
             }
             
@@ -1296,11 +1308,24 @@
         }
 
         // 將函數定義為全局函數
+        let isNavigating = false; // 防止重複點擊的標記
         window.goToNewSite = function() {
+            if (isNavigating) {
+                console.log('正在處理中，請勿重複點擊');
+                return;
+            }
+            
+            isNavigating = true;
             console.log('前往新網站按鈕被點擊');
+            
             // 前往新網站
             window.open('https://aagngt.dpdns.org/', '_blank');
             hideSystemWarning();
+            
+            // 2秒後重置標記，防止用戶在短時間內重複點擊
+            setTimeout(() => {
+                isNavigating = false;
+            }, 2000);
         };
 
         window.stayOnCurrentSite = function() {
