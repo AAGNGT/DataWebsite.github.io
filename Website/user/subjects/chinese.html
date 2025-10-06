@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中文學習資料庫 - 強人BB</title>
+    <link rel="icon" href="../1_PNG/visitor.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="homepage-style.css">
+    <style>
+    .subject-header {
+        background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+        padding: 40px 20px;
+        text-align: center;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .subject-header h1 {
+        color: #2e7d32;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .subject-header p {
+        color: #4caf50;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    .materials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .material-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 4px solid #4caf50;
+    }
+
+    .material-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .material-card h3 {
+        color: #2e7d32;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .material-card p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .material-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .material-link {
+        background: #4caf50;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .material-link:hover {
+        background: #45a049;
+        transform: translateY(-2px);
+    }
+
+    .back-btn {
+        background: #6c757d;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .back-btn:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+    </style>
+</head>
+<body>
+    <div class="visitor-container">
+        <button class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+            返回首頁
+        </button>
+
+        <div class="subject-header">
+            <h1>
+                <i class="fas fa-book"></i>
+                中文學習資料庫
+            </h1>
+            <p>文學、語法、寫作技巧 - 全面提升中文能力</p>
+        </div>
+
+        <div class="materials-grid">
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-pen-fancy"></i>
+                    文學作品
+                </h3>
+                <p>經典文學作品賞析，包括古代詩詞、現代文學、小說散文等，提升文學素養和閱讀理解能力。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-file-pdf"></i>
+                        詩詞選集
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-book-open"></i>
+                        現代文學
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-language"></i>
+                    語法學習
+                </h3>
+                <p>系統學習中文語法規則，包括詞性、句型、修辭手法等，掌握正確的語言表達方式。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-clipboard-list"></i>
+                        語法練習
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-question-circle"></i>
+                        語法測驗
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-edit"></i>
+                    寫作技巧
+                </h3>
+                <p>學習各種文體的寫作方法，包括議論文、記敘文、說明文等，提升寫作能力和表達技巧。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-pencil-alt"></i>
+                        寫作指導
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-star"></i>
+                        範文賞析
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-comments"></i>
+                    口語表達
+                </h3>
+                <p>提升口語表達能力，包括演講技巧、辯論方法、日常對話等，增強語言交流能力。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-microphone"></i>
+                        演講練習
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-users"></i>
+                        辯論技巧
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-search"></i>
+                    閱讀理解
+                </h3>
+                <p>提升閱讀理解能力，包括文章分析、主題概括、細節理解等，增強閱讀效率。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-file-alt"></i>
+                        閱讀練習
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-lightbulb"></i>
+                        理解技巧
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-trophy"></i>
+                    考試準備
+                </h3>
+                <p>針對各類中文考試的準備資料，包括模擬試題、考試技巧、重點複習等。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-clipboard-check"></i>
+                        模擬試題
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-chart-line"></i>
+                        成績分析
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function goBack() {
+        window.location.href = '../homepage.html';
+    }
+    </script>
+</body>
+</html>

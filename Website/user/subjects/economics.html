@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>經濟學習資料庫 - 強人BB</title>
+    <link rel="icon" href="../1_PNG/visitor.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="homepage-style.css">
+    <style>
+    .subject-header {
+        background: linear-gradient(135deg, #fff3e0, #fce4ec);
+        padding: 40px 20px;
+        text-align: center;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .subject-header h1 {
+        color: #f57c00;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .subject-header p {
+        color: #ff9800;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    .materials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .material-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 4px solid #ff9800;
+    }
+
+    .material-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .material-card h3 {
+        color: #f57c00;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .material-card p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .material-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .material-link {
+        background: #ff9800;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .material-link:hover {
+        background: #f57c00;
+        transform: translateY(-2px);
+    }
+
+    .back-btn {
+        background: #6c757d;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .back-btn:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+    </style>
+</head>
+<body>
+    <div class="visitor-container">
+        <button class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+            返回首頁
+        </button>
+
+        <div class="subject-header">
+            <h1>
+                <i class="fas fa-chart-pie"></i>
+                經濟學習資料庫
+            </h1>
+            <p>微觀經濟、宏觀經濟 - 理解經濟運作</p>
+        </div>
+
+        <div class="materials-grid">
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-user"></i>
+                    微觀經濟
+                </h3>
+                <p>學習個體經濟行為，包括供需理論、市場結構、消費者行為、生產者理論等。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-chart-line"></i>
+                        供需分析
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-question-circle"></i>
+                        微觀測驗
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-globe"></i>
+                    宏觀經濟
+                </h3>
+                <p>學習總體經濟現象，包括國民所得、通貨膨脹、失業率、經濟成長等概念。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-chart-bar"></i>
+                        總體指標
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-trending-up"></i>
+                        經濟成長
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-university"></i>
+                    貨幣銀行
+                </h3>
+                <p>學習貨幣理論和銀行體系，包括貨幣政策、利率、匯率、金融市場等概念。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-coins"></i>
+                        貨幣理論
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-building"></i>
+                        銀行體系
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-handshake"></i>
+                    國際貿易
+                </h3>
+                <p>學習國際經濟關係，包括貿易理論、匯率制度、國際金融、全球化等議題。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-ship"></i>
+                        貿易理論
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-exchange-alt"></i>
+                        匯率制度
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-chart-area"></i>
+                    經濟分析
+                </h3>
+                <p>學習經濟分析工具，包括經濟模型、統計分析、計量經濟學等方法。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-calculator"></i>
+                        經濟模型
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-chart-line"></i>
+                        統計分析
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-trophy"></i>
+                    考試準備
+                </h3>
+                <p>針對經濟科考試的準備資料，包括模擬試題、考試技巧、重點複習等。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-clipboard-check"></i>
+                        模擬試題
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-chart-line"></i>
+                        成績分析
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function goBack() {
+        window.location.href = '../homepage.html';
+    }
+    </script>
+</body>
+</html>

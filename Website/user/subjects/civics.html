@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公民學習資料庫 - 強人BB</title>
+    <link rel="icon" href="../1_PNG/visitor.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="homepage-style.css">
+    <style>
+    .subject-header {
+        background: linear-gradient(135deg, #f3e5f5, #e8f5e8);
+        padding: 40px 20px;
+        text-align: center;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .subject-header h1 {
+        color: #7b1fa2;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .subject-header p {
+        color: #9c27b0;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    .materials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .material-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 4px solid #9c27b0;
+    }
+
+    .material-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .material-card h3 {
+        color: #7b1fa2;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .material-card p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .material-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .material-link {
+        background: #9c27b0;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .material-link:hover {
+        background: #7b1fa2;
+        transform: translateY(-2px);
+    }
+
+    .back-btn {
+        background: #6c757d;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .back-btn:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+    </style>
+</head>
+<body>
+    <div class="visitor-container">
+        <button class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+            返回首頁
+        </button>
+
+        <div class="subject-header">
+            <h1>
+                <i class="fas fa-balance-scale"></i>
+                公民學習資料庫
+            </h1>
+            <p>法律、政治、社會議題 - 培養公民意識</p>
+        </div>
+
+        <div class="materials-grid">
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-gavel"></i>
+                    法律基礎
+                </h3>
+                <p>學習基本法律概念，包括憲法、民法、刑法等，了解法律體系和公民權利義務。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-book"></i>
+                        法律條文
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-question-circle"></i>
+                        法律測驗
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-landmark"></i>
+                    政治制度
+                </h3>
+                <p>了解政治體制、選舉制度、政府組織等政治概念，培養政治參與意識。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-vote-yea"></i>
+                        選舉制度
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-building"></i>
+                        政府組織
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-users"></i>
+                    社會議題
+                </h3>
+                <p>探討當代社會問題，包括環保、人權、社會正義等議題，培養社會責任感。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-leaf"></i>
+                        環保議題
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-heart"></i>
+                        人權議題
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-globe"></i>
+                    國際關係
+                </h3>
+                <p>學習國際政治、外交關係、全球化等概念，了解國際局勢和國際合作。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-handshake"></i>
+                        外交關係
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-globe-americas"></i>
+                        全球化
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-comments"></i>
+                    公民參與
+                </h3>
+                <p>學習公民參與方式，包括投票、請願、社會運動等，培養公民行動力。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-vote-yea"></i>
+                        投票參與
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-megaphone"></i>
+                        社會運動
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-trophy"></i>
+                    考試準備
+                </h3>
+                <p>針對公民科考試的準備資料，包括模擬試題、考試技巧、重點複習等。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-clipboard-check"></i>
+                        模擬試題
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-chart-line"></i>
+                        成績分析
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function goBack() {
+        window.location.href = '../homepage.html';
+    }
+    </script>
+</body>
+</html>

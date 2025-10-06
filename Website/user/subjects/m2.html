@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M2 學習資料庫 - 強人BB</title>
+    <link rel="icon" href="../1_PNG/visitor.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="homepage-style.css">
+    <style>
+    .subject-header {
+        background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
+        padding: 40px 20px;
+        text-align: center;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .subject-header h1 {
+        color: #2e7d32;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .subject-header p {
+        color: #4caf50;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    .materials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .material-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 4px solid #4caf50;
+    }
+
+    .material-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .material-card h3 {
+        color: #2e7d32;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .material-card p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .material-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .material-link {
+        background: #4caf50;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .material-link:hover {
+        background: #45a049;
+        transform: translateY(-2px);
+    }
+
+    .back-btn {
+        background: #6c757d;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .back-btn:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+    </style>
+</head>
+<body>
+    <div class="visitor-container">
+        <button class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+            返回首頁
+        </button>
+
+        <div class="subject-header">
+            <h1>
+                <i class="fas fa-chart-line"></i>
+                M2 學習資料庫
+            </h1>
+            <p>進階數學、統計學 - 深入數學領域</p>
+        </div>
+
+        <div class="materials-grid">
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-infinity"></i>
+                    高等微積分
+                </h3>
+                <p>深入學習微積分理論，包括多元微積分、向量微積分、微分方程等高階數學概念。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-clipboard-list"></i>
+                        微積分練習
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-question-circle"></i>
+                        微積分測驗
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-chart-bar"></i>
+                    統計學
+                </h3>
+                <p>學習統計學理論，包括機率論、統計推論、迴歸分析、假設檢定等統計方法。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-chart-pie"></i>
+                        統計分析
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-dice"></i>
+                        機率論
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-project-diagram"></i>
+                    線性代數
+                </h3>
+                <p>學習線性代數基礎，包括矩陣運算、向量空間、特徵值、特徵向量等概念。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-table"></i>
+                        矩陣運算
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-vector-square"></i>
+                        向量空間
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-calculator"></i>
+                    數值分析
+                </h3>
+                <p>學習數值計算方法，包括數值積分、數值微分、數值求解等計算技巧。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-laptop-code"></i>
+                        數值方法
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-code"></i>
+                        程式實作
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-puzzle-piece"></i>
+                    數學建模
+                </h3>
+                <p>學習數學建模方法，包括問題分析、模型建立、求解驗證等建模過程。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-lightbulb"></i>
+                        建模技巧
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-check-double"></i>
+                        模型驗證
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-trophy"></i>
+                    考試準備
+                </h3>
+                <p>針對M2考試的準備資料，包括模擬試題、考試技巧、重點複習等。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-clipboard-check"></i>
+                        模擬試題
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-chart-line"></i>
+                        成績分析
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function goBack() {
+        window.location.href = '../homepage.html';
+    }
+    </script>
+</body>
+</html>

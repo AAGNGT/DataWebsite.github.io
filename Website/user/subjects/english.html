@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英文學習資料庫 - 強人BB</title>
+    <link rel="icon" href="../1_PNG/visitor.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="homepage-style.css">
+    <style>
+    .subject-header {
+        background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+        padding: 40px 20px;
+        text-align: center;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .subject-header h1 {
+        color: #1976d2;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .subject-header p {
+        color: #2196f3;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    .materials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .material-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 4px solid #2196f3;
+    }
+
+    .material-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .material-card h3 {
+        color: #1976d2;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .material-card p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .material-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .material-link {
+        background: #2196f3;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .material-link:hover {
+        background: #1976d2;
+        transform: translateY(-2px);
+    }
+
+    .back-btn {
+        background: #6c757d;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .back-btn:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+    </style>
+</head>
+<body>
+    <div class="visitor-container">
+        <button class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+            返回首頁
+        </button>
+
+        <div class="subject-header">
+            <h1>
+                <i class="fas fa-language"></i>
+                英文學習資料庫
+            </h1>
+            <p>文法、詞彙、會話練習 - 全面提升英文能力</p>
+        </div>
+
+        <div class="materials-grid">
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-book"></i>
+                    文法學習
+                </h3>
+                <p>系統學習英文文法規則，包括時態、語態、句型結構等，掌握正確的英文表達方式。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-clipboard-list"></i>
+                        文法練習
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-question-circle"></i>
+                        文法測驗
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-spell-check"></i>
+                    詞彙學習
+                </h3>
+                <p>擴展英文詞彙量，包括常用單詞、片語、慣用語等，提升詞彙運用能力。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-list"></i>
+                        單詞表
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-brain"></i>
+                        記憶技巧
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-comments"></i>
+                    會話練習
+                </h3>
+                <p>提升英文口語表達能力，包括日常對話、商務英語、學術討論等。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-microphone"></i>
+                        口語練習
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-users"></i>
+                        對話模擬
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-file-alt"></i>
+                    閱讀理解
+                </h3>
+                <p>提升英文閱讀能力，包括文章理解、快速閱讀、閱讀技巧等。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-book-open"></i>
+                        閱讀材料
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-lightbulb"></i>
+                        理解技巧
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-pen"></i>
+                    寫作技巧
+                </h3>
+                <p>學習英文寫作方法，包括文章結構、寫作技巧、文體練習等。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-edit"></i>
+                        寫作指導
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-star"></i>
+                        範文賞析
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-headphones"></i>
+                    聽力訓練
+                </h3>
+                <p>提升英文聽力能力，包括聽力技巧、語音識別、聽力理解等。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-play"></i>
+                        聽力材料
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-volume-up"></i>
+                        語音練習
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function goBack() {
+        window.location.href = '../homepage.html';
+    }
+    </script>
+</body>
+</html>

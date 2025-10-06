@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>電腦學習資料庫 - 強人BB</title>
+    <link rel="icon" href="../1_PNG/visitor.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="homepage-style.css">
+    <style>
+    .subject-header {
+        background: linear-gradient(135deg, #e3f2fd, #f3e5f5);
+        padding: 40px 20px;
+        text-align: center;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .subject-header h1 {
+        color: #1976d2;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .subject-header p {
+        color: #2196f3;
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    .materials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 40px;
+    }
+
+    .material-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 4px solid #2196f3;
+    }
+
+    .material-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .material-card h3 {
+        color: #1976d2;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .material-card p {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+    .material-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .material-link {
+        background: #2196f3;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .material-link:hover {
+        background: #1976d2;
+        transform: translateY(-2px);
+    }
+
+    .back-btn {
+        background: #6c757d;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .back-btn:hover {
+        background: #5a6268;
+        transform: translateY(-2px);
+    }
+    </style>
+</head>
+<body>
+    <div class="visitor-container">
+        <button class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-left"></i>
+            返回首頁
+        </button>
+
+        <div class="subject-header">
+            <h1>
+                <i class="fas fa-laptop-code"></i>
+                電腦學習資料庫
+            </h1>
+            <p>程式設計、資訊科技 - 掌握數位技能</p>
+        </div>
+
+        <div class="materials-grid">
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-code"></i>
+                    程式設計
+                </h3>
+                <p>學習各種程式語言，包括Python、Java、C++、JavaScript等，掌握程式設計基礎。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-laptop-code"></i>
+                        程式練習
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-question-circle"></i>
+                        程式測驗
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-database"></i>
+                    資料結構
+                </h3>
+                <p>學習資料結構和演算法，包括陣列、鏈表、樹、圖等資料結構概念。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-sitemap"></i>
+                        資料結構
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-cogs"></i>
+                        演算法
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-network-wired"></i>
+                    網路技術
+                </h3>
+                <p>學習網路基礎知識，包括TCP/IP、HTTP、網路安全、雲端運算等概念。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-globe"></i>
+                        網路基礎
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-shield-alt"></i>
+                        網路安全
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-mobile-alt"></i>
+                    網頁開發
+                </h3>
+                <p>學習網頁開發技術，包括HTML、CSS、JavaScript、前端框架等技術。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-file-code"></i>
+                        HTML/CSS
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-js"></i>
+                        JavaScript
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-robot"></i>
+                    人工智慧
+                </h3>
+                <p>學習AI基礎概念，包括機器學習、深度學習、自然語言處理等AI技術。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-brain"></i>
+                        機器學習
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-eye"></i>
+                        深度學習
+                    </a>
+                </div>
+            </div>
+
+            <div class="material-card">
+                <h3>
+                    <i class="fas fa-trophy"></i>
+                    考試準備
+                </h3>
+                <p>針對電腦科考試的準備資料，包括模擬試題、考試技巧、重點複習等。</p>
+                <div class="material-links">
+                    <a href="#" class="material-link">
+                        <i class="fas fa-clipboard-check"></i>
+                        模擬試題
+                    </a>
+                    <a href="#" class="material-link">
+                        <i class="fas fa-chart-line"></i>
+                        成績分析
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function goBack() {
+        window.location.href = '../homepage.html';
+    }
+    </script>
+</body>
+</html>
