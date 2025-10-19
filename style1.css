@@ -1,0 +1,257 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #333;
+    line-height: 1.6;
+    position: relative;
+}
+
+/* 背景裝飾元素 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(3, 169, 244, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(0, 188, 212, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 導航欄設計 */
+header {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-bottom: 2px solid #e0e0e0;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    backdrop-filter: blur(10px);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    position: relative;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    padding: 8px 15px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(3, 169, 244, 0.1) 100%);
+    transition: all 0.3s ease;
+}
+
+.logo-section:hover {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, rgba(3, 169, 244, 0.15) 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
+}
+
+.logo-icon {
+    font-size: 24px;
+    background-color: #f5f5f5;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.logo-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, #2196F3, #03A9F4) padding-box,
+                linear-gradient(135deg, #2196F3, #03A9F4) border-box;
+    padding: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.2);
+}
+
+.logo-image:hover {
+    transform: scale(1.05) rotate(2deg);
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+h1 {
+    background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(33, 150, 243, 0.1);
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav li {
+    position: relative;
+}
+
+.main-nav a {
+    color: #555;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 12px 20px;
+    display: block;
+    border-right: 1px solid #e0e0e0;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.main-nav li:last-child a {
+    border-right: none;
+}
+
+.main-nav a:hover {
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.cta-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+}
+
+.cta-button:hover {
+    background-color: #555;
+    transform: translateY(-1px);
+}
+/* 快速連結區域 */
+.quick-links-section {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+    max-width: 600px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.quick-links-section.visible {
+    opacity: 1;
+}
+
+.quick-links-items {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    transform: translateY(10px);
+    opacity: 0.8;
+    transition: all 0.4s ease;
+}
+
+.quick-links-items.animate-in {
+    transform: translateY(0);
+    opacity: 1;
+} 
+
+.quick-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    font-size: 12px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.quick-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.quick-link:hover::before {
+    left: 100%;
+}
+
+.quick-link:hover {
+    background: #e9ecef;
+    border-color: #2196F3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+.quick-link.manage-links {
+    background: linear-gradient(135deg, #333 0%, #555 100%);
+    color: white;
+    border-color: #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.quick-link.manage-links:hover {
+    background: linear-gradient(135deg, #555 0%, #777 100%);
+    border-color: #2196F3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+}
+
+.quick-link i {
+    font-size: 11px;
+    transition: all 0.3s ease;
+}
+
+.quick-link:hover i {
+    transform: scale(1.1);
+    color: #2196F3;
+}
+
+.quick-link.manage-links:hover i {
+    color: white;
+}
