@@ -6,6 +6,7 @@
     <title>強人bb - 學習資源平台</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -44,7 +45,7 @@
     </ul>
     </nav>  
             <div class="header-actions">
-                <button class="cta-button" onclick="window.location.href='login.html'">Login</button>
+                <button class="cta-button" onclick="window.location.href='Website/login.html'">Login</button>
             </div>
             <button class="menu" onclick="toggleMobileMenu()">&#9776;</button>
         </div>
@@ -58,7 +59,7 @@
             <div class="mobile-menu-nav">
                 <a href="https://drive.google.com/drive/folders/1O_qCR5a0Cr6vtRvP91qxAXSlkyj2EVXc?usp=sharing" onclick="closeMobileMenu()">最新消息</a>
                 <a href="https://github.com/AAGNGT/DataWebsite.github.io" onclick="closeMobileMenu()">關於我們</a>
-                <a href="login.html" onclick="closeMobileMenu()">Login</a>
+                <a href="Website/login.html" onclick="closeMobileMenu()">Login</a>
             </div>
         </div>
         
@@ -176,24 +177,30 @@
                             <p>完整的 Minecraft 伺服器架設教學，從基礎設定到進階配置，讓您輕鬆建立自己的遊戲伺服器。</p>
                         </div>
                         <div class="video-list">
-                            <div class="video-item">
+                            <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=auPeE9UhKxk&list=PL0SZ6mlI7r2p-uovA_cjls5IzvBILClwl&index=1', '_blank')">
                                 <div class="video-thumbnail">
-                                    <i class="fas fa-play"></i>
+                                    <img src="https://img.youtube.com/vi/auPeE9UhKxk/mqdefault.jpg" alt="EP01 體驗篇 : 介紹強人bb的 Minecraft Server">
+                                    <div class="play-overlay">
+                                        <i class="fas fa-play"></i>
+                                    </div>
                                 </div>
                                 <div class="video-details">
-                                    <h5>Minecraft 伺服器基礎設定</h5>
-                                    <p>從零開始架設 Minecraft 伺服器</p>
-                                    <span class="video-duration">28:45</span>
+                                    <h5>EP01 體驗篇 : 介紹強人bb的 Minecraft Server</h5>
+                                    <p>深入了解強人bb的 Minecraft 伺服器特色與功能</p>
+                                    <span class="video-duration">EP01</span>
                                 </div>
                             </div>
-                            <div class="video-item">
+                            <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=5rCjGuimw4E&list=PL0SZ6mlI7r2p-uovA_cjls5IzvBILClwl&index=2', '_blank')">
                                 <div class="video-thumbnail">
-                                    <i class="fas fa-play"></i>
+                                    <img src="https://img.youtube.com/vi/5rCjGuimw4E/mqdefault.jpg" alt="EP02 建設伺服器篇 :「📦模組📦」&「🛠️插件⚒️」伺服器製作">
+                                    <div class="play-overlay">
+                                        <i class="fas fa-play"></i>
+                                    </div>
                                 </div>
                                 <div class="video-details">
-                                    <h5>伺服器插件安裝與配置</h5>
-                                    <p>如何安裝和管理伺服器插件</p>
-                                    <span class="video-duration">35:20</span>
+                                    <h5>EP02 建設伺服器篇 : 模組 & 插件伺服器製作</h5>
+                                    <p>學習如何在自己的電腦上架設 Minecraft 伺服器，包含模組和插件的安裝配置 (100%💸免費)</p>
+                                    <span class="video-duration">EP02</span>
                                 </div>
                             </div>
                         </div>
@@ -213,7 +220,7 @@
                         <i class="fas fa-lock"></i>
                         <h4>登入後才可以享用完整功能</h4>
                         <p>請先登入您的帳戶以存取所有學習資料和進階功能</p>
-                        <a href="login.html" class="login-btn">立即登入</a>
+                        <a href="Website/login.html" class="login-btn">立即登入</a>
                     </div>
                 </div>
 
