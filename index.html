@@ -3,92 +3,528 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>烘培工坊</title>
+    <title>強人bb - 學習資源平台</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-    <button class="menu">&#9776;</button>
-    <h1>烘培工坊</h1>
-    <nav>
+        <div class="header-container">
+            <div class="logo-section">
+                <img src="Website/1_PNG/強人bb.png" alt="強人bb Logo" class="logo-image">
+                <h1>強人bb</h1>
+            </div>
+            
+            <!-- 快速連結區域 -->
+            <div class="quick-links-section">
+                <div class="quick-links-items">
+                    <a class="quick-link" onclick="scrollToSection('hero')">
+                        <i class="fas fa-home"></i>
+                        <span>主頁</span>
+                    </a>
+                    <a class="quick-link" onclick="scrollToSection('channel')">
+                        <i class="fas fa-tv"></i>
+                        <span>教學頻道</span>
+                    </a>
+                    <a class="quick-link" onclick="scrollToSection('database')">
+                        <i class="fas fa-database"></i>
+                        <span>學習資料庫</span>
+                    </a>
+                    <a href="quick-links.html" class="quick-link manage-links">
+                        <i class="fas fa-cog"></i>
+                        <span>管理連結</span>
+                    </a>
+                </div>
+            </div>
+            
+            <nav class="main-nav">
     <ul>
         <li><a href="https://drive.google.com/drive/folders/1O_qCR5a0Cr6vtRvP91qxAXSlkyj2EVXc?usp=sharing">最新消息</a></li>
         <li><a href="https://github.com/AAGNGT/DataWebsite.github.io">關於我們</a></li>
-        <li><a href="#">門市據點 N/A</a></li>
-        <li><a href="#">會員專區 N/A</a></li>                
     </ul>
     </nav>  
+            <div class="header-actions">
+                <button class="cta-button" onclick="window.location.href='login.html'">Login</button>
+            </div>
+            <button class="menu" onclick="toggleMobileMenu()">&#9776;</button>
+        </div>
+        
+        <!-- 手機菜單 -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="mobile-menu-header">
+                <h3>強人bb</h3>
+                <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
+            </div>
+            <div class="mobile-menu-nav">
+                <a href="https://drive.google.com/drive/folders/1O_qCR5a0Cr6vtRvP91qxAXSlkyj2EVXc?usp=sharing" onclick="closeMobileMenu()">最新消息</a>
+                <a href="https://github.com/AAGNGT/DataWebsite.github.io" onclick="closeMobileMenu()">關於我們</a>
+                <a href="login.html" onclick="closeMobileMenu()">Login</a>
+            </div>
+        </div>
+        
+        <!-- 手機菜單遮罩 -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
     </header>   
-    <main>
-
-    <section class="news">
-    <h2>健康穀物麵包新鮮出爐！</h2>
-    <p>這是運用 Htmi, Github 設計的自學網站</p>
-    <p><a href="Website/login.html">進入全新網站</a></p>
-    </section>
-
-    <section class="slogan">
-    <p>"1. 經濟體制改革
-方法：推行市場經濟改革，從原有的計劃經濟轉向市場導向經濟。允許私營企業發展，削減國營企業壟斷，實行承包責任制，讓農民對土地收益有更多自主權。
-
-效果：農業產量大幅提升，解決了溫飽問題；同時，私營經濟迅速崛起，帶動了大規模就業和產業升級。
-
-
-
-2. 對外開放政策
-
-
-方法：設立經濟特區（如深圳、珠海、廈門等），吸引外資，鼓勵外商投資，並參與全球貿易體系。加入世界貿易組織（WTO），進一步融入國際市場。
-
-效果：外商直接投資（FDI）激增，技術與資金大量引入，出口導向型經濟迅速崛起，使中國成為“世界工廠”。
-
-
-
-3. 基礎設施建設
-
-
-方法：大規模投資於交通、能源、城市化等基礎設施領域，實施高速公路和高鐵網絡建設，推動城市現代化發展。
-
-效果：基礎設施的完善顯著提高了物流效率，促進了內需和區域經濟平衡發展，減少經濟發展差距。  "</p>
-    </section>
     
-    <section class="shop">
-    <img src="images/shop.png" alt="烘培工坊大安店">
-    <div class="info">
-    <h2>8月1日大安旗艦店隆重開張！</h2>
-    <p>享受花園庭院的悠閒時光，內用座位區美食相伴，<br>
-       即日起來店消費加 LINE 好友可獲精緻小點心，等您一同品味！</p>
+    <main>
+        <!-- 主要橫幅區域 -->
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h2>強人bb學習平台</h2>
+                <p>專業的學習資料庫與優質教學頻道，助您提升學習效率</p>
+            </div>
+    </section>
+
+        <!-- 教學頻道區域 -->
+        <section id="channel" class="feature-section">
+            <!-- 流星背景動畫 -->
+            <div class="meteor-container">
+                <div class="meteor meteor-1"></div>
+                <div class="meteor meteor-2"></div>
+                <div class="meteor meteor-3"></div>
+                <div class="meteor meteor-4"></div>
+                <div class="meteor meteor-5"></div>
+                <div class="meteor meteor-6"></div>
+                <div class="meteor meteor-7"></div>
+                <div class="meteor meteor-8"></div>
+                <div class="stars-layer">
+                    <div class="star star-1"></div>
+                    <div class="star star-2"></div>
+                    <div class="star star-3"></div>
+                    <div class="star star-4"></div>
+                    <div class="star star-5"></div>
+                    <div class="star star-6"></div>
+                    <div class="star star-7"></div>
+                    <div class="star star-8"></div>
+                    <div class="star star-9"></div>
+                    <div class="star star-10"></div>
+                </div>
+            </div>
+            <div class="container">
+                <h3>📺 教學頻道</h3>
+                <div class="channel-showcase">
+                    <div class="channel-main">
+                        <div class="channel-info">
+                            <div class="channel-header">
+                                <img src="Website/1_PNG/AAGNGT.png" alt="AAGNGT Logo" class="channel-logo">
+                                <div class="channel-title">
+                                    <h4>強人bb教學頻道</h4>
+                                    <p>提供各科專業知識講解，從基礎到進階，讓學習更有效率</p>
+                                </div>
+                            </div>
+                            <div class="channel-stats">
+                                <span><i class="fas fa-users"></i> 393 位訂閱者</span>
+                                <span><i class="fas fa-video"></i> 158 部影片</span>
+                                <span><i class="fas fa-clock"></i> 不定時更新</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 教學影片分類按鈕 -->
+                <div class="video-category-buttons">
+                    <button class="category-btn active" onclick="showCategory('teaching')">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>教學影片</span>
+                    </button>
+                    <button class="category-btn" onclick="showCategory('minecraft')">
+                        <i class="fas fa-server"></i>
+                        <span>架設您的 Minecraft 伺服器的教學</span>
+                    </button>
+                </div>
+                
+                <!-- 教學影片內容區域 -->
+                <div class="video-content-container">
+                    <div id="teaching-content" class="video-content active">
+                        <div class="series-intro">
+                            <h4>📚 教學影片系列</h4>
+                            <p>提供最新的軟體教學和技術分享，包含 Discord 功能教學、Windows 11 系統介紹等實用技術內容，讓您掌握最新的數位技能。</p>
+                        </div>
+                        <div class="video-list">
+                            <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=zNQZoCzJomk', '_blank')">
+                                <div class="video-thumbnail">
+                                    <img src="https://img.youtube.com/vi/zNQZoCzJomk/mqdefault.jpg" alt="Discord 快速切換帳戶功能">
+                                    <div class="play-overlay">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                </div>
+                                <div class="video-details">
+                                    <h5>Discord (2) 如何開啟快速切換帳戶功能(最新教學) (Win11)</h5>
+                                    <p>學習如何在 Windows 11 上開啟 Discord 快速切換帳戶功能</p>
+                                    <span class="video-duration">最新教學</span>
+                                </div>
+                            </div>
+                            <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=BEw3Kliokj4', '_blank')">
+                                <div class="video-thumbnail">
+                                    <img src="https://img.youtube.com/vi/BEw3Kliokj4/mqdefault.jpg" alt="Windows 11 22H2 完整版介紹">
+                                    <div class="play-overlay">
+                                        <i class="fas fa-play"></i>
+                                    </div>
+                                </div>
+                                <div class="video-details">
+                                    <h5>Windows 11 22H2 完整版介紹 + 小預告 (moment 1 + 2)</h5>
+                                    <p>深入了解 Windows 11 22H2 的新功能和改進</p>
+                                    <span class="video-duration">完整版介紹</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="minecraft-content" class="video-content">
+                        <div class="series-intro">
+                            <h4>🎮 Minecraft 伺服器架設系列</h4>
+                            <p>完整的 Minecraft 伺服器架設教學，從基礎設定到進階配置，讓您輕鬆建立自己的遊戲伺服器。</p>
+                        </div>
+                        <div class="video-list">
+                            <div class="video-item">
+                                <div class="video-thumbnail">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="video-details">
+                                    <h5>Minecraft 伺服器基礎設定</h5>
+                                    <p>從零開始架設 Minecraft 伺服器</p>
+                                    <span class="video-duration">28:45</span>
+                                </div>
+                            </div>
+                            <div class="video-item">
+                                <div class="video-thumbnail">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="video-details">
+                                    <h5>伺服器插件安裝與配置</h5>
+                                    <p>如何安裝和管理伺服器插件</p>
+                                    <span class="video-duration">35:20</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
     </div>
     </section>
 
-    <section class="product">
-        <div>
-            <img src="images/p1.png" alt="巴黎風法國土司">
-            <h3>巴黎風法國土司</h3>
-            <p>外皮金黃酥脆，內質鬆軟<br>讓您體驗法式浪漫的味覺享受</p>
+        <!-- 學習資料庫區域 -->
+        <section id="database" class="feature-section alt">
+            <div class="container">
+                <h3>📖 學習資料庫</h3>
+                
+                <!-- 登入提示 -->
+                <div class="login-notice">
+                    <div class="notice-content">
+                        <i class="fas fa-lock"></i>
+                        <h4>登入後才可以享用完整功能</h4>
+                        <p>請先登入您的帳戶以存取所有學習資料和進階功能</p>
+                        <a href="login.html" class="login-btn">立即登入</a>
+                    </div>
+                </div>
+
+                <div class="database-showcase">
+                    <!-- 核心科目 -->
+                    <div class="subject-category">
+                        <div class="category-header">
+                            <h4>🎯 核心科目</h4>
+                            <p>必修基礎科目，建立扎實的學習基礎</p>
+                        </div>
+                        <div class="subject-grid core-subjects">
+                            <div class="subject-card core">
+                                <div class="subject-icon">📚</div>
+                                <h5>中文</h5>
+                                <p>語文基礎與文學賞析</p>
+                                <div class="subject-status">
+                                    <span class="status-badge core-badge">核心</span>
+                                    <span class="file-count">中文.html</span>
+                                </div>
+                            </div>
+                            <div class="subject-card core">
+                                <div class="subject-icon">🗣️</div>
+                                <h5>英文</h5>
+                                <p>英語溝通與寫作技巧</p>
+                                <div class="subject-status">
+                                    <span class="status-badge core-badge">核心</span>
+                                    <span class="file-count">english.html</span>
+                                </div>
+                            </div>
+                            <div class="subject-card core">
+                                <div class="subject-icon">📊</div>
+                                <h5>數學</h5>
+                                <p>數學思維與解題技巧</p>
+                                <div class="subject-status">
+                                    <span class="status-badge core-badge">核心</span>
+                                    <span class="file-count">math.html</span>
+                                </div>
+                            </div>
+                            <div class="subject-card core">
+                                <div class="subject-icon">🏛️</div>
+                                <h5>公民</h5>
+                                <p>社會參與與公民素養</p>
+                                <div class="subject-status">
+                                    <span class="status-badge core-badge">核心</span>
+                                    <span class="file-count">civics.html</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 選修科目 -->
+                    <div class="subject-category">
+                        <div class="category-header">
+                            <h4>🎨 選修科目</h4>
+                            <p>專業選修課程，拓展學習領域</p>
+                        </div>
+                        <div class="subject-grid elective-subjects">
+                            <div class="subject-card elective">
+                                <div class="subject-icon">💰</div>
+                                <h5>經濟</h5>
+                                <p>經濟學原理與市場分析</p>
+                                <div class="subject-status">
+                                    <span class="status-badge elective-badge">選修</span>
+                                    <span class="file-count">economics.html</span>
+                                </div>
+                            </div>
+                            <div class="subject-card elective">
+                                <div class="subject-icon">💻</div>
+                                <h5>電腦</h5>
+                                <p>程式設計與資訊科技</p>
+                                <div class="subject-status">
+                                    <span class="status-badge elective-badge">選修</span>
+                                    <span class="file-count">computer.html</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 增潤項目 -->
+                    <div class="subject-category">
+                        <div class="category-header">
+                            <h4>🚀 增潤項目</h4>
+                            <p>進階學習內容，提升專業能力</p>
+                        </div>
+                        <div class="subject-grid enhancement-subjects">
+                            <div class="subject-card enhancement">
+                                <div class="subject-icon">📋</div>
+                                <h5>M2</h5>
+                                <p>數學延伸部分</p>
+                                <div class="subject-status">
+                                    <span class="status-badge enhancement-badge">增潤</span>
+                                    <span class="file-count">m2.html</span>
+                                </div>
+                            </div>
+                        </div>
         </div>
-        <div>
-            <img src="images/p2.png" alt="皇家奶油可頌麵包">
-            <h3>皇家奶油可頌麵包</h3>
-            <p>酥脆口感搭配奶油的濃郁香氣<br>品嘗簡單而純粹的美味</p>
         </div>
-        <div>
-            <img src="images/p3.png" alt="健康營養全麥土司">
-            <h3>健康營養全麥土司</h3>
-            <p>全麥製成，口感柔韌紮實<br>天然養分健康首選</p>
         </div>
-    </section>
-    <section class="newsletter">
-        <p>shell:startup</p>
-        <form>
-            <input type="email" placeholder="請輸入您的 Email" required>
-            <button type="submit">送出</button>
-        </form>
     </section>
     </main>
+    
     <footer>
+        <div class="container">
         <p>Copyright © 2024 強人bb All Rights Reserved.</p>
+            <p>shell:startup 致力於提供優質的學習資源與服務</p>
+        </div>
     </footer>
+    
+    <script>
+        // 視頻分類切換功能
+        function showCategory(category) {
+            const buttons = document.querySelectorAll('.category-btn');
+            const contents = document.querySelectorAll('.video-content');
+            
+            // 移除所有active類別
+            buttons.forEach(btn => btn.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // 添加轉出效果
+            const currentContent = document.querySelector('.video-content.active');
+            if (currentContent) {
+                currentContent.style.transform = 'translateX(-100%)';
+                currentContent.style.opacity = '0';
+            }
+            
+            // 延遲後切換內容
+            setTimeout(() => {
+                // 隱藏所有內容
+                contents.forEach(content => {
+                    content.classList.remove('active');
+                    content.style.transform = 'translateX(100%)';
+                    content.style.opacity = '0';
+                });
+                
+                // 顯示選中的內容
+                const targetButton = document.querySelector(`[onclick="showCategory('${category}')"]`);
+                const targetContent = document.getElementById(`${category}-content`);
+                
+                if (targetButton && targetContent) {
+                    targetButton.classList.add('active');
+                    targetContent.classList.add('active');
+                    
+                    // 添加轉入效果
+                    setTimeout(() => {
+                        targetContent.style.transform = 'translateX(0)';
+                        targetContent.style.opacity = '1';
+                    }, 50);
+                }
+            }, 300);
+        }
+
+        // 流星動畫滾動觸發功能
+        function initMeteorAnimation() {
+            const channelSection = document.getElementById('channel');
+            const meteors = document.querySelectorAll('.meteor');
+            const stars = document.querySelectorAll('.star');
+            
+            let isVisible = false;
+            let animationStarted = false;
+            
+            function handleScroll() {
+                const rect = channelSection.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                
+                // 當頻道區域進入視窗時觸發動畫
+                if (rect.top < windowHeight && rect.bottom > 0) {
+                    if (!isVisible) {
+                        isVisible = true;
+                        startMeteorAnimation();
+                    }
+                } else {
+                    if (isVisible) {
+                        isVisible = false;
+                        stopMeteorAnimation();
+                    }
+                }
+            }
+            
+            function startMeteorAnimation() {
+                if (animationStarted) return;
+                animationStarted = true;
+                
+                // 啟動流星動畫
+                meteors.forEach((meteor, index) => {
+                    meteor.style.animationPlayState = 'running';
+                    meteor.style.opacity = '1';
+                });
+                
+                // 啟動星星閃爍
+                stars.forEach((star, index) => {
+                    star.style.animationPlayState = 'running';
+                    star.style.opacity = '1';
+                });
+                
+                // 添加額外的視覺效果
+                channelSection.classList.add('meteor-active');
+            }
+            
+            function stopMeteorAnimation() {
+                animationStarted = false;
+                
+                // 停止動畫
+                meteors.forEach(meteor => {
+                    meteor.style.animationPlayState = 'paused';
+                    meteor.style.opacity = '0';
+                });
+                
+                stars.forEach(star => {
+                    star.style.animationPlayState = 'paused';
+                    star.style.opacity = '0.3';
+                });
+                
+                channelSection.classList.remove('meteor-active');
+            }
+            
+            // 監聽滾動事件
+            window.addEventListener('scroll', handleScroll);
+            
+            // 初始檢查
+            handleScroll();
+        }
+        
+        // 滾動導航功能
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = section.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // 快速連結自動顯示功能
+        function initQuickLinksVisibility() {
+            const quickLinksSection = document.querySelector('.quick-links-section');
+            const quickLinksItems = document.querySelector('.quick-links-items');
+            
+            function handleScroll() {
+                const scrollY = window.scrollY;
+                
+                // 當滾動超過一定距離時顯示快速連結
+                if (scrollY > 100) {
+                    quickLinksSection.classList.add('visible');
+                    quickLinksItems.classList.add('animate-in');
+                } else {
+                    quickLinksSection.classList.remove('visible');
+                    quickLinksItems.classList.remove('animate-in');
+                }
+            }
+            
+            // 監聽滾動事件
+            window.addEventListener('scroll', handleScroll);
+            
+            // 初始檢查
+            handleScroll();
+        }
+
+        // 手機菜單功能
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            
+            if (mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        function openMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileMenuOverlay');
+            
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // 監聽視窗大小變化
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
+        });
+
+        // 監聽ESC鍵關閉菜單
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
+
+        // 頁面載入完成後初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initMeteorAnimation();
+            initQuickLinksVisibility();
+        });
+    </script>
 </body>
 <!-- 
 <head>
