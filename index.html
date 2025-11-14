@@ -1,1404 +1,1700 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>強人bb - 學習資源平台</title>
-    <link rel="stylesheet" href="style1.css">
-    <link rel="stylesheet" href="style2.css">
-    <link rel="stylesheet" href="style4.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* 主要內容區域 */
-main {
-    padding-top: 80px; /* 調整為單一導航欄的高度 */
-}
+    <!DOCTYPE html>
+    <html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>強人bb - 學習資源平台</title>
+        <link rel="stylesheet" href="style1.css">
+        <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="style4.css">
+        <link rel="stylesheet" href="stylelogin.css">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <style>
+            /* 主要內容區域 */
+    main {
+        padding-top: 80px; /* 調整為單一導航欄的高度 */
+    }
 
-/* 英雄區域 */
-.hero {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
-    color: #333;
-    padding: 80px 0;
-    text-align: center;
-    border-bottom: 2px solid #e0e0e0;
-    position: relative;
-    overflow: hidden;
-}
+    /* 英雄區域 */
+    .hero {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+        color: #333;
+        padding: 80px 0;
+        text-align: center;
+        border-bottom: 2px solid #e0e0e0;
+        position: relative;
+        overflow: hidden;
+    }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: 
-        radial-gradient(circle at 30% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 70% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-}
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 30% 20%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 70% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+        pointer-events: none;
+    }
 
-.hero-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
 
-.hero h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #333;
-}
+    .hero h2 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #333;
+    }
 
-.hero p {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    color: #666;
-    line-height: 1.6;
-}
+    .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        color: #666;
+        line-height: 1.6;
+    }
 
-.hero-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
+    .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 
-/* 按鈕樣式 */
-.btn-primary, .btn-secondary {
-    display: inline-block;
-    padding: 12px 24px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 14px;
-    transition: all 0.2s ease;
-    border: 1px solid #ddd;
-}
+    /* 按鈕樣式 */
+    .btn-primary, .btn-secondary {
+        display: inline-block;
+        padding: 12px 24px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        transition: all 0.2s ease;
+        border: 1px solid #ddd;
+    }
 
-.btn-primary {
-    background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);
-    color: white;
-    border: none;
-    position: relative;
-    overflow: hidden;
-}
+    .btn-primary {
+        background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);
+        color: white;
+        border: none;
+        position: relative;
+        overflow: hidden;
+    }
 
-.btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition: left 0.5s ease;
-}
+    .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s ease;
+    }
 
-.btn-primary:hover::before {
-    left: 100%;
-}
+    .btn-primary:hover::before {
+        left: 100%;
+    }
 
-.btn-primary:hover {
-    background: linear-gradient(135deg, #1976D2 0%, #0288D1 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
-}
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #1976D2 0%, #0288D1 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
+    }
 
-.btn-secondary {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    color: #333;
-    border: 2px solid transparent;
-    background-clip: padding-box;
-    position: relative;
-}
+    .btn-secondary {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        color: #333;
+        border: 2px solid transparent;
+        background-clip: padding-box;
+        position: relative;
+    }
 
-.btn-secondary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, #2196F3, #03A9F4);
-    border-radius: inherit;
-    padding: 2px;
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-}
+    .btn-secondary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, #2196F3, #03A9F4);
+        border-radius: inherit;
+        padding: 2px;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+    }
 
-.btn-secondary:hover {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
-}
+    .btn-secondary:hover {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2);
+    }
 
-/* 容器 */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
+    /* 容器 */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
 
-/* 功能區域 */
-.feature-section {
-    padding: 60px 0;
-    background-color: #fff;
-    border-bottom: 1px solid #e0e0e0;
-}
+    /* 功能區域 */
+    .feature-section {
+        padding: 60px 0;
+        background-color: #fff;
+        border-bottom: 1px solid #e0e0e0;
+    }
 
-.feature-section.alt {
-    background-color: #f8f9fa;
-}
+    .feature-section.alt {
+        background-color: #f8f9fa;
+    }
 
-.feature-section h3 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: #333;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #e0e0e0;
-    display: inline-block;
-    width: 100%;
-}
+    .feature-section h3 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        color: #333;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #e0e0e0;
+        display: inline-block;
+        width: 100%;
+    }
 
-/* 流星背景動畫 */
-.meteor-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
-    pointer-events: none;
-}
+    /* 流星背景動畫 */
+    .meteor-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+        pointer-events: none;
+    }
 
-.meteor {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: linear-gradient(45deg, #2196F3, #03A9F4, #00BCD4);
-    border-radius: 50%;
-    box-shadow: 0 0 6px #2196F3, 0 0 12px #03A9F4, 0 0 18px #00BCD4;
-    opacity: 0;
-    animation: meteor-fall 3s linear infinite;
-}
-
-.meteor::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 120px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #2196F3, #03A9F4, #00BCD4, transparent);
-    transform: rotate(45deg);
-    transform-origin: left;
-    box-shadow: 0 0 10px #2196F3, 0 0 20px #03A9F4;
-}
-
-.meteor::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 60px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(33, 150, 243, 0.6), transparent);
-    transform: rotate(45deg);
-    transform-origin: left;
-    animation: meteor-trail 3s linear infinite;
-}
-
-@keyframes meteor-trail {
-    0% {
+    .meteor {
+        position: absolute;
+        width: 2px;
+        height: 2px;
+        background: linear-gradient(45deg, #2196F3, #03A9F4, #00BCD4);
+        border-radius: 50%;
+        box-shadow: 0 0 6px #2196F3, 0 0 12px #03A9F4, 0 0 18px #00BCD4;
         opacity: 0;
-        transform: rotate(45deg) scaleX(0);
+        animation: meteor-fall 3s linear infinite;
     }
-    20% {
-        opacity: 1;
-        transform: rotate(45deg) scaleX(1);
+
+    .meteor::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 120px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #2196F3, #03A9F4, #00BCD4, transparent);
+        transform: rotate(45deg);
+        transform-origin: left;
+        box-shadow: 0 0 10px #2196F3, 0 0 20px #03A9F4;
     }
-    100% {
-        opacity: 0;
-        transform: rotate(45deg) scaleX(1);
+
+    .meteor::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 60px;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(33, 150, 243, 0.6), transparent);
+        transform: rotate(45deg);
+        transform-origin: left;
+        animation: meteor-trail 3s linear infinite;
     }
-}
 
-.meteor-1 {
-    top: -10px;
-    left: 10%;
-    animation-delay: 0s;
-    animation-duration: 2.5s;
-}
-
-.meteor-2 {
-    top: -10px;
-    left: 20%;
-    animation-delay: 0.5s;
-    animation-duration: 3s;
-}
-
-.meteor-3 {
-    top: -10px;
-    left: 35%;
-    animation-delay: 1s;
-    animation-duration: 2.8s;
-}
-
-.meteor-4 {
-    top: -10px;
-    left: 50%;
-    animation-delay: 1.5s;
-    animation-duration: 3.2s;
-}
-
-.meteor-5 {
-    top: -10px;
-    left: 65%;
-    animation-delay: 2s;
-    animation-duration: 2.7s;
-}
-
-.meteor-6 {
-    top: -10px;
-    left: 80%;
-    animation-delay: 2.5s;
-    animation-duration: 3.1s;
-}
-
-.meteor-7 {
-    top: -10px;
-    left: 90%;
-    animation-delay: 3s;
-    animation-duration: 2.9s;
-}
-
-.meteor-8 {
-    top: -10px;
-    left: 5%;
-    animation-delay: 3.5s;
-    animation-duration: 3.3s;
-}
-
-@keyframes meteor-fall {
-    0% {
-        opacity: 0;
-        transform: translateY(-100px) translateX(0);
+    @keyframes meteor-trail {
+        0% {
+            opacity: 0;
+            transform: rotate(45deg) scaleX(0);
+        }
+        20% {
+            opacity: 1;
+            transform: rotate(45deg) scaleX(1);
+        }
+        100% {
+            opacity: 0;
+            transform: rotate(45deg) scaleX(1);
+        }
     }
-    10% {
-        opacity: 1;
+
+    .meteor-1 {
+        top: -10px;
+        left: 10%;
+        animation-delay: 0s;
+        animation-duration: 2.5s;
     }
-    90% {
-        opacity: 1;
+
+    .meteor-2 {
+        top: -10px;
+        left: 20%;
+        animation-delay: 0.5s;
+        animation-duration: 3s;
     }
-    100% {
-        opacity: 0;
-        transform: translateY(100vh) translateX(50px);
+
+    .meteor-3 {
+        top: -10px;
+        left: 35%;
+        animation-delay: 1s;
+        animation-duration: 2.8s;
     }
-}
-.stars-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-/* 星星背景 */
-.star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    animation: star-twinkle 2s ease-in-out infinite;
-    box-shadow: 0 0 6px white, 0 0 12px rgba(255, 255, 255, 0.5);
-}
 
-.star::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 2px;
-    height: 2px;
-    background: white;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: star-sparkle 1.5s ease-in-out infinite;
-}
-
-.star::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 1px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: star-sparkle 1.5s ease-in-out infinite reverse;
-}
-
-@keyframes star-sparkle {
-    0%, 100% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0);
+    .meteor-4 {
+        top: -10px;
+        left: 50%;
+        animation-delay: 1.5s;
+        animation-duration: 3.2s;
     }
-    50% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
+
+    .meteor-5 {
+        top: -10px;
+        left: 65%;
+        animation-delay: 2s;
+        animation-duration: 2.7s;
     }
-}
 
-.star-1 { top: 10%; left: 15%; width: 1px; height: 1px; animation-delay: 0s; }
-.star-2 { top: 20%; left: 85%; width: 2px; height: 2px; animation-delay: 0.5s; }
-.star-3 { top: 30%; left: 25%; width: 1px; height: 1px; animation-delay: 1s; }
-.star-4 { top: 40%; left: 75%; width: 1.5px; height: 1.5px; animation-delay: 1.5s; }
-.star-5 { top: 50%; left: 10%; width: 1px; height: 1px; animation-delay: 2s; }
-.star-6 { top: 60%; left: 90%; width: 2px; height: 2px; animation-delay: 0.3s; }
-.star-7 { top: 70%; left: 40%; width: 1px; height: 1px; animation-delay: 0.8s; }
-.star-8 { top: 80%; left: 60%; width: 1.5px; height: 1.5px; animation-delay: 1.3s; }
-.star-9 { top: 15%; left: 50%; width: 1px; height: 1px; animation-delay: 1.8s; }
-.star-10 { top: 85%; left: 30%; width: 2px; height: 2px; animation-delay: 2.3s; }
+    .meteor-6 {
+        top: -10px;
+        left: 80%;
+        animation-delay: 2.5s;
+        animation-duration: 3.1s;
+    }
 
-@keyframes star-twinkle {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.2); }
-}
+    .meteor-7 {
+        top: -10px;
+        left: 90%;
+        animation-delay: 3s;
+        animation-duration: 2.9s;
+    }
 
-/* 頻道區域特殊樣式 */
-#channel {
-    position: relative;
-    background: 
-        linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%),
-        radial-gradient(circle at 20% 20%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(3, 169, 244, 0.1) 0%, transparent 50%);
-    overflow: hidden;
-    transition: all 0.5s ease;
-    backdrop-filter: blur(10px);
-}
+    .meteor-8 {
+        top: -10px;
+        left: 5%;
+        animation-delay: 3.5s;
+        animation-duration: 3.3s;
+    }
 
-#channel.meteor-active {
-    background: 
-        linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 30%, #16213e 70%, #0f3460 100%),
-        radial-gradient(circle at 20% 20%, rgba(33, 150, 243, 0.2) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(3, 169, 244, 0.2) 0%, transparent 50%);
-    box-shadow: inset 0 0 100px rgba(33, 150, 243, 0.1);
-}
+    @keyframes meteor-fall {
+        0% {
+            opacity: 0;
+            transform: translateY(-100px) translateX(0);
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            transform: translateY(100vh) translateX(50px);
+        }
+    }
+    .stars-layer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    /* 星星背景 */
+    .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: star-twinkle 2s ease-in-out infinite;
+        box-shadow: 0 0 6px white, 0 0 12px rgba(255, 255, 255, 0.5);
+    }
 
-#channel.meteor-active::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: 
-        radial-gradient(circle at 20% 20%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(3, 169, 244, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(0, 188, 212, 0.05) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: 1;
-    animation: background-pulse 4s ease-in-out infinite;
-}
+    .star::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 2px;
+        height: 2px;
+        background: white;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: star-sparkle 1.5s ease-in-out infinite;
+    }
 
-@keyframes background-pulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-}
+    .star::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 1px;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: star-sparkle 1.5s ease-in-out infinite reverse;
+    }
 
-#channel .container { position: relative; z-index: 2; }
-#channel h3 { color: white; text-shadow: 0 0 10px rgba(33, 150, 243, 0.5); position: relative; z-index: 2; }
+    @keyframes star-sparkle {
+        0%, 100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+        }
+        50% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
 
-/* 頻道展示區域 */
-.channel-showcase { margin-top: 2rem; position: relative; z-index: 2; }
-.channel-main { display: flex; justify-content: center; align-items: center; }
-.channel-info {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-    max-width: 600px;
-    width: 100%;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-.channel-info::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(3, 169, 244, 0.1) 100%); border-radius: inherit; z-index: -1; }
-.channel-info:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(33, 150, 243, 0.15); border-color: #2196F3; }
-.channel-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
-.channel-logo { width: 80px; height: 80px; object-fit: contain; border-radius: 12px; border: 2px solid #e0e0e0; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); padding: 8px; transition: all 0.3s ease; }
-.channel-info:hover .channel-logo { border-color: #2196F3; transform: scale(1.05); box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2); }
-.channel-title h4 { font-size: 1.8rem; color: white; margin: 0 0 0.5rem 0; font-weight: 700; background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 50%, #bbdefb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 20px rgba(33, 150, 243, 0.5); position: relative; }
-.channel-title h4::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(33, 150, 243, 0.3) 0%, rgba(3, 169, 244, 0.3) 100%); border-radius: 8px; z-index: -1; filter: blur(10px); }
-.channel-title p { color: rgba(255, 255, 255, 0.8); font-size: 1rem; line-height: 1.5; margin: 0; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
-.channel-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; padding-top: 1rem; border-top: 1px solid #e0e0e0; }
-.channel-stats span { display: flex; align-items: center; gap: 0.5rem; color: rgba(255, 255, 255, 0.9); font-size: 0.95rem; font-weight: 500; padding: 8px 12px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden; }
-.channel-stats span::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: left 0.5s ease; }
-.channel-stats span:hover { background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%); color: white; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3); }
-.channel-stats i { color: #2196F3; font-size: 1rem; transition: color 0.3s ease; }
-.channel-stats span:hover i { color: white; }
+    .star-1 { top: 10%; left: 15%; width: 1px; height: 1px; animation-delay: 0s; }
+    .star-2 { top: 20%; left: 85%; width: 2px; height: 2px; animation-delay: 0.5s; }
+    .star-3 { top: 30%; left: 25%; width: 1px; height: 1px; animation-delay: 1s; }
+    .star-4 { top: 40%; left: 75%; width: 1.5px; height: 1.5px; animation-delay: 1.5s; }
+    .star-5 { top: 50%; left: 10%; width: 1px; height: 1px; animation-delay: 2s; }
+    .star-6 { top: 60%; left: 90%; width: 2px; height: 2px; animation-delay: 0.3s; }
+    .star-7 { top: 70%; left: 40%; width: 1px; height: 1px; animation-delay: 0.8s; }
+    .star-8 { top: 80%; left: 60%; width: 1.5px; height: 1.5px; animation-delay: 1.3s; }
+    .star-9 { top: 15%; left: 50%; width: 1px; height: 1px; animation-delay: 1.8s; }
+    .star-10 { top: 85%; left: 30%; width: 2px; height: 2px; animation-delay: 2.3s; }
 
-/* 自製 AI：黑色玻璃風格 */
-#ai {
-    position: relative;
-    background: radial-gradient(1200px 600px at 20% 20%, rgba(33, 150, 243, 0.08), transparent 60%),
-                radial-gradient(800px 400px at 80% 80%, rgba(118, 75, 162, 0.08), transparent 60%),
-                linear-gradient(135deg, #0a0a0f 0%, #111827 60%, #0b0f1a 100%);
-    color: #e5e7eb;
-    overflow: hidden;
-}
-#ai::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% -10%, rgba(255,255,255,0.08), transparent 40%);
-    pointer-events: none;
-}
-#ai h3 { color: #fff; text-shadow: 0 0 14px rgba(255,255,255,0.2); }
-.ai-panel {
-    background: rgba(17, 25, 40, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
-}
-.ai-panel .channel-logo { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); }
-.ai-panel .channel-title p { color: rgba(255,255,255,0.85); }
+    @keyframes star-twinkle {
+        0%, 100% { opacity: 0.3; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.2); }
+    }
 
-.ai-card {
-    margin-top: 1rem;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    padding: 16px;
-}
-.ai-input {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.18);
-    background: rgba(0,0,0,0.35);
-    color: #e5e7eb;
-}
-.ai-input::placeholder { color: rgba(229,231,235,0.6); }
-.ai-result { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; }
+    /* 頻道區域特殊樣式 */
+    #channel {
+        position: relative;
+        background: 
+            linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%),
+            radial-gradient(circle at 20% 20%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(3, 169, 244, 0.1) 0%, transparent 50%);
+        overflow: hidden;
+        transition: all 0.5s ease;
+        backdrop-filter: blur(10px);
+    }
 
-/* 影片資源分享（黑玻璃 + 輪播 + 排行） */
-#video-hub {
-    position: relative;
-    background: linear-gradient(135deg, #0b1020 0%, #0f1a2a 60%, #0a1220 100%);
-    color: #e5e7eb;
-    overflow: hidden;
-}
-#video-hub h3 { color: #fff; text-shadow: 0 0 14px rgba(255,255,255,0.2); }
-.media-panel {
-    display: grid;
-    grid-template-columns: 1.6fr 0.8fr; /* 左側更大，右側更窄 */
-    gap: 24px;
-}
-@media (max-width: 900px){ .media-panel { grid-template-columns: 1fr; } }
-.media-card {
-    background: rgba(17, 25, 40, 0.6);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px;
-    padding: 20px;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
-}
-.carousel {
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    aspect-ratio: 16 / 9;
-    background: #0a0a0a;
-}
-.carousel.sm { max-width: 420px; margin: 0 auto; }
-.carousel img { width: 100%; height: 100%; object-fit: cover; display: none; }
-.carousel img.active { display: block; }
-.carousel .nav {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; pointer-events: none;
-}
-.carousel button { pointer-events: auto; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid rgba(255,255,255,0.2); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; }
-.carousel .dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
-.carousel .dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(255,255,255,0.4); transition: all .2s; }
-.carousel .dot.active { width: 28px; background: #4dabf7; }
-.carousel-link { display: block; position: relative; border-radius: 16px; }
-.enter-badge { position: absolute; right: 8px; bottom: 8px; padding: 6px 10px; border-radius: 10px; background: rgba(17,25,40,0.75); color: #e5e7eb; border: 1px solid rgba(255,255,255,0.18); font-size: 12px; display: inline-flex; align-items: center; gap: 6px; }
-.enter-badge i { color: #93c5fd; }
-.media-badges { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
-.media-badges span { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); }
-.carousel-2col { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; align-items: center; }
-@media (max-width: 900px){ .carousel-2col { grid-template-columns: 1fr; } }
-.carousel-text h4 { margin: 0 0 6px 0; font-size: 1.8rem; color: #fff; font-weight: 800; letter-spacing: .5px; }
-.carousel-text p { margin: 0; color: #cbd5e1; line-height: 1.6; }
-.carousel-text .icon-box { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; }
-.rank-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.rank-item { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; padding: 8px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
-.rank-item img { width: 64px; height: 40px; object-fit: cover; border-radius: 8px; }
-.rank-item .meta { display: flex; flex-direction: column; gap: 2px; }
-.rank-item .meta strong { color: #fff; font-size: 0.95rem; }
-.rank-item .meta small { color: #9ca3af; }
-.rank-item .score { color: #93c5fd; font-weight: 700; }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="header-container">
-            <div class="logo-section">
-                <img src="Website/1_PNG/強人bb.png" alt="強人bb Logo" class="logo-image">
-                <h1>強人bb</h1>
+    #channel.meteor-active {
+        background: 
+            linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 30%, #16213e 70%, #0f3460 100%),
+            radial-gradient(circle at 20% 20%, rgba(33, 150, 243, 0.2) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(3, 169, 244, 0.2) 0%, transparent 50%);
+        box-shadow: inset 0 0 100px rgba(33, 150, 243, 0.1);
+    }
+
+    #channel.meteor-active::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(circle at 20% 20%, rgba(33, 150, 243, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(3, 169, 244, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, rgba(0, 188, 212, 0.05) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 1;
+        animation: background-pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes background-pulse {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+    }
+
+    #channel .container { position: relative; z-index: 2; }
+    #channel h3 { color: white; text-shadow: 0 0 10px rgba(33, 150, 243, 0.5); position: relative; z-index: 2; }
+
+    /* 頻道展示區域 */
+    .channel-showcase { margin-top: 2rem; position: relative; z-index: 2; }
+    .channel-main { display: flex; justify-content: center; align-items: center; }
+    .channel-info {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        max-width: 600px;
+        width: 100%;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    .channel-info::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(3, 169, 244, 0.1) 100%); border-radius: inherit; z-index: -1; }
+    .channel-info:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(33, 150, 243, 0.15); border-color: #2196F3; }
+    .channel-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .channel-logo { width: 80px; height: 80px; object-fit: contain; border-radius: 12px; border: 2px solid #e0e0e0; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); padding: 8px; transition: all 0.3s ease; }
+    .channel-info:hover .channel-logo { border-color: #2196F3; transform: scale(1.05); box-shadow: 0 4px 15px rgba(33, 150, 243, 0.2); }
+    .channel-title h4 { font-size: 1.8rem; color: white; margin: 0 0 0.5rem 0; font-weight: 700; background: linear-gradient(135deg, #ffffff 0%, #e3f2fd 50%, #bbdefb 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 20px rgba(33, 150, 243, 0.5); position: relative; }
+    .channel-title h4::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(33, 150, 243, 0.3) 0%, rgba(3, 169, 244, 0.3) 100%); border-radius: 8px; z-index: -1; filter: blur(10px); }
+    .channel-title p { color: rgba(255, 255, 255, 0.8); font-size: 1rem; line-height: 1.5; margin: 0; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+    .channel-stats { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; padding-top: 1rem; border-top: 1px solid #e0e0e0; }
+    .channel-stats span { display: flex; align-items: center; gap: 0.5rem; color: rgba(255, 255, 255, 0.9); font-size: 0.95rem; font-weight: 500; padding: 8px 12px; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2); transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden; }
+    .channel-stats span::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: left 0.5s ease; }
+    .channel-stats span:hover { background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%); color: white; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3); }
+    .channel-stats i { color: #2196F3; font-size: 1rem; transition: color 0.3s ease; }
+    .channel-stats span:hover i { color: white; }
+
+    /* 自製 AI：黑色玻璃風格 */
+    #ai {
+        position: relative;
+        background: radial-gradient(1200px 600px at 20% 20%, rgba(33, 150, 243, 0.08), transparent 60%),
+                    radial-gradient(800px 400px at 80% 80%, rgba(118, 75, 162, 0.08), transparent 60%),
+                    linear-gradient(135deg, #0a0a0f 0%, #111827 60%, #0b0f1a 100%);
+        color: #e5e7eb;
+        overflow: hidden;
+    }
+    #ai::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% -10%, rgba(255,255,255,0.08), transparent 40%);
+        pointer-events: none;
+    }
+    #ai h3 { color: #fff; text-shadow: 0 0 14px rgba(255,255,255,0.2); }
+    .ai-panel {
+        background: rgba(17, 25, 40, 0.65);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .ai-panel .channel-logo { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); }
+    .ai-panel .channel-title p { color: rgba(255,255,255,0.85); }
+
+    .ai-card {
+        margin-top: 1rem;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 16px;
+    }
+    .ai-input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.18);
+        background: rgba(0,0,0,0.35);
+        color: #e5e7eb;
+    }
+    .ai-input::placeholder { color: rgba(229,231,235,0.6); }
+    .ai-result { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; }
+
+    /* 影片資源分享（黑玻璃 + 輪播 + 排行） */
+    #video-hub {
+        position: relative;
+        background: linear-gradient(135deg, #0b1020 0%, #0f1a2a 60%, #0a1220 100%);
+        color: #e5e7eb;
+        overflow: hidden;
+    }
+    #video-hub h3 { color: #fff; text-shadow: 0 0 14px rgba(255,255,255,0.2); }
+    .media-panel {
+        display: grid;
+        grid-template-columns: 1.6fr 0.8fr; /* 左側更大，右側更窄 */
+        gap: 24px;
+    }
+    @media (max-width: 900px){ .media-panel { grid-template-columns: 1fr; } }
+    .media-card {
+        background: rgba(17, 25, 40, 0.6);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 20px;
+        padding: 20px;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 16px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+    .carousel {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+        background: #0a0a0a;
+    }
+    .carousel.sm { max-width: 420px; margin: 0 auto; }
+    .carousel img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .carousel img.active { display: block; }
+    .carousel .nav {
+        position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; pointer-events: none;
+    }
+    .carousel button { pointer-events: auto; background: rgba(0,0,0,0.5); color: #fff; border: 1px solid rgba(255,255,255,0.2); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; }
+    .carousel .dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; }
+    .carousel .dot { width: 8px; height: 8px; border-radius: 999px; background: rgba(255,255,255,0.4); transition: all .2s; }
+    .carousel .dot.active { width: 28px; background: #4dabf7; }
+    .carousel-link { display: block; position: relative; border-radius: 16px; }
+    .enter-badge { position: absolute; right: 8px; bottom: 8px; padding: 6px 10px; border-radius: 10px; background: rgba(17,25,40,0.75); color: #e5e7eb; border: 1px solid rgba(255,255,255,0.18); font-size: 12px; display: inline-flex; align-items: center; gap: 6px; }
+    .enter-badge i { color: #93c5fd; }
+    .media-badges { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+    .media-badges span { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); }
+    .carousel-2col { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; align-items: center; }
+    @media (max-width: 900px){ .carousel-2col { grid-template-columns: 1fr; } }
+    .carousel-text h4 { margin: 0 0 6px 0; font-size: 1.8rem; color: #fff; font-weight: 800; letter-spacing: .5px; }
+    .carousel-text p { margin: 0; color: #cbd5e1; line-height: 1.6; }
+    .carousel-text .icon-box { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; }
+    .rank-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .rank-item { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; padding: 8px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+    .rank-item img { width: 64px; height: 40px; object-fit: cover; border-radius: 8px; }
+    .rank-item .meta { display: flex; flex-direction: column; gap: 2px; }
+    .rank-item .meta strong { color: #fff; font-size: 0.95rem; }
+    .rank-item .meta small { color: #9ca3af; }
+    .rank-item .score { color: #93c5fd; font-weight: 700; }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-container">
+                <div class="logo-section">
+                    <img src="Website/1_PNG/強人bb.png" alt="強人bb Logo" class="logo-image">
+                    <h1>強人bb</h1>
+                </div>
+                
+                <!-- 快速連結區域 -->
+                <div class="quick-links-section">
+                    <div class="quick-links-items">
+                        <a class="quick-link" onclick="scrollToSection('hero')">
+                            <i class="fas fa-home"></i>
+                            <span>主頁</span>
+                        </a>
+                        <a class="quick-link" onclick="scrollToSection('channel')">
+                            <i class="fas fa-tv"></i>
+                            <span>教學頻道</span>
+                        </a>
+                        <a class="quick-link" onclick="scrollToSection('video-hub')">
+                            <i class="fas fa-file-video"></i>
+                            <span>影片資源分享</span>
+                        </a>
+                        <a class="quick-link" onclick="scrollToSection('database')">
+                            <i class="fas fa-database"></i>
+                            <span>學習資料庫</span>
+                        </a>
+                        <a class="quick-link" onclick="scrollToSection('ai')">
+                            <i class="fas fa-robot"></i>
+                            <span>使用AI</span>
+                        </a>
+                        <a href="quick-links.html" class="quick-link manage-links">
+                            <i class="fas fa-cog"></i>
+                            <span>管理連結</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <nav class="main-nav">
+        <ul>
+            <li><a href="https://drive.google.com/drive/folders/1O_qCR5a0Cr6vtRvP91qxAXSlkyj2EVXc?usp=sharing">最新消息</a></li>
+            <li><a href="https://github.com/AAGNGT/DataWebsite.github.io">關於我們</a></li>
+        </ul>
+        </nav>  
+                <div class="header-actions">
+                    <button class="cta-button" onclick="window.location.href='Website/login.html'">Login</button>
+                </div>
+                <button class="menu" onclick="toggleMobileMenu()">&#9776;</button>
             </div>
             
-            <!-- 快速連結區域 -->
-            <div class="quick-links-section">
-                <div class="quick-links-items">
-                    <a class="quick-link" onclick="scrollToSection('hero')">
-                        <i class="fas fa-home"></i>
-                        <span>主頁</span>
-                    </a>
-                    <a class="quick-link" onclick="scrollToSection('channel')">
-                        <i class="fas fa-tv"></i>
-                        <span>教學頻道</span>
-                    </a>
-                    <a class="quick-link" onclick="scrollToSection('video-hub')">
-                        <i class="fas fa-file-video"></i>
-                        <span>影片資源分享</span>
-                    </a>
-                    <a class="quick-link" onclick="scrollToSection('database')">
-                        <i class="fas fa-database"></i>
-                        <span>學習資料庫</span>
-                    </a>
-                    <a class="quick-link" onclick="scrollToSection('ai')">
-                        <i class="fas fa-robot"></i>
-                        <span>使用AI</span>
-                    </a>
-                    <a href="quick-links.html" class="quick-link manage-links">
-                        <i class="fas fa-cog"></i>
-                        <span>管理連結</span>
-                    </a>
+            <!-- 手機菜單 -->
+            <div class="mobile-menu" id="mobileMenu">
+                <div class="mobile-menu-header">
+                    <h3>強人bb</h3>
+                    <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
+                </div>
+                <div class="mobile-menu-nav">
+                    <a href="https://drive.google.com/drive/folders/1O_qCR5a0Cr6vtRvP91qxAXSlkyj2EVXc?usp=sharing" onclick="closeMobileMenu()">最新消息</a>
+                    <a href="https://github.com/AAGNGT/DataWebsite.github.io" onclick="closeMobileMenu()">關於我們</a>
+                    <a href="Website/login.html" onclick="closeMobileMenu()">Login</a>
                 </div>
             </div>
             
-            <nav class="main-nav">
-    <ul>
-        <li><a href="https://drive.google.com/drive/folders/1O_qCR5a0Cr6vtRvP91qxAXSlkyj2EVXc?usp=sharing">最新消息</a></li>
-        <li><a href="https://github.com/AAGNGT/DataWebsite.github.io">關於我們</a></li>
-    </ul>
-    </nav>  
-            <div class="header-actions">
-                <button class="cta-button" onclick="window.location.href='Website/login.html'">Login</button>
-            </div>
-            <button class="menu" onclick="toggleMobileMenu()">&#9776;</button>
-        </div>
+            <!-- 手機菜單遮罩 -->
+            <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+        </header>   
         
-        <!-- 手機菜單 -->
-        <div class="mobile-menu" id="mobileMenu">
-            <div class="mobile-menu-header">
-                <h3>強人bb</h3>
-                <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
-            </div>
-            <div class="mobile-menu-nav">
-                <a href="https://drive.google.com/drive/folders/1O_qCR5a0Cr6vtRvP91qxAXSlkyj2EVXc?usp=sharing" onclick="closeMobileMenu()">最新消息</a>
-                <a href="https://github.com/AAGNGT/DataWebsite.github.io" onclick="closeMobileMenu()">關於我們</a>
-                <a href="Website/login.html" onclick="closeMobileMenu()">Login</a>
-            </div>
-        </div>
-        
-        <!-- 手機菜單遮罩 -->
-        <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
-    </header>   
-    
-    <main>
-        <!-- 主要橫幅區域 -->
-        <section id="hero" class="hero">
-            <div class="hero-content">
-                <h2>強人bb學習平台</h2>
-                <p>專業的學習資料庫與優質教學頻道，助您提升學習效率</p>
-            </div>
-    </section>
-
-        <!-- 教學頻道區域 -->
-        <section id="channel" class="feature-section">
-            <!-- 流星背景動畫 -->
-            <div class="meteor-container">
-                <div class="meteor meteor-1"></div>
-                <div class="meteor meteor-2"></div>
-                <div class="meteor meteor-3"></div>
-                <div class="meteor meteor-4"></div>
-                <div class="meteor meteor-5"></div>
-                <div class="meteor meteor-6"></div>
-                <div class="meteor meteor-7"></div>
-                <div class="meteor meteor-8"></div>
-                <div class="stars-layer">
-                    <div class="star star-1"></div>
-                    <div class="star star-2"></div>
-                    <div class="star star-3"></div>
-                    <div class="star star-4"></div>
-                    <div class="star star-5"></div>
-                    <div class="star star-6"></div>
-                    <div class="star star-7"></div>
-                    <div class="star star-8"></div>
-                    <div class="star star-9"></div>
-                    <div class="star star-10"></div>
+        <main>
+            <!-- 主要橫幅區域 -->
+            <section id="hero" class="hero">
+                <div class="hero-content">
+                    <h2>強人bb學習平台</h2>
+                    <p>專業的學習資料庫與優質教學頻道，助您提升學習效率</p>
                 </div>
-            </div>
+        </section>
+
+            <!-- 教學頻道區域 -->
+            <section id="channel" class="feature-section">
+                <!-- 流星背景動畫 -->
+                <div class="meteor-container">
+                    <div class="meteor meteor-1"></div>
+                    <div class="meteor meteor-2"></div>
+                    <div class="meteor meteor-3"></div>
+                    <div class="meteor meteor-4"></div>
+                    <div class="meteor meteor-5"></div>
+                    <div class="meteor meteor-6"></div>
+                    <div class="meteor meteor-7"></div>
+                    <div class="meteor meteor-8"></div>
+                    <div class="stars-layer">
+                        <div class="star star-1"></div>
+                        <div class="star star-2"></div>
+                        <div class="star star-3"></div>
+                        <div class="star star-4"></div>
+                        <div class="star star-5"></div>
+                        <div class="star star-6"></div>
+                        <div class="star star-7"></div>
+                        <div class="star star-8"></div>
+                        <div class="star star-9"></div>
+                        <div class="star star-10"></div>
+                    </div>
+                </div>
+                <div class="container">
+                    <h3>📺 教學頻道</h3>
+                    <div class="channel-showcase">
+                        <div class="channel-main">
+                            <div class="channel-info">
+                                <div class="channel-header">
+                                    <img src="Website/1_PNG/AAGNGT.png" alt="AAGNGT Logo" class="channel-logo">
+                                    <div class="channel-title">
+                                        <h4>強人bb教學頻道</h4>
+                                        <p>提供各科專業知識講解，從基礎到進階，讓學習更有效率</p>
+                                    </div>
+                                </div>
+                                <div class="channel-stats">
+                                    <span><i class="fas fa-users"></i> 393 位訂閱者</span>
+                                    <span><i class="fas fa-video"></i> 158 部影片</span>
+                                    <span><i class="fas fa-clock"></i> 不定時更新</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 教學影片分類按鈕 -->
+                    <div class="video-category-buttons">
+                        <button class="category-btn active" onclick="showCategory('teaching')">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>教學影片</span>
+                        </button>
+                        <button class="category-btn" onclick="showCategory('minecraft')">
+                            <i class="fas fa-server"></i>
+                            <span>架設您的 Minecraft 伺服器的教學</span>
+                        </button>
+                    </div>
+                    
+                    <!-- 教學影片內容區域 -->
+                    <div class="video-content-container">
+                        <div id="teaching-content" class="video-content active">
+                            <div class="series-intro">
+                                <h4>📚 教學影片系列</h4>
+                                <p>提供最新的軟體教學和技術分享，包含 Discord 功能教學、Windows 11 系統介紹等實用技術內容，讓您掌握最新的數位技能。</p>
+                            </div>
+                            <div class="video-list">
+                                <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=zNQZoCzJomk', '_blank')">
+                                    <div class="video-thumbnail">
+                                        <img src="https://img.youtube.com/vi/zNQZoCzJomk/mqdefault.jpg" alt="Discord 快速切換帳戶功能">
+                                        <div class="play-overlay">
+                                            <i class="fas fa-play"></i>
+                                        </div>
+                                    </div>
+                                    <div class="video-details">
+                                        <h5>Discord (2) 如何開啟快速切換帳戶功能(最新教學) (Win11)</h5>
+                                        <p>學習如何在 Windows 11 上開啟 Discord 快速切換帳戶功能</p>
+                                        <span class="video-duration">最新教學</span>
+                                    </div>
+                                </div>
+                                <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=BEw3Kliokj4', '_blank')">
+                                    <div class="video-thumbnail">
+                                        <img src="https://img.youtube.com/vi/BEw3Kliokj4/mqdefault.jpg" alt="Windows 11 22H2 完整版介紹">
+                                        <div class="play-overlay">
+                                            <i class="fas fa-play"></i>
+                                        </div>
+                                    </div>
+                                    <div class="video-details">
+                                        <h5>Windows 11 22H2 完整版介紹 + 小預告 (moment 1 + 2)</h5>
+                                        <p>深入了解 Windows 11 22H2 的新功能和改進</p>
+                                        <span class="video-duration">完整版介紹</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="minecraft-content" class="video-content">
+                            <div class="series-intro">
+                                <h4>🎮 Minecraft 伺服器架設系列</h4>
+                                <p>完整的 Minecraft 伺服器架設教學，從基礎設定到進階配置，讓您輕鬆建立自己的遊戲伺服器。</p>
+                            </div>
+                            <div class="video-list">
+                                <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=auPeE9UhKxk&list=PL0SZ6mlI7r2p-uovA_cjls5IzvBILClwl&index=1', '_blank')">
+                                    <div class="video-thumbnail">
+                                        <img src="https://img.youtube.com/vi/auPeE9UhKxk/mqdefault.jpg" alt="EP01 體驗篇 : 介紹強人bb的 Minecraft Server">
+                                        <div class="play-overlay">
+                                            <i class="fas fa-play"></i>
+                                        </div>
+                                    </div>
+                                    <div class="video-details">
+                                        <h5>EP01 體驗篇 : 介紹強人bb的 Minecraft Server</h5>
+                                        <p>深入了解強人bb的 Minecraft 伺服器特色與功能</p>
+                                        <span class="video-duration">EP01</span>
+                                    </div>
+                                </div>
+                                <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=5rCjGuimw4E&list=PL0SZ6mlI7r2p-uovA_cjls5IzvBILClwl&index=2', '_blank')">
+                                    <div class="video-thumbnail">
+                                        <img src="https://img.youtube.com/vi/5rCjGuimw4E/mqdefault.jpg" alt="EP02 建設伺服器篇 :「📦模組📦」&「🛠️插件⚒️」伺服器製作">
+                                        <div class="play-overlay">
+                                            <i class="fas fa-play"></i>
+                                        </div>
+                                    </div>
+                                    <div class="video-details">
+                                        <h5>EP02 建設伺服器篇 : 模組 & 插件伺服器製作</h5>
+                                        <p>學習如何在自己的電腦上架設 Minecraft 伺服器，包含模組和插件的安裝配置 (100%💸免費)</p>
+                                        <span class="video-duration">EP02</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+
+        
+        </section>
+
+        <!-- 影片資源分享（位於頻道區塊下方） -->
+        <section id="video-hub" class="feature-section">
             <div class="container">
-                <h3>📺 教學頻道</h3>
-                <div class="channel-showcase">
+                <h3>🎬 影片資源分享</h3>
+                <div class="media-badges" style="margin: 10px 0 18px;">
+                    <span><i class="fas fa-hdd"></i> NAS 儲存</span>
+                    <span><i class="fab fa-microsoft"></i> 微軟整合</span>
+                    <span><i class="fas fa-shield-alt"></i> 私有分享</span>
+                    <span><i class="fas fa-clock"></i> 24 小時運作</span>
+                    <span><i class="fas fa-database"></i> 數據副本保存</span>
+                    <span><i class="fas fa-tools"></i> 定時維護</span>
+                    <span><i class="fas fa-sync-alt"></i> 不斷更新</span>
+                </div>
+                <div class="media-panel">
+                    <!-- 左側：輪播（左文右圖） -->
+                    <div class="media-card">
+                        <a href="https://aagngt.dpdns.org" target="_blank" rel="noopener" class="carousel-link">
+                            <div class="carousel-2col">
+                                <div class="carousel-text">
+                                    <div style="display:flex; align-items:center; gap: 14px; margin-bottom: 10px;">
+                                        <div class="icon-box"><i class="fas fa-play" style="font-size: 1.2rem;"></i></div>
+                                        <h4>影片分享中心</h4>
+                                    </div>
+                                    <p>利用強人BB 的 NAS，結合 Microsoft 內嵌，打造專屬影音空間。</p>
+                                </div>
+                                <div class="carousel sm" id="videoCarousel">
+                                    <!-- 動態注入 img -->
+                                    <div class="nav">
+                                        <button type="button" aria-label="prev" id="vcPrev"><i class="fas fa-chevron-left"></i></button>
+                                        <button type="button" aria-label="next" id="vcNext"><i class="fas fa-chevron-right"></i></button>
+                                    </div>
+                                    <div class="dots" id="vcDots"></div>
+                                    <div class="enter-badge"><i class="fas fa-external-link-alt"></i> 點擊進入</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- 右側：最近上架排行榜 -->
+                    <div class="media-card">
+                        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 8px;">
+                            <div style="display:flex; align-items:center; gap:8px; color:#fff; font-weight:700;">
+                                <i class="fas fa-fire"></i> 最近上架影片排行榜
+                            </div>
+                        </div>
+                        <div class="rank-list" id="rankList"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+            <!-- 學習資料庫區域 -->
+            <section id="database" class="feature-section alt">
+                <div class="container">
+                    <h3>📖 學習資料庫</h3>
+                    
+                    <!-- 登入提示 -->
+                    <div class="login-notice" id="loginNotice">
+                        <div class="notice-content">
+                            <i class="fas fa-lock"></i>
+                            <h4>登入後才可以享用完整功能</h4>
+                            <p>請先登入您的帳戶以存取所有學習資料和進階功能</p>
+                            <button class="login-btn" id="showLoginBtn">立刻驗證</button>
+                        </div>
+                    </div>
+
+                    <div class="database-showcase" id="databaseShowcase">
+                        <!-- 核心科目 -->
+                        <div class="subject-category">
+                            <div class="category-header">
+                                <h4>🎯 核心科目</h4>
+                                <p>必修基礎科目，建立扎實的學習基礎</p>
+                            </div>
+                            <div class="subject-grid core-subjects">
+                                <div class="subject-card core" data-href="chinese.html">
+                                    <div class="subject-icon">📚</div>
+                                    <h5>中文</h5>
+                                    <p>語文基礎與文學賞析</p>
+                                    <div class="subject-status">
+                                        <span class="status-badge core-badge">核心</span>
+                                        <span class="file-count">中文.html</span>
+                                    </div>
+                                </div>
+                                <div class="subject-card core" data-href="english.html">
+                                    <div class="subject-icon">🗣️</div>
+                                    <h5>英文</h5>
+                                    <p>英語溝通與寫作技巧</p>
+                                    <div class="subject-status">
+                                        <span class="status-badge core-badge">核心</span>
+                                        <span class="file-count">english.html</span>
+                                    </div>
+                                </div>
+                                <div class="subject-card core" data-href="math.html">
+                                    <div class="subject-icon">📊</div>
+                                    <h5>數學</h5>
+                                    <p>數學思維與解題技巧</p>
+                                    <div class="subject-status">
+                                        <span class="status-badge core-badge">核心</span>
+                                        <span class="file-count">math.html</span>
+                                    </div>
+                                </div>
+                                <div class="subject-card core" data-href="civics.html">
+                                    <div class="subject-icon">🏛️</div>
+                                    <h5>公民</h5>
+                                    <p>社會參與與公民素養</p>
+                                    <div class="subject-status">
+                                        <span class="status-badge core-badge">核心</span>
+                                        <span class="file-count">civics.html</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 選修科目 -->
+                        <div class="subject-category">
+                            <div class="category-header">
+                                <h4>🎨 選修科目</h4>
+                                <p>專業選修課程，拓展學習領域</p>
+                            </div>
+                            <div class="subject-grid elective-subjects">
+                                <div class="subject-card elective" data-href="economics.html">
+                                    <div class="subject-icon">💰</div>
+                                    <h5>經濟</h5>
+                                    <p>經濟學原理與市場分析</p>
+                                    <div class="subject-status">
+                                        <span class="status-badge elective-badge">選修</span>
+                                        <span class="file-count">economics.html</span>
+                                    </div>
+                                </div>
+                                <div class="subject-card elective" data-href="computer.html">
+                                    <div class="subject-icon">💻</div>
+                                    <h5>電腦</h5>
+                                    <p>程式設計與資訊科技</p>
+                                    <div class="subject-status">
+                                        <span class="status-badge elective-badge">選修</span>
+                                        <span class="file-count">computer.html</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 增潤項目 -->
+                        <div class="subject-category">
+                            <div class="category-header">
+                                <h4>🚀 增潤項目</h4>
+                                <p>進階學習內容，提升專業能力</p>
+                            </div>
+                            <div class="subject-grid enhancement-subjects">
+                                <div class="subject-card enhancement" data-href="m2.html">
+                                    <div class="subject-icon">📋</div>
+                                    <h5>M2</h5>
+                                    <p>數學延伸部分</p>
+                                    <div class="subject-status">
+                                        <span class="status-badge enhancement-badge">增潤</span>
+                                        <span class="file-count">m2.html</span>
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+            </div>
+            </div>
+        </section>
+        </main>
+        
+        <!-- 自製 AI 區域 -->
+        <section id="ai" class="feature-section">
+            <div class="container">
+                <h3>🤖 自製 AI（Google AI Studio）</h3>
+                <div class="channel-showcase" style="margin-top: 0;">
                     <div class="channel-main">
-                        <div class="channel-info">
+                        <div class="channel-info ai-panel" style="max-width: 860px; width: 100%;">
                             <div class="channel-header">
-                                <img src="Website/1_PNG/AAGNGT.png" alt="AAGNGT Logo" class="channel-logo">
+                                <img src="Website/1_PNG/強人bb.png" alt="AI Logo" class="channel-logo">
                                 <div class="channel-title">
-                                    <h4>強人bb教學頻道</h4>
-                                    <p>提供各科專業知識講解，從基礎到進階，讓學習更有效率</p>
+                                    <h4>強人bb 學習助理</h4>
+                                    <p>
+                                        提供學習摘要、重點整理與練習建議。支援格式化回覆（粗體、段落、清單），
+                                        不輸出數學符號。您可使用自己的 <strong>Google AI Studio API Key</strong>，
+                                        資料只保存在您的瀏覽器。
+                                    </p>
                                 </div>
                             </div>
-                            <div class="channel-stats">
-                                <span><i class="fas fa-users"></i> 393 位訂閱者</span>
-                                <span><i class="fas fa-video"></i> 158 部影片</span>
-                                <span><i class="fas fa-clock"></i> 不定時更新</span>
+                            
+                            <!-- 快速操作 -->
+                            <div class="channel-stats" style="justify-content: flex-start; gap: 10px;">
+                                <span style="cursor: pointer;" onclick="window.location.href='ai-chat.html'">
+                                    <i class="fas fa-comments"></i> 立刻開啟 AI 聊天（專頁）
+                                </span>
                             </div>
+                            
+                            <!-- API Key 與輸入框 -->
+                            <div class="ai-card">
+                                <div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;">
+                                    <input id="aiApiKey" type="password" class="ai-input" placeholder="輸入您的 Google AI Studio API Key">
+                                    <button class="btn-secondary" id="saveKeyBtn" style="white-space: nowrap;">儲存金鑰</button>
+                                </div>
+                                <textarea id="aiPrompt" rows="4" class="ai-input" placeholder="輸入您的問題，例如：請將『分工的優點與缺點』整理成重點清單" style="margin-top: 12px; resize: vertical;"></textarea>
+                                <div style="display:flex; gap:10px; margin-top: 8px;">
+                                    <button class="btn-primary" id="sendAiBtn"><i class="fas fa-paper-plane"></i> 發送</button>
+                                    <button class="btn-secondary" id="clearAiBtn"><i class="fas fa-eraser"></i> 清除</button>
+                                </div>
+                            </div>
+                            
+                            <!-- AI 回覆區 -->
+                            <div id="aiResult" class="ai-result" style="margin-top: 16px; padding: 16px; min-height: 80px; white-space: pre-wrap; line-height: 1.7;"></div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- 教學影片分類按鈕 -->
-                <div class="video-category-buttons">
-                    <button class="category-btn active" onclick="showCategory('teaching')">
-                        <i class="fas fa-graduation-cap"></i>
-                        <span>教學影片</span>
-                    </button>
-                    <button class="category-btn" onclick="showCategory('minecraft')">
-                        <i class="fas fa-server"></i>
-                        <span>架設您的 Minecraft 伺服器的教學</span>
-                    </button>
-                </div>
-                
-                <!-- 教學影片內容區域 -->
-                <div class="video-content-container">
-                    <div id="teaching-content" class="video-content active">
-                        <div class="series-intro">
-                            <h4>📚 教學影片系列</h4>
-                            <p>提供最新的軟體教學和技術分享，包含 Discord 功能教學、Windows 11 系統介紹等實用技術內容，讓您掌握最新的數位技能。</p>
-                        </div>
-                        <div class="video-list">
-                            <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=zNQZoCzJomk', '_blank')">
-                                <div class="video-thumbnail">
-                                    <img src="https://img.youtube.com/vi/zNQZoCzJomk/mqdefault.jpg" alt="Discord 快速切換帳戶功能">
-                                    <div class="play-overlay">
-                                        <i class="fas fa-play"></i>
-                                    </div>
-                                </div>
-                                <div class="video-details">
-                                    <h5>Discord (2) 如何開啟快速切換帳戶功能(最新教學) (Win11)</h5>
-                                    <p>學習如何在 Windows 11 上開啟 Discord 快速切換帳戶功能</p>
-                                    <span class="video-duration">最新教學</span>
-                                </div>
-                            </div>
-                            <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=BEw3Kliokj4', '_blank')">
-                                <div class="video-thumbnail">
-                                    <img src="https://img.youtube.com/vi/BEw3Kliokj4/mqdefault.jpg" alt="Windows 11 22H2 完整版介紹">
-                                    <div class="play-overlay">
-                                        <i class="fas fa-play"></i>
-                                    </div>
-                                </div>
-                                <div class="video-details">
-                                    <h5>Windows 11 22H2 完整版介紹 + 小預告 (moment 1 + 2)</h5>
-                                    <p>深入了解 Windows 11 22H2 的新功能和改進</p>
-                                    <span class="video-duration">完整版介紹</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div id="minecraft-content" class="video-content">
-                        <div class="series-intro">
-                            <h4>🎮 Minecraft 伺服器架設系列</h4>
-                            <p>完整的 Minecraft 伺服器架設教學，從基礎設定到進階配置，讓您輕鬆建立自己的遊戲伺服器。</p>
-                        </div>
-                        <div class="video-list">
-                            <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=auPeE9UhKxk&list=PL0SZ6mlI7r2p-uovA_cjls5IzvBILClwl&index=1', '_blank')">
-                                <div class="video-thumbnail">
-                                    <img src="https://img.youtube.com/vi/auPeE9UhKxk/mqdefault.jpg" alt="EP01 體驗篇 : 介紹強人bb的 Minecraft Server">
-                                    <div class="play-overlay">
-                                        <i class="fas fa-play"></i>
-                                    </div>
-                                </div>
-                                <div class="video-details">
-                                    <h5>EP01 體驗篇 : 介紹強人bb的 Minecraft Server</h5>
-                                    <p>深入了解強人bb的 Minecraft 伺服器特色與功能</p>
-                                    <span class="video-duration">EP01</span>
-                                </div>
-                            </div>
-                            <div class="video-item" onclick="window.open('https://www.youtube.com/watch?v=5rCjGuimw4E&list=PL0SZ6mlI7r2p-uovA_cjls5IzvBILClwl&index=2', '_blank')">
-                                <div class="video-thumbnail">
-                                    <img src="https://img.youtube.com/vi/5rCjGuimw4E/mqdefault.jpg" alt="EP02 建設伺服器篇 :「📦模組📦」&「🛠️插件⚒️」伺服器製作">
-                                    <div class="play-overlay">
-                                        <i class="fas fa-play"></i>
-                                    </div>
-                                </div>
-                                <div class="video-details">
-                                    <h5>EP02 建設伺服器篇 : 模組 & 插件伺服器製作</h5>
-                                    <p>學習如何在自己的電腦上架設 Minecraft 伺服器，包含模組和插件的安裝配置 (100%💸免費)</p>
-                                    <span class="video-duration">EP02</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    </div>
-    </section>
-
-    <!-- 影片資源分享（位於頻道區塊下方） -->
-    <section id="video-hub" class="feature-section">
-        <div class="container">
-            <h3>🎬 影片資源分享</h3>
-            <div class="media-badges" style="margin: 10px 0 18px;">
-                <span><i class="fas fa-hdd"></i> NAS 儲存</span>
-                <span><i class="fab fa-microsoft"></i> 微軟整合</span>
-                <span><i class="fas fa-shield-alt"></i> 私有分享</span>
-                <span><i class="fas fa-clock"></i> 24 小時運作</span>
-                <span><i class="fas fa-database"></i> 數據副本保存</span>
-                <span><i class="fas fa-tools"></i> 定時維護</span>
-                <span><i class="fas fa-sync-alt"></i> 不斷更新</span>
-            </div>
-            <div class="media-panel">
-                <!-- 左側：輪播（左文右圖） -->
-                <div class="media-card">
-                    <a href="https://aagngt.dpdns.org" target="_blank" rel="noopener" class="carousel-link">
-                        <div class="carousel-2col">
-                            <div class="carousel-text">
-                                <div style="display:flex; align-items:center; gap: 14px; margin-bottom: 10px;">
-                                    <div class="icon-box"><i class="fas fa-play" style="font-size: 1.2rem;"></i></div>
-                                    <h4>影片分享中心</h4>
-                                </div>
-                                <p>利用強人BB 的 NAS，結合 Microsoft 內嵌，打造專屬影音空間。</p>
-                            </div>
-                            <div class="carousel sm" id="videoCarousel">
-                                <!-- 動態注入 img -->
-                                <div class="nav">
-                                    <button type="button" aria-label="prev" id="vcPrev"><i class="fas fa-chevron-left"></i></button>
-                                    <button type="button" aria-label="next" id="vcNext"><i class="fas fa-chevron-right"></i></button>
-                                </div>
-                                <div class="dots" id="vcDots"></div>
-                                <div class="enter-badge"><i class="fas fa-external-link-alt"></i> 點擊進入</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- 右側：最近上架排行榜 -->
-                <div class="media-card">
-                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 8px;">
-                        <div style="display:flex; align-items:center; gap:8px; color:#fff; font-weight:700;">
-                            <i class="fas fa-fire"></i> 最近上架影片排行榜
-                        </div>
-                    </div>
-                    <div class="rank-list" id="rankList"></div>
                 </div>
             </div>
-        </div>
-    </section>
-
-        <!-- 學習資料庫區域 -->
-        <section id="database" class="feature-section alt">
+        </section>
+        
+        <footer>
             <div class="container">
-                <h3>📖 學習資料庫</h3>
-                
-                <!-- 登入提示 -->
-                <div class="login-notice">
-                    <div class="notice-content">
-                        <i class="fas fa-lock"></i>
-                        <h4>登入後才可以享用完整功能</h4>
-                        <p>請先登入您的帳戶以存取所有學習資料和進階功能</p>
-                        <a href="Website/login.html" class="login-btn">立即登入</a>
-                    </div>
-                </div>
-
-                <div class="database-showcase">
-                    <!-- 核心科目 -->
-                    <div class="subject-category">
-                        <div class="category-header">
-                            <h4>🎯 核心科目</h4>
-                            <p>必修基礎科目，建立扎實的學習基礎</p>
-                        </div>
-                        <div class="subject-grid core-subjects">
-                            <div class="subject-card core">
-                                <div class="subject-icon">📚</div>
-                                <h5>中文</h5>
-                                <p>語文基礎與文學賞析</p>
-                                <div class="subject-status">
-                                    <span class="status-badge core-badge">核心</span>
-                                    <span class="file-count">中文.html</span>
-                                </div>
-                            </div>
-                            <div class="subject-card core">
-                                <div class="subject-icon">🗣️</div>
-                                <h5>英文</h5>
-                                <p>英語溝通與寫作技巧</p>
-                                <div class="subject-status">
-                                    <span class="status-badge core-badge">核心</span>
-                                    <span class="file-count">english.html</span>
-                                </div>
-                            </div>
-                            <div class="subject-card core">
-                                <div class="subject-icon">📊</div>
-                                <h5>數學</h5>
-                                <p>數學思維與解題技巧</p>
-                                <div class="subject-status">
-                                    <span class="status-badge core-badge">核心</span>
-                                    <span class="file-count">math.html</span>
-                                </div>
-                            </div>
-                            <div class="subject-card core">
-                                <div class="subject-icon">🏛️</div>
-                                <h5>公民</h5>
-                                <p>社會參與與公民素養</p>
-                                <div class="subject-status">
-                                    <span class="status-badge core-badge">核心</span>
-                                    <span class="file-count">civics.html</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 選修科目 -->
-                    <div class="subject-category">
-                        <div class="category-header">
-                            <h4>🎨 選修科目</h4>
-                            <p>專業選修課程，拓展學習領域</p>
-                        </div>
-                        <div class="subject-grid elective-subjects">
-                            <div class="subject-card elective">
-                                <div class="subject-icon">💰</div>
-                                <h5>經濟</h5>
-                                <p>經濟學原理與市場分析</p>
-                                <div class="subject-status">
-                                    <span class="status-badge elective-badge">選修</span>
-                                    <span class="file-count">economics.html</span>
-                                </div>
-                            </div>
-                            <div class="subject-card elective">
-                                <div class="subject-icon">💻</div>
-                                <h5>電腦</h5>
-                                <p>程式設計與資訊科技</p>
-                                <div class="subject-status">
-                                    <span class="status-badge elective-badge">選修</span>
-                                    <span class="file-count">computer.html</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 增潤項目 -->
-                    <div class="subject-category">
-                        <div class="category-header">
-                            <h4>🚀 增潤項目</h4>
-                            <p>進階學習內容，提升專業能力</p>
-                        </div>
-                        <div class="subject-grid enhancement-subjects">
-                            <div class="subject-card enhancement">
-                                <div class="subject-icon">📋</div>
-                                <h5>M2</h5>
-                                <p>數學延伸部分</p>
-                                <div class="subject-status">
-                                    <span class="status-badge enhancement-badge">增潤</span>
-                                    <span class="file-count">m2.html</span>
-                                </div>
-                            </div>
-                        </div>
-        </div>
-        </div>
-        </div>
-    </section>
-    </main>
-    
-    <!-- 自製 AI 區域 -->
-    <section id="ai" class="feature-section">
-        <div class="container">
-            <h3>🤖 自製 AI（Google AI Studio）</h3>
-            <div class="channel-showcase" style="margin-top: 0;">
-                <div class="channel-main">
-                    <div class="channel-info ai-panel" style="max-width: 860px; width: 100%;">
-                        <div class="channel-header">
-                            <img src="Website/1_PNG/強人bb.png" alt="AI Logo" class="channel-logo">
-                            <div class="channel-title">
-                                <h4>強人bb 學習助理</h4>
-                                <p>
-                                    提供學習摘要、重點整理與練習建議。支援格式化回覆（粗體、段落、清單），
-                                    不輸出數學符號。您可使用自己的 <strong>Google AI Studio API Key</strong>，
-                                    資料只保存在您的瀏覽器。
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <!-- 快速操作 -->
-                        <div class="channel-stats" style="justify-content: flex-start; gap: 10px;">
-                            <span style="cursor: pointer;" onclick="window.location.href='ai-chat.html'">
-                                <i class="fas fa-comments"></i> 立刻開啟 AI 聊天（專頁）
-                            </span>
-                        </div>
-                        
-                        <!-- API Key 與輸入框 -->
-                        <div class="ai-card">
-                            <div style="display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;">
-                                <input id="aiApiKey" type="password" class="ai-input" placeholder="輸入您的 Google AI Studio API Key">
-                                <button class="btn-secondary" id="saveKeyBtn" style="white-space: nowrap;">儲存金鑰</button>
-                            </div>
-                            <textarea id="aiPrompt" rows="4" class="ai-input" placeholder="輸入您的問題，例如：請將『分工的優點與缺點』整理成重點清單" style="margin-top: 12px; resize: vertical;"></textarea>
-                            <div style="display:flex; gap:10px; margin-top: 8px;">
-                                <button class="btn-primary" id="sendAiBtn"><i class="fas fa-paper-plane"></i> 發送</button>
-                                <button class="btn-secondary" id="clearAiBtn"><i class="fas fa-eraser"></i> 清除</button>
-                            </div>
-                        </div>
-                        
-                        <!-- AI 回覆區 -->
-                        <div id="aiResult" class="ai-result" style="margin-top: 16px; padding: 16px; min-height: 80px; white-space: pre-wrap; line-height: 1.7;"></div>
-                    </div>
-                </div>
+            <p>Copyright © 2024 強人bb All Rights Reserved.</p>
+                <p>shell:startup 致力於提供優質的學習資源與服務</p>
             </div>
+        </footer>
+
+        <div id="loginOverlay"></div>
+           <div id="loginModal">
+             <div class="modal-header">
+                 <h4><i class="fas fa-shield-alt"></i> 安全驗證</h4>
+                  <button id="closeModalBtn">&times;</button>
+             </div>
+        <div class="modal-body">
+        
+        <div class="modal-tabs">
+            <div class="modal-tab" data-tab="pattern">九宮格</div>
+            <div class="modal-tab active" data-tab="pin">四位數字密碼</div>
         </div>
-    </section>
-    
-    <footer>
-        <div class="container">
-        <p>Copyright © 2024 強人bb All Rights Reserved.</p>
-            <p>shell:startup 致力於提供優質的學習資源與服務</p>
+        <!-- 九宮格 -->
+        <div class="modal-tab-content" data-tab-content="pattern">
+            <p style="text-align:center; color: #9ca3af; font-size: 0.9rem;">進行調試中</p>
         </div>
-    </footer>
-    
-    <script>
-        // 視頻分類切換功能
-        function showCategory(category) {
-            const buttons = document.querySelectorAll('.category-btn');
-            const contents = document.querySelectorAll('.video-content');
-            
-            // 移除所有active類別
-            buttons.forEach(btn => btn.classList.remove('active'));
-            contents.forEach(content => content.classList.remove('active'));
-            
-            // 添加轉出效果
-            const currentContent = document.querySelector('.video-content.active');
-            if (currentContent) {
-                currentContent.style.transform = 'translateX(-100%)';
-                currentContent.style.opacity = '0';
-            }
-            
-            // 延遲後切換內容
-            setTimeout(() => {
-                // 隱藏所有內容
-                contents.forEach(content => {
-                    content.classList.remove('active');
-                    content.style.transform = 'translateX(100%)';
-                    content.style.opacity = '0';
-                });
-                
-                // 顯示選中的內容
-                const targetButton = document.querySelector(`[onclick="showCategory('${category}')"]`);
-                const targetContent = document.getElementById(`${category}-content`);
-                
-                if (targetButton && targetContent) {
-                    targetButton.classList.add('active');
-                    targetContent.classList.add('active');
-                    
-                    // 添加轉入效果
-                    setTimeout(() => {
-                        targetContent.style.transform = 'translateX(0)';
-                        targetContent.style.opacity = '1';
-                    }, 50);
-                }
-            }, 300);
-        }
-
-        // 流星動畫滾動觸發功能
-        function initMeteorAnimation() {
-            const channelSection = document.getElementById('channel');
-            const meteors = document.querySelectorAll('.meteor');
-            const stars = document.querySelectorAll('.star');
-            
-            let isVisible = false;
-            let animationStarted = false;
-            
-            function handleScroll() {
-                const rect = channelSection.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                
-                // 當頻道區域進入視窗時觸發動畫
-                if (rect.top < windowHeight && rect.bottom > 0) {
-                    if (!isVisible) {
-                        isVisible = true;
-                        startMeteorAnimation();
-                    }
-                } else {
-                    if (isVisible) {
-                        isVisible = false;
-                        stopMeteorAnimation();
-                    }
-                }
-            }
-            
-            function startMeteorAnimation() {
-                if (animationStarted) return;
-                animationStarted = true;
-                
-                // 啟動流星動畫
-                meteors.forEach((meteor, index) => {
-                    meteor.style.animationPlayState = 'running';
-                    meteor.style.opacity = '1';
-                });
-                
-                // 啟動星星閃爍
-                stars.forEach((star, index) => {
-                    star.style.animationPlayState = 'running';
-                    star.style.opacity = '1';
-                });
-                
-                // 添加額外的視覺效果
-                channelSection.classList.add('meteor-active');
-            }
-            
-            function stopMeteorAnimation() {
-                animationStarted = false;
-                
-                // 停止動畫
-                meteors.forEach(meteor => {
-                    meteor.style.animationPlayState = 'paused';
-                    meteor.style.opacity = '0';
-                });
-                
-                stars.forEach(star => {
-                    star.style.animationPlayState = 'paused';
-                    star.style.opacity = '0.3';
-                });
-                
-                channelSection.classList.remove('meteor-active');
-            }
-            
-            // 監聽滾動事件
-            window.addEventListener('scroll', handleScroll);
-            
-            // 初始檢查
-            handleScroll();
-        }
         
-        // 滾動導航功能
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = section.offsetTop - headerHeight - 20;
+        <div class="modal-tab-content" data-tab-content="pattern">
+            <p id="patternErrorMsg" style="text-align:center; color: #ef4444; font-size: 0.9rem; height: 1.2em;"></p>
+            <div id="patternLockContainer">
+                <svg id="patternLines" width="100%" height="100%"></svg>
                 
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        // 快速連結自動顯示功能
-        function initQuickLinksVisibility() {
-            const quickLinksSection = document.querySelector('.quick-links-section');
-            const quickLinksItems = document.querySelector('.quick-links-items');
-            
-            function handleScroll() {
-                const scrollY = window.scrollY;
-                
-                // 當滾動超過一定距離時顯示快速連結
-                if (scrollY > 100) {
-                    quickLinksSection.classList.add('visible');
-                    quickLinksItems.classList.add('animate-in');
-                } else {
-                    quickLinksSection.classList.remove('visible');
-                    quickLinksItems.classList.remove('animate-in');
-                }
-            }
-            
-            // 監聽滾動事件
-            window.addEventListener('scroll', handleScroll);
-            
-            // 初始檢查
-            handleScroll();
-        }
-
-        // 手機菜單功能
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('mobileMenuOverlay');
-            
-            if (mobileMenu.classList.contains('active')) {
-                closeMobileMenu();
-            } else {
-                openMobileMenu();
-            }
-        }
-
-        function openMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('mobileMenuOverlay');
-            
-            mobileMenu.classList.add('active');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const overlay = document.getElementById('mobileMenuOverlay');
-            
-            mobileMenu.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        // 監聽視窗大小變化
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                closeMobileMenu();
-            }
-        });
-
-        // 監聽ESC鍵關閉菜單
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeMobileMenu();
-            }
-        });
-
-        // 頁面載入完成後初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            initMeteorAnimation();
-            initQuickLinksVisibility();
-            initAIHelpers();
-            initVideoHub();
-        });
-        
-        // 自製 AI：Google AI Studio（Gemini）
-        function initAIHelpers() {
-            const keyInput = document.getElementById('aiApiKey');
-            const saveBtn = document.getElementById('saveKeyBtn');
-            const sendBtn = document.getElementById('sendAiBtn');
-            const clearBtn = document.getElementById('clearAiBtn');
-            const promptEl = document.getElementById('aiPrompt');
-            const resultEl = document.getElementById('aiResult');
-            
-            if (!keyInput || !saveBtn || !sendBtn || !promptEl || !resultEl) return;
-            
-            // 載入已儲存的 API Key
-            const saved = localStorage.getItem('googleAIStudioKey');
-            if (saved) keyInput.value = saved;
-            
-            saveBtn.addEventListener('click', function() {
-                localStorage.setItem('googleAIStudioKey', keyInput.value.trim());
-                alert('API Key 已儲存至此瀏覽器');
-            });
-            
-            clearBtn.addEventListener('click', function() {
-                promptEl.value = '';
-                resultEl.textContent = '';
-            });
-            
-            sendBtn.addEventListener('click', async function() {
-                const apiKey = (keyInput.value || '').trim();
-                const prompt = (promptEl.value || '').trim();
-                if (!apiKey) { alert('請先輸入 API Key'); return; }
-                if (!prompt) { alert('請輸入問題或指示'); return; }
-                
-                resultEl.textContent = '正在生成回覆…';
-                try {
-                    const endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + encodeURIComponent(apiKey);
-                    const body = {
-                        contents: [{
-                            parts: [{
-                                text: '請用條列清單與段落輸出，避免使用數學符號。問題如下：' + prompt
-                            }]
-                        }]
-                    };
-                    const res = await fetch(endpoint, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body)
-                    });
-                    if (!res.ok) throw new Error('API error ' + res.status);
-                    const data = await res.json();
-                    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '（沒有回覆內容）';
-                    // 基本文字格式處理：保留換行與粗體
-                    resultEl.innerHTML = sanitizeToBasicHtml(text);
-                } catch (e) {
-                    resultEl.textContent = '發生錯誤：' + e.message;
-                }
-            });
-        }
-        
-        // 僅允許基本格式的轉換（粗體、清單、換行），不含數學符號
-        function sanitizeToBasicHtml(text) {
-            const escaped = text
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;');
-            // 粗體：**text**
-            let html = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1<\/strong>');
-            // 將行首 - 或 * 轉為清單
-            const lines = html.split(/\r?\n/);
-            let inList = false; let out = '';
-            for (const line of lines) {
-                const m = line.match(/^\s*[-*]\s+(.*)/);
-                if (m) {
-                    if (!inList) { out += '<ul style="margin:0 0 0 1.2rem;">'; inList = true; }
-                    out += '<li>' + m[1] + '</li>';
-                } else {
-                    if (inList) { out += '</ul>'; inList = false; }
-                    out += (line.trim() ? '<p>' + line + '</p>' : '<br>');
-                }
-            }
-            if (inList) out += '</ul>';
-            return out;
-        }
-
-        // 影片資源分享：輪播 + 排行
-        function initVideoHub() {
-            const carousel = document.getElementById('videoCarousel');
-            const dotsWrap = document.getElementById('vcDots');
-            const prevBtn = document.getElementById('vcPrev');
-            const nextBtn = document.getElementById('vcNext');
-            const rankList = document.getElementById('rankList');
-            if (!carousel || !dotsWrap || !prevBtn || !nextBtn || !rankList) return;
-
-            // 圖片輪播（純圖片，不含連結）
-            const slides = [
-                'https://cdn.hk01.com/di/media/images/283773/org/6da32b263e534c5943f748d194adff95.png/H24CXCYv6qFWVjYxlnsXxaVYK-45Qjvh51lmwedZZsE?v=w800',
-                'https://i.ytimg.com/vi_webp/BEw3Kliokj4/maxresdefault.webp',
-                'https://i.ytimg.com/vi/auPeE9UhKxk/maxresdefault.jpg'
-            ];
-
-            const recent = [
-                { thumb: 'https://aagngt.dpdns.org/1_PNG/love.png', title: '咕嚕咕嚕魔法陣', channel: '江藤博之', score: 98, url: 'https://aagngt.dpdns.org/series-player.html?v=guruguru-series' },
-                { thumb: 'https://aagngt.dpdns.org/1_PNG/kind.jpg', title: '罪惡王冠', channel: 'Production I.G', score: 95, url: 'https://aagngt.dpdns.org/series-player.html?v=Guilty-Crown' },
-                { thumb: 'https://aagngt.dpdns.org/1_PNG/game.webp', title: '關於我轉生變成史萊姆這檔事', channel: '伏瀨', score: 92, url: 'https://aagngt.dpdns.org/series-player.html?v=I-Got-Reincarnated-as-a-Slime' }
-            ];
-
-            // 建立輪播圖片
-            const imgs = slides.map((src, i) => {
-                const img = document.createElement('img');
-                img.src = src; img.alt = 'slide-' + (i + 1); img.dataset.index = i;
-                if (i === 0) img.classList.add('active');
-                carousel.appendChild(img);
-                return img;
-            });
-            // 建立 dots
-            const dots = slides.map((_, i) => {
-                const d = document.createElement('div');
-                d.className = 'dot' + (i === 0 ? ' active' : '');
-                d.addEventListener('click', () => go(i));
-                dotsWrap.appendChild(d);
-                return d;
-            });
-
-            let idx = 0; let timer;
-            function go(n) {
-                idx = (n + imgs.length) % imgs.length;
-                imgs.forEach((img, i) => img.classList.toggle('active', i === idx));
-                dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-                reset();
-            }
-            function next() { go(idx + 1); }
-            function prev() { go(idx - 1); }
-            function reset() { clearInterval(timer); timer = setInterval(next, 5000); }
-            prevBtn.addEventListener('click', prev);
-            nextBtn.addEventListener('click', next);
-            document.addEventListener('keydown', e => { if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') prev(); });
-            reset();
-
-            // 排行
-            rankList.innerHTML = recent.map(r => (
-                '<a class="rank-item" href="' + r.url + '" target="_blank" rel="noopener">' +
-                '<img src="' + r.thumb + '" alt="' + r.title + '">' +
-                '<div class="meta"><strong>' + r.title + '</strong><small>' + r.channel + '</small></div>' +
-                '<div class="score">' + r.score + '</div>' +
-                '</a>'
-            )).join('');
-        }
-    </script>
-</body>
-<!-- 
-<head>
-    <link rel="stylesheet" href=
-"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity=
-"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-        crossorigin="anonymous">
-
-    <script src=
-"https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity=
-"sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous">
-    </script>
-    
-    <script src=
-"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity=
-"sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous">
-    </script>
-    
-    <script src=
-"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity=
-"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous">
-    </script>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg
-                navbar-light bg-success">
-        <a class="navbar-brand" href="#">
-            <p style="font-size: 30px;">
-                THE NOTES TAKER
-            </p>
-
-        </a>
-    </nav>
-
-    <div class="container my-3">
-        <h1>Take your Notes here</h1>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">
-                    Add a Note
-                
-                </h5>
-                <div class="form-group">
-                    <textarea class="form-control"
-                        id="addTxt" rows="3">
-                    </textarea>
-                </div>
-                <button class="btn btn-primary"
-                    id="addBtn" style=
-                    "background-color:green">
-                    Add Note
-                </button>
+                <div class="pattern-dot" data-id="1"></div>
+                <div class="pattern-dot" data-id="2"></div>
+                <div class="pattern-dot" data-id="3"></div>
+                <div class="pattern-dot" data-id="4"></div>
+                <div class="pattern-dot" data-id="5"></div>
+                <div class="pattern-dot" data-id="6"></div>
+                <div class="pattern-dot" data-id="7"></div>
+                <div class="pattern-dot" data-id="8"></div>
+                <div class="pattern-dot" data-id="9"></div>
             </div>
+            <!-- <p style="text-align:center; font-size: 0.9rem; color: #9ca3af; margin-top: 16px;">進行調試中</p> -->
         </div>
-        <hr>
-        <h1>Your Notes</h1>
-        <hr>
         
-        <div id="notes" class=
-            "row container-fluid">
+        <div class="modal-tab-content active" data-tab-content="pin">
+            <form id="pinPad" onsubmit="return false;">
+                <label for="pinInput" style="font-size: 0.9rem; color: #9ca3af;">請輸入 4 位數PIN</label>
+                <input type="password" id="pinInput" maxlength="4" inputmode="numeric" placeholder="----" autocomplete="off">
+                <div id="pinErrorMsg"></div>
+                <button type="submit" class="btn-primary" id="pinSubmitBtn">LOGIN</button>
+            </form>
         </div>
     </div>
+          </div>
+        <script>
+            // 視頻分類切換功能
+            function showCategory(category) {
+                const buttons = document.querySelectorAll('.category-btn');
+                const contents = document.querySelectorAll('.video-content');
+                
+                // 移除所有active類別
+                buttons.forEach(btn => btn.classList.remove('active'));
+                contents.forEach(content => content.classList.remove('active'));
+                
+                // 添加轉出效果
+                const currentContent = document.querySelector('.video-content.active');
+                if (currentContent) {
+                    currentContent.style.transform = 'translateX(-100%)';
+                    currentContent.style.opacity = '0';
+                }
+                
+                // 延遲後切換內容
+                setTimeout(() => {
+                    // 隱藏所有內容
+                    contents.forEach(content => {
+                        content.classList.remove('active');
+                        content.style.transform = 'translateX(100%)';
+                        content.style.opacity = '0';
+                    });
+                    
+                    // 顯示選中的內容
+                    const targetButton = document.querySelector(`[onclick="showCategory('${category}')"]`);
+                    const targetContent = document.getElementById(`${category}-content`);
+                    
+                    if (targetButton && targetContent) {
+                        targetButton.classList.add('active');
+                        targetContent.classList.add('active');
+                        
+                        // 添加轉入效果
+                        setTimeout(() => {
+                            targetContent.style.transform = 'translateX(0)';
+                            targetContent.style.opacity = '1';
+                        }, 50);
+                    }
+                }, 300);
+            }
 
-    <script src="gfg.js"></script>
-</body>
-</html>
- -->
+            // 流星動畫滾動觸發功能
+            function initMeteorAnimation() {
+                const channelSection = document.getElementById('channel');
+                const meteors = document.querySelectorAll('.meteor');
+                const stars = document.querySelectorAll('.star');
+                
+                let isVisible = false;
+                let animationStarted = false;
+                
+                function handleScroll() {
+                    const rect = channelSection.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    
+                    // 當頻道區域進入視窗時觸發動畫
+                    if (rect.top < windowHeight && rect.bottom > 0) {
+                        if (!isVisible) {
+                            isVisible = true;
+                            startMeteorAnimation();
+                        }
+                    } else {
+                        if (isVisible) {
+                            isVisible = false;
+                            stopMeteorAnimation();
+                        }
+                    }
+                }
+                
+                function startMeteorAnimation() {
+                    if (animationStarted) return;
+                    animationStarted = true;
+                    
+                    // 啟動流星動畫
+                    meteors.forEach((meteor, index) => {
+                        meteor.style.animationPlayState = 'running';
+                        meteor.style.opacity = '1';
+                    });
+                    
+                    // 啟動星星閃爍
+                    stars.forEach((star, index) => {
+                        star.style.animationPlayState = 'running';
+                        star.style.opacity = '1';
+                    });
+                    
+                    // 添加額外的視覺效果
+                    channelSection.classList.add('meteor-active');
+                }
+                
+                function stopMeteorAnimation() {
+                    animationStarted = false;
+                    
+                    // 停止動畫
+                    meteors.forEach(meteor => {
+                        meteor.style.animationPlayState = 'paused';
+                        meteor.style.opacity = '0';
+                    });
+                    
+                    stars.forEach(star => {
+                        star.style.animationPlayState = 'paused';
+                        star.style.opacity = '0.3';
+                    });
+                    
+                    channelSection.classList.remove('meteor-active');
+                }
+                
+                // 監聽滾動事件
+                window.addEventListener('scroll', handleScroll);
+                
+                // 初始檢查
+                handleScroll();
+            }
+            
+            // 滾動導航功能
+            function scrollToSection(sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = section.offsetTop - headerHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+
+            // 快速連結自動顯示功能
+            function initQuickLinksVisibility() {
+                const quickLinksSection = document.querySelector('.quick-links-section');
+                const quickLinksItems = document.querySelector('.quick-links-items');
+                
+                function handleScroll() {
+                    const scrollY = window.scrollY;
+                    
+                    // 當滾動超過一定距離時顯示快速連結
+                    if (scrollY > 100) {
+                        quickLinksSection.classList.add('visible');
+                        quickLinksItems.classList.add('animate-in');
+                    } else {
+                        quickLinksSection.classList.remove('visible');
+                        quickLinksItems.classList.remove('animate-in');
+                    }
+                }
+                
+                // 監聽滾動事件
+                window.addEventListener('scroll', handleScroll);
+                
+                // 初始檢查
+                handleScroll();
+            }
+
+            // 手機菜單功能
+            function toggleMobileMenu() {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const overlay = document.getElementById('mobileMenuOverlay');
+                
+                if (mobileMenu.classList.contains('active')) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            }
+
+            function openMobileMenu() {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const overlay = document.getElementById('mobileMenuOverlay');
+                
+                mobileMenu.classList.add('active');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeMobileMenu() {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const overlay = document.getElementById('mobileMenuOverlay');
+                
+                mobileMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // 監聽視窗大小變化
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    closeMobileMenu();
+                }
+            });
+
+            // 監聽ESC鍵關閉菜單
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeMobileMenu();
+                }
+            });
+
+            // 頁面載入完成後初始化
+            document.addEventListener('DOMContentLoaded', function() {
+                initMeteorAnimation();
+                initQuickLinksVisibility();
+                initAIHelpers();
+                initVideoHub();
+                initLoginSystem();
+            });
+
+            // 學習資料庫登入系統
+// 學習資料庫登入系統 (整合 PIN 碼與圖形鎖)
+function initLoginSystem() {
+            // --- 通用元素 ---
+            const loginNotice = document.getElementById('loginNotice');
+            const showLoginBtn = document.getElementById('showLoginBtn');
+            const databaseShowcase = document.getElementById('databaseShowcase');
+            
+            const loginOverlay = document.getElementById('loginOverlay');
+            const loginModal = document.getElementById('loginModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            
+            const modalTabs = document.querySelectorAll('.modal-tab');
+            const modalTabContents = document.querySelectorAll('.modal-tab-content');
+
+            if (!showLoginBtn) return; // Exit if elements don't exist
+
+            // --- PIN 碼相關元素 ---
+            const pinForm = document.getElementById('pinPad');
+            const pinInput = document.getElementById('pinInput');
+            const pinSubmitBtn = document.getElementById('pinSubmitBtn');
+            const pinErrorMsg = document.getElementById('pinErrorMsg');
+            
+            // --- 九宮格圖形鎖相關元素 ---
+            const CORRECT_PATTERN = ['7', '4', '1', '5', '3', '6', '9']; // "M" 圖案
+            const patternContainer = document.getElementById('patternLockContainer');
+            const svgLines = document.getElementById('patternLines');
+            const patternErrorMsg = document.getElementById('patternErrorMsg');
+            const allDots = Array.from(document.querySelectorAll('.pattern-dot'));
+            
+            const dotMap = new Map();
+            allDots.forEach(dot => {
+                dotMap.set(dot.dataset.id, dot);
+            });
+
+            let isDrawing = false;
+            let currentPath = []; // 儲存被選中的 "點" 元素
+            let tempLine = null; // 儲存滑鼠移動時的 SVG <line> 元素
+
+            // --- 通用 Modal 函式 ---
+            
+            // 登入成功後的統一處理
+            const handleLoginSuccess = () => {
+                loginNotice.classList.add('logged-in');
+                loginNotice.querySelector('i').className = 'fas fa-check-circle';
+                loginNotice.querySelector('h4').textContent = '✅ 驗證成功';
+                loginNotice.querySelector('p').textContent = '您已解鎖所有學習資料，點擊下方卡片開始學習。';
+                
+                showLoginBtn.textContent = '已驗證';
+                showLoginBtn.disabled = true;
+
+                databaseShowcase.classList.add('logged-in');
+                closeLoginModal();
+            };
+
+            // 開啟 Modal
+            const showLoginModal = () => {
+                loginOverlay.classList.add('active');
+                loginModal.classList.add('active');
+                loginModal.classList.remove('shake');
+                resetPattern(); // 重置圖形鎖
+                pinInput.value = ''; // 重置 PIN
+                pinErrorMsg.textContent = '';
+            };
+
+            // 關閉 Modal
+            const closeLoginModal = () => {
+                loginOverlay.classList.remove('active');
+                loginModal.classList.remove('active');
+            };
+
+            // Modal Tab 切換邏輯
+            modalTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetTab = tab.dataset.tab;
+                    
+                    modalTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    modalTabContents.forEach(c => {
+                        c.classList.toggle('active', c.dataset.tabContent === targetTab);
+                    });
+                    
+                    // 切換時重置狀態
+                    resetPattern();
+                    pinInput.value = '';
+                    pinErrorMsg.textContent = '';
+                    patternErrorMsg.textContent = '';
+                });
+            });
+
+            showLoginBtn.addEventListener('click', showLoginModal);
+            closeModalBtn.addEventListener('click', closeLoginModal);
+            loginOverlay.addEventListener('click', closeLoginModal);
+
+            // --- PIN 碼系統邏輯 ---
+            
+            const handlePinLoginFail = () => {
+                loginModal.classList.add('shake');
+                pinErrorMsg.textContent = '密碼錯誤，請重試。';
+                pinInput.value = '';
+                pinInput.focus();
+                setTimeout(() => loginModal.classList.remove('shake'), 500);
+            };
+
+            const checkPin = (e) => {
+                e.preventDefault();
+                pinErrorMsg.textContent = '';
+                if (pinInput.value === '2024') {
+                    handleLoginSuccess(); // 成功
+                } else {
+                    handlePinLoginFail(); // 失敗
+                }
+            };
+            
+            pinForm.addEventListener('submit', checkPin);
+            pinSubmitBtn.addEventListener('click', checkPin);
+
+            // --- 九宮格圖形鎖邏輯 ---
+
+            // 獲取點相對於 SVG 容器的中心座標
+            function getDotCenter(dot) {
+                const rect = dot.getBoundingClientRect();
+                const containerRect = patternContainer.getBoundingClientRect();
+                return {
+                    x: rect.left - containerRect.left + rect.width / 2,
+                    y: rect.top - containerRect.top + rect.height / 2
+                };
+            }
+
+            // 創建 SVG 線條元素
+            function createLine(x1, y1, x2, y2, id = null) {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', x1);
+                line.setAttribute('y1', y1);
+                line.setAttribute('x2', x2);
+                line.setAttribute('y2', y2);
+                if (id) line.id = id;
+                return line;
+            }
+
+            // 重置圖形鎖狀態
+            function resetPattern() {
+                isDrawing = false;
+                currentPath = [];
+                svgLines.innerHTML = ''; // 清除所有線條
+                tempLine = null;
+                allDots.forEach(dot => dot.classList.remove('active'));
+                patternContainer.classList.remove('success', 'error');
+                patternErrorMsg.textContent = '';
+            }
+
+            // 設置圖形鎖狀態 (成功/失敗)
+            function setPatternState(state, message) {
+                patternContainer.classList.add(state); // 'success' 或 'error'
+                patternErrorMsg.style.color = (state === 'success') ? '#22c55e' : '#ef4444';
+                patternErrorMsg.textContent = message;
+
+                setTimeout(() => {
+                    if (state === 'success') {
+                        handleLoginSuccess(); // 調用通用登入成功函式
+                    } else {
+                        resetPattern(); // 僅重置
+                    }
+                }, 1000);
+            }
+
+            // 檢查圖案是否正確
+            function checkPattern() {
+                const pathIds = currentPath.map(dot => dot.dataset.id);
+                if (JSON.stringify(pathIds) === JSON.stringify(CORRECT_PATTERN)) {
+                    setPatternState('success', '驗證成功！');
+                } else {
+                    setPatternState('error', '圖案錯誤，請重試。');
+                }
+            }
+            
+            // --- 圖形鎖事件處理 ---
+            
+            function onDrawStart(e) {
+                e.preventDefault();
+                resetPattern();
+                
+                const dot = e.target.closest('.pattern-dot');
+                if (!dot) return;
+
+                isDrawing = true;
+                dot.classList.add('active');
+                currentPath.push(dot);
+
+                // 綁定 move 和 end 事件
+                document.addEventListener('mousemove', onDrawMove);
+                document.addEventListener('mouseup', onDrawEnd);
+                document.addEventListener('touchmove', onDrawMove, { passive: false });
+                document.addEventListener('touchend', onDrawEnd);
+            }
+
+            function onDrawMove(e) {
+                if (!isDrawing) return;
+                e.preventDefault();
+
+                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+                // 獲取滑鼠/觸控點相對於 SVG 容器的座標
+                const containerRect = patternContainer.getBoundingClientRect();
+                const cursorX = clientX - containerRect.left;
+                const cursorY = clientY - containerRect.top;
+
+                // 更新 "暫時線條"
+                const lastDotCenter = getDotCenter(currentPath[currentPath.length - 1]);
+                if (!tempLine) {
+                    tempLine = createLine(lastDotCenter.x, lastDotCenter.y, cursorX, cursorY, 'tempLine');
+                    svgLines.appendChild(tempLine);
+                } else {
+                    tempLine.setAttribute('x2', cursorX);
+                    tempLine.setAttribute('y2', cursorY);
+                }
+
+                // 檢查是否經過了某個 "新" 的點
+                const dotOver = document.elementFromPoint(clientX, clientY);
+                if (dotOver && dotOver.classList.contains('pattern-dot')) {
+                    const dot = dotOver;
+                    // 如果這個點不在當前路徑中
+                    if (!currentPath.includes(dot)) {
+                        dot.classList.add('active');
+                        
+                        // 畫一條 "固定" 線條
+                        const newDotCenter = getDotCenter(dot);
+                        svgLines.appendChild(
+                            createLine(lastDotCenter.x, lastDotCenter.y, newDotCenter.x, newDotCenter.y)
+                        );
+                        
+                        // 將新點加入路徑
+                        currentPath.push(dot);
+                        
+                        // 更新 "暫時線條" 的起點
+                        tempLine.setAttribute('x1', newDotCenter.x);
+                        tempLine.setAttribute('y1', newDotCenter.y);
+                    }
+                }
+            }
+
+            function onDrawEnd(e) {
+                if (!isDrawing) return;
+                isDrawing = false;
+                
+                // 移除 "暫時線條"
+                if (tempLine) {
+                    tempLine.remove();
+                    tempLine = null;
+                }
+                
+                // 檢查圖案
+                checkPattern();
+
+                // 移除 move 和 end 事件
+                document.removeEventListener('mousemove', onDrawMove);
+                document.removeEventListener('mouseup', onDrawEnd);
+                document.removeEventListener('touchmove', onDrawMove);
+                document.removeEventListener('touchend', onDrawEnd);
+            }
+
+            // 綁定 "開始繪製" 事件
+            patternContainer.addEventListener('mousedown', onDrawStart);
+            patternContainer.addEventListener('touchstart', onDrawStart, { passive: false });
+            
+            // --- 科目卡片點擊邏輯 (Event Delegation) ---
+            databaseShowcase.addEventListener('click', (e) => {
+                if (!databaseShowcase.classList.contains('logged-in')) {
+                    if (!loginModal.classList.contains('active')) {
+                        loginNotice.style.transition = 'all 0.1s ease';
+                        loginNotice.style.transform = 'scale(1.03)';
+                        loginNotice.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.5)';
+                        setTimeout(() => {
+                            loginNotice.style.transform = '';
+                            loginNotice.style.boxShadow = '';
+                        }, 400);
+                    }
+                    return; 
+                }
+                
+                const card = e.target.closest('.subject-card');
+                if (card && card.dataset.href) {
+                    const targetUrl = 'https://aatest.vercel.app/' + card.dataset.href;
+                    window.location.href = targetUrl;
+                }
+            });
+        }
+            
+            pinForm.addEventListener('submit', checkPin); // Listen on form submit
+            pinSubmitBtn.addEventListener('click', checkPin); // Also on button click
+
+            // --- Subject Card Click Logic (Event Delegation) ---
+            databaseShowcase.addEventListener('click', (e) => {
+                // Check if we are logged in
+                if (!databaseShowcase.classList.contains('logged-in')) {
+                    // Optional: Briefly highlight the login box
+                    if (!loginModal.classList.contains('active')) {
+                        loginNotice.style.transition = 'all 0.1s ease';
+                        loginNotice.style.transform = 'scale(1.03)';
+                        loginNotice.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.5)';
+                        setTimeout(() => {
+                            loginNotice.style.transform = '';
+                            loginNotice.style.boxShadow = '';
+                        }, 400);
+                    }
+                    return; 
+                }
+                
+                // Find the clicked card
+                const card = e.target.closest('.subject-card');
+                if (card && card.dataset.href) {
+                    const targetUrl = 'https://aatest.vercel.app/' + card.dataset.href;
+                    // window.open(targetUrl, '_blank'); // Open in new tab
+                    window.location.href = targetUrl; // Open in same tab
+                }
+            });
+        
+            
+            // 自製 AI：Google AI Studio（Gemini）
+            function initAIHelpers() {
+                const keyInput = document.getElementById('aiApiKey');
+                const saveBtn = document.getElementById('saveKeyBtn');
+                const sendBtn = document.getElementById('sendAiBtn');
+                const clearBtn = document.getElementById('clearAiBtn');
+                const promptEl = document.getElementById('aiPrompt');
+                const resultEl = document.getElementById('aiResult');
+                
+                if (!keyInput || !saveBtn || !sendBtn || !promptEl || !resultEl) return;
+                
+                // 載入已儲存的 API Key
+                const saved = localStorage.getItem('googleAIStudioKey');
+                if (saved) keyInput.value = saved;
+                
+                saveBtn.addEventListener('click', function() {
+                    localStorage.setItem('googleAIStudioKey', keyInput.value.trim());
+                    alert('API Key 已儲存至此瀏覽器');
+                });
+                
+                clearBtn.addEventListener('click', function() {
+                    promptEl.value = '';
+                    resultEl.textContent = '';
+                });
+                
+                sendBtn.addEventListener('click', async function() {
+                    const apiKey = (keyInput.value || '').trim();
+                    const prompt = (promptEl.value || '').trim();
+                    if (!apiKey) { alert('請先輸入 API Key'); return; }
+                    if (!prompt) { alert('請輸入問題或指示'); return; }
+                    
+                    resultEl.textContent = '正在生成回覆…';
+                    try {
+                        const endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + encodeURIComponent(apiKey);
+                        const body = {
+                            contents: [{
+                                parts: [{
+                                    text: '請用條列清單與段落輸出，避免使用數學符號。問題如下：' + prompt
+                                }]
+                            }]
+                        };
+                        const res = await fetch(endpoint, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(body)
+                        });
+                        if (!res.ok) throw new Error('API error ' + res.status);
+                        const data = await res.json();
+                        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '（沒有回覆內容）';
+                        // 基本文字格式處理：保留換行與粗體
+                        resultEl.innerHTML = sanitizeToBasicHtml(text);
+                    } catch (e) {
+                        resultEl.textContent = '發生錯誤：' + e.message;
+                    }
+                });
+            }
+            
+            // 僅允許基本格式的轉換（粗體、清單、換行），不含數學符號
+            function sanitizeToBasicHtml(text) {
+                const escaped = text
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;');
+                // 粗體：**text**
+                let html = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1<\/strong>');
+                // 將行首 - 或 * 轉為清單
+                const lines = html.split(/\r?\n/);
+                let inList = false; let out = '';
+                for (const line of lines) {
+                    const m = line.match(/^\s*[-*]\s+(.*)/);
+                    if (m) {
+                        if (!inList) { out += '<ul style="margin:0 0 0 1.2rem;">'; inList = true; }
+                        out += '<li>' + m[1] + '</li>';
+                    } else {
+                        if (inList) { out += '</ul>'; inList = false; }
+                        out += (line.trim() ? '<p>' + line + '</p>' : '<br>');
+                    }
+                }
+                if (inList) out += '</ul>';
+                return out;
+            }
+
+            // 影片資源分享：輪播 + 排行
+            function initVideoHub() {
+                const carousel = document.getElementById('videoCarousel');
+                const dotsWrap = document.getElementById('vcDots');
+                const prevBtn = document.getElementById('vcPrev');
+                const nextBtn = document.getElementById('vcNext');
+                const rankList = document.getElementById('rankList');
+                if (!carousel || !dotsWrap || !prevBtn || !nextBtn || !rankList) return;
+
+                // 圖片輪播（純圖片，不含連結）
+                const slides = [
+                    'https://cdn.hk01.com/di/media/images/283773/org/6da32b263e534c5943f748d194adff95.png/H24CXCYv6qFWVjYxlnsXxaVYK-45Qjvh51lmwedZZsE?v=w800',
+                    'https://i.ytimg.com/vi_webp/BEw3Kliokj4/maxresdefault.webp',
+                    'https://i.ytimg.com/vi/auPeE9UhKxk/maxresdefault.jpg'
+                ];
+
+                const recent = [
+                    { thumb: 'https://aagngt.dpdns.org/1_PNG/love.png', title: '咕嚕咕嚕魔法陣', channel: '江藤博之', score: 98, url: 'https://aagngt.dpdns.org/series-player.html?v=guruguru-series' },
+                    { thumb: 'https://aagngt.dpdns.org/1_PNG/kind.jpg', title: '罪惡王冠', channel: 'Production I.G', score: 95, url: 'https://aagngt.dpdns.org/series-player.html?v=Guilty-Crown' },
+                    { thumb: 'https://aagngt.dpdns.org/1_PNG/game.webp', title: '關於我轉生變成史萊姆這檔事', channel: '伏瀨', score: 92, url: 'https://aagngt.dpdns.org/series-player.html?v=I-Got-Reincarnated-as-a-Slime' }
+                ];
+
+                // 建立輪播圖片
+                const imgs = slides.map((src, i) => {
+                    const img = document.createElement('img');
+                    img.src = src; img.alt = 'slide-' + (i + 1); img.dataset.index = i;
+                    if (i === 0) img.classList.add('active');
+                    carousel.appendChild(img);
+                    return img;
+                });
+                // 建立 dots
+                const dots = slides.map((_, i) => {
+                    const d = document.createElement('div');
+                    d.className = 'dot' + (i === 0 ? ' active' : '');
+                    d.addEventListener('click', () => go(i));
+                    dotsWrap.appendChild(d);
+                    return d;
+                });
+
+                let idx = 0; let timer;
+                function go(n) {
+                    idx = (n + imgs.length) % imgs.length;
+                    imgs.forEach((img, i) => img.classList.toggle('active', i === idx));
+                    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                    reset();
+                }
+                function next() { go(idx + 1); }
+                function prev() { go(idx - 1); }
+                function reset() { clearInterval(timer); timer = setInterval(next, 5000); }
+                prevBtn.addEventListener('click', prev);
+                nextBtn.addEventListener('click', next);
+                document.addEventListener('keydown', e => { if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') prev(); });
+                reset();
+
+                // 排行
+                rankList.innerHTML = recent.map(r => (
+                    '<a class="rank-item" href="' + r.url + '" target="_blank" rel="noopener">' +
+                    '<img src="' + r.thumb + '" alt="' + r.title + '">' +
+                    '<div class="meta"><strong>' + r.title + '</strong><small>' + r.channel + '</small></div>' +
+                    '<div class="score">' + r.score + '</div>' +
+                    '</a>'
+                )).join('');
+            }
+        </script>
+    </body>
