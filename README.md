@@ -1,5 +1,5 @@
-2.0強人bb官方網站
-
+2.0強人bb官方網站 (https://aagngt.us.kg)
+curl http://aagngt.us.kg -o flie.png
 之前係使用hosting Server wordpress佢可以有插件進行帳戶數據庫產品即時留言朋友功能等等
 
 現在使用靜態網站加上AI編程，但目前軟件受到限制
