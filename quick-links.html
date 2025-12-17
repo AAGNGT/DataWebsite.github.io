@@ -4,276 +4,243 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>快速連結管理 - 強人bb</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="linksMove.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        /* 快速連結管理頁面專用樣式 */
-        .links-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
+        /* ===== Modal 動畫效果 ===== */
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
-        
-        .page-header {
-            text-align: center;
-            margin-bottom: 3rem;
+
+        @keyframes modalScaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.85) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
-        
-        .page-header h1 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 1rem;
+
+        @keyframes modalFadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
         }
-        
-        .page-header p {
-            color: #666;
-            font-size: 1.1rem;
+
+        @keyframes modalScaleOut {
+            from {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.9) translateY(-10px);
+            }
         }
-        
-        .add-link-section {
-            background: white;
-            padding: 2rem;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            margin-bottom: 2rem;
+
+        @keyframes modalGradientShift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
         }
-        
-        .add-link-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr auto;
-            gap: 1rem;
-            align-items: end;
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
         }
-        
-        .form-group {
-            display: flex;
-            flex-direction: column;
+
+        /* Modal Overlay 基礎樣式 */
+        .modal-overlay {
+            backdrop-filter: blur(6px);
+            opacity: 0;
         }
-        
-        .form-group label {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+
+        .modal-overlay.showing {
+            animation: modalFadeIn 0.25s ease-out forwards;
         }
-        
-        .form-group input,
-        .form-group select {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
+
+        .modal-overlay.hiding {
+            animation: modalFadeOut 0.2s ease-in forwards;
         }
-        
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #667eea;
+
+        /* Theme 1 的 modal overlay 背景漸變 */
+        body.theme-1 .modal-overlay {
+            background: linear-gradient(135deg, 
+                rgba(15, 23, 42, 0.4) 0%, 
+                rgba(15, 23, 42, 0.5) 50%, 
+                rgba(15, 23, 42, 0.4) 100%);
+            background-size: 200% 200%;
         }
-        
-        .add-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.2s ease;
+
+        body.theme-1 .modal-overlay.showing {
+            animation: modalFadeIn 0.25s ease-out forwards,
+                       modalGradientShift 4s ease infinite;
         }
-        
-        .add-btn:hover {
-            background: #5a6fd8;
+
+        /* Theme 2 的 modal overlay 背景漸變 */
+        body.theme-2 .modal-overlay {
+            background: linear-gradient(135deg, 
+                rgba(5, 8, 22, 0.7) 0%, 
+                rgba(15, 23, 42, 0.6) 50%, 
+                rgba(5, 8, 22, 0.7) 100%);
+            background-size: 200% 200%;
         }
-        
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+
+        body.theme-2 .modal-overlay.showing {
+            animation: modalFadeIn 0.25s ease-out forwards,
+                       modalGradientShift 3s ease infinite;
         }
-        
-        .link-card {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
+
+        /* Modal 內容動畫 */
+        .modal {
             position: relative;
+            overflow: hidden;
+            transform-origin: center center;
+            opacity: 0;
+            transform: scale(0.85) translateY(-20px);
         }
-        
-        .link-card:hover {
-            border-color: #999;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transform: translateY(-2px);
+
+        .modal-overlay.showing .modal {
+            animation: modalScaleIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
-        
-        .link-card-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
+
+        .modal-overlay.hiding .modal {
+            animation: modalScaleOut 0.2s ease-in forwards;
         }
-        
-        .link-icon {
-            width: 50px;
-            height: 50px;
-            background: #f0f0f0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #667eea;
+
+        /* Modal 頂部閃光效果 */
+        .modal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(99, 102, 241, 0.6) 25%, 
+                rgba(139, 92, 246, 0.6) 50%, 
+                rgba(99, 102, 241, 0.6) 75%, 
+                transparent 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s linear infinite;
+            z-index: 1;
         }
-        
-        .link-info h3 {
-            font-size: 1.2rem;
-            color: #333;
-            margin-bottom: 0.3rem;
-        }
-        
-        .link-info p {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .link-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .action-btn {
-            padding: 6px 12px;
-            border: 1px solid #ddd;
-            background: white;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s ease;
-        }
-        
-        .action-btn.visit {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-        
-        .action-btn.visit:hover {
-            background: #5a6fd8;
-        }
-        
-        .action-btn.edit {
-            color: #666;
-        }
-        
-        .action-btn.edit:hover {
-            background: #f0f0f0;
-        }
-        
-        .action-btn.delete {
-            color: #e74c3c;
-            border-color: #e74c3c;
-        }
-        
-        .action-btn.delete:hover {
-            background: #e74c3c;
-            color: white;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: #666;
-        }
-        
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-        
-        .empty-state h3 {
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-        
-        /* 響應式設計 */
-        @media (max-width: 768px) {
-            .add-link-form {
-                grid-template-columns: 1fr;
-            }
-            
-            .links-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .page-header h1 {
-                font-size: 2rem;
-            }
+
+        /* Theme 2 的 modal 頂部閃光效果 */
+        body.theme-2 .modal::before {
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(148, 163, 184, 0.4) 25%, 
+                rgba(226, 232, 240, 0.5) 50%, 
+                rgba(148, 163, 184, 0.4) 75%, 
+                transparent 100%);
         }
     </style>
 </head>
 <body>
-    <!-- 快速連結欄 -->
-    <div class="quick-links-bar">
-        <div class="container">
-            <div class="quick-links-content">
-                <span class="quick-links-label">快速連結：</span>
-                <div class="quick-links-items">
-                    <a href="index.html" class="quick-link">
-                        <i class="fas fa-home"></i>
-                        <span>首頁</span>
-                    </a>
-                    <a href="user/homepage.html" class="quick-link">
-                        <i class="fas fa-user"></i>
-                        <span>用戶中心</span>
-                    </a>
-                    <a href="user/subjects/" class="quick-link">
-                        <i class="fas fa-book"></i>
-                        <span>學習資料</span>
-                    </a>
-                    <a href="quick-links.html" class="quick-link manage-links">
-                        <i class="fas fa-cog"></i>
-                        <span>管理連結</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <header>
-        <div class="header-container">
-            <div class="logo-section">
-                <img src="1_PNG/強人bb.png" alt="強人bb Logo" class="logo-image">
-                <h1>強人bb</h1>
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="https://drive.google.com/drive/folders/1O_qCR5a0Cr6vtRvP91qxAXSlkyj2EVXc?usp=sharing">最新消息</a></li>
-                    <li><a href="https://github.com/AAGNGT/DataWebsite.github.io">關於我們</a></li>
-                    <li><a href="#">門市據點 N/A</a></li>
-                    <li><a href="#">會員專區 N/A</a></li>
-                </ul>
-            </nav>
-            <div class="header-actions">
-                <button class="cta-button" onclick="window.location.href='login.html'">Login</button>
-            </div>
-            <button class="menu">&#9776;</button>
-        </div>
-    </header>
-
-    <main>
+    <main class="page-shell">
         <div class="links-container">
             <div class="page-header">
                 <h1>快速連結管理</h1>
                 <p>管理您的個人快速連結，方便快速存取常用頁面</p>
-            </div>
+                </div>
 
+            <!-- 頂部工具列 -->
+            <div class="toolbar">
+                <div class="toolbar-left">
+                    <div class="search-group">
+                        <label for="linkSearchInput">搜尋：</label>
+                        <input type="text" id="linkSearchInput" placeholder="輸入名稱、描述或網址關鍵字">
+            </div>
+                    <div class="search-group">
+                        <label for="categoryFilter">分類：</label>
+                        <select id="categoryFilter"></select>
+        </div>
+    </div>
+                <div class="toolbar-right">
+                    <button type="button" class="action-btn visit" id="toolbarAddLinkBtn">
+                        <i class="fas fa-plus"></i> 新增連結
+                    </button>
+                    <button type="button" class="action-btn" id="toggleAdvancedBtn" aria-expanded="false">
+                        進階工具 <span class="advanced-toggle-icon">▼</span>
+                    </button>
+                    <button type="button" class="action-btn" id="themeToggleBtn">
+                        外觀：方案一
+                    </button>
+                    <div class="font-size-controls">
+                        <button type="button" class="action-btn" id="fontSizeDecrease" title="縮小字體">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="action-btn" id="fontSizeReset" title="重置字體">
+                            <i class="fas fa-text-height"></i>
+                        </button>
+                        <button type="button" class="action-btn" id="fontSizeIncrease" title="放大字體">
+                            <i class="fas fa-plus"></i>
+                        </button>
+            </div>
+            </div>
+        </div>
+
+            <!-- 進階工具面板（可收合） -->
+            <div class="advanced-panel" id="advancedPanel">
+                <div class="advanced-panel-inner">
+                    <div class="advanced-row">
+                        <!-- 分類管理 -->
+                        <div class="add-link-section">
+                            <h3>分類管理</h3>
+                            <div class="category-manage">
+                                <input type="text" id="newCategoryName" placeholder="新增分類名稱">
+                                <button type="button" class="add-btn" id="addCategoryBtn">
+                                    <i class="fas fa-plus"></i> 新增分類
+                                </button>
+            </div>
+                            <div class="category-list" id="categoryList"></div>
+                        </div>
+                        <!-- 匯出 / 匯入 -->
+                        <div class="add-link-section">
+                            <h3>匯出 / 匯入</h3>
+                            <div class="export-import-group">
+                                <button type="button" class="action-btn" id="exportLinksBtn">匯出連結</button>
+                                <button type="button" class="action-btn" id="importLinksBtn">匯入檔案</button>
+                                <button type="button" class="action-btn" id="pasteJsonBtn">貼上 JSON</button>
+                                <button type="button" class="action-btn delete" id="deleteDataBtn" style="background-color:#dc2626; color:white;">刪除數據</button>
+                                <input type="file" id="importLinksFile" accept="application/json" style="display:none">
+                            </div>
+                            <div id="pasteJsonArea" style="display:none; margin-top:12px;">
+                                <textarea id="pasteJsonInput" placeholder="請貼上 JSON 數據..." style="width:100%; min-height:120px; padding:8px; border-radius:8px; border:1px solid #e5e7eb; font-family:monospace; font-size:12px; resize:vertical;"></textarea>
+                                <div style="margin-top:8px; display:flex; gap:8px;">
+                                    <button type="button" class="action-btn visit" id="confirmPasteJsonBtn">確認匯入</button>
+                                    <button type="button" class="action-btn" id="cancelPasteJsonBtn">取消</button>
+                                </div>
+                            </div>
+                            <p style="margin-top:8px;font-size:12px;color:#6b7280;">
+                                匯出後可備份您的快速連結；匯入會覆蓋目前資料，請謹慎使用。您也可以直接貼上 JSON 數據。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="advanced-row single">
             <!-- 添加連結區域 -->
             <div class="add-link-section">
-                <h3 style="margin-bottom: 1.5rem; color: #333;">添加新連結</h3>
+                            <h3>添加新連結</h3>
                 <form class="add-link-form" id="addLinkForm">
                     <div class="form-group">
                         <label for="linkName">連結名稱</label>
@@ -284,198 +251,177 @@
                         <input type="url" id="linkUrl" placeholder="https://example.com" required>
                     </div>
                     <div class="form-group">
-                        <label for="linkIcon">圖標</label>
-                        <select id="linkIcon">
-                            <option value="fas fa-book">📚 書籍</option>
-                            <option value="fas fa-calculator">🧮 計算</option>
-                            <option value="fas fa-flask">🧪 實驗</option>
-                            <option value="fas fa-globe">🌍 地理</option>
-                            <option value="fas fa-history">📜 歷史</option>
-                            <option value="fas fa-language">🗣️ 語言</option>
-                            <option value="fas fa-palette">🎨 藝術</option>
-                            <option value="fas fa-music">🎵 音樂</option>
-                            <option value="fas fa-code">💻 程式</option>
-                            <option value="fas fa-heart">❤️ 健康</option>
+                        <label for="linkDescription">描述</label>
+                        <input type="text" id="linkDescription" placeholder="例如：數學筆記網站">
+                    </div>
+                    <div class="form-group">
+                        <label for="linkImageUrl">圖片連結（可選）</label>
+                        <input type="url" id="linkImageUrl" placeholder="https://example.com/icon.png，留空則使用 favicon.ico">
+                    </div>
+                                <div class="form-group">
+                                    <label for="linkCategorySelect">分類</label>
+                                    <select id="linkCategorySelect">
+                                        <option value="預設">預設</option>
+                                        <option value="__custom__">自訂分類...</option>
                         </select>
+                                    <input type="text" id="linkCategory" placeholder="例如：數學、英文，留空則使用預設" style="display:none; margin-top:4px;">
+                                </div>
+                                <div class="form-group">
+                                    <label for="linkOpenInNewTab">開啟方式</label>
+                                    <div>
+                                        <input type="checkbox" id="linkOpenInNewTab">
+                                        <label for="linkOpenInNewTab" style="font-weight: normal; color: #666;">在新分頁開啟</label>
+                                    </div>
                     </div>
                     <button type="submit" class="add-btn">
                         <i class="fas fa-plus"></i> 添加
                     </button>
                 </form>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- 連結列表 -->
             <div id="linksContainer">
                 <div class="links-grid" id="linksGrid">
-                    <!-- 預設連結 -->
-                    <div class="link-card">
-                        <div class="link-card-header">
-                            <div class="link-icon">
-                                <i class="fas fa-home"></i>
                             </div>
-                            <div class="link-info">
-                                <h3>首頁</h3>
-                                <p>返回主頁</p>
                             </div>
                         </div>
-                        <div class="link-actions">
-                            <a href="index.html" class="action-btn visit">訪問</a>
-                            <button class="action-btn edit">編輯</button>
-                            <button class="action-btn delete">刪除</button>
-                        </div>
-                    </div>
+    </main>
 
-                    <div class="link-card">
-                        <div class="link-card-header">
-                            <div class="link-icon">
-                                <i class="fas fa-book"></i>
-                            </div>
-                            <div class="link-info">
-                                <h3>學習資料</h3>
-                                <p>瀏覽學習資源</p>
-                            </div>
+    <!-- 編輯連結彈出窗 -->
+    <div class="modal-overlay" id="editModalOverlay">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="editModalTitle">
+            <div class="modal-header">
+                <h2 class="modal-title" id="editModalTitle">編輯連結</h2>
+                <button type="button" class="modal-close-btn" id="editModalClose" aria-label="關閉">×</button>
                         </div>
-                        <div class="link-actions">
-                            <a href="user/subjects/" class="action-btn visit">訪問</a>
-                            <button class="action-btn edit">編輯</button>
-                            <button class="action-btn delete">刪除</button>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="editLinkName">連結名稱</label>
+                    <input type="text" id="editLinkName" placeholder="連結名稱">
+                    </div>
+                <div class="form-group">
+                    <label for="editLinkUrl">連結網址</label>
+                    <input type="url" id="editLinkUrl" placeholder="https://example.com">
+                            </div>
+                <div class="form-group">
+                    <label for="editLinkDescription">描述</label>
+                    <textarea id="editLinkDescription" placeholder="簡短描述這個連結的用途"></textarea>
+                            </div>
+                <div class="form-group">
+                    <label for="editLinkImageUrl">圖片連結（可選）</label>
+                    <input type="url" id="editLinkImageUrl" placeholder="https://example.com/icon.png，留空則使用 favicon.ico">
                         </div>
+                <div class="form-group">
+                    <label for="editLinkCategorySelect">分類</label>
+                    <select id="editLinkCategorySelect">
+                        <option value="預設">預設</option>
+                        <option value="__custom__">自訂分類...</option>
+                    </select>
+                    <input type="text" id="editLinkCategory" placeholder="例如：數學、英文" style="display:none; margin-top:4px;">
+                        </div>
+                <div class="form-group">
+                    <label for="editLinkOpenInNewTab">開啟方式</label>
+                    <div>
+                        <input type="checkbox" id="editLinkOpenInNewTab">
+                        <label for="editLinkOpenInNewTab" style="font-weight: normal; color: #6b7280;">在新分頁開啟</label>
                     </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="action-btn" id="editModalCancel">取消</button>
+                <button type="button" class="action-btn visit" id="editModalSave">儲存變更</button>
         </div>
-    </main>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
-            <p>Copyright © 2024 強人bb All Rights Reserved.</p>
+            <p>Copyright © 2025 強人bb All Rights Reserved.</p>
             <p>快速連結管理系統</p>
         </div>
     </footer>
 
+    <!-- 通用對話窗（確認 / 輸入） -->
+    <div class="modal-overlay" id="dialogOverlay" style="display:none;">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+            <div class="modal-header">
+                <h2 class="modal-title" id="dialogTitle">提示</h2>
+                <button type="button" class="modal-close-btn" id="dialogClose" aria-label="關閉">×</button>
+                        </div>
+            <div class="modal-body">
+                <p id="dialogMessage" style="font-size:14px; color:#4b5563; margin:0;"></p>
+                <div class="form-group" id="dialogInputGroup" style="margin-top:10px; display:none;">
+                    <label for="dialogInput" id="dialogInputLabel" style="font-size:12px; color:#6b7280;">輸入內容</label>
+                    <input type="text" id="dialogInput" />
+                        </div>
+                    </div>
+            <div class="modal-footer">
+                <button type="button" class="action-btn" id="dialogCancelBtn">取消</button>
+                <button type="button" class="action-btn visit" id="dialogOkBtn">確定</button>
+                    </div>
+        </div>
+    </div>
+
+    <!-- 歡迎頁面覆蓋層 -->
+    <div id="welcomeOverlay" style="display:none;">
+        <div id="fireworksContainer"></div>
+        <div id="celebrationText" class="celebration-text">🎉 恭喜！歡迎使用快速連結管理！🎉</div>
+        <div class="welcome-content-fullscreen">
+            <div class="welcome-header">
+                <p class="welcome-subtitle">功能強大的個人快速連結管理工具，讓您輕鬆組織和管理常用網站</p>
+            </div>
+            
+            <div class="welcome-features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon-large">📁</div>
+                    <h3 class="feature-title">分類管理</h3>
+                    <p class="feature-desc">為連結創建自訂分類，方便整理和組織</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">🔍</div>
+                    <h3 class="feature-title">快速搜尋</h3>
+                    <p class="feature-desc">輸入關鍵字即可快速找到所需連結</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">📌</div>
+                    <h3 class="feature-title">置頂功能</h3>
+                    <p class="feature-desc">將重要連結置頂，優先顯示在列表頂部</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">🎨</div>
+                    <h3 class="feature-title">自訂顏色</h3>
+                    <p class="feature-desc">為每個分類設定專屬顏色，視覺化區分</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">💾</div>
+                    <h3 class="feature-title">數據備份</h3>
+                    <p class="feature-desc">支援匯出/匯入，隨時備份您的連結數據</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon-large">🎯</div>
+                    <h3 class="feature-title">拖放排序</h3>
+                    <p class="feature-desc">輕鬆拖動連結調整順序，自由排列</p>
+                </div>
+            </div>
+            
+            <div class="welcome-footer">
+                <button type="button" class="welcome-start-btn" id="welcomeStartBtn">
+                    <span class="btn-text">開始使用</span>
+                    <span class="btn-icon">✨</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="quick-links.js"></script>
     <script>
-        // 快速連結管理功能
-        let links = [
-            {
-                id: 1,
-                name: '首頁',
-                url: 'index.html',
-                icon: 'fas fa-home',
-                description: '返回主頁'
-            },
-            {
-                id: 2,
-                name: '學習資料',
-                url: 'user/subjects/',
-                icon: 'fas fa-book',
-                description: '瀏覽學習資源'
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.QuickLinks && typeof window.QuickLinks.initManagerPage === 'function') {
+                window.QuickLinks.initManagerPage({})
             }
-        ];
-
-        // 添加連結表單處理
-        document.getElementById('addLinkForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('linkName').value;
-            const url = document.getElementById('linkUrl').value;
-            const icon = document.getElementById('linkIcon').value;
-            
-            const newLink = {
-                id: Date.now(),
-                name: name,
-                url: url,
-                icon: icon,
-                description: '自定義連結'
-            };
-            
-            links.push(newLink);
-            renderLinks();
-            
-            // 清空表單
-            document.getElementById('addLinkForm').reset();
-            
-            // 顯示成功訊息
-            showNotification('連結已添加！', 'success');
-        });
-
-        // 渲染連結列表
-        function renderLinks() {
-            const linksGrid = document.getElementById('linksGrid');
-            linksGrid.innerHTML = '';
-            
-            links.forEach(link => {
-                const linkCard = document.createElement('div');
-                linkCard.className = 'link-card';
-                linkCard.innerHTML = `
-                    <div class="link-card-header">
-                        <div class="link-icon">
-                            <i class="${link.icon}"></i>
-                        </div>
-                        <div class="link-info">
-                            <h3>${link.name}</h3>
-                            <p>${link.description}</p>
-                        </div>
-                    </div>
-                    <div class="link-actions">
-                        <a href="${link.url}" class="action-btn visit">訪問</a>
-                        <button class="action-btn edit" onclick="editLink(${link.id})">編輯</button>
-                        <button class="action-btn delete" onclick="deleteLink(${link.id})">刪除</button>
-                    </div>
-                `;
-                linksGrid.appendChild(linkCard);
-            });
-        }
-
-        // 刪除連結
-        function deleteLink(id) {
-            if (confirm('確定要刪除這個連結嗎？')) {
-                links = links.filter(link => link.id !== id);
-                renderLinks();
-                showNotification('連結已刪除！', 'success');
-            }
-        }
-
-        // 編輯連結
-        function editLink(id) {
-            const link = links.find(l => l.id === id);
-            if (link) {
-                const newName = prompt('輸入新的連結名稱：', link.name);
-                const newUrl = prompt('輸入新的連結網址：', link.url);
-                
-                if (newName && newUrl) {
-                    link.name = newName;
-                    link.url = newUrl;
-                    renderLinks();
-                    showNotification('連結已更新！', 'success');
-                }
-            }
-        }
-
-        // 顯示通知
-        function showNotification(message, type) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: ${type === 'success' ? '#4CAF50' : '#f44336'};
-                color: white;
-                padding: 15px 20px;
-                border-radius: 4px;
-                z-index: 1000;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            `;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-
-        // 初始化
-        document.addEventListener('DOMContentLoaded', function() {
-            renderLinks();
         });
     </script>
 </body>
